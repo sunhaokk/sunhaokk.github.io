@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>%2F2017%2F01%2F13%2Fhello-world%2F</url>
+      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[hexo更换主题模板图文教程]]></title>
+      <url>%2F2017%2F01%2F11%2Fhexo%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98%E6%A8%A1%E6%9D%BF%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B%2F</url>
+      <content type="text"><![CDATA[G:\img\da-png-watch.png]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[hexo部署到github和coding注意事项]]></title>
+      <url>%2F2017%2F01%2F11%2Fhexo-github-coding-notice%2F</url>
+      <content type="text"><![CDATA[在github新建项目的时候一定输入的是youname.github.io其中youname是你的用户名。因为github默认的页面，就是你的用户名。所以这个不要乱改。 同理coding在新建项目的时候一定也要是youname。你的用户名。coding默认也是用户名即是主页，否则生成的页面地址是http://youname_.coding.me/youproject。 在hexo的配置文件_config.yml中，因为yml要求规范严格，所以一定要注意缩进和空格。 123456deploy: type: git repo: github: git@github.com:youname/youname.github.io.git coding: git@git.coding.net:youname/youname.git branch: master]]></content>
+    </entry>
+
+    
+  
+  
+</search>

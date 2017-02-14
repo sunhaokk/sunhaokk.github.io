@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Da</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://sunhao.win/"/>
+  <updated>2017-02-13T08:51:13.002Z</updated>
+  <id>http://sunhao.win/</id>
+  
+  <author>
+    <name>Sun Hao</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js_new</title>
+    <link href="http://sunhao.win/2017/02/13/js-new/"/>
+    <id>http://sunhao.win/2017/02/13/js-new/</id>
+    <published>2017-02-13T03:07:41.000Z</published>
+    <updated>2017-02-13T08:51:13.002Z</updated>
+    
+    <content type="html"><![CDATA[<p>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br>如何学习<br><a id="more"></a><br>不如不学<br>不如不学<br>不如不学<br>不如不学<br>不如不学<br>不如不学<br>不如不学<br>不如不学</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;如何学习&lt;br&gt;
+    
+    </summary>
+    
+      <category term="javascript - javascript - 学习" scheme="http://sunhao.win/categories/javascript-javascript-%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="学习 - 学习 - 测试" scheme="http://sunhao.win/tags/%E5%AD%A6%E4%B9%A0-%E5%AD%A6%E4%B9%A0-%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>how_to_fix</title>
+    <link href="http://sunhao.win/2017/02/13/how-to-fix/"/>
+    <id>http://sunhao.win/2017/02/13/how-to-fix/</id>
+    <published>2017-02-13T02:40:30.000Z</published>
+    <updated>2017-02-13T02:40:30.846Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://sunhao.win/2017/01/13/hello-world/"/>
+    <id>http://sunhao.win/2017/01/13/hello-world/</id>
+    <published>2017-01-13T09:35:56.238Z</published>
+    <updated>2017-01-11T00:31:16.225Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hexo更换主题模板图文教程</title>
+    <link href="http://sunhao.win/2017/01/11/hexo%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98%E6%A8%A1%E6%9D%BF%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B/"/>
+    <id>http://sunhao.win/2017/01/11/hexo更换主题模板图文教程/</id>
+    <published>2017-01-11T09:01:54.000Z</published>
+    <updated>2017-01-13T06:38:27.957Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="file:///G:/hexo/source/_posts/2017-01-13-14-16-52.png" alt=""><br>G:\img\da-png-watch.png</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;file:///G:/hexo/source/_posts/2017-01-13-14-16-52.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;G:\img\da-png-watch.png&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hexo部署到github和coding注意事项</title>
+    <link href="http://sunhao.win/2017/01/11/hexo-github-coding-notice/"/>
+    <id>http://sunhao.win/2017/01/11/hexo-github-coding-notice/</id>
+    <published>2017-01-11T07:10:57.000Z</published>
+    <updated>2017-01-11T08:10:45.839Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li>在github新建项目的时候一定输入的是youname.github.io其中youname是你的用户名。<br>因为github默认的页面，就是你的用户名。所以这个不要乱改。<br><img src="http://ojlt0g866.bkt.clouddn.com/da-png-githubproject.png" alt=""></li>
+<li><p>同理coding在新建项目的时候一定也要是youname。你的用户名。coding默认也是用户名即是主页，否则生成的页面地址是<a href="http://youname_.coding.me/youproject。" target="_blank" rel="external">http://youname_.coding.me/youproject。</a><br><img src="http://ojlt0g866.bkt.clouddn.com/da-png-codingreg.png" alt=""></p>
+</li>
+<li><p>在hexo的配置文件_config.yml中，因为yml要求规范严格，所以一定要注意缩进和空格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">	github: git@github.com:youname/youname.github.io.git</div><div class="line">	coding: git@git.coding.net:youname/youname.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="http://ojlt0g866.bkt.clouddn.com/da-png-watch.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;在github新建项目的时候一定输入的是youname.github.io其中youname是你的用户名。&lt;br&gt;因为github默认的页面，就是你的用户名。所以这个不要乱改。&lt;br&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

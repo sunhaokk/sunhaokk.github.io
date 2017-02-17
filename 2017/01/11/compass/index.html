@@ -95,7 +95,7 @@
 如果需要验证版本，可以运行以下命令:
 1$ compass version">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Da'sBlog">
+<meta property="og:title" content="Compass">
 <meta property="og:url" content="http://sunhao.win/2017/01/11/compass/index.html">
 <meta property="og:site_name" content="Da'sBlog">
 <meta property="og:description" content="开始Version: 1.0.1
@@ -103,9 +103,9 @@
 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。
 如果需要验证版本，可以运行以下命令:
 1$ compass version">
-<meta property="og:updated_time" content="2017-02-17T07:54:10.454Z">
+<meta property="og:updated_time" content="2017-02-17T08:04:50.618Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Da'sBlog">
+<meta name="twitter:title" content="Compass">
 <meta name="twitter:description" content="开始Version: 1.0.1
 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用.
 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。
@@ -144,7 +144,7 @@
 
 
 
-  <title>  | Da'sBlog </title>
+  <title> Compass | Da'sBlog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -351,7 +351,7 @@
             
             
               
-                
+                Compass
               
             
           </h1>
@@ -421,17 +421,17 @@
 <h2 id="开始使用Compass"><a href="#开始使用Compass" class="headerlink" title="开始使用Compass"></a>开始使用Compass</h2><p>Compass 是一款使用<a href="http://sass-lang.com" target="_blank" rel="external">Sass语言</a> 编写的开源的css设计框架，使用<br>起来强大和简单. 如果你对Sass不熟悉, 可以去<a href="http://sass-lang.com" target="_blank" rel="external">sass-lang.com</a>学习如何使用.</p>
 <h2 id="安装Compass"><a href="#安装Compass" class="headerlink" title="安装Compass"></a>安装Compass</h2><p>请按照<a href="http://compass-style.org/install/" target="_blank" rel="external">Compass 安装指南</a>按步骤安装Compass和Sass。</p>
 <p>如果需要验证版本，可以运行以下命令:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass version</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass version</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="监视和编译你的项目"><a href="#监视和编译你的项目" class="headerlink" title="监视和编译你的项目"></a>监视和编译你的项目</h2><p>（ps：watch参数就是，监控你的项目是否则有文件改动，一旦有改动，就自动转成css。）</p>
 <p>当开发项目时, 你可以运行compass监视器 ，自动修改你的css文件到最新状态。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /path/to/project</div><div class="line">$ compass watch</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /path/to/project</div><div class="line">$ compass watch</div></pre></td></tr></table></figure>
 <p>当在生产环境中编译你的css文件的时, 通过 –production 编译器将默认对终端(就是我们用的浏览器)优化输出(其实就是精简):</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass compile --production</div></pre></td></tr></table></figure>
-<h2 id="使用Compass不用命令行"><a href="#使用Compass不用命令行" class="headerlink" title="使用Compass不用命令行"></a>使用Compass不用命令行</h2><p>你可以不用compass命令行. 在一些情况下, 对于一些不是明确支持Compasssass编译器和框架，这样更容易集成.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gem install compass-core</div><div class="line">$ cat &lt;&lt;- EOF &gt; _project-setup.scss</div><div class="line">\$project-path: absolute-path(join-file-segments(<span class="string">".."</span>));</div><div class="line">@<span class="keyword">import</span> <span class="string">"compass/configuration"</span>;</div><div class="line">\$compass-options: (http_path: <span class="string">"/"</span>);</div><div class="line">@include compass-configuration(\$compass-options);</div><div class="line">EOF</div><div class="line">Add to the top <span class="keyword">of</span> each sass file: @<span class="keyword">import</span> <span class="string">"project-setup"</span>;</div><div class="line">Compile using the Sass command line:</div><div class="line">$ sass -r compass-core --update sass:css</div></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass compile --production</div></pre></td></tr></table></figure>
+<h2 id="使用Compass不用命令行"><a href="#使用Compass不用命令行" class="headerlink" title="使用Compass不用命令行"></a>使用Compass不用命令行</h2><p>你可以不用compass命令行. 在一些情况下, 对于一些不是明确支持Compasssass编译器和框架，这样更容易集成.<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gem install compass-core</div><div class="line">$ cat &lt;&lt;- EOF &gt; _project-setup.scss</div><div class="line">\$project-<span class="symbol">path:</span> absolute-path(join-file-segments(<span class="string">".."</span>));</div><div class="line">@import <span class="string">"compass/configuration"</span>;</div><div class="line">\$compass-<span class="symbol">options:</span> (<span class="symbol">http_path:</span> <span class="string">"/"</span>);</div><div class="line">@include compass-configuration(\$compass-options);</div><div class="line">EOF</div><div class="line">Add to the top of each sass <span class="symbol">file:</span> @import <span class="string">"project-setup"</span>;</div><div class="line">Compile using the Sass command <span class="symbol">line:</span></div><div class="line">$ sass -r compass-core --update <span class="symbol">sass:</span>css</div></pre></td></tr></table></figure></p>
 <p>详情请读: <a href="http://compass-style.org/help/documentation/sass-based-configuration-options/" target="_blank" rel="external">Compass’s Sass-based配置选项</a>.</p>
-<h2 id="更多配置命令"><a href="#更多配置命令" class="headerlink" title="更多配置命令"></a>更多配置命令</h2><p>所有compass命令的文档可以通过运行下面的代码发现:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help</div></pre></td></tr></table></figure></p>
-<p>可以设置一个可选参数，指定具体的一个命令:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help &lt;command&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="更多配置命令"><a href="#更多配置命令" class="headerlink" title="更多配置命令"></a>更多配置命令</h2><p>所有compass命令的文档可以通过运行下面的代码发现:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help</div></pre></td></tr></table></figure></p>
+<p>可以设置一个可选参数，指定具体的一个命令:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help &lt;command&gt;</div></pre></td></tr></table></figure></p>
 <p> <command> 就是指定的命令参数 (例如. compile)</p>
 <h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><h2 id="教程-1"><a href="#教程-1" class="headerlink" title="教程"></a>教程</h2><h3 id="Compass-Tutorials"><a href="#Compass-Tutorials" class="headerlink" title="Compass Tutorials"></a>Compass Tutorials</h3><p>These tutorials are still a work-in-progress, if you have questions that aren’t covered here let us know on the <a href="http://groups.google.com/group/compass-users" target="_blank" rel="external">Compass users mailing list</a> where there are lots of friendly Compass users standing by to help you out.</p>
 <h3 id="New-to-Compass"><a href="#New-to-Compass" class="headerlink" title="New to Compass?"></a>New to Compass?</h3><p>If you’re new to Compass, you might be interested in <a href="http://compass-style.org/help/tutorials/best_practices/" target="_blank" rel="external">best practices</a>, the <a href="http://compass-style.org/help/tutorials/configuration-reference/" target="_blank" rel="external">configuration reference</a>, <a href="http://compass-style.org/help/tutorials/configurable-variables/" target="_blank" rel="external">configurable variables</a>, or the <a href="http://compass-style.org/help/tutorials/command-line/" target="_blank" rel="external">command line documentation</a>.</p>
@@ -489,9 +489,9 @@ project_path = File.expand_path(File.join(File.dirname(__FILE__), &apos;..&apos;
 css_dir = &quot;output/stylesheets&quot;
 sass_dir = &quot;content/stylesheets&quot;
 images_dir = &quot;assets/images&quot;
-javascripts_dir = &quot;assets/javascripts&quot;
+rubys_dir = &quot;assets/rubys&quot;
 fonts_dir = &quot;assets/fonts&quot;
-http_javascripts_dir = &quot;javascripts&quot;
+http_rubys_dir = &quot;rubys&quot;
 http_stylesheets_dir = &quot;stylesheets&quot;
 http_images_dir = &quot;images&quot;
 http_fonts_dir = &quot;fonts&quot;
@@ -554,9 +554,9 @@ project_path = File.expand_path(File.join(File.dirname(__FILE__), &apos;..&apos;
 css_dir = &quot;output/stylesheets&quot;
 sass_dir = &quot;content/stylesheets&quot;
 images_dir = &quot;assets/images&quot;
-javascripts_dir = &quot;assets/javascripts&quot;
+rubys_dir = &quot;assets/rubys&quot;
 fonts_dir = &quot;assets/fonts&quot;
-http_javascripts_dir = &quot;javascripts&quot;
+http_rubys_dir = &quot;rubys&quot;
 http_stylesheets_dir = &quot;stylesheets&quot;
 http_images_dir = &quot;images&quot;
 http_fonts_dir = &quot;fonts&quot;
@@ -634,7 +634,7 @@ nanoc projects using the formal approach
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2017/01/11/compass/"
-     data-title=""
+     data-title="Compass"
      data-content=""
      data-url="http://sunhao.win/2017/01/11/compass/">
   <div class="ds-share-inline">
@@ -659,12 +659,15 @@ nanoc projects using the formal approach
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/01/11/compass/"
-           data-title="" data-url="http://sunhao.win/2017/01/11/compass/">
+           data-title="Compass" data-url="http://sunhao.win/2017/01/11/compass/">
       </div>
     
   </div>
@@ -800,7 +803,7 @@ nanoc projects using the formal approach
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

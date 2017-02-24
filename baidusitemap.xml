@@ -5,15 +5,39 @@
     
   <url>
     <loc>http://sunhao.win/2017/02/24/safe-cc/</loc>
-    <lastmod>2017-02-24T06:58:05.733Z</lastmod>
+    <lastmod>2017-02-24T07:53:54.141Z</lastmod>
     <data>
         <display>
         <title>服务器网站被CC攻击的解决方法</title>
         <pubTime>2017-02-24T06:02:15.000Z</pubTime>
         
-        <tag>cc攻击</tag>
+        <tag>CC攻击</tag>
          
-        <tag>ddos攻击</tag>
+        <tag>DDOS攻击</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络安全" url="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/02/24/safe-iptables/</loc>
+    <lastmod>2017-02-24T07:52:05.924Z</lastmod>
+    <data>
+        <display>
+        <title>ACK攻击</title>
+        <pubTime>2017-02-24T06:58:05.000Z</pubTime>
+        
+        <tag>SYN攻击</tag>
+         
+        <tag>CC攻击</tag>
+         
+        <tag>ACK攻击</tag>
          
          
            

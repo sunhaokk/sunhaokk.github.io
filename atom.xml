@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-02-24T07:52:05.924Z</updated>
+  <updated>2017-02-24T08:00:57.503Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>ACK攻击</title>
+    <title>使用iptables应对SYN攻击,CC攻击,ACK攻击</title>
     <link href="http://sunhao.win/2017/02/24/safe-iptables/"/>
     <id>http://sunhao.win/2017/02/24/safe-iptables/</id>
     <published>2017-02-24T06:58:05.000Z</published>
-    <updated>2017-02-24T07:52:05.924Z</updated>
+    <updated>2017-02-24T08:00:57.503Z</updated>
     
     <content type="html"><![CDATA[<p>三次握手的过程及相关概念<br>TCP/IP协议使用三次握手来建立连接，过程如下：<br>1、第一次握手，客户端发送数据包syn到服务器，并进入SYN_SEND状态，等待回复<br>2、第二次握手，服务器发送数据报syn/ack，给客户机，并进入SYN_RECV状态，等待回复<br>3、第三次握手，客户端发送数据包ACK给客户机，发送完成后，客户端和服务器进入ESTABLISHED状态，链接建立完成</p>
 <p>三次握手协议中，服务器维护一个等待队列，收到一个syn包就在队列中建立一个条目，并分配一定的资源。对应的每一个条目表示已经收到一个syn请 求，并已经回复syn/ack，服务器上对应的连接已经进入SYN_RECV状态，等待客户端响应，收到客户端的响应包以后，该连接进入 ESTABLISHED状态，队列中对应的条目被删除。<br>backlog参数：设定等待队列的最大数目。对应内核参数：net.ipv4.tcp_max_syn_backlog = 1024<br>syn-ack重传次数：服务器发送syn/ack包，如果没有收到客户端的相应，就会重传syn/ack，超过一定时间之后会进行第二次重传，超过设定 次数以后将该条目从队列中删除。每次重传的间隔时间并不确定。对应的内核参数：net.ipv4.tcp_synack_retries = 5<br>syn重传次数：概念和syn/ack重传次数类似，对应的内核参数：net.ipv4.tcp_syn_retries = 5<br>等待存活时间：指等待队列的条目存活时间，即从服务器收到syn包到确认这个包无效的最长时间，该时间是所有重传包请求的最长等待时间<br><a id="more"></a><br>什么是SYN 攻击</p>
@@ -60,9 +60,9 @@
       <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="SYN攻击" scheme="http://sunhao.win/tags/SYN%E6%94%BB%E5%87%BB/"/>
-    
       <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
+    
+      <category term="SYN攻击" scheme="http://sunhao.win/tags/SYN%E6%94%BB%E5%87%BB/"/>
     
       <category term="ACK攻击" scheme="http://sunhao.win/tags/ACK%E6%94%BB%E5%87%BB/"/>
     

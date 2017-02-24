@@ -4,16 +4,18 @@
 
     
   <url>
-    <loc>http://sunhao.win/2017/02/24/safe-cc/</loc>
-    <lastmod>2017-02-24T07:53:54.141Z</lastmod>
+    <loc>http://sunhao.win/2017/02/24/safe-iptables/</loc>
+    <lastmod>2017-02-24T08:00:57.503Z</lastmod>
     <data>
         <display>
-        <title>服务器网站被CC攻击的解决方法</title>
-        <pubTime>2017-02-24T06:02:15.000Z</pubTime>
+        <title>使用iptables应对SYN攻击,CC攻击,ACK攻击</title>
+        <pubTime>2017-02-24T06:58:05.000Z</pubTime>
         
         <tag>CC攻击</tag>
          
-        <tag>DDOS攻击</tag>
+        <tag>SYN攻击</tag>
+         
+        <tag>ACK攻击</tag>
          
          
            
@@ -26,18 +28,16 @@
 
     
   <url>
-    <loc>http://sunhao.win/2017/02/24/safe-iptables/</loc>
-    <lastmod>2017-02-24T07:52:05.924Z</lastmod>
+    <loc>http://sunhao.win/2017/02/24/safe-cc/</loc>
+    <lastmod>2017-02-24T07:53:54.141Z</lastmod>
     <data>
         <display>
-        <title>ACK攻击</title>
-        <pubTime>2017-02-24T06:58:05.000Z</pubTime>
+        <title>服务器网站被CC攻击的解决方法</title>
+        <pubTime>2017-02-24T06:02:15.000Z</pubTime>
         
-        <tag>SYN攻击</tag>
-         
         <tag>CC攻击</tag>
          
-        <tag>ACK攻击</tag>
+        <tag>DDOS攻击</tag>
          
          
            

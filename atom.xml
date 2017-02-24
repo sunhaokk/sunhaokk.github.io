@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-02-21T09:28:01.866Z</updated>
+  <updated>2017-02-24T06:58:05.733Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,11 +16,91 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>服务器网站被CC攻击的解决方法</title>
+    <link href="http://sunhao.win/2017/02/24/safe-cc/"/>
+    <id>http://sunhao.win/2017/02/24/safe-cc/</id>
+    <published>2017-02-24T06:02:15.000Z</published>
+    <updated>2017-02-24T06:58:05.733Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。</p>
+<p>首先，什么事CC攻击？</p>
+<p>攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS,和伪装就叫：CC(ChallengeCollapsar)。<br>CC主要是用来攻击页面的。大家都有这样的经历，就是在访问论坛时，如果这个论坛比较大，访问的人比较多，打开页面的速度会比较慢，访问的人越多，论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。<br>一个静态页面不需要服务器多少资源，甚至可以说直接从内存中读出来发给你就可以了，但是论坛就不一样了，我看一个帖子，系统需要到数据库中判断我是否有读帖子的权限，如果有，就读出帖子里面的内容，显示出来——这里至少访问了2次数据库，如果数据库的数据容量有200MB大小，系统很可能就要在这200MB大小的数据空间搜索一遍，这需要多少的CPU资源和时间？如果我是查找一个关键字，那么时间更加可观，因为前面的搜索可以限定在一个很小的范围内，比如用户权限只查用户表，帖子内容只查帖子表，而且查到就可以马上停止查询，而搜索肯定会对所有的数据进行一次判断，消耗的时间是相当的大。<br>CC就是充分利用了这个特点，模拟多个用户（多少线程就是多少用户）不停的进行访问（访问那些需要大量数据操作，就是需要大量CPU时间的页面）.这一点用一个一般的性能测试软件就可以做到大量模拟用户并发。</p>
+<p>CC攻击是DDoS(分布式拒绝服务)的一种，相比其它的DDoS攻击CC似乎更有技术含量一些。这种攻击你见不到虚假IP，见不到特别大的异常流量，但造成服务器无法进行正常连接，一条ADSL的普通用户足以挂掉一台高性能的Web服务器。由此可见其危害性，称其为”Web杀手”毫不为过。最让站长们忧虑的是这种攻击技术含量不是很高，利用工具和一些IP代理，一个初、中级的电脑水平的用户就能够实施DDoS攻击。</p>
+<p>那么怎样保证这些网站服务器的安全呢？防护CC攻击大家有必要了解CC攻击的原理及如果发现CC攻击和对CC攻击的防范措施。</p>
+<p>一、CC攻击的原理：<br>CC攻击的原理就是攻击者控制某些主机不停地发大量数据包给对方服务器造成服务器资源耗尽，一直到宕机崩溃。CC主要是用来攻击页面的，每个人都有这样的体验：当一个网页访问的人数特别多的时候，打开网页就慢了，CC就是模拟多个用户(多少线程就是多少用户)不停地进行访问那些需要大量数据操作(就是需要大量CPU时间)的页面，造成服务器资源的浪费，CPU长时间处于100%，永远都有处理不完的连接直至就网络拥塞，正常的访问被中止。<br><a id="more"></a><br>二、CC攻击的种类：<br>CC攻击的种类有三种，直接攻击，代理攻击，僵尸网络攻击。</p>
+<p>直接攻击主要针对有重要缺陷的WEB应用程序，一般说来是程序写的有问题的时候才会出现这种情况，比较少见。</p>
+<p>僵尸网络攻击有点类似于DDOS攻击了，从WEB应用程序层面上已经无法防御。</p>
+<p>代理攻击：CC攻击者一般会操作一批代理服务器，比方说100个代理，然后每个代理同时发出10个请求，这样WEB服务器同时收到1000个并发请求的，并且在发出请求后，立刻断掉与代理的连接，避免代理返回的数据将本身的带宽堵死，而不能发动再次请求，这时WEB服务器会将响应这些请求的进程进行队列，数据库服务器也同样如此，这样一来，正常请求将会被排在很后被处理，就象本来你去食堂吃饭时，一般只有不到十个人在排队，今天前面却插了一千个人，那么轮到你的机会就很小很小了，这时就出现页面打开极其缓慢或者白屏。</p>
+<p>三、攻击症状<br>CC攻击有一定的隐蔽性，那如何确定服务器正在遭受或者曾经遭受CC攻击呢?我们可以通过以下三个方法来确定。</p>
+<p>(1).命令行法<br>一般遭受CC攻击时，Web服务器会出现80端口对外关闭的现象，因为这个端口已经被大量的垃圾数据堵塞了正常的连接被中止了。我们可以通过在命令行下输入命令netstat-an来查看，如果看到类似如下有大量显示雷同的连接记录基本就可以被CC攻击了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">……</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6:2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">……</div></pre></td></tr></table></figure></p>
+<p>其中”192.168.1.6”就是被用来代理攻击的主机的IP，”SYN_RECEIVED”是TCP连接状态标志，意思是”正在处于连接的初始同步状态”，表明无法建立握手应答处于等待状态。这就是攻击的特征，一般情况下这样的记录一般都会有很多条，表示来自不同的代理IP的攻击。</p>
+<p>(2).批处理法<br>上述方法需要手工输入命令且如果Web服务器IP连接太多看起来比较费劲，我们可以建立一个批处理文件，通过该脚本代码确定是否存在CC攻击。打开记事本键入如下代码保存为CC.bat：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@echooff</div><div class="line"></div><div class="line">time /t &gt;&gt;log.log</div><div class="line"></div><div class="line">netstat -n -p tcp |find &quot;:80&quot;&gt;&gt;Log.log</div><div class="line"></div><div class="line">notepad log.log</div><div class="line"></div><div class="line">exit</div></pre></td></tr></table></figure></p>
+<p>上面的脚本的含义是筛选出当前所有的到80端口的连接。当我们感觉服务器异常是就可以双击运行该批处理文件，然后在打开的log.log文件中查看所有的连接。如果同一个IP有比较多的到服务器的连接，那就基本可以确定该IP正在对服务器进行CC攻击。</p>
+<p>(3).查看系统日志<br>上面的两种方法有个弊端，只可以查看当前的CC攻击，对于确定Web服务器之前是否遭受CC攻击就无能为力了，此时我们可以通过Web日志来查，因为Web日志忠实地记录了所有IP访问Web资源的情况。通过查看日志我们可以Web服务器之前是否遭受CC攻击，并确定攻击者的IP然后采取进一步的措施。</p>
+<p>Web日志一般在C:\WINDOWS\system32\LogFiles\HTTPERR目录下，该目录下用类似httperr1.log的日志文件，这个文件就是记录Web访问错误的记录。管理员可以依据日志时间属性选择相应的日志打开进行分析是否Web被CC攻击了。默认情况下，Web日志记录的项并不是很多，我们可以通过IIS进行设置，让Web日志记录更多的项以便进行安全分析。其操作步骤是：</p>
+<p>“开始→管理工具”打开”Internet信息服务器”，展开左侧的项定位到到相应的Web站点，然后右键点击选择”属性”打开站点属性窗口，在”网站”选项卡下点击”属性”按钮，在”日志记录属性”窗口的”高级”选项卡下可以勾选相应的”扩展属性”，以便让Web日志进行记录。比如其中的”发送的字节数”、”接收的字节数”、”所用时间”这三项默认是没有选中的，但在记录判断CC攻击中是非常有用的，可以勾选。另外，如果你对安全的要求比较高，可以在”常规”选项卡下对”新日志计划”进行设置，让其”每小时”或者”每一天”进行记录。为了便于日后进行分析时好确定时间可以勾选”文件命名和创建使用当地时间”。</p>
+<p>四、CC攻击防御策略<br>确定Web服务器正在或者曾经遭受CC攻击，那如何进行有效的防范呢?</p>
+<p>(1).取消域名绑定<br>一般cc攻击都是针对网站的域名进行攻击，比如我们的网站域名是”www.star-net.cn”，那么攻击者就在攻击工具中设定攻击对象为该域名然后实施攻击。</p>
+<p>对于这样的攻击我们的措施是在IIS上取消这个域名的绑定，让CC攻击失去目标。具体操作步骤是：打开”IIS管理器”定位到具体站点右键”属性”打开该站点的属性面板，点击IP地址右侧的”高级”按钮，选择该域名项进行编辑，将”主机头值”删除或者改为其它的值(域名)。</p>
+<p>经过模拟测试，取消域名绑定后Web服务器的CPU马上恢复正常状态，通过IP进行访问连接一切正常。但是不足之处也很明显，取消或者更改域名对于别人的访问带来了不变，另外，对于针对IP的CC攻击它是无效的，就算更换域名攻击者发现之后，他也会对新域名实施攻击。</p>
+<p>(2).域名欺骗解析<br>如果发现针对域名的CC攻击，我们可以把被攻击的域名解析到127.0.0.1这个地址上。我们知道127.0.0.1是本地回环IP是用来进行网络测试的，如果把被攻击的域名解析到这个IP上，就可以实现攻击者自己攻击自己的目的，这样他再多的肉鸡或者代理也会宕机，让其自作自受。</p>
+<p>另外，当我们的Web服务器遭受CC攻击时把被攻击的域名解析到国家有权威的政府网站或者是网警的网站，让其网警来收拾他们。</p>
+<p>现在一般的Web站点都是利用类似”新网”这样的服务商提供的动态域名解析服务，大家可以登录进去之后进行设置。</p>
+<p>(3).更改Web端口<br>一般情况下Web服务器通过80端口对外提供服务，因此攻击者实施攻击就以默认的80端口进行攻击，所以，我们可以修改Web端口达到防CC攻击的目的。运行IIS管理器，定位到相应站点，打开站点”属性”面板，在”网站标识”下有个TCP端口默认为80，我们修改为其他的端口就可以了。</p>
+<p>(4).IIS屏蔽IP<br>我们通过命令或在查看日志发现了CC攻击的源IP，就可以在IIS中设置屏蔽该IP对Web站点的访问，从而达到防范IIS攻击的目的。在相应站点的”属性”面板中，点击”目录安全性”选项卡，点击”IP地址和域名现在”下的”编辑”按钮打开设置对话框。在此窗口中我们可以设置”授权访问”也就是”白名单”，也可以设置”拒绝访问”即”黑名单”。比如我们可以将攻击者的IP添加到”拒绝访问”列表中，就屏蔽了该IP对于Web的访问。</p>
+<p>五、CC攻击的防范手段<br>防止CC攻击，不一定非要用高防服务器。比如，用防CC攻击软件就可以有效的防止CC攻击。推荐一些CC的防范手段：</p>
+<p>1、优化代码<br>尽可能使用缓存来存储重复的查询内容，减少重复的数据查询资源开销。减少复杂框架的调用，减少不必要的数据请求和处理逻辑。程序执行中，及时释放资源，比如及时关闭mysql连接，及时关闭memcache连接等，减少空连接消耗。</p>
+<p>2、限制手段<br>对一些负载较高的程序增加前置条件判断，可行的判断方法如下：</p>
+<p>必须具有网站签发的session信息才可以使用（可简单阻止程序发起的集中请求）；必须具有正确的referer（可有效防止嵌入式代码的攻击）；禁止一些客户端类型的请求（比如一些典型的不良蜘蛛特征）；同一session多少秒内只能执行一次。</p>
+<p>3、完善日志<br>尽可能完整保留访问日志。日志分析程序，能够尽快判断出异常访问，比如单一ip密集访问；比如特定url同比请求激增。</p>
+<p>六、针对CC攻击的商业解决方案<br>很多的网站管理者是等到网站遭到攻击了，受到损失了，才去寻求解决的方案，在将来的互联网飞速发展的时代，一定要有安全隐患意识，不要等到损失大了，再去想办法来补救，这样为时已晚。然而当网站受到攻击时，大多数人想到的是—–快点找硬防，基本上都步了一个误区，就是认为网站或者服务器被攻击，购买硬件防火墙，什么事都万事大吉了，实际上这样的想法是极端错误的。多年的统计数据表明，想彻底解CC攻击是几乎不可能的，就好比治疗感冒一样，我们可以治疗，也可以预防，但却无法根治，但我们若采取积极有效的防御方法，则可在很大程度上降低或减缓生病的机率，防治DDOS攻击也是如此。</p>
+<p>实际上比较理想解决方案应该是”软件+硬件”的解决方案。此方案对于资金较为充足的企业网站来说，这个方案适合他们；硬件在DDOS防护上有优势，软件CC防护上有优势；相对于一些对于ICP内容网站、论坛社区BBS、电子商务eBusiness、音乐网站Music、电影网站File等网站服务器越来越普及，但由于种种原因往往会遭受竞争对手或打击报复者的恶意DDOS攻击，持续的攻击会导致大量用户流失，严重的甚至因人气全失而被迫关闭服务器，为了最大程度的保护运营者的利益，冰盾科技结合多年抗DDOS的实践经验给出了最少的安全投资可获得最大安全回报的抗DDOS解决方案。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。&lt;/p&gt;
+&lt;p&gt;首先，什么事CC攻击？&lt;/p&gt;
+&lt;p&gt;攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS,和伪装就叫：CC(ChallengeCollapsar)。&lt;br&gt;CC主要是用来攻击页面的。大家都有这样的经历，就是在访问论坛时，如果这个论坛比较大，访问的人比较多，打开页面的速度会比较慢，访问的人越多，论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。&lt;br&gt;一个静态页面不需要服务器多少资源，甚至可以说直接从内存中读出来发给你就可以了，但是论坛就不一样了，我看一个帖子，系统需要到数据库中判断我是否有读帖子的权限，如果有，就读出帖子里面的内容，显示出来——这里至少访问了2次数据库，如果数据库的数据容量有200MB大小，系统很可能就要在这200MB大小的数据空间搜索一遍，这需要多少的CPU资源和时间？如果我是查找一个关键字，那么时间更加可观，因为前面的搜索可以限定在一个很小的范围内，比如用户权限只查用户表，帖子内容只查帖子表，而且查到就可以马上停止查询，而搜索肯定会对所有的数据进行一次判断，消耗的时间是相当的大。&lt;br&gt;CC就是充分利用了这个特点，模拟多个用户（多少线程就是多少用户）不停的进行访问（访问那些需要大量数据操作，就是需要大量CPU时间的页面）.这一点用一个一般的性能测试软件就可以做到大量模拟用户并发。&lt;/p&gt;
+&lt;p&gt;CC攻击是DDoS(分布式拒绝服务)的一种，相比其它的DDoS攻击CC似乎更有技术含量一些。这种攻击你见不到虚假IP，见不到特别大的异常流量，但造成服务器无法进行正常连接，一条ADSL的普通用户足以挂掉一台高性能的Web服务器。由此可见其危害性，称其为”Web杀手”毫不为过。最让站长们忧虑的是这种攻击技术含量不是很高，利用工具和一些IP代理，一个初、中级的电脑水平的用户就能够实施DDoS攻击。&lt;/p&gt;
+&lt;p&gt;那么怎样保证这些网站服务器的安全呢？防护CC攻击大家有必要了解CC攻击的原理及如果发现CC攻击和对CC攻击的防范措施。&lt;/p&gt;
+&lt;p&gt;一、CC攻击的原理：&lt;br&gt;CC攻击的原理就是攻击者控制某些主机不停地发大量数据包给对方服务器造成服务器资源耗尽，一直到宕机崩溃。CC主要是用来攻击页面的，每个人都有这样的体验：当一个网页访问的人数特别多的时候，打开网页就慢了，CC就是模拟多个用户(多少线程就是多少用户)不停地进行访问那些需要大量数据操作(就是需要大量CPU时间)的页面，造成服务器资源的浪费，CPU长时间处于100%，永远都有处理不完的连接直至就网络拥塞，正常的访问被中止。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="cc攻击" scheme="http://sunhao.win/tags/cc%E6%94%BB%E5%87%BB/"/>
+    
+      <category term="ddos攻击" scheme="http://sunhao.win/tags/ddos%E6%94%BB%E5%87%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>study clojure</title>
+    <link href="http://sunhao.win/2017/02/21/study-clojure/"/>
+    <id>http://sunhao.win/2017/02/21/study-clojure/</id>
+    <published>2017-02-21T13:41:25.000Z</published>
+    <updated>2017-02-21T13:41:25.076Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Compass中文手册</title>
     <link href="http://sunhao.win/2017/01/11/compass/"/>
     <id>http://sunhao.win/2017/01/11/compass/</id>
     <published>2017-01-11T07:10:57.000Z</published>
-    <updated>2017-02-21T09:28:01.866Z</updated>
+    <updated>2017-02-23T09:32:05.633Z</updated>
     
     <content type="html"><![CDATA[<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>compass目前已经不再维护，但有些东西仍值得学习。</p>
 <p><strong>Version: 1.0.1</strong></p>
@@ -112,31 +192,103 @@
 <p>3.compass核心与设计无关。这就是为什么compass没有栅格系统，因为栅格系统和设计有关。</p>
 <p>4.compass并不特别，compass能做的，扩展也能做。<br>5.Sass非常棒 – compass使Sass更容易，并证明如何使用Sass充分发挥其潜力。.<br>6.浏览器的兼容很头疼。需要共同解决。<br>7.默认情况下，compass支持尽可能多的浏览器，渐进增强，向后兼容。</p>
 <p>8.compass是一个Sass的试验场。watcher和 color function的例子转移到sass。</p>
-<h3 id="Stylesheet-Conventions"><a href="#Stylesheet-Conventions" class="headerlink" title="Stylesheet Conventions"></a>Stylesheet Conventions</h3><p>All framework stylesheets are partials. Their filename begin with an underscore. Otherwise, Sass will create stylesheets directly into the user’s CSS directory.<br>Compass imports do not emit styles. There are a few limited exceptions to this like the resets and base classes for inheritance.<br>Mixins with two-level defaults. Mixins often provide two levels of default values. The first is a global default that can be overridden once. The second is a default that can be overridden when the mixin is included.<br>Mixin argument names are part of the public API, make sure they are understandable and not needlessly truncated or terse.<br>If adding a new folder of stylesheets, add a single stylesheet with the same name that imports all of the stylesheets in the folder.<br>Try to avoid passing selectors as arguments. This is what mixins are for.</p>
-<h3 id="Common-Problems-amp-Miscellaneous-Info"><a href="#Common-Problems-amp-Miscellaneous-Info" class="headerlink" title="Common Problems &amp; Miscellaneous Info"></a>Common Problems &amp; Miscellaneous Info</h3><p>Setting up Git</p>
-<p>Please follow these instructions to set up your email address and attribution information.</p>
-<p>Download your git repo:</p>
-<p>git clone git@github.com:your_username/compass.git<br>Set up a remote to the main repo:</p>
-<p>cd compass<br>git remote add chriseppstein git://github.com/chriseppstein/compass.git<br>Getting recent changes from the main repo:</p>
-<p>git fetch chriseppstein</p>
-<h3 id="Using-Compass-while-Under-Development"><a href="#Using-Compass-while-Under-Development" class="headerlink" title="Using Compass while Under Development"></a>Using Compass while Under Development</h3><p>Use the bin script. /path/to/compass/bin/compass is a version of the compass command line that uses the local changes you have made. You can add /path/to/compass/bin to your $PATH, or refer to it directly.<br>Build and install a gem:<br>Edit VERSION and change the version to something like: 1.0.0.something-unique-to-me.0<br>gem build compass.gemspec<br>gem install compass-0.10.6.something-uniq-to-me.0.gem – If installing to your system gems, you’ll probably need to add sudo to the front. If you don’t know what that means, you probably need to add sudo to the front.<br>In a bundled environment, you can configure your gem to use compass while you work on it like so:</p>
-<p>gem ‘compass’, :path =&gt; “/Users/myusername/some/path/to/compass”<br>Bundler will perform some sort of charm on ruby to make it work.</p>
-<p>Configuring ruby directly. If you’re a ruby pro, you probably don’t need to be told that you can set compass on the load path like so:</p>
-<p>export RUBYLIB=/Users/myusername/some/path/to/compass/lib</p>
-<h3 id="Running-Tests"><a href="#Running-Tests" class="headerlink" title="Running Tests"></a>Running Tests</h3><p>You must have Ruby installed on your system. After setting up git, change to the root directory of your git checkout of Compass.</p>
-<p>cd compass<br>Install the bundler Ruby gem.</p>
-<p>gem install bundler<br>If installing to your system gems, you’ll probably need to add sudo to the front of that command. If you don’t know what that means, you probably need to add sudo to the front.</p>
-<p>Install development dependencies:</p>
-<p>bundle install –binstubs devbin<br>Running core library and stylesheet tests:</p>
-<p>bundle exec rake test features<br>Running behavior tests</p>
-<p>./devbin/cucumber<br>If stylesheet tests fail, the output of the test project is captured in test/fixtures/stylesheets/<project>/saved/ and the error message will report where the error was. Here’s an example:</project></p>
-<p>Stylesheet Test Failure</p>
-<h3 id="Writing-Stylesheet-Tests"><a href="#Writing-Stylesheet-Tests" class="headerlink" title="Writing Stylesheet Tests"></a>Writing Stylesheet Tests</h3><p>Compass has stylesheet tests to ensure that each stylesheet compiles, can be imported directly without any other dependencies and that refactorings that should not affect the output, don’t.</p>
-<p>At some point, it would be great to have a test system that verifies that the stylesheets work correctly in various browsers. If you have ideas for how to accomplish this in a sane way, please let us know.</p>
-<p>In the test/fixtures/stylesheets directory, there are a number of compass projects. The tests work by adding or updating the sass files, running the tests to make sure they fail, and then changing the expected css output to make the test pass. It is rudimentary, but as a safety net, it has caught a number of problems that might have been missed otherwise. If you add a new stylesheet to compass, please make sure to add a new test stylesheet that only imports the newly added stylesheet and add rules that use the new features in that stylesheet.</p>
-<h3 id="You-cherry-picked-rebased-my-changes-What-should-I-do"><a href="#You-cherry-picked-rebased-my-changes-What-should-I-do" class="headerlink" title="You cherry-picked/rebased my changes. What should I do?"></a>You cherry-picked/rebased my changes. What should I do?</h3><p>Depending on any number of reasons, including but not limited to the alignment of the stars, Your changes might not be merged into compass using a simple merge. For instance, we might decide to place a change against master into stable instead, or we might squish all your changes together into a single commit at the time of merge, or we might want a change you’ve submitted but not a change that it was placed onto top of. In these cases, there are a couple of ways you can react:</p>
-<p>If you have some changes on a branch that were not yet accepted, but other changes on that branch were accepted then you should run the following command (make sure to fetch first): git checkout branch_name; git rebase chriseppstein/master (assuming the change was applied to the master branch)<br>If all your changes on the topic branch were accepted or you don’t care to keep it around anymore: git checkout master; git branch -D branch_name; git push origin :branch_name</p>
-<h2 id="Creating-Compass-Extensions"><a href="#Creating-Compass-Extensions" class="headerlink" title="Creating Compass Extensions"></a>Creating Compass Extensions</h2><h2 id="Extending-Compass"><a href="#Extending-Compass" class="headerlink" title="Extending Compass"></a>Extending Compass</h2><h2 id="Production-Stylesheets"><a href="#Production-Stylesheets" class="headerlink" title="Production Stylesheets"></a>Production Stylesheets</h2><h2 id="Spriting"><a href="#Spriting" class="headerlink" title="Spriting"></a>Spriting</h2><h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><h3 id="Magic-Selectors"><a href="#Magic-Selectors" class="headerlink" title="Magic Selectors"></a>Magic Selectors</h3><h3 id="Sprite-layouts"><a href="#Sprite-layouts" class="headerlink" title="Sprite layouts"></a>Sprite layouts</h3><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h2 id="Upgrading"><a href="#Upgrading" class="headerlink" title="Upgrading"></a>Upgrading</h2><h3 id="Lemonade-Upgrade"><a href="#Lemonade-Upgrade" class="headerlink" title="Lemonade Upgrade"></a>Lemonade Upgrade</h3><h3 id="Scared-to-Upgrade"><a href="#Scared-to-Upgrade" class="headerlink" title="Scared to Upgrade?"></a>Scared to Upgrade?</h3><h3 id="Upgrading-to-v0-11"><a href="#Upgrading-to-v0-11" class="headerlink" title="Upgrading to v0.11"></a>Upgrading to v0.11</h3><h2 id="Working-with-Configurable-Variables"><a href="#Working-with-Configurable-Variables" class="headerlink" title="Working with Configurable Variables"></a>Working with Configurable Variables</h2><h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><h1 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h1><h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1>]]></content>
+<h3 id="样式约定"><a href="#样式约定" class="headerlink" title="样式约定"></a>样式约定</h3><p>1.框架所有的样式都是(私有)部分. 它们由一个下划线开始. 否则, Sass 将直接在用户的css目录创建样式表<br>2.Compass不引入额外样式. 也有例外如 resets 和 集成的基类。<br>3.Mixins 提供两个级别的默认设置<br>. 第一是一个全局默认，可以重写一次<br>. 第二个默认mixin如果包含进来，可以重写.<br>4.Mixin 参数名称的公共API部分<br>,确保易懂，不要简短.<br>5.创建一个新的文件夹放样式表, 用一个和文件夹名一样的样式表导入所有的样式表 .<br>6.尽量避免通过选择器作为参数。</p>
+<h3 id="常见问题-amp-杂项信息"><a href="#常见问题-amp-杂项信息" class="headerlink" title="常见问题 &amp;杂项信息"></a>常见问题 &amp;杂项信息</h3><p>设置Git</p>
+<p>请按照以下这些指示来设置您的电子邮件地址和属性的信息。.</p>
+<p>下载git repo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:your_username/compass.git</div></pre></td></tr></table></figure></p>
+<p>链接远程 repo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd compass</div><div class="line">git remote add chriseppstein git://github.com/chriseppstein/compass.git</div></pre></td></tr></table></figure></p>
+<p>获取最近更新:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git fetch chriseppstein</div></pre></td></tr></table></figure></p>
+<h3 id="在开发中使用compass"><a href="#在开发中使用compass" class="headerlink" title="在开发中使用compass"></a>在开发中使用compass</h3><p>使用本地脚本可以放在 /path/to/compass/bin/compass 。 你可以添加 /path/to/compass/bin 到$PATH(环境变量), 或者选择其他目录.<br>创建安装gem:<br>编辑 VERSION 改变 version像这样: 1.0.0.something-unique-to-me.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem build compass.gemspec</div><div class="line">gem install compass-0.10.6.something-uniq-to-me.0.gem</div></pre></td></tr></table></figure></p>
+<p>– 如果安装gems到你的系统, 你可能需要用 sudo . 如果你不明白什么意思，就加上它(sudo意思就是superuser<br> do 的缩写)<br>捆绑环境, 你可以像这样用gem安装compass:<br>``linux<br>gem ‘compass’, :path =&gt; “/Users/myusername/some/path/to/compass”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ruby将自动执行捆绑命令</div><div class="line"></div><div class="line">配置ruby目录 . ruby的加载路径可以这么设置</div><div class="line">```linux</div><div class="line">export RUBYLIB=/Users/myusername/some/path/to/compass/lib</div></pre></td></tr></table></figure></p>
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p> 你必须安装Ruby到你的系统. 配置完git, 切换到root目录通过git checkout到compass分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd compass</div></pre></td></tr></table></figure></p>
+<p>捆绑安装Ruby gem.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install bundler</div></pre></td></tr></table></figure></p>
+<p>用sudo安装gems, </p>
+<p>配置依赖:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bundle install --binstubs devbin</div></pre></td></tr></table></figure></p>
+<p>核心库和样式测试:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bundle exec rake test features</div></pre></td></tr></table></figure></p>
+<p>运行性能测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./devbin/cucumber</div></pre></td></tr></table></figure></p>
+<p>如果样式测试失败, 捕获输出的测试项目在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test/fixtures/stylesheets/&lt;project&gt;/saved/</div></pre></td></tr></table></figure></p>
+<h3 id="编写样式测试"><a href="#编写样式测试" class="headerlink" title="编写样式测试"></a>编写样式测试</h3><p>Compass已经对每个样式表测试, 直接可以导入任何其他依赖关系和重构，不会影响到输出.</p>
+<p>在某种程度上，在不同的浏览器测试是一项巨大工程。如果你有想法，请让我们知道如何做到这一点<br>在test/fixtures/stylesheets目录, 有许多的compass项目. 测试添加更新文件,修改错误保证他们都通过. 安全起见，它可能错过一些问题。如果您添加一个新的样式表到compass，请确保添加一个新样式表，增加新的样式规则。</p>
+<h3 id="You-cherry-picked-rebased-my-changes-What-should-I-do"><a href="#You-cherry-picked-rebased-my-changes-What-should-I-do" class="headerlink" title="You cherry-picked/rebased my changes. What should I do?"></a>You cherry-picked/rebased my changes. What should I do?</h3><p>根据任何数目的原因，包括但不限于星星多少，您的更改不会简单合并到compass。例如，我们会考虑master的稳定，而不是改变的地方，或者我们可以把所有同类更改合并在一起，形成一个单一的提交在时间，或者我们可能希望改变你已经提交，它被安置到顶部但没有改变。在这些情况下，有两种方法你有两种选择:</p>
+<p>1.如果您有一些变化的一个分支，尚未接受，但其他分支上的变化被接受，那么您应该运行以下命令（确保fetch最新）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout branch_name; git rebase chriseppstein/master</div><div class="line">(假设的变化应用到主分支)</div></pre></td></tr></table></figure></p>
+<p>2.<br>If all your changes on the topic branch were accepted or you don’t care to keep it around anymore:<br>如果你所有在分支的改变被接受或你不想再保留:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master; git branch -D branch_name; git push origin :branch_name</div></pre></td></tr></table></figure></p>
+<h2 id="Creating-Compass-Extensions"><a href="#Creating-Compass-Extensions" class="headerlink" title="Creating Compass Extensions"></a>Creating Compass Extensions</h2><h3 id="Compass-Extensions"><a href="#Compass-Extensions" class="headerlink" title="Compass Extensions"></a>Compass Extensions</h3><p>Compass, at its heart, is a framework upon which sass-based stylesheet frameworks are built. It provides the tools for building, installing and using reusable stylesheets that provide anything from full-fledged layout frameworks to designs for widgets or even full page designs. All using the power of sass to keep the semantic meaning of the html pages clear and free of design details.</p>
+<p>This document describes the compass extension toolset so that you can build your own compass extension.</p>
+<p>Basic Extension Layout</p>
+<p>my_extension<br>|<br>|- stylesheets (this directory will be on the sass load path)<br>|  |<br>|  |- my_extension (not technically required, but it’s good to scope imports by the name of the extension)<br>|  |  |<br>|  |  |- _module_one.sass (this file would be imported using @import my_extension/module_one.sass)<br>|  |  |- _module_two.sass (this file would be imported using @import my_extension/module_two.sass)<br>|  |  |- …<br>|  |<br>|  |- _my_extension.sass (This file will import the entire extension using @import my_extension.sass)<br>|<br>|- templates (this is where templates/patterns go)<br>|  |<br>|  |- project (this should be provided if you’d like people to be able to base their project on the extension)<br>|  |  |<br>|  |  |- manifest.rb (this file should declare the contents of the template)<br>|  |  |- screen.sass (this would be the main stylesheet, importing from your extension and demonstrating its use)<br>|  |  |- print.sass (this file would set up basic print styles)<br>|  |  |- ie.sass (if you want, you can provide custom styles for IE)<br>|  |<br>|  |- some_pattern<br>|     |<br>|     |- manifest.rb<br>|     |- some.sass (some sass is probably in order, always import from the extension library as much as possible)<br>|     |- some_script.js (yes, you can provide javascript code)<br>|     |- some_image.png (and images)<br>|     |- some_content.html.haml (and even html and haml)<br>|     |- some_other_file.txt (and other arbitrary files)<br>|<br>|- lib (optional ruby code)<br>   |<br>   |- my_extension.rb (this code can register your framework if you deviate from conventions and require sass extensions, etc.)<br>   |- compass-my_extension.rb (This file is automatically required by compass if it is present. Avoiding the need to pass -r to the compass command line tool.)<br>   |<br>   |- my_extension<br>      |<br>      |- sass_extensions.rb (this is the standard location to place sass functions)<br>Names in bold are part of the extension naming convention.</p>
+<p>Generating an Extension</p>
+<p>If you want a leg up to get started working on your extension, you can use compass to generate an extension with the following command:</p>
+<p>compass create my_extension –using compass/extension<br>This will create a few basic files and folders to get you started.</p>
+<p>If you prefer to use the scss syntax for your extension run the following command instead:</p>
+<p>compass create my_extension –using compass/extension -x scss<br>Advanced Layout Options</p>
+<p>Library File Location</p>
+<p>The extension library file referenced above as my_extension/lib/my_extension.rb can actually be stored at any of the following three locations:</p>
+<p>my_extension/compass_init.rb<br>my_extension/lib/my_extension.rb (NOTE: You must use this one if you’re distributing as a rubygem.)<br>my_extension/my_extension.rb<br>The first of those locations found (in the above order) will be loaded. The compass_init.rb file takes priority, so that extensions that want to work differently as compass extensions than they do as normal ruby libraries, have a way of targeting compass.</p>
+<p>Stylesheet and Template Locations</p>
+<p>If you’d like to store your stylesheets and/or templates in a non-standard location within your extension, you must provide a library file and register the extension explicitly like so:</p>
+<p>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’)<br>stylesheets_dir = File.join(base_directory, ‘my’, ‘stylesheets’)<br>templates_dir   = File.join(base_directory, ‘my’, ‘templates’)<br>Compass::Frameworks.register(‘my_extension’, :stylesheets_directory =&gt; stylesheets_dir, :templates_directory =&gt; templates_dir)<br>If you’re following the standard naming convention, but the stylesheet and template directories are not at the top level, you can just do this instead:</p>
+<p> path from the library file to where you’re keeping your compass stuff.<br>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’, ‘compass’)<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; base_directory)<br>Adding Configuration Options to Compass</p>
+<p>For details on how to add new configuration options to compass read this.</p>
+<p>Conventions to Follow</p>
+<p>The following are not required, but are standards that your framework should attempt to adhere to unless there’s a good reason not to do so.</p>
+<p>Have a single import for your framework.<br>Break up your framework into modules so that people can import just smaller pieces for faster load times when they’re not using everything.<br>Use partials (files starting with an underscore) for stylesheets that are meant to be imported. If you do not Sass will generate css files for your libraries in some configurations.<br>Provide a project template. If you do not, your project should only be providing widgets or page designs, etc.<br>Building a Template (a.k.a. Pattern)<br>Manifest Files</p>
+<p>The manifest file declares the template contents and tells compass information about the files in the template.</p>
+<p>An Example Manifest File</p>
+<p>description “My awesome compass plugin.”</p>
+<p>stylesheet ‘screen.sass’, :media =&gt; ‘screen, projection’<br>stylesheet ‘partials/_base.sass’<br>stylesheet ‘print.sass’,  :media =&gt; ‘print’<br>stylesheet ‘ie.sass’,     :media =&gt; ‘screen, projection’, :condition =&gt; “lt IE 8”</p>
+<p>image ‘grid.png’<br>javascript ‘script.js’</p>
+<p>html ‘welcome.html.haml’, :erb =&gt; true<br>file ‘README’</p>
+<p>help %Q{<br>This is a message that users will see if they type</p>
+<p>  compass help my_extension</p>
+<p>You can use it to help them learn how to use your extension.<br>}</p>
+<p>welcome_message %Q{<br>This is a message that users will see after they install this pattern.<br>Use this to tell users what to do next.<br>}<br>You may also see some real manifest files here:</p>
+<p>blueprint<br>compass-css-lightbox<br>Manifest Declarations</p>
+<p>Easy Mode: If you just have some basic files and nothing fancy going on, simply place this line in your manifest:</p>
+<p>discover :all<br>If the file is missing discover :all is the default</p>
+<p>This will cause compass to find all the files in your template and use the files’ extension to determine where they should go. Alternatively, you can request that compass only discover files of a certain type. For example, the following will only discover javascript and image assets, you could then declare other file types on your own.</p>
+<p>discover :javascripts<br>discover :images<br>The following types may be discovered: :stylesheets, :images, :javascripts, :fonts, :html, :files, and :directories</p>
+<p>Normal Mode: There are seven kinds of manifest declarations:</p>
+<p>stylesheet - Declares a sass file.<br>image - Declares an image.<br>javascript - Declares a javascript file.<br>font - Declares a font file.<br>html - Declares an html file.<br>file - Declares a random file.<br>directory - Declares a directory should be created.<br>All declarations take the path to the file as their first argument. Note that the normal slash / can and should be used in a manifest. Compass will take care of the cross platform issues. The path to the file will be reproduced in the user’s project, so please keep that in mind when creating folders. The location where files are going to be installed is dictated by the user’s project configuration, however, a template can place things into subdirectories relative to those locations.</p>
+<p>Common options:</p>
+<p>:erb - When set to true, the file will be processed via the ERB templating language. See the “Advanced Manifests” section below for more details.<br>:to - The location where the file should be installed relative to the type-specific location.<br>:like - Most often used with a file declaration, this option allows you to install into the location of another manifest type (and also :css). E.g. :like =&gt; :css<br>Stylesheet options:</p>
+<p>:media - this is used as a hint to the user about the media attribute of the stylesheet link tag.<br>:condition - this is used to hint the user that a conditional comment should be used to import the stylesheet with the given condition.<br>Directory options:</p>
+<p>:within - where the directory should be created. If omitted, the directory will be relative to the project directory. Can be one of: the following<br>sass_dir<br>javascripts_dir<br>fonts_dir<br>images_dir<br>HTML files:</p>
+<p>You can provide html as haml or as plain html. If you provide haml, the haml will be converted to html when it is installed, unless the project allows haml files. Providing html files is usually done to demonstrate how to use a more complicated design and to get the user started off with working product.</p>
+<p>Advanced Manifests and Templates</p>
+<p>ERB Processing - This can be used to customize the contents of the file in an extension template. The template will be processed in the context of a TemplateContext instance, which gives you access to the full project configuration information as well as the command line options. Since it’s unlikely many templates will need this functionality, I leave it as an exercise of the user to figure it out and if they can’t to contact the compass-devs mailing list for assistance.<br>no_configuration_file! - calling this method within the manifest will tell the installer to skip the creation of a configuration file.<br>skip_compilation! - calling this method within the manifest will tell the installer to skip compilation of sass files to css.<br>Distributing Extensions as Ruby Gems</p>
+<p>Rubygems is a flexible, easy-to-use system for distributing ruby software. If you have any questions about rubygems, I suggest that you start looking for help here.</p>
+<p>The big advantages of using rubygems to distribute your extension is that it allows your extension to be a dependency for other projects and that each install is versioned, which makes supporting your extension easier.</p>
+<p>If distributing as a rubygem, it is a good idea to have a file compass-<framework>.rb in your lib directory that registers the compass framework. This will allow compass to automatically require the framework from within rubygems.</framework></p>
+<p>Tips for Developing Extensions</p>
+<p>If you’re developing a simple extension, you may find it convenient to place your extension within an existing compass project in the extension folder.<br>Never specify an extension in your imports as this can cause issue when the syntax of a file changes.<br>Packaging an Extension as a RubyGem</p>
+<p>You do not have to make your extension a ruby gem. But if you do, you get some benefits you would not have otherwise:</p>
+<p>Releases<br>Versions<br>A standard way of asking your users what release they are using.<br>Better integration with ruby-based projects via tools like Bundler.<br>Creating a Gem</p>
+<p>Before you begin, please ensure you have gem version 1.3.6 or greater. gem -v will tell you the currently installed version.</p>
+<p>Define your gemspec file at the top of your extension. Here’s an example of one. The gemspec should have the same name as your gem.<br>Register your framework by adding lib/my_extension.rb and registering it:</p>
+<p>require ‘compass’<br>extension_path = File.expand_path(File.join(File.dirname(<strong>FILE</strong>), “..”))<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; extension_path)<br>This is how compass knows where to find your extension’s files when a user requires it. For more options, go back up and read about Stylesheet and Template Locations.</p>
+<p>Build a gem: gem build my_extension.gemspec. This will build your gem file and add the current version to the name. E.g. my_extension-0.0.1.gem<br>Test your gem by installing it locally: gem install my_extension-0.0.1.gem<br>Releasing a Gem</p>
+<p>The ruby community is nice and will host your gem files for free. To release your gem:</p>
+<p>gem push my_extension-0.0.1.gem<br>Your ruby gem will be hosted on rubygems.org. Please familiarize yourself with their documentation.</p>
+<p>Installing Extensions<br>How extensions are installed varies according to the decisions you make about how you are packaging and releasing your gem. There will be a standard approach in a future release, but until then, it is suggested that you provide your users with succinct installation instructions.</p>
+<p>Installing Extensions Released as RubyGems</p>
+<p>When creating a new project:</p>
+<p>sudo gem install my_extension<br>compass create my_project -r my_extension –using my_extension<br>The -r option is annoying and will not be needed in a future version of compass. But for now, it tells compass to find and load the extension from the local rubygems repository.</p>
+<p>To install via rubygems into an existing project:</p>
+<p>gem install my_extension<br> edit the project configuration file and add:<br>require ‘my_extension’<br>compass install my_extension<br>Or if you have other patterns besides the project pattern:</p>
+<p>compass install my_extension/pattern<br>Installing Ad-hoc Extensions</p>
+<p>Ad-hoc extensions are any set of files and folders following the basic conventions described above. They could be installed via a zip file or by checking the code out from source control. Ad-hoc extensions will be automatically found in the extensions directory of a project and registered for import without needing a require statement in the compass configuration file.</p>
+<p>Currently, ad-hoc extensions can only be installed into the extensions directory of an existing compass project. This will be fixed in a future release of compass. Until then, you may need to instruct your users to create a bare project to get started:</p>
+<p>compass create my_project –bare<br>This will create a project directory, a sass directory (with no sass files) and a configuration file.</p>
+<p>The standard location for extensions is project_root/extensions for stand-alone projects and project_root/vendor/plugins/compass_extensions for rails projects. Additionally, the user may customize their extensions directory by setting extensions_dir in their compass configuration file.</p>
+<p>To install into an existing project, simply place the extension into a project’s extension directory. This could be done via a git clone or by extracting an archive. The name of the directory it creates should be the name of the extension. The project will now have access to the extension.</p>
+<p>Verifying that an Extension is Installed Correctly</p>
+<p>The user can verify that they have access to your extension by typing:</p>
+<p>compass help<br>And they should see the framework in the list of available frameworks. Alternatively, if you’ve provided a help message in the manifest, then the user can type:</p>
+<p>compass help my_extension</p>
+<ul>
+<li>or -<br>compass help my_extension/pattern_name<br>Note: The user might need to provide the -r option to help in order for compass to find a gem-based extension before a project exists. This is not needed for extensions installed into the extensions directory, or if the project is already required in the current directory’s project configuration.<h2 id="Extending-Compass"><a href="#Extending-Compass" class="headerlink" title="Extending Compass"></a>Extending Compass</h2><h2 id="Production-Stylesheets"><a href="#Production-Stylesheets" class="headerlink" title="Production Stylesheets"></a>Production Stylesheets</h2><h2 id="Spriting"><a href="#Spriting" class="headerlink" title="Spriting"></a>Spriting</h2><h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><h3 id="Magic-Selectors"><a href="#Magic-Selectors" class="headerlink" title="Magic Selectors"></a>Magic Selectors</h3><h3 id="Sprite-layouts"><a href="#Sprite-layouts" class="headerlink" title="Sprite layouts"></a>Sprite layouts</h3><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h2 id="Upgrading"><a href="#Upgrading" class="headerlink" title="Upgrading"></a>Upgrading</h2><h3 id="Lemonade-Upgrade"><a href="#Lemonade-Upgrade" class="headerlink" title="Lemonade Upgrade"></a>Lemonade Upgrade</h3><h3 id="Scared-to-Upgrade"><a href="#Scared-to-Upgrade" class="headerlink" title="Scared to Upgrade?"></a>Scared to Upgrade?</h3><h3 id="Upgrading-to-v0-11"><a href="#Upgrading-to-v0-11" class="headerlink" title="Upgrading to v0.11"></a>Upgrading to v0.11</h3><h2 id="Working-with-Configurable-Variables"><a href="#Working-with-Configurable-Variables" class="headerlink" title="Working with Configurable Variables"></a>Working with Configurable Variables</h2><h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><h1 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h1><h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1></li>
+</ul>
+]]></content>
     
     <summary type="html">
     

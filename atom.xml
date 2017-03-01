@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-02-26T12:29:38.723Z</updated>
+  <updated>2017-03-01T06:25:40.677Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>名词 吞吐量 带宽 QPS TPS DDOS流量 并发用户数</title>
+    <link href="http://sunhao.win/2017/03/01/safe-noun/"/>
+    <id>http://sunhao.win/2017/03/01/safe-noun/</id>
+    <published>2017-03-01T01:00:44.000Z</published>
+    <updated>2017-03-01T06:25:40.677Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。-1"><a href="#Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。-1" class="headerlink" title="Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。[1]"></a>Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。[1]</h3><h3 id="Max-net-bitrate-带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。"><a href="#Max-net-bitrate-带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。" class="headerlink" title="Max net bitrate: 带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。"></a>Max net bitrate: 带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。</h3><p>两者需要区分链路上的可用带宽（带宽）与实际链路中每秒所能传送的比特数（吞吐量）。通常更倾向于用“吞吐量”一词来表示一个系统的测试性能。这样，因为实现受各种低效率因素的影响，所以由一段带宽为10Mbps的链路连接的一对节点可能只达到2Mbps的吞吐量。</p>
+<h3 id="QPS：Queries-Per-Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches-sec，即每秒的响应请求数，也即是最大吞吐能力。"><a href="#QPS：Queries-Per-Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches-sec，即每秒的响应请求数，也即是最大吞吐能力。" class="headerlink" title="QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。"></a>QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。</h3><a id="more"></a>
+<h3 id="TPS是-TransactionsPerSecond的缩写，也就是事务数-秒。"><a href="#TPS是-TransactionsPerSecond的缩写，也就是事务数-秒。" class="headerlink" title="TPS是 TransactionsPerSecond的缩写，也就是事务数/秒。"></a>TPS是 TransactionsPerSecond的缩写，也就是事务数/秒。</h3><p>它是软件测试结果的测量单位。一个事务是指一个客户机向服务器发送请求然后服务器 做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数，最终利用这些信息来估计得分。客户机使 用加权协函数平均方法来计算客户机的得分，测试软件就是利用客户机的这些信息使用加权协函数平均方法来计算服务器端的整体TPS得分。</p>
+<h3 id="DDOS流量"><a href="#DDOS流量" class="headerlink" title="DDOS流量"></a>DDOS流量</h3><p>该防御值主要针对DNS服务器进行DDOS攻击所产生的流量。这种攻击方式，是指借助于客户/服务器技术，将多个计算机联合起来作为攻击平台，对一个或多个目标发动DDOS攻击，从而成倍地提高拒绝服务攻击的威力。</p>
+<h3 id="响应时间-RT"><a href="#响应时间-RT" class="headerlink" title="响应时间(RT)"></a>响应时间(RT)</h3><p>响应时间是指系统对请求作出响应的时间。对于一个游戏软件来说，响应时间小于100毫秒应该是不错的，响应时间在1秒左右可能属于勉强可以接受，如果响应时间达到3秒就完全难以接受了。而对于编译系统来说，完整编译一个较大规模软件的源代码可能需要几十分钟甚至更长时间，但这些响应时间对于用户来说都是可以接受的。 </p>
+<h3 id="吞吐量-Throughput"><a href="#吞吐量-Throughput" class="headerlink" title="吞吐量(Throughput)"></a>吞吐量(Throughput)</h3><pre><code>吞吐量是指系统在单位时间内处理请求的数量。对于无并发的应用系统而言，吞吐量与响应时间成严格的反比关系，实际上此时吞吐量就是响应时间的倒数。前面已经说过，对于单用户的系统，响应时间（或者系统响应时间和应用延迟时间）可以很好地度量系统的性能，但对于并发系统，通常需要用吞吐量作为性能指标。 
+</code></pre><p>　　对于一个多用户的系统，如果只有一个用户使用时系统的平均响应时间是t，当有你n个用户使用时，每个用户看到的响应时间通常并不是n×t，而往往比n×t小很多（当然，在某些特殊情况下也可能比n×t大，甚至大很多）。这是因为处理每个请求需要用到很多资源，由于每个请求的处理过程中有许多不走难以并发执行，这导致在具体的一个时间点，所占资源往往并不多。也就是说在处理单个请求时，在每个时间点都可能有许多资源被闲置，当处理多个请求时，如果资源配置合理，每个用户看到的平均响应时间并不随用户数的增加而线性增加。实际上，不同系统的平均响应时间随用户数增加而增长的速度也不大相同，这也是采用吞吐量来度量并发系统的性能的主要原因。一般而言，吞吐量是一个比较通用的指标，两个具有不同用户数和用户使用模式的系统，如果其最大吞吐量基本一致，则可以判断两个系统的处理能力基本一致。 </p>
+<h3 id="并发用户数"><a href="#并发用户数" class="headerlink" title="并发用户数"></a>并发用户数</h3><p>　　并发用户数是指系统可以同时承载的正常使用系统功能的用户的数量。与吞吐量相比，并发用户数是一个更直观但也更笼统的性能指标。实际上，并发用户数是一个非常不准确的指标，因为用户不同的使用模式会导致不同用户在单位时间发出不同数量的请求。一网站系统为例，假设用户只有注册后才能使用，但注册用户并不是每时每刻都在使用该网站，因此具体一个时刻只有部分注册用户同时在线，在线用户就在浏览网站时会花很多时间阅读网站上的信息，因而具体一个时刻只有部分在线用户同时向系统发出请求。这样，对于网站系统我们会有三个关于用户数的统计数字：注册用户数、在线用户数和同时发请求用户数。由于注册用户可能长时间不登陆网站，使用注册用户数作为性能指标会造成很大的误差。而在线用户数和同事发请求用户数都可以作为性能指标。相比而言，以在线用户作为性能指标更直观些，而以同时发请求用户数作为性能指标更准确些。 </p>
+<p>从以上概念来看吞吐量和响应时间是衡量系统性能的重要指标，QPS虽然和吞吐量的计量单位不同，但应该是成正比的，任何一个指标都可以含量服务器的并行处理能力。当然Throughput更关心数据量，QPS更关心处理笔数。 </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。-1&quot;&gt;&lt;a href=&quot;#Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。-1&quot; class=&quot;headerlink&quot; title=&quot;Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。[1]&quot;&gt;&lt;/a&gt;Throughput：吞吐量。防火墙吞吐量是指在没有帧丢失的情况下，设备能够接收并转发的最大数据速率。[1]&lt;/h3&gt;&lt;h3 id=&quot;Max-net-bitrate-带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。&quot;&gt;&lt;a href=&quot;#Max-net-bitrate-带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。&quot; class=&quot;headerlink&quot; title=&quot;Max net bitrate: 带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。&quot;&gt;&lt;/a&gt;Max net bitrate: 带宽。指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码在计算机网络中又称为线速。可以说以太网的带宽是10Mbps。&lt;/h3&gt;&lt;p&gt;两者需要区分链路上的可用带宽（带宽）与实际链路中每秒所能传送的比特数（吞吐量）。通常更倾向于用“吞吐量”一词来表示一个系统的测试性能。这样，因为实现受各种低效率因素的影响，所以由一段带宽为10Mbps的链路连接的一对节点可能只达到2Mbps的吞吐量。&lt;/p&gt;
+&lt;h3 id=&quot;QPS：Queries-Per-Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches-sec，即每秒的响应请求数，也即是最大吞吐能力。&quot;&gt;&lt;a href=&quot;#QPS：Queries-Per-Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches-sec，即每秒的响应请求数，也即是最大吞吐能力。&quot; class=&quot;headerlink&quot; title=&quot;QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。&quot;&gt;&lt;/a&gt;QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="QPS" scheme="http://sunhao.win/tags/QPS/"/>
+    
+      <category term="TPS" scheme="http://sunhao.win/tags/TPS/"/>
+    
+      <category term="吞吐量" scheme="http://sunhao.win/tags/%E5%90%9E%E5%90%90%E9%87%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>position:absolute-top,right,bottom,left为0使用</title>
@@ -94,9 +130,9 @@
       <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
-    
       <category term="SYN攻击" scheme="http://sunhao.win/tags/SYN%E6%94%BB%E5%87%BB/"/>
+    
+      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
     
       <category term="ACK攻击" scheme="http://sunhao.win/tags/ACK%E6%94%BB%E5%87%BB/"/>
     

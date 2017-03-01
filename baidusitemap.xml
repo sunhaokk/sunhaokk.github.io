@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://sunhao.win/2017/03/01/safe-noun/</loc>
+    <lastmod>2017-03-01T06:25:40.677Z</lastmod>
+    <data>
+        <display>
+        <title>名词 吞吐量 带宽 QPS TPS DDOS流量 并发用户数</title>
+        <pubTime>2017-03-01T01:00:44.000Z</pubTime>
+        
+        <tag>QPS</tag>
+         
+        <tag>TPS</tag>
+         
+        <tag>吞吐量</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络安全" url="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/2017/02/26/css-top-right-bootom-left-zero/</loc>
     <lastmod>2017-02-26T12:29:38.723Z</lastmod>
     <data>
@@ -33,9 +57,9 @@
         <title>使用iptables应对SYN攻击,CC攻击,ACK攻击[转]</title>
         <pubTime>2017-02-24T06:58:05.000Z</pubTime>
         
-        <tag>CC攻击</tag>
-         
         <tag>SYN攻击</tag>
+         
+        <tag>CC攻击</tag>
          
         <tag>ACK攻击</tag>
          

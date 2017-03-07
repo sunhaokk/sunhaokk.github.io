@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-03-05T05:15:41.894Z</updated>
+  <updated>2017-03-07T06:24:56.000Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -14,6 +14,205 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>php函数参数类和接口</title>
+    <link href="http://sunhao.win/2017/03/07/php-class-type-declaration/"/>
+    <id>http://sunhao.win/2017/03/07/php-class-type-declaration/</id>
+    <published>2017-03-07T05:46:37.000Z</published>
+    <updated>2017-03-07T06:24:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>参数为类的实例<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">C</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">// This doesn't extend C.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(C $c)</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> get_class($c).<span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(<span class="keyword">new</span> C);</div><div class="line">f(<span class="keyword">new</span> D);</div><div class="line">f(<span class="keyword">new</span> E);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>输出为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">C</div><div class="line">D</div><div class="line"></div><div class="line">Fatal error: Uncaught TypeError: Argument <span class="number">1</span> passed to f() must be an instance of C, instance of E given, called in - on line <span class="number">14</span> <span class="keyword">and</span> defined in -:<span class="number">8</span></div><div class="line">Stack trace:</div><div class="line"><span class="comment">#0 -(14): f(Object(E))</span></div><div class="line"><span class="comment">#1 &#123;main&#125;</span></div><div class="line">  thrown in - on line <span class="number">8</span></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>参数为接口的实现</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">I</span> </span>&#123; <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>; &#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">implements</span> <span class="title">I</span> </span>&#123; <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125; &#125;</div><div class="line"></div><div class="line"><span class="comment">// This doesn't implement I.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(I $i)</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> get_class($i).<span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(<span class="keyword">new</span> C);</div><div class="line">f(<span class="keyword">new</span> E);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>输出为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">C</div><div class="line">PHP Catchable fatal error:  Argument <span class="number">1</span> passed to f() must implement <span class="class"><span class="keyword">interface</span> <span class="title">I</span>, <span class="title">instance</span> <span class="title">of</span> <span class="title">E</span> <span class="title">given</span>, <span class="title">called</span> <span class="title">in</span> /<span class="title">code</span>/<span class="title">main</span>.<span class="title">php</span> <span class="title">on</span> <span class="title">line</span> 13 <span class="title">and</span> <span class="title">defined</span> <span class="title">in</span> /<span class="title">code</span>/<span class="title">main</span>.<span class="title">php</span> <span class="title">on</span> <span class="title">line</span> 8</span></div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参数为类的实例&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;C&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;D&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;C&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// This doesn&#39;t extend C.&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;E&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(C $c)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; get_class($c).&lt;span class=&quot;string&quot;&gt;&quot;\n&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; C);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; D);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; E);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;输出为&lt;/p&gt;
+&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;C&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;D&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Fatal error: Uncaught TypeError: Argument &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; passed to f() must be an instance of C, instance of E given, called in - on line &lt;span class=&quot;number&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; defined in -:&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Stack trace:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#0 -(14): f(Object(E))&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#1 &amp;#123;main&amp;#125;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  thrown in - on line &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="php" scheme="http://sunhao.win/categories/php/"/>
+    
+    
+      <category term="php参数" scheme="http://sunhao.win/tags/php%E5%8F%82%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack热拔插教程hmr</title>
+    <link href="http://sunhao.win/2017/03/07/webpack-hmr-tutorial/"/>
+    <id>http://sunhao.win/2017/03/07/webpack-hmr-tutorial/</id>
+    <published>2017-03-07T00:50:58.000Z</published>
+    <updated>2017-03-07T06:17:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://andrewhfarmer.com/webpack-hmr-tutorial/" target="_blank" rel="external">http://andrewhfarmer.com/webpack-hmr-tutorial/</a><br>Struggling to set up HMR with Webpack?</p>
+<p>Are you finding the Webpack documentation to be lacking - particularly in the HMR section? Does it seem like they’ve left out some important parts?</p>
+<p>If so, read on! We’ll fill in the gaps together.</p>
+<p>By the way, HMR stands for ‘Hot Module Replacement’, sometimes called ‘hot module swapping’. It’s a Webpack feature that updates your JavaScript in-place without a browser refresh - whenever you make code changes. I love it because it enables a very fast developer workflow.<br>HMR Myths<br>First let’s get a couple myths about HMR out of the way.<br><a id="more"></a><br>Myth: HMR is only for React<br>Not true - it usually just takes 3 lines of code to enable HMR in arbitrary JavaScript. This Tutorial doesn’t even mention React - I’ll cover HMR in React in a subsequent post.</p>
+<p>Myth: HMR is only for ‘advanced’ users<br>Not true. Without good documentation, HMR is difficult for beginners and advanced users alike. With the right information (this article), HMR can be enabled with very minor changes to config/code.</p>
+<p>Myth: HMR is the same as ‘live reload’<br>Not true. Live reload is when the browser automatically refreshes the page whenever you make a code change. HMR is faster because it updates code in-place without refreshing.</p>
+<p>2 Steps to HMR Success<br>There are 2 steps to enabling HMR: config changes and code changes.</p>
+<ol>
+<li><p>Config / Project Setup<br>There are 3 ways to configure your project for HMR. I go into each way in detail in Part 1. Pick the way that’s right for you and either use the provided github repository, or follow the directions to adapt your existing code base.</p>
+</li>
+<li><p>JavaScript / HMR API<br>To get HMR to work you have to add a little bit of extra code to your JavaScript. In the simplest case this is just 3 lines of code. I’ll show you everything you need to add for your use-case in Part 2.</p>
+</li>
+</ol>
+<p>Part 1: Configuring Your Project<br>There are exactly 3 ways that you can configure your HMR project. Let’s go through each one. I’ll help you pick which one to use in the next section.</p>
+<ol>
+<li><p>webpack-dev-server CLI<br>Run the webpack-dev-server on the command-line. With this approach you don’t need to change your webpack.config.js file, so it’s the simplest.</p>
+</li>
+<li><p>webpack-dev-server API<br>Run WebpackDevServer from a node.js script. Requires some additions to your webpack.config.js.</p>
+</li>
+<li><p>webpack-hot-middleware w/ express<br>webpack-hot-middleware is used for running a webpack dev server with HMR inside an express server.</p>
+</li>
+</ol>
+<p>The Non-Way<br>If you are used to running the webpack CLI or the Webpack API (without express or webpack-dev-server), then you’ll have to change how you do things a little bit. HMR requires a server to work. To find out why, read my understanding HMR post.</p>
+<p>But how do I choose?<br>Follow this simple guide to pick one of the 3 ways above.</p>
+<p>If you are using a task runner like grunt or gulp you’ll want to use the webpack-dev-server API. You can run the server from one of your gulp/grunt tasks.</p>
+<p>If you use your own node scripts to run webpack, you’ll also want to use the webpack-dev-server API.</p>
+<p>If you use express to host your site: use webpack-hot-middleware. It will be integrated with your express server, so you won’t have to run another server for your bundled JS.</p>
+<p>If none of the above apply to you or you just want the simplest possible setup: use the webpack-dev-server CLI. It requires no configuration.</p>
+<p>Okay, I picked one, but how do I start?<br>Glad you asked! Below is a separate ‘Configuring X’ section for each of the 3 approaches.</p>
+<p>Scroll forward to the approach you decided to use, follow the directions, and then scroll down to Part 2.</p>
+<ol>
+<li>Configuring webpack-dev-server CLI<br>Read this section if you’ve decided to use the webpack-dev-server CLI. Otherwise, scroll to the next section.</li>
+</ol>
+<p>If you are starting a new project, use my webpack HMR with webpack-dev-server CLI starter project (wow that’s a mouthful). It has a README and lots of comments to explain what’s going on.</p>
+<p>If you are working with an existing project: just make sure you have a valid webpack.config.js and run webpack-dev-server.</p>
+<p>Here’s an example command:</p>
+<p>webpack-dev-server –content-base=www –inline –watch –hot<br>You may want to modify the above command for your use-case based on the CLI Docs.</p>
+<p>That’s it! When you use the webpack-dev-server CLI it does all the configuration for you.</p>
+<p>Gotcha: When using this approach, make sure your webpack.config.js does NOT contain any references to webpack-dev-server or HotModuleReplacementPlugin. You’ll get errors if you do.</p>
+<ol>
+<li>Configuring WebpackDevServer API<br>Read this section if you’ve decided to use the WebpackDevServer API. Otherwise, scroll to the next section.</li>
+</ol>
+<p>If you are starting a new project, use my webpack HMR with WebpackDevServer API starter project. It has a README and lots of comments to explain what’s going on.</p>
+<p>If you are working with an existing project, you’ll have to make 3 changes:</p>
+<p>Change #1: Add entry points to your webpack.config.js. Here’s an example. You need webpack/hot/dev-server and webpack-dev-server/client as shown, but index.js should be the name of your usual entry point.</p>
+<p>entry: [<br>  ‘./index.js’,<br>  ‘webpack/hot/dev-server’,<br>  ‘webpack-dev-server/client?<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a>‘,<br>],<br>Change #2: Add the HotModuleReplacementPlugin to your your webpack.config.js, like this:</p>
+<p>plugins: [<br>  new webpack.HotModuleReplacementPlugin(),<br>]<br>For a complete example, see the starter project webpack.config.js.</p>
+<p>Change #3: Run WebpackDevServer with the hot: true option. For an example, see the starter project server.js.</p>
+<ol>
+<li>Configuring webpack-hot-middleware &amp; express<br>Read this section if you’ve decided to use express and webpack-hot-middleware. Otherwise, scroll on to Part 2.</li>
+</ol>
+<p>If you are starting a new project, use my webpack HMR with webpack-hot-middleware &amp; express starter project. It has a README and lots of comments to explain what’s going on.</p>
+<p>If you are working with an existing express project, you’ll need to do 3 things:</p>
+<p>Change #1: Install webpack-hot-middleware and webpack-dev-middleware. I’m assuming you already have webpack and express.</p>
+<p>npm install –save-dev webpack-hot-middleware webpack-dev-middleware<br>Change #2: Adjust your webpack.config.js to look similar to this. The important bits are the entry and plugins section. You’ll want all the plugins I have listed:</p>
+<p>var path = require(‘path’);<br>var webpack = require(‘webpack’);</p>
+<p>var config = {<br>  context: path.join(<strong>dirname, ‘js’),<br>  entry: [<br>    ‘webpack-hot-middleware/client?path=/</strong>webpack_hmr&amp;timeout=20000’,<br>    ‘./index.js’,<br>  ],<br>  output: {<br>    path: path.join(__dirname, ‘www’),<br>    filename: ‘bundle.js’,<br>    publicPath: ‘/assets/‘,<br>  },<br>  plugins: [<br>    new webpack.optimize.OccurenceOrderPlugin(),<br>    new webpack.HotModuleReplacementPlugin(),<br>    new webpack.NoErrorsPlugin()<br>  ]<br>};<br>module.exports = config;<br>Change #3: Add the middleware to your express server.</p>
+<p>Add these requires:</p>
+<p>var webpackDevMiddleware = require(“webpack-dev-middleware”);<br>var webpackHotMiddleware = require(“webpack-hot-middleware”);<br>And these middleware .use statements:</p>
+<p>app.use(webpackDevMiddleware(compiler, {<br>  hot: true,<br>  filename: ‘bundle.js’,<br>  publicPath: ‘/assets/‘,<br>  stats: {<br>    colors: true,<br>  },<br>  historyApiFallback: true,<br>}));</p>
+<p>app.use(webpackHotMiddleware(compiler, {<br>  log: console.log,<br>  path: ‘/__webpack_hmr’,<br>  heartbeat: 10 * 1000,<br>}));<br>Part 2: Code Changes<br>Your Webpack project should now be configured for HMR. But if you fire up a browser at this point and make a code change, it won’t work. Either you won’t see the update, or you’ll get a full browser refresh.</p>
+<p>Why isn’t it working yet? Webpack doesn’t know when it is acceptable to reload a particular JS file.</p>
+<p>To let Webpack know which files can be updated, we’ll use the HMR JavaScript API a.k.a. the module.hot API.</p>
+<p>If you used any of my github starter projects, they are already using the module.hot API and you will see changes reflected immediately.<br>The Simple Way<br>To start, find your entry point (often called index.js or main.js) and add the following to the end:</p>
+<p>if (module.hot) {<br>  module.hot.accept();<br>}<br>This tells Webpack that this file and all of its dependencies can be replaced.</p>
+<p>Now make a code change that you could see the effect of onscreen. You SHOULD have seen an update!</p>
+<p>For many projects, that’s all there is to it.</p>
+<p>The Catch: Side Effects<br>If any of your files produce side effects when they run, for instance if they add elements to the DOM, then you’ll need to use module.hot.dispose to dispose of those side effects.</p>
+<p>Why? If you don’t, when Webpack reloads the module, all the side effects will be repeated.</p>
+<p>Here’s an example, box-creator.js:</p>
+<p>var sideEffectNode = document.createElement(‘div’);<br>sideEffectNode.textContent = ‘Side Effect’;<br>document.body.appendChild(sideEffectNode);</p>
+<p>// Remove the most recently-added <div> so that when the code runs again and<br>// adds a new <div>, we don’t end up with duplicate divs.<br>if (module.hot) {<br>  module.hot.dispose(function() {<br>    sideEffectNode.parentNode.removeChild(sideEffectNode);<br>  });<br>}<br>This is a file that simply adds a <div> to the DOM whenever it is loaded. It uses module.hot.dispose to remove the <div> when it is unloaded by the Webpack HMR Runtime.</div></div></div></div></p>
+<p>Conclusion<br>That’s all you need to know to get HMR working. If you want to dig deeper to solidify your understanding, read my article on understanding HMR.</p>
+<p>Coming soon: next I’ll post about how to apply HMR to your React project. Sign up for my list to be notified when that comes out!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://andrewhfarmer.com/webpack-hmr-tutorial/&quot;&gt;http://andrewhfarmer.com/webpack-hmr-tutorial/&lt;/a&gt;&lt;br&gt;Struggling to set up HMR with Webpack?&lt;/p&gt;
+&lt;p&gt;Are you finding the Webpack documentation to be lacking - particularly in the HMR section? Does it seem like they’ve left out some important parts?&lt;/p&gt;
+&lt;p&gt;If so, read on! We’ll fill in the gaps together.&lt;/p&gt;
+&lt;p&gt;By the way, HMR stands for ‘Hot Module Replacement’, sometimes called ‘hot module swapping’. It’s a Webpack feature that updates your JavaScript in-place without a browser refresh - whenever you make code changes. I love it because it enables a very fast developer workflow.&lt;br&gt;HMR Myths&lt;br&gt;First let’s get a couple myths about HMR out of the way.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="webpack" scheme="http://sunhao.win/categories/webpack/"/>
+    
+    
+      <category term="webpack" scheme="http://sunhao.win/tags/webpack/"/>
+    
+      <category term="hmr" scheme="http://sunhao.win/tags/hmr/"/>
+    
+      <category term="教程" scheme="http://sunhao.win/tags/%E6%95%99%E7%A8%8B/"/>
+    
+      <category term="热拔插" scheme="http://sunhao.win/tags/%E7%83%AD%E6%8B%94%E6%8F%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>laravel学习零散知识点</title>
+    <link href="http://sunhao.win/2017/03/06/laravel-study/"/>
+    <id>http://sunhao.win/2017/03/06/laravel-study/</id>
+    <published>2017-03-06T08:22:41.000Z</published>
+    <updated>2017-03-07T06:20:31.366Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;!! !!&#125; 相当于 <span class="meta">&lt;?php</span> <span class="keyword">echo</span> $value; <span class="meta">?&gt;</span></div><div class="line">&#123;&#123; &#125;&#125; 相当于 <span class="meta">&lt;?php</span> <span class="keyword">echo</span> htmlspecialchars($value); <span class="meta">?&gt;</span></div><div class="line"></div><div class="line">csrf_field()</div><div class="line"></div><div class="line">csrf_field 函数生成一个包含 CSRF 令牌值的 HTML 隐藏域，例如，使用Blade语法示例如下：</div><div class="line"></div><div class="line">&#123;!! csrf_field() !!&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">csrf_token()</div><div class="line"></div><div class="line">csrf_token 函数获取当前 CSRF 令牌的值：</div><div class="line"></div><div class="line">$token = csrf_token();</div></pre></td></tr></table></figure>
+<a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;!! !!&amp;#125; 相当于 &lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; $value; &lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&amp;#123; &amp;#125;&amp;#125; 相当于 &lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; htmlspecialchars($value); &lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_field()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_field 函数生成一个包含 CSRF 令牌值的 HTML 隐藏域，例如，使用Blade语法示例如下：&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;!! csrf_field() !!&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_token()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_token 函数获取当前 CSRF 令牌的值：&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$token = csrf_token();&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="laravel" scheme="http://sunhao.win/categories/laravel/"/>
+    
+    
+      <category term="学习" scheme="http://sunhao.win/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git文件状态</title>
+    <link href="http://sunhao.win/2017/03/06/git-filestatus/"/>
+    <id>http://sunhao.win/2017/03/06/git-filestatus/</id>
+    <published>2017-03-06T00:54:46.000Z</published>
+    <updated>2017-03-06T01:06:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170306/085148199.png" alt="mark"><br>灰色箭头不参与git快照。</p>
+<ol>
+<li>默认git有4种状态</li>
+<li>untracked  未跟踪 </li>
+<li>unmodified 未修改</li>
+<li>modified 修改</li>
+<li>staged  暂存区</li>
+</ol>
+<h3 id="其中我们工作区中只有-未修改-和修改。"><a href="#其中我们工作区中只有-未修改-和修改。" class="headerlink" title="其中我们工作区中只有  未修改 和修改。"></a>其中我们工作区中只有  未修改 和修改。</h3><h3 id="初始化，和commit后-所有为跟踪的文件都是-未修改的。"><a href="#初始化，和commit后-所有为跟踪的文件都是-未修改的。" class="headerlink" title="初始化，和commit后  所有为跟踪的文件都是 未修改的。"></a>初始化，和commit后  所有为跟踪的文件都是 未修改的。</h3><p>运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：<br><a id="more"></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170306/085148199.png&quot; alt=&quot;mark&quot;&gt;&lt;br&gt;灰色箭头不参与git快照。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;默认git有4种状态&lt;/li&gt;
+&lt;li&gt;untracked  未跟踪 &lt;/li&gt;
+&lt;li&gt;unmodified 未修改&lt;/li&gt;
+&lt;li&gt;modified 修改&lt;/li&gt;
+&lt;li&gt;staged  暂存区&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;其中我们工作区中只有-未修改-和修改。&quot;&gt;&lt;a href=&quot;#其中我们工作区中只有-未修改-和修改。&quot; class=&quot;headerlink&quot; title=&quot;其中我们工作区中只有  未修改 和修改。&quot;&gt;&lt;/a&gt;其中我们工作区中只有  未修改 和修改。&lt;/h3&gt;&lt;h3 id=&quot;初始化，和commit后-所有为跟踪的文件都是-未修改的。&quot;&gt;&lt;a href=&quot;#初始化，和commit后-所有为跟踪的文件都是-未修改的。&quot; class=&quot;headerlink&quot; title=&quot;初始化，和commit后  所有为跟踪的文件都是 未修改的。&quot;&gt;&lt;/a&gt;初始化，和commit后  所有为跟踪的文件都是 未修改的。&lt;/h3&gt;&lt;p&gt;运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://sunhao.win/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://sunhao.win/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>window命令mklink 创建符号链接 硬链接 目录联结</title>

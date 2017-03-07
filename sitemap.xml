@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/2017/03/07/php-class-type-declaration/</loc>
+    
+    <lastmod>2017-03-07T06:24:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/06/laravel-study/</loc>
+    
+    <lastmod>2017-03-07T06:20:31.366Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/07/webpack-hmr-tutorial/</loc>
+    
+    <lastmod>2017-03-07T06:17:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/06/git-filestatus/</loc>
+    
+    <lastmod>2017-03-06T01:06:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/2017/03/05/window-mklink/</loc>
     
     <lastmod>2017-03-05T05:15:41.894Z</lastmod>

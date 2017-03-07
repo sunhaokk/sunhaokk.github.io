@@ -4,6 +4,92 @@
 
     
   <url>
+    <loc>http://sunhao.win/2017/03/07/php-class-type-declaration/</loc>
+    <lastmod>2017-03-07T06:24:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>php函数参数类和接口</title>
+        <pubTime>2017-03-07T05:46:37.000Z</pubTime>
+        
+        <tag>php参数</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://sunhao.win/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/06/laravel-study/</loc>
+    <lastmod>2017-03-07T06:20:31.366Z</lastmod>
+    <data>
+        <display>
+        <title>laravel学习零散知识点</title>
+        <pubTime>2017-03-06T08:22:41.000Z</pubTime>
+        
+        <tag>学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="laravel" url="http://sunhao.win/categories/laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/07/webpack-hmr-tutorial/</loc>
+    <lastmod>2017-03-07T06:17:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>webpack热拔插教程hmr</title>
+        <pubTime>2017-03-07T00:50:58.000Z</pubTime>
+        
+        <tag>webpack</tag>
+         
+        <tag>hmr</tag>
+         
+        <tag>教程</tag>
+         
+        <tag>热拔插</tag>
+         
+         
+           
+             
+              <breadCrumb title="webpack" url="http://sunhao.win/categories/webpack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/06/git-filestatus/</loc>
+    <lastmod>2017-03-06T01:06:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>git文件状态</title>
+        <pubTime>2017-03-06T00:54:46.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="git" url="http://sunhao.win/categories/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/2017/03/05/window-mklink/</loc>
     <lastmod>2017-03-05T05:15:41.894Z</lastmod>
     <data>

@@ -3,6 +3,34 @@
   
     
     <entry>
+      <title><![CDATA[linux点命令执行linux.命令]]></title>
+      <url>%2F2017%2F04%2F01%2Flinux-shell-dot%2F</url>
+      <content type="text"><![CDATA[.: . filename [arguments] . 文件名 [参数] Execute commands from a file in the current shell. 在当前的shell脚本中加载一个文件执行里面的命令. Read and execute commands from FILENAME in the current shell. The 在当前的shell脚本中加载一个文件读取和执行里面的命令. entries in $PATH are used to find the directory containing FILENAME. If any ARGUMENTS are supplied, they become the positional parameters when FILENAME is executed. Exit Status: Returns the status of the last command executed in FILENAME; fails if FILENAME cannot be read.]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[vmware-nonet]]></title>
+      <url>%2F2017%2F03%2F17%2Fvmware-nonet%2F</url>
+      <content type="text"><![CDATA[很多小伙伴，在配置完虚拟机后，发现无法正常上网，这是为什么呢？ 导致这个原因大部分是因为，我们的电脑有多个网卡，而我们设置的桥接方式是自动配置的，无法正确识别，主网卡。 这个时候我们可以通过 虚拟网络编辑器 编辑网桥 指定网卡就可以。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[git fork和clone区别，fetch与pull区别]]></title>
+      <url>%2F2017%2F03%2F10%2Fgit-fork-clone-fetch-pull%2F</url>
+      <content type="text"><![CDATA[fork：github中，克隆别人仓库的项目到自己的仓库clone：克隆github或者其他远程 git服务器仓库的项目到自己的 本地]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[apache配置]]></title>
+      <url>%2F2017%2F03%2F09%2Fapache-config%2F</url>
+      <content type="text"><![CDATA[优雅重启1/usr/local/apache2/bin/apachectl graceful vhost配置路径/usr/local/apache2/etc/extra httpd配置路径/usr/local/apache2/etc]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[php函数参数类和接口]]></title>
       <url>%2F2017%2F03%2F07%2Fphp-class-type-declaration%2F</url>
       <content type="text"><![CDATA[参数为类的实例123456789101112131415&lt;?phpclass C &#123;&#125;class D extends C &#123;&#125;// This doesn't extend C.class E &#123;&#125;function f(C $c) &#123; echo get_class($c)."\n";&#125;f(new C);f(new D);f(new E);?&gt; 输出为 1234567891011&lt;?phpCDFatal error: Uncaught TypeError: Argument 1 passed to f() must be an instance of C, instance of E given, called in - on line 14 and defined in -:8Stack trace:#0 -(14): f(Object(E))#1 &#123;main&#125; thrown in - on line 8?&gt; 参数为接口的实现 1234567891011121314&lt;?phpinterface I &#123; public function f(); &#125;class C implements I &#123; public function f() &#123;&#125; &#125;// This doesn't implement I.class E &#123;&#125;function f(I $i) &#123; echo get_class($i)."\n";&#125;f(new C);f(new E);?&gt; 输出为 1234&lt;?phpCPHP Catchable fatal error: Argument 1 passed to f() must implement interface I, instance of E given, called in /code/main.php on line 13 and defined in /code/main.php on line 8?&gt;]]></content>
@@ -19,14 +47,21 @@
     <entry>
       <title><![CDATA[laravel学习零散知识点]]></title>
       <url>%2F2017%2F03%2F06%2Flaravel-study%2F</url>
-      <content type="text"><![CDATA[12345678910111213141516&#123;!! !!&#125; 相当于 &lt;?php echo $value; ?&gt;&#123;&#123; &#125;&#125; 相当于 &lt;?php echo htmlspecialchars($value); ?&gt;csrf_field()csrf_field 函数生成一个包含 CSRF 令牌值的 HTML 隐藏域，例如，使用Blade语法示例如下：&#123;!! csrf_field() !!&#125;csrf_token()csrf_token 函数获取当前 CSRF 令牌的值：$token = csrf_token();]]></content>
+      <content type="text"><![CDATA[&lt;?php$firstname = “Bill”;$lastname = “Gates”;$age = “60”; $result = compact(“firstname”, “lastname”, “age”); print_r($result);?&gt;compact 紧凑的 动人的; 雄辩的，有口才的; 有说明力的; 富于表情的，逼真的;eloquent英文发音：[‘lærəvel] 作者 Taylor Otwell In Narnia, Cair Paravel is the name of the castle where the kings and queens of Narnia live. Laravel rhymes with Paravel. I thought the name had a classy and sophisticated ring to it.— Taylor Otwell — Laravel这个名字来自于纳尼亚传奇中的Cair Paravel城堡。Laravel 和Paravel 的发音相似，Taylor认为Laravel这个名字韵味深长而又优雅，所以命名为Laravel。Cair Paravel 中的Paravel发音为[‘pærəvel] 推断Laravel发音取[‘lærəvel] 123456789101112131415161718192021222324252627&#123;!! !!&#125; 相当于 &lt;?php echo $value; ?&gt;&#123;&#123; &#125;&#125; 相当于 &lt;?php echo htmlspecialchars($value); ?&gt;csrf_field()csrf_field 函数生成一个包含 CSRF 令牌值的 HTML 隐藏域，例如，使用Blade语法示例如下：&#123;!! csrf_field() !!&#125;&#123;&#123;&#123;&#125;&#125;&#125; 完全转换html@if()@else ss@endif@foreach()@endforeach@for@endfor@while@endwhilecsrf_token()csrf_token 函数获取当前 CSRF 令牌的值：$token = csrf_token(); php artisan make:controller myControllerphp artisan route:list laravel collect laravel 请求 query get has existshas 和exists 的区别 has 判断 是否存在此参数 其此参数不为空检索 only去除 Request::except(‘name’,’age’) 去除url Request::url() 全部 fullUrl() 请求历史 flash flashExcept flashOnly old请求文件 Request::file(‘’profile)-&gt;getSize()getClientOriginalNamegetClientOriginalExtensionsession 教程http://blog.csdn.net/ghost_hell/article/details/53177072Hash::make() laravelyield 用于定义个内容的片段 里面没有内容 只是内容的片段section 用于定义给定片段的内容 定义了内容 可以多次继承覆盖 服务容器 都是依靠构造函数或者某些情况下通过 setter 方法将类依赖注入到类]]></content>
     </entry>
 
     
     <entry>
       <title><![CDATA[git文件状态]]></title>
       <url>%2F2017%2F03%2F06%2Fgit-filestatus%2F</url>
-      <content type="text"><![CDATA[灰色箭头不参与git快照。 默认git有4种状态 untracked 未跟踪 unmodified 未修改 modified 修改 staged 暂存区 其中我们工作区中只有 未修改 和修改。初始化，和commit后 所有为跟踪的文件都是 未修改的。运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：]]></content>
+      <content type="text"><![CDATA[灰色箭头不参与git快照。 默认git有4种状态 untracked 未跟踪 unmodified 未修改 modified 修改 staged 暂存区 其中我们工作区中只有 未修改 和修改。初始化，和commit后 所有为跟踪的文件都是 未修改的。运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：git diff –cached 查看已经暂存起来的变化：git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交 如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 “Changes not staged for commit” 部分（也就是未暂存清单）看到： 123456789$ rm grit.gemspec$ git statusOn branch masterChanges not staged for commit: (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed) (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory) deleted: grit.gemspec no changes added to commit (use “git add” and/or “git commit -a”)然后再运行 git rm 记录此次移除文件的操作： 123456789$ git rm grit.gemspecrm &apos;grit.gemspec&apos;$ git statusOn branch masterChanges to be committed: (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage) deleted: grit.gemspec 另外一种情况是，我们想把文件从 Git 仓库中删除（亦即从暂存区域移除），但仍然希望保留在当前工作目录中。换句话说，仅是从跟踪清单中删除。比如一些大型日志文件或者一堆 .a 编译文件，不小心纳入仓库后，要移除跟踪但不删除文件，以便稍后在 .gitignore 文件中补上，用 –cached 选项即可： $ git rm --cached readme.txt 后面可以列出文件或者目录的名字，也可以使用 glob 模式。比方说： $ git rm log/\*.log 注意到星号 * 之前的反斜杠 \，因为 Git 有它自己的文件模式扩展匹配方式，所以我们不用 shell 来帮忙展开（译注：实际上不加反斜杠也可以运行，只不过按照 shell 扩展的话，仅仅删除指定目录下的文件而不会递归匹配。上面的例子本来就指定了目录，所以效果等同，但下面的例子就会用递归方式匹配，所以必须加反斜杠。）。此命令删除所有 log/ 目录下扩展名为 .log 的文件。类似的比如： $ git rm \*~ 会递归删除当前目录及其子目录中所有 ~ 结尾的文件。 图形化显示分支 git log –pretty=format:”%h %s” –graph 123456789101112选项 说明-p 按补丁格式显示每个更新之间的差异。--word-diff 按 word diff 格式显示差异。--stat 显示每次更新的文件修改统计信息。--shortstat 只显示 --stat 中最后的行数修改添加移除统计。--name-only 仅在提交信息后显示已修改的文件清单。--name-status 显示新增、修改、删除的文件清单。--abbrev-commit 仅显示 SHA-1 的前几个字符，而非所有的 40 个字符。--relative-date 使用较短的相对时间显示（比如，“2 weeks ago”）。--graph 显示 ASCII 图形表示的分支合并历史。--pretty 使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。--oneline `--pretty=oneline --abbrev-commit` 的简化用法。 提交时忘了暂存某些修改，可以先补上暂存操作，然后再运行 –amend 提交：123$ git commit -m &apos;initial commit&apos;$ git add forgotten_file$ git commit --amend 取消对文件的修改$ git checkout – benchmarks.rb 添加远程仓库git remote add [shortname] [url] 从远程仓库抓取数据$ git fetch [remote-name] 默认情况下 git clone 命令本质上就是自动创建了本地的 master 分支用于跟踪远程仓库中的 master 分支（假设远程仓库确实有 master 分支）。所以一般我们运行 git pull，目的都是要从原始克隆的远端仓库中抓取数据后，合并到工作目录中的当前分支。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[window命令 端口占用、查杀进制]]></title>
+      <url>%2F2017%2F03%2F05%2Fwindow-tasklist-taskkill-netstat%2F</url>
+      <content type="text"><![CDATA[cmd关闭php的一个示例 首先用php -S 开启一个服务 另开一个窗口，查询占用了8081端口的进程：netstat -ano|findstr 8081，找到pid为12552 tasklist|findstr 12552 。发现就是我们的php服务 taskkill /f /t /im php.exe/f 强制/t 关闭子进程/im 文件名taskkill /f /PID 12552/PID 删除指定pid]]></content>
     </entry>
 
     

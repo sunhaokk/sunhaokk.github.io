@@ -4,6 +4,156 @@
 
     
   <url>
+    <loc>http://sunhao.win/2017/04/01/linux-shell-dot/</loc>
+    <lastmod>2017-04-01T03:38:10.729Z</lastmod>
+    <data>
+        <display>
+        <title>linux点命令执行linux.命令</title>
+        <pubTime>2017-04-01T01:07:54.000Z</pubTime>
+        
+        <tag>linux.命令</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/06/laravel-study/</loc>
+    <lastmod>2017-03-23T06:00:19.210Z</lastmod>
+    <data>
+        <display>
+        <title>laravel学习零散知识点</title>
+        <pubTime>2017-03-06T08:22:41.000Z</pubTime>
+        
+        <tag>学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="laravel" url="http://sunhao.win/categories/laravel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/17/vmware-nonet/</loc>
+    <lastmod>2017-03-17T09:45:35.707Z</lastmod>
+    <data>
+        <display>
+        <title>vmware-nonet</title>
+        <pubTime>2017-03-17T08:19:47.000Z</pubTime>
+        
+        <tag>vmware</tag>
+         
+         
+           
+             
+              <breadCrumb title="vmware" url="http://sunhao.win/categories/vmware/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/05/window-tasklist-taskkill-netstat/</loc>
+    <lastmod>2017-03-12T11:20:32.976Z</lastmod>
+    <data>
+        <display>
+        <title>window命令 端口占用、查杀进制</title>
+        <pubTime>2017-03-05T03:15:53.000Z</pubTime>
+        
+        <tag>taskkill</tag>
+         
+        <tag>tasklist</tag>
+         
+        <tag>netstat</tag>
+         
+         
+           
+             
+              <breadCrumb title="window" url="http://sunhao.win/categories/window/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/06/git-filestatus/</loc>
+    <lastmod>2017-03-10T07:57:16.672Z</lastmod>
+    <data>
+        <display>
+        <title>git文件状态</title>
+        <pubTime>2017-03-06T00:54:46.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="git" url="http://sunhao.win/categories/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/10/git-fork-clone-fetch-pull/</loc>
+    <lastmod>2017-03-10T03:43:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>git fork和clone区别，fetch与pull区别</title>
+        <pubTime>2017-03-10T03:19:28.000Z</pubTime>
+        
+        <tag>fork</tag>
+         
+        <tag>clone</tag>
+         
+        <tag>fetch</tag>
+         
+        <tag>pull</tag>
+         
+         
+           
+             
+              <breadCrumb title="git" url="http://sunhao.win/categories/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/03/09/apache-config/</loc>
+    <lastmod>2017-03-09T02:53:39.665Z</lastmod>
+    <data>
+        <display>
+        <title>apache配置</title>
+        <pubTime>2017-03-09T00:31:00.000Z</pubTime>
+        
+        <tag>apache</tag>
+         
+         
+           
+             
+              <breadCrumb title="apache" url="http://sunhao.win/categories/apache/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/2017/03/07/php-class-type-declaration/</loc>
     <lastmod>2017-03-07T06:24:56.000Z</lastmod>
     <data>
@@ -17,26 +167,6 @@
            
              
               <breadCrumb title="php" url="http://sunhao.win/categories/php/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sunhao.win/2017/03/06/laravel-study/</loc>
-    <lastmod>2017-03-07T06:20:31.366Z</lastmod>
-    <data>
-        <display>
-        <title>laravel学习零散知识点</title>
-        <pubTime>2017-03-06T08:22:41.000Z</pubTime>
-        
-        <tag>学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="laravel" url="http://sunhao.win/categories/laravel/"/>
           
         </display>
     </data>
@@ -63,26 +193,6 @@
            
              
               <breadCrumb title="webpack" url="http://sunhao.win/categories/webpack/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sunhao.win/2017/03/06/git-filestatus/</loc>
-    <lastmod>2017-03-06T01:06:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>git文件状态</title>
-        <pubTime>2017-03-06T00:54:46.000Z</pubTime>
-        
-        <tag>git</tag>
-         
-         
-           
-             
-              <breadCrumb title="git" url="http://sunhao.win/categories/git/"/>
           
         </display>
     </data>

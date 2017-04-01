@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/2017/04/01/linux-shell-dot/</loc>
+    
+    <lastmod>2017-04-01T03:38:10.729Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/06/laravel-study/</loc>
+    
+    <lastmod>2017-03-23T06:00:19.210Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/17/vmware-nonet/</loc>
+    
+    <lastmod>2017-03-17T09:45:35.707Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/05/window-tasklist-taskkill-netstat/</loc>
+    
+    <lastmod>2017-03-12T11:20:32.976Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/06/git-filestatus/</loc>
+    
+    <lastmod>2017-03-10T07:57:16.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/10/git-fork-clone-fetch-pull/</loc>
+    
+    <lastmod>2017-03-10T03:43:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/09/apache-config/</loc>
+    
+    <lastmod>2017-03-09T02:53:39.665Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/2017/03/07/php-class-type-declaration/</loc>
     
     <lastmod>2017-03-07T06:24:56.000Z</lastmod>
@@ -9,23 +58,9 @@
   </url>
   
   <url>
-    <loc>http://sunhao.win/2017/03/06/laravel-study/</loc>
-    
-    <lastmod>2017-03-07T06:20:31.366Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://sunhao.win/2017/03/07/webpack-hmr-tutorial/</loc>
     
     <lastmod>2017-03-07T06:17:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sunhao.win/2017/03/06/git-filestatus/</loc>
-    
-    <lastmod>2017-03-06T01:06:52.000Z</lastmod>
     
   </url>
   

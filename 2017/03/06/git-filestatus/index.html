@@ -112,7 +112,7 @@ staged  暂存区
 
 其中我们工作区中只有  未修改 和修改。初始化，和commit后  所有为跟踪的文件都是 未修改的。运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：">
 <meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170306/085148199.png">
-<meta property="og:updated_time" content="2017-03-06T01:06:52.000Z">
+<meta property="og:updated_time" content="2017-03-10T07:57:16.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git文件状态">
 <meta name="twitter:description" content="灰色箭头不参与git快照。
@@ -461,7 +461,25 @@ staged  暂存区
 <li>modified 修改</li>
 <li>staged  暂存区</li>
 </ol>
-<h3 id="其中我们工作区中只有-未修改-和修改。"><a href="#其中我们工作区中只有-未修改-和修改。" class="headerlink" title="其中我们工作区中只有  未修改 和修改。"></a>其中我们工作区中只有  未修改 和修改。</h3><h3 id="初始化，和commit后-所有为跟踪的文件都是-未修改的。"><a href="#初始化，和commit后-所有为跟踪的文件都是-未修改的。" class="headerlink" title="初始化，和commit后  所有为跟踪的文件都是 未修改的。"></a>初始化，和commit后  所有为跟踪的文件都是 未修改的。</h3><p>运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：<br><a id="more"></a></p>
+<h3 id="其中我们工作区中只有-未修改-和修改。"><a href="#其中我们工作区中只有-未修改-和修改。" class="headerlink" title="其中我们工作区中只有  未修改 和修改。"></a>其中我们工作区中只有  未修改 和修改。</h3><h3 id="初始化，和commit后-所有为跟踪的文件都是-未修改的。"><a href="#初始化，和commit后-所有为跟踪的文件都是-未修改的。" class="headerlink" title="初始化，和commit后  所有为跟踪的文件都是 未修改的。"></a>初始化，和commit后  所有为跟踪的文件都是 未修改的。</h3><p>运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：<br><a id="more"></a><br>git diff –cached 查看已经暂存起来的变化：<br>git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交</p>
+<p>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 “Changes not staged for commit” 部分（也就是未暂存清单）看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ rm grit.gemspec</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">        deleted:    grit.gemspec</div></pre></td></tr></table></figure>
+<p>no changes added to commit (use “git add” and/or “git commit -a”)<br>然后再运行 git rm 记录此次移除文件的操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ git rm grit.gemspec</div><div class="line">rm &apos;grit.gemspec&apos;</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes to be committed:</div><div class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</div><div class="line"></div><div class="line">        deleted:    grit.gemspec</div></pre></td></tr></table></figure>
+<p>另外一种情况是，我们想把文件从 Git 仓库中删除（亦即从暂存区域移除），但仍然希望保留在当前工作目录中。换句话说，仅是从跟踪清单中删除。比如一些大型日志文件或者一堆 .a 编译文件，不小心纳入仓库后，要移除跟踪但不删除文件，以便稍后在 .gitignore 文件中补上，用 –cached 选项即可：</p>
+<pre><code>$ git rm --cached readme.txt
+</code></pre><p>后面可以列出文件或者目录的名字，也可以使用 glob 模式。比方说：</p>
+<pre><code>$ git rm log/\*.log
+</code></pre><p>注意到星号 * 之前的反斜杠 \，因为 Git 有它自己的文件模式扩展匹配方式，所以我们不用 shell 来帮忙展开（译注：实际上不加反斜杠也可以运行，只不过按照 shell 扩展的话，仅仅删除指定目录下的文件而不会递归匹配。上面的例子本来就指定了目录，所以效果等同，但下面的例子就会用递归方式匹配，所以必须加反斜杠。）。此命令删除所有 log/ 目录下扩展名为 .log 的文件。类似的比如：</p>
+<pre><code>$ git rm \*~
+</code></pre><p>会递归删除当前目录及其子目录中所有 ~ 结尾的文件。</p>
+<p>图形化显示分支<br>  git log –pretty=format:”%h %s” –graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">选项	说明</div><div class="line">-p	按补丁格式显示每个更新之间的差异。</div><div class="line">--word-diff	按 word diff 格式显示差异。</div><div class="line">--stat	显示每次更新的文件修改统计信息。</div><div class="line">--shortstat	只显示 --stat 中最后的行数修改添加移除统计。</div><div class="line">--name-only	仅在提交信息后显示已修改的文件清单。</div><div class="line">--name-status	显示新增、修改、删除的文件清单。</div><div class="line">--abbrev-commit	仅显示 SHA-1 的前几个字符，而非所有的 40 个字符。</div><div class="line">--relative-date	使用较短的相对时间显示（比如，“2 weeks ago”）。</div><div class="line">--graph	显示 ASCII 图形表示的分支合并历史。</div><div class="line">--pretty	使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。</div><div class="line">--oneline	`--pretty=oneline --abbrev-commit` 的简化用法。</div></pre></td></tr></table></figure>
+<p>提交时忘了暂存某些修改，可以先补上暂存操作，然后再运行 –amend 提交：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git commit -m &apos;initial commit&apos;</div><div class="line">$ git add forgotten_file</div><div class="line">$ git commit --amend</div></pre></td></tr></table></figure></p>
+<p>取消对文件的修改<br>$ git checkout – benchmarks.rb</p>
+<p>添加远程仓库<br>git remote add [shortname] [url]</p>
+<p>从远程仓库抓取数据<br>$ git fetch [remote-name]</p>
+<p>默认情况下 git clone 命令本质上就是自动创建了本地的 master 分支用于跟踪远程仓库中的 master 分支（假设远程仓库确实有 master 分支）。所以一般我们运行 git pull，目的都是要从原始克隆的远端仓库中抓取数据后，合并到工作目录中的当前分支。</p>
 
       
     </div>
@@ -498,8 +516,8 @@ staged  暂存区
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/window-mklink/" rel="next" title="window命令mklink 创建符号链接 硬链接 目录联结">
-                <i class="fa fa-chevron-left"></i> window命令mklink 创建符号链接 硬链接 目录联结
+              <a href="/2017/03/05/window-tasklist-taskkill-netstat/" rel="next" title="window命令 端口占用、查杀进制">
+                <i class="fa fa-chevron-left"></i> window命令 端口占用、查杀进制
               </a>
             
           </div>
@@ -606,7 +624,7 @@ staged  暂存区
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -615,7 +633,7 @@ staged  暂存区
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -624,7 +642,7 @@ staged  暂存区
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

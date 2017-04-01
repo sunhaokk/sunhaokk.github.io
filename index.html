@@ -435,14 +435,19 @@ Read and execute commands from FILENAME in the current shell.  The
 在当前的shell脚本中加载一个文件读取和执行里面的命令.
 
 entries in $PATH are used to find the directory containing FILENAME.
-
+$PATH环境变量用于查找文件目录
 
 If any ARGUMENTS are supplied, they become the positional parameters
 when FILENAME is executed.
+如果有形参，文件在被执行的时候实参就会传过去。
+ps:(parameter=形参(formal parameter)， argument=实参(actual parameter)。)
 
 Exit Status:
+退出状态:
+
 Returns the status of the last command executed in FILENAME; fails if
 FILENAME cannot be read.
+返回文件最后执行的命令的状态；如果无法读取文件返回失败。
 </code></pre>
           <!--noindex-->
           <div class="post-button text-center">

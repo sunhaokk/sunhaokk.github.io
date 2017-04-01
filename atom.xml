@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-04-01T03:38:10.729Z</updated>
+  <updated>2017-04-01T07:16:57.252Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://sunhao.win/2017/04/01/linux-shell-dot/"/>
     <id>http://sunhao.win/2017/04/01/linux-shell-dot/</id>
     <published>2017-04-01T01:07:54.000Z</published>
-    <updated>2017-04-01T03:38:10.729Z</updated>
+    <updated>2017-04-01T07:16:57.252Z</updated>
     
     <content type="html"><![CDATA[<p>.: . filename [arguments]<br>   . 文件名 [参数]</p>
 <pre><code>Execute commands from a file in the current shell.
@@ -30,14 +30,19 @@ Read and execute commands from FILENAME in the current shell.  The
 在当前的shell脚本中加载一个文件读取和执行里面的命令.
 
 entries in $PATH are used to find the directory containing FILENAME.
-
+$PATH环境变量用于查找文件目录
 
 If any ARGUMENTS are supplied, they become the positional parameters
 when FILENAME is executed.
+如果有形参，文件在被执行的时候实参就会传过去。
+ps:(parameter=形参(formal parameter)， argument=实参(actual parameter)。)
 
 Exit Status:
+退出状态:
+
 Returns the status of the last command executed in FILENAME; fails if
 FILENAME cannot be read.
+返回文件最后执行的命令的状态；如果无法读取文件返回失败。
 </code></pre><a id="more"></a>]]></content>
     
     <summary type="html">
@@ -50,14 +55,19 @@ Read and execute commands from FILENAME in the current shell.  The
 在当前的shell脚本中加载一个文件读取和执行里面的命令.
 
 entries in $PATH are used to find the directory containing FILENAME.
-
+$PATH环境变量用于查找文件目录
 
 If any ARGUMENTS are supplied, they become the positional parameters
 when FILENAME is executed.
+如果有形参，文件在被执行的时候实参就会传过去。
+ps:(parameter=形参(formal parameter)， argument=实参(actual parameter)。)
 
 Exit Status:
+退出状态:
+
 Returns the status of the last command executed in FILENAME; fails if
 FILENAME cannot be read.
+返回文件最后执行的命令的状态；如果无法读取文件返回失败。
 &lt;/code&gt;&lt;/pre&gt;
     
     </summary>
@@ -763,9 +773,9 @@ FILENAME cannot be read.
       <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
-    
       <category term="SYN攻击" scheme="http://sunhao.win/tags/SYN%E6%94%BB%E5%87%BB/"/>
+    
+      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
     
       <category term="ACK攻击" scheme="http://sunhao.win/tags/ACK%E6%94%BB%E5%87%BB/"/>
     

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-04-01T07:16:57.252Z</updated>
+  <updated>2017-04-18T09:36:44.000Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,11 +16,270 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>php-interfaces-and-traits</title>
+    <link href="http://sunhao.win/2017/04/18/php-interfaces-and-traits/"/>
+    <id>http://sunhao.win/2017/04/18/php-interfaces-and-traits/</id>
+    <published>2017-04-18T00:37:27.000Z</published>
+    <updated>2017-04-18T09:36:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="interfaces和traits-超强组合"><a href="#interfaces和traits-超强组合" class="headerlink" title="interfaces和traits,超强组合"></a>interfaces和traits,超强组合</h3><p>译者注:<br>老歪，写的文章特别详细，一句话会说好几遍，语义我删减了点。但尽可能保持原意。<br>如果你还没有用php的interfaces, 会错过面向对象的强大特性.  在PHP 5.4中Interfaces和traits配合十分强大.<br>Interfaces不在类中，类必须实现interface里约定的方法. </p>
+<p>假设我们有个User的类. Users有个地址，我们把地址通过应用邮件包传给PackageShipper（托运人） :</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Address</span> </span>&#123;</div><div class="line"> <span class="comment">// ... setters and getters for address fields ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line"> <span class="keyword">protected</span> $address;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;address = $address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">// ... other user logic ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PackageShipper</span> </span>&#123;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">shipTo</span><span class="params">(User $user)</span> </span>&#123;</div><div class="line">  $address = $user-&gt;getAddress();</div><div class="line"></div><div class="line">  <span class="comment">// ... do shipping code using $address ...</span></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>我们的应用愉快的传递包, 直到有一天我们有个需求， Companies(公司) 也需要传递包. 我们创建一个公司类来处理:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span> </span>&#123;</div><div class="line"> <span class="keyword">protected</span> $address;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;address = $address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">// ... other company logic ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在我们遇到一个问题. PackageShipper只知道处理Users. 我们需要PackageShipper类处理任何地址.</p>
+<p>我们可以创建基类(就是基本的类) ,Users 和 Companies 集成它,PackageShipper允许任何来至继承 base 的类. 这么做不令人满意. 从含义上讲, Users 和 Companies 是两个不同实体, 他们没有太多的共性用于base继承. 除了地址其他没有一样的了. 还有一些类或许已经继承了别的类, 因为php是单继承的，我们没办法再继承了.</p>
+<p>所以, 我们可以用 interface定义一个PackageShipper处理的 Users 和 Companies公共部分 . 然后, Users 和 Companies继承interface, PackageShipper只需要处理继承接口的对象.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">inteface Addressable &#123;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span></span>;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Addressable</span> </span>&#123;</div><div class="line"> <span class="keyword">protected</span> $address;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;address = $address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">// ... other user logic ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span> <span class="keyword">implements</span> <span class="title">Addressable</span> </span>&#123;</div><div class="line"> <span class="keyword">protected</span> $address;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;address = $address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">// ... other company logic ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PackageShipper</span> </span>&#123;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">shipTo</span><span class="params">(Addressable $entity)</span> </span>&#123;</div><div class="line">  $address = $entity-&gt;getAddress();</div><div class="line"></div><div class="line">  <span class="comment">// ... do shipping code using $address ...</span></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一个类可以继承多个不同interfaces, 不同基类可以继承同样的interface.</p>
+<p>但是这还是有一个问题. Company和User 用同样代码继承Addressable . 这样太浪费了;只要还有接口约束, 继承来至接口类没必要都一样. 但是, 它们都继承了接口, 我们要复制代码. 如果还要第三个Addressable,同样继承interface, 将会带来更多的重复.</p>
+<p>如果你使用PHP 5.3 版本以下, 没办法解决的. 但是如果使用PHP 5.4, 有种新的方式可以解决这种问题: traits.</p>
+<p>trait类似于类，因为它们都实现方法和属性。不同的是，类可以实例化，但是trait不能。相反，trait可以添加到类定义，给该类的所有定义的方法和属性定义在trait中</p>
+<p>traits就像一个宏一样:在类中使用traits和traits中的代码复制到类是一样的。</p>
+<p>用traits,我们可以清除重复的代码 ，保持Addressable接口的定义:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">trait</span> AddressAccessor &#123;</div><div class="line"> <span class="keyword">protected</span> $address;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;address = $address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;address;</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Addressable</span> </span>&#123;</div><div class="line"> <span class="keyword">use</span> <span class="title">AddressAccessor</span>;</div><div class="line"></div><div class="line"> <span class="comment">// ... other user logic ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span> <span class="keyword">implements</span> <span class="title">Addressable</span> </span>&#123;</div><div class="line"> <span class="keyword">use</span> <span class="title">AddressAccessor</span>;</div><div class="line"></div><div class="line"> <span class="comment">// ... other company logic ...</span></div></pre></td></tr></table></figure>
+<p> 现在，任何类可以通过AddressAccessor trait继承Addressable接口 . 重复的代码都可以移除.</p>
+<p>trait本身不继承Addressable. 这就是为什么只有classes 可以继承 interfaces. 注意trait的优先级别要小于类里面的。</p>
+<p>Interfaces保证 PHP执行正确的代码. 和traits结合, 定义了一个快速开发的强大工具, 减少重复的代码,更易读,更好维护.</p>
+<p>下面是应用的最终代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Address</span> </span>&#123;</div><div class="line"> <span class="comment">// ... setters and getters for address fields ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">inteface Addressable &#123;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span></span>;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">trait</span> AddressAccessor &#123;</div><div class="line"> <span class="keyword">protected</span> $address;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAddress</span><span class="params">(Address $address)</span> </span>&#123;</div><div class="line">  <span class="keyword">$this</span>-&gt;address = $address;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;address;</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Addressable</span> </span>&#123;</div><div class="line"> <span class="keyword">use</span> <span class="title">AddressAccessor</span>;</div><div class="line"></div><div class="line"> <span class="comment">// ... other user logic ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span> <span class="keyword">implements</span> <span class="title">Addressable</span> </span>&#123;</div><div class="line"> <span class="keyword">use</span> <span class="title">AddressAccessor</span>;</div><div class="line"></div><div class="line"> <span class="comment">// ... other company logic ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PackageShipper</span> </span>&#123;</div><div class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">shipTo</span><span class="params">(Addressable $entity)</span> </span>&#123;</div><div class="line">  $address = $entity-&gt;getAddress();</div><div class="line"></div><div class="line">  <span class="comment">// ... do shipping code using $address ...</span></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 简单点说，接口用于限制，traits减少重复代码。</p>
+<p>原文:<br><a href="http://blog.everymansoftware.com/2012/09/interfaces-and-traits-powerful-combo.html" target="_blank" rel="external">http://blog.everymansoftware.com/2012/09/interfaces-and-traits-powerful-combo.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;interfaces和traits-超强组合&quot;&gt;&lt;a href=&quot;#interfaces和traits-超强组合&quot; class=&quot;headerlink&quot; title=&quot;interfaces和traits,超强组合&quot;&gt;&lt;/a&gt;interfaces和traits,超强组合&lt;/h3&gt;&lt;p&gt;译者注:&lt;br&gt;老歪，写的文章特别详细，一句话会说好几遍，语义我删减了点。但尽可能保持原意。&lt;br&gt;如果你还没有用php的interfaces, 会错过面向对象的强大特性.  在PHP 5.4中Interfaces和traits配合十分强大.&lt;br&gt;Interfaces不在类中，类必须实现interface里约定的方法. &lt;/p&gt;
+&lt;p&gt;假设我们有个User的类. Users有个地址，我们把地址通过应用邮件包传给PackageShipper（托运人） :&lt;/p&gt;
+&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Address&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;span class=&quot;comment&quot;&gt;// ... setters and getters for address fields ...&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;User&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; $address;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setAddress&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Address $address)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;$this&lt;/span&gt;-&amp;gt;address = $address;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getAddress&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;$this&lt;/span&gt;-&amp;gt;address;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;span class=&quot;comment&quot;&gt;// ... other user logic ...&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;PackageShipper&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;shipTo&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(User $user)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  $address = $user-&amp;gt;getAddress();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// ... do shipping code using $address ...&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="php" scheme="http://sunhao.win/categories/php/"/>
+    
+    
+      <category term="interfaces" scheme="http://sunhao.win/tags/interfaces/"/>
+    
+      <category term="traits" scheme="http://sunhao.win/tags/traits/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux-fifo</title>
+    <link href="http://sunhao.win/2017/04/14/linux-fifo/"/>
+    <id>http://sunhao.win/2017/04/14/linux-fifo/</id>
+    <published>2017-04-14T08:19:55.000Z</published>
+    <updated>2017-04-14T08:19:55.343Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux-mknod</title>
+    <link href="http://sunhao.win/2017/04/14/linux-mknod/"/>
+    <id>http://sunhao.win/2017/04/14/linux-mknod/</id>
+    <published>2017-04-14T05:56:26.000Z</published>
+    <updated>2017-04-14T06:09:51.248Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#将其中的1,3这样的数字记录下来，这表示主设备号和次设备号（一般来说主设备号用来区分设备的种类；次设备号则是为了作唯一性区分，标明不同属性——注意，在unix系统中是把设备也当作文件来对待的），在redhat 9下，ls加不加-L参数都无所谓，但是在Solaris下则一定要加上才可以显示</div><div class="line">[root@localhost test1]# ls -lL /dev/null </div><div class="line">crw-rw-rw- 1 root root 1, 3 8月  18 21:56 /dev/null</div><div class="line"></div><div class="line">[root@localhost test1]# mknod /dev/hda3 b 3 7    #创建一个区块</div><div class="line"></div><div class="line">[root@localhost test1]# ls -al /dev/hda3         #查看</div><div class="line">brw-r--r-- 1 root root 3, 7 8月  21 11:01 /dev/hda3</div></pre></td></tr></table></figure>
+<ol>
+<li><p>mknod命令用于创建Linux中的字符设备文件和块设备文件。</p>
+</li>
+<li><p>首先要明白什么是设备文件，简单的我们说 操作系统与外部设备（入磁盘驱动器，打印机，modern，终端 等等）都是通过设备文件来进行通信 的，在Unix/Linux系统与外部设备通讯之前，这个设备必须首先要有一个设备文件，设备文件均放在/dev目录下。一般情况下在安装系统的时候系统自动创建了很多已检测到的设备的设备文件，但有时候我们也需要自己手动创建，命令行生成设备文件的方式有 insf，mksf，mknod等等</p>
+</li>
+<li><p>根据mknod命令的使用参数来看【mknod Name { b | c } Major Minor 】，使用mknod之前，至少要明白以下几点：<br>设备文件类型：分为块设备和字符设备。ls -l /dev 结果显示第一个字段有b<strong><em> 和 c*</em></strong>，这里即标识了块设备和字符设备。<br>字符设备文件—-字符设备文件传送数据给设备的时候，一次传送一个字符，终端，打印机，绘图仪，modern等设备都经过字符设备文件传送数据<br>块设备—系统通过块设备文件存取一个设备的时候，先从内存中的buffer中读或写数据，而不是直接传送数据到物理磁盘，这种方式能有效的提高磁盘和CD-ROMS的I/O性能。磁盘和CD-ROMS即可以使用字符设备文件也可使用块设备文件。</p>
+</li>
+<li><p>来看看mknod 命令，如果该设备文件你想放在一个特定的文件夹下当然就先创建文件夹<br>mknod 设备文件名[/dev/xyz]  b/c  主号  次号</p>
+</li>
+</ol>
+<a id="more"></a>
+<p>Linux对设备管理是以文件管理的形式进行的，各种设备都以文件的形式存放在/dev目录 下，称为设备文件。应用程序可以打开、关闭和读写这些设备文件，完成对设备的操作，就像操作普通的数据文件一样。为了管理这些设备，系统为设备编了号，每 个设备号又分为主设备号和次设备号。主设备号用来区分不同种类的设备，而次设备号用来区分同一类型的多个设备。<br>    Linux为所有的设备文件都提供了统一的操作函数接口，此函数结构使用数据结构struct file_operations。这个数据结构中包括许多操作函数的指针，如open()、close()、read()和write()等，但由于外设 的种类较多，操作方式各不相同。Struct file_operations结构体中的成员为一系列的接口函数，如用于读/写的read/write函数和用于控制的ioctl等。打开一个文件就是 调用这个文件file_operations中的open操作。不同类型的文件有不同的file_operations成员函数，如普通的磁盘数据文件， 接口函数完成磁盘数据块读写操作；而对于各种设备文件，则最终调用各自驱动程序中的I/O函数进行具体设备的操作。这样，应用程序根本不必考虑操作的是设 备还是普通文件，可一律当作文件处理，具有非常清晰统一的I/O接口。所以file_operations是文件层次的I/O接口。</p>
+<p>   linux中可以通过mknod命令创建一个设备，具体的使用方法如下</p>
+<p>  mknod 的标准形式为:       mknod DEVNAME {b | c}  MAJOR  MINOR</p>
+<p>1、DEVNAME是要创建的设备文件名，如果想将设备文件放在一个特定的文件夹下，就需要先用mkdir在dev目录下新建一个目录；</p>
+<p>2、 b和c 分别表示块设备和字符设备：</p>
+<pre><code>b表示系统从块设备中读取数据的时候，直接从内存的buffer中读取数据，而不经过磁盘； 
+
+c表示字符设备文件与设备传送数据的时候是以字符的形式传送，一次传送一个字符，比如打印机、终端都是以字符的形式传送数据；
+</code></pre><p>3、MAJOR和MINOR分别表示主设备号和次设备号：</p>
+<pre><code>为了管理设备，系统为每个设备分配一个编号，一个设备号由主设备号和次设备号组成。主设备号标示某一种类的设备，次设备号用来区分同一类型的设备。linux操作系统中为设备文件编号分配了32位无符号整数，其中前12位是主设备号，后20位为次设备号，所以在向系统申请设备文件时主设备号不好超过4095，次设备号不好超过2^20 -1。
+</code></pre><p>用法：mknod [选项]… 名称 类型 [主设备号 次设备号]<br>创建指定类型和名称的特殊文件。</p>
+<p>长选项必须使用的参数对于短选项时也是必需使用的。<br>  -m, –mode=模式       设置权限模式(类似chmod)，而不是rwxrwxrwx 减umask<br>  -Z, –context=CTX     将对应名称文件的SELinux 安全环境设置为CTX<br>  –help        显示此帮助信息并退出<br>  –version        显示版本信息并退出</p>
+<p>当类型为”p”时可不指定主设备号和次设备号，否则它们是必须指定的。<br>如果主设备号和次设备号以”0x”或”0X”开头，它们会被视作十六进制数来<br>解析；如果以”0”开头，则被视作八进制数；其余情况下被视作十进制数。<br>可用的类型包括：</p>
+<p>  b      创建(有缓冲的)区块特殊文件<br>  c, u   创建(没有缓冲的)字符特殊文件,虚拟设备<br>  p      创建先进先出(FIFO)特殊文件</p>
+<p>注意：您的shell 内含自己的mknod 程序版本，它会覆盖这里所提及的相应<br>版本。请查阅您的shell 文档获知它所支持的选项。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#将其中的1,3这样的数字记录下来，这表示主设备号和次设备号（一般来说主设备号用来区分设备的种类；次设备号则是为了作唯一性区分，标明不同属性——注意，在unix系统中是把设备也当作文件来对待的），在redhat 9下，ls加不加-L参数都无所谓，但是在Solaris下则一定要加上才可以显示&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;[root@localhost test1]# ls -lL /dev/null &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;crw-rw-rw- 1 root root 1, 3 8月  18 21:56 /dev/null&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;[root@localhost test1]# mknod /dev/hda3 b 3 7    #创建一个区块&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;[root@localhost test1]# ls -al /dev/hda3         #查看&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;brw-r--r-- 1 root root 3, 7 8月  21 11:01 /dev/hda3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;mknod命令用于创建Linux中的字符设备文件和块设备文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;首先要明白什么是设备文件，简单的我们说 操作系统与外部设备（入磁盘驱动器，打印机，modern，终端 等等）都是通过设备文件来进行通信 的，在Unix/Linux系统与外部设备通讯之前，这个设备必须首先要有一个设备文件，设备文件均放在/dev目录下。一般情况下在安装系统的时候系统自动创建了很多已检测到的设备的设备文件，但有时候我们也需要自己手动创建，命令行生成设备文件的方式有 insf，mksf，mknod等等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;根据mknod命令的使用参数来看【mknod Name { b | c } Major Minor 】，使用mknod之前，至少要明白以下几点：&lt;br&gt;设备文件类型：分为块设备和字符设备。ls -l /dev 结果显示第一个字段有b&lt;strong&gt;&lt;em&gt; 和 c*&lt;/em&gt;&lt;/strong&gt;，这里即标识了块设备和字符设备。&lt;br&gt;字符设备文件—-字符设备文件传送数据给设备的时候，一次传送一个字符，终端，打印机，绘图仪，modern等设备都经过字符设备文件传送数据&lt;br&gt;块设备—系统通过块设备文件存取一个设备的时候，先从内存中的buffer中读或写数据，而不是直接传送数据到物理磁盘，这种方式能有效的提高磁盘和CD-ROMS的I/O性能。磁盘和CD-ROMS即可以使用字符设备文件也可使用块设备文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;来看看mknod 命令，如果该设备文件你想放在一个特定的文件夹下当然就先创建文件夹&lt;br&gt;mknod 设备文件名[/dev/xyz]  b/c  主号  次号&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="mknod" scheme="http://sunhao.win/tags/mknod/"/>
+    
+      <category term="linux" scheme="http://sunhao.win/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>html5-prefech加速prerender预渲染</title>
+    <link href="http://sunhao.win/2017/04/14/html5-prefetch/"/>
+    <id>http://sunhao.win/2017/04/14/html5-prefetch/</id>
+    <published>2017-04-14T02:20:03.000Z</published>
+    <updated>2017-04-14T05:55:26.983Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li>DNS Prefetching</li>
+</ol>
+<p>现代浏览器当遇到DNS解析时已经十分聪明——用户在跟随某个链接之前，浏览器先尝试解析域名再将其进行缓存。</p>
+<pre><code>&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//fonts.googleapis.com&quot;&gt;  
+&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//google-analytics.com&quot;&gt;  
+&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//www.google-    analytics.com&quot;&gt;  
+&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//platform.twitter.com&quot;&gt;
+</code></pre><a id="more"></a>  
+<ol>
+<li>Link Prefetching</li>
+</ol>
+<p>Link Prefetching特性允许开发者在页面加载的时候预先加载他们希望指定的页面或元素。代码如下：</p>
+<pre><code>&lt;link rel=&quot;prefetch&quot; href=&quot;http://daker.me/2013/05/hello-world.html&quot; /&gt;  
+&lt;link rel=&quot;prefetch&quot; href=&quot;http://daker.me/assets/images/avatar.png&quot; /&gt; 
+</code></pre><p>你也能够使用prerendering特性令你的网站速度更快，浏览器能够在后台获取并渲染整个页面，用户点击相应链接时再为用户展示该页面。代码如下：</p>
+<pre><code>&lt;link rel=&quot;prerender&quot; href=&quot;http://daker.me/2013/05/hello-world.html&quot; /&gt;  
+</code></pre><ol>
+<li>Download属性</li>
+</ol>
+<p>凭借HTML5的Download属性，开发者可以不必到特定页面下载文件，而是直接进行下载。这一操作不必依赖服务器端代码便能够执行。代码如下：</p>
+<pre><code>&lt;a href=&quot;download_pdf.php?id=15&quot; download=&quot;myfile.pdf&quot;&gt;Download PDF&lt;/a&gt;  
+</code></pre><ol>
+<li>Regular Expressions</li>
+</ol>
+<p>一旦用户输入一个有效的email或URL地址，pattern属性可以令你直接使用regular expressions而无需检查JS或服务器端代码。代码如下：</p>
+<pre><code>&lt;input type=&quot;email&quot; pattern=&quot;[^ @]*@[^ @]*&quot; value=&quot;&quot;&gt;  
+</code></pre><ol>
+<li>Datalist元素</li>
+</ol>
+<p>若使用jQuery插件执行自动填充输入操作，则用户每敲击一次键盘都要访问服务器端代码以及数据库。但有了Datalist元素，开发者不必再使用jQuery插件便可完成该操作。代码如下：</p>
+<pre><code>&lt;form action=&quot;form.php&quot; method=&quot;post&quot;&gt;  
+    &lt;input list=&quot;cars&quot; name=&quot;cars&quot; &gt;  
+    &lt;datalist id=&quot;cars&quot;&gt;  
+        &lt;option value=&quot;Volvo&quot;&gt;  
+        &lt;option value=&quot;BMW&quot;&gt;  
+        &lt;option value=&quot;Bugatti&quot;&gt;  
+        &lt;option value=&quot;Cadillac&quot;&gt;  
+        &lt;option value=&quot;Chevrolet&quot;&gt;  
+        &lt;option value=&quot;Chrysler&quot;&gt;  
+    &lt;/datalist&gt;  
+    &lt;input type=&quot;submit&quot; /&gt;  
+&lt;/form&gt;  
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;DNS Prefetching&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;现代浏览器当遇到DNS解析时已经十分聪明——用户在跟随某个链接之前，浏览器先尝试解析域名再将其进行缓存。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&amp;quot;dns-prefetch&amp;quot; href=&amp;quot;//fonts.googleapis.com&amp;quot;&amp;gt;  
+&amp;lt;link rel=&amp;quot;dns-prefetch&amp;quot; href=&amp;quot;//google-analytics.com&amp;quot;&amp;gt;  
+&amp;lt;link rel=&amp;quot;dns-prefetch&amp;quot; href=&amp;quot;//www.google-    analytics.com&amp;quot;&amp;gt;  
+&amp;lt;link rel=&amp;quot;dns-prefetch&amp;quot; href=&amp;quot;//platform.twitter.com&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="html5" scheme="http://sunhao.win/categories/html5/"/>
+    
+    
+      <category term="dns" scheme="http://sunhao.win/tags/dns/"/>
+    
+      <category term="seo" scheme="http://sunhao.win/tags/seo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux-kill</title>
+    <link href="http://sunhao.win/2017/04/11/linux-kill/"/>
+    <id>http://sunhao.win/2017/04/11/linux-kill/</id>
+    <published>2017-04-11T01:43:32.000Z</published>
+    <updated>2017-04-11T10:12:24.396Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一些快捷键"><a href="#一些快捷键" class="headerlink" title="一些快捷键"></a>一些快捷键</h2><p>ctrl+a 行首</p>
+<p>ctrl+e 行尾</p>
+<p>ctrl+u  删除</p>
+<p>ctrl+l  清除屏幕</p>
+<p>ctrl+z  加入到后台</p>
+<p>ctrl+r  历史记录</p>
+<p>linux 把top放入后台 ctrl+z<br>或者top&amp;  放入后台<br>&amp;还有含义  就是 1 2 输出</p>
+<p>如果要关闭 </p>
+<p>先ps</p>
+<p>看到pid号后</p>
+<p>kill  -9  pid号<br><a id="more"></a></p>
+<p>错误输出<br>2&gt;&gt;</p>
+<p>2&gt;&amp;1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。最后一个&amp; ， 是让该命令在后台执行。</p>
+<p>； 多命令</p>
+<p>ls /etc/ | grep [^b].* |wc</p>
+<p>$a=1</p>
+<p>$取值运算<br>set -u 未声明变量会提示<br>unset 删除变量</p>
+<p>export x 设置全局变量</p>
+<p>locate  定位<br>locale 位置</p>
+<p>locale -a 显示支持的所有</p>
+<p>df -h 磁盘信息</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一些快捷键&quot;&gt;&lt;a href=&quot;#一些快捷键&quot; class=&quot;headerlink&quot; title=&quot;一些快捷键&quot;&gt;&lt;/a&gt;一些快捷键&lt;/h2&gt;&lt;p&gt;ctrl+a 行首&lt;/p&gt;
+&lt;p&gt;ctrl+e 行尾&lt;/p&gt;
+&lt;p&gt;ctrl+u  删除&lt;/p&gt;
+&lt;p&gt;ctrl+l  清除屏幕&lt;/p&gt;
+&lt;p&gt;ctrl+z  加入到后台&lt;/p&gt;
+&lt;p&gt;ctrl+r  历史记录&lt;/p&gt;
+&lt;p&gt;linux 把top放入后台 ctrl+z&lt;br&gt;或者top&amp;amp;  放入后台&lt;br&gt;&amp;amp;还有含义  就是 1 2 输出&lt;/p&gt;
+&lt;p&gt;如果要关闭 &lt;/p&gt;
+&lt;p&gt;先ps&lt;/p&gt;
+&lt;p&gt;看到pid号后&lt;/p&gt;
+&lt;p&gt;kill  -9  pid号&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://sunhao.win/tags/linux/"/>
+    
+      <category term="kill" scheme="http://sunhao.win/tags/kill/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux点命令执行linux.命令</title>
     <link href="http://sunhao.win/2017/04/01/linux-shell-dot/"/>
     <id>http://sunhao.win/2017/04/01/linux-shell-dot/</id>
     <published>2017-04-01T01:07:54.000Z</published>
-    <updated>2017-04-01T07:16:57.252Z</updated>
+    <updated>2017-04-01T07:27:41.099Z</updated>
     
     <content type="html"><![CDATA[<p>.: . filename [arguments]<br>   . 文件名 [参数]</p>
 <pre><code>Execute commands from a file in the current shell.
@@ -43,7 +302,8 @@ Exit Status:
 Returns the status of the last command executed in FILENAME; fails if
 FILENAME cannot be read.
 返回文件最后执行的命令的状态；如果无法读取文件返回失败。
-</code></pre><a id="more"></a>]]></content>
+</code></pre><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &apos;ls -a&apos;&gt;&gt;myLS</div><div class="line">. myLS</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -507,16 +767,18 @@ FILENAME cannot be read.
   </entry>
   
   <entry>
-    <title>数据结构-集合论，集合,数组 第一篇</title>
+    <title>数据结构-集合论，集合,数组 大O 第一篇</title>
     <link href="http://sunhao.win/2017/03/02/data-structure-set/"/>
     <id>http://sunhao.win/2017/03/02/data-structure-set/</id>
     <published>2017-03-02T00:55:57.000Z</published>
-    <updated>2017-03-02T02:11:52.000Z</updated>
+    <updated>2017-04-17T02:34:20.667Z</updated>
     
     <content type="html"><![CDATA[<h3 id="集合论-集合论或集论是研究集合（由一堆抽象物件构成的整体）的数学理论-包含了集合、元素和成员关系等最基本的数学概念。"><a href="#集合论-集合论或集论是研究集合（由一堆抽象物件构成的整体）的数学理论-包含了集合、元素和成员关系等最基本的数学概念。" class="headerlink" title="集合论: 集合论或集论是研究集合（由一堆抽象物件构成的整体）的数学理论,包含了集合、元素和成员关系等最基本的数学概念。"></a>集合论: 集合论或集论是研究集合（由一堆抽象物件构成的整体）的数学理论,包含了集合、元素和成员关系等最基本的数学概念。</h3><h3 id="集合（简称集）是数学中一个基本概念，它是集合论的研究对象-集合就是“一堆东西”。集合里的“东西”，叫作元素。"><a href="#集合（简称集）是数学中一个基本概念，它是集合论的研究对象-集合就是“一堆东西”。集合里的“东西”，叫作元素。" class="headerlink" title="集合（简称集）是数学中一个基本概念，它是集合论的研究对象.集合就是“一堆东西”。集合里的“东西”，叫作元素。"></a>集合（简称集）是数学中一个基本概念，它是集合论的研究对象.集合就是“一堆东西”。集合里的“东西”，叫作元素。</h3><p>集合A和B的并集，符号为A ∪ B<br>集合A和B的交集，符号为A ∩ B<br>集合U和A的相对差集，符号为U \ A<br>集合A和B的对称差，符号为A △ B或A⊕B</p>
 <p>编程中的数组 是集合中的一种表现形式。</p>
 <p>数组是在程序设计中，为了处理方便， 把具有相同类型的若干变量按有序的形式组织起来的一种形式。这些按序排列的同类数据元素的集合称为数组。<br>其中具有相同类型的若干变量按有序的形式组织起来的一种形式   就是我们说的成员关系。</p>
-<p>①[x，y] ：中括号表示包括边界数字，即表示大于等于x小于等于y<br>②(x，y)：小括号是不包括边界，即表示大于x小于y<br>所以我们的数组 用[]来声明。而()已经被函数占用，所以不考虑。<br><a id="more"></a></p>
+<p>①[x，y] ：中括号表示包括边界数字，即表示大于等于x小于等于y<br>②(x，y)：小括号是不包括边界，即表示大于x小于y<br>所以我们的数组 用[]来声明。而()已经被函数占用，所以不考虑。<br><a id="more"></a><br>大O 其实是omega的缩写  在数学上表示首个不可数的序数</p>
+<p>序数是在基数的基础上再增加一层意思。<br>例如：<br>　　基数：一、二、三、四、五、六、七、八、九、十。<br>　　序数：第一、第二、第三、第四、第五、第六、第七、第八、第九、第十。<br>基数：<br>　　在数学上，基数（cardinal number）是集合论中刻画任意集合大小的一个概念。两个能够建立元素间一一对应的集合称为互相对等集合。例如3个人的集合和3匹马的集合可以建立一一对应，是两个对等的集合。<br>序数：<br>　　集合论基本概念之一，是日常使用的第一、第二等表示次序的数的推广。序数概念是建立在良序集概念之上的，而良序集又是偏序集、全序集的特殊情形。</p>
+<p>数学的一个基本的分支学科，研究对象是一般集合。集合论在数学中占有一个独特的地位，它的基本概念已渗透到数学的所有领域。[1]  集合论或集论是研究集合（由一堆抽象物件构成的整体）的数学理论，包含了集合、元素和成员关系等最基本的数学概念。在大多数现代数学的公式化中，集合论提供了要如何描述数学物件的语言。集合论和逻辑与一阶逻辑共同构成了数学的公理化基础，以未定义的“集合”与“集合成员”等术语来形式化地建构数学物件。</p>
 ]]></content>
     
     <summary type="html">
@@ -773,299 +1035,11 @@ FILENAME cannot be read.
       <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
+      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
+    
       <category term="SYN攻击" scheme="http://sunhao.win/tags/SYN%E6%94%BB%E5%87%BB/"/>
     
-      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
-    
       <category term="ACK攻击" scheme="http://sunhao.win/tags/ACK%E6%94%BB%E5%87%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>服务器网站被CC攻击的解决方法</title>
-    <link href="http://sunhao.win/2017/02/24/safe-cc/"/>
-    <id>http://sunhao.win/2017/02/24/safe-cc/</id>
-    <published>2017-02-24T06:02:15.000Z</published>
-    <updated>2017-02-24T07:53:54.141Z</updated>
-    
-    <content type="html"><![CDATA[<p>作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。</p>
-<p>首先，什么事CC攻击？</p>
-<p>攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS,和伪装就叫：CC(ChallengeCollapsar)。<br>CC主要是用来攻击页面的。大家都有这样的经历，就是在访问论坛时，如果这个论坛比较大，访问的人比较多，打开页面的速度会比较慢，访问的人越多，论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。<br><a id="more"></a><br>一个静态页面不需要服务器多少资源，甚至可以说直接从内存中读出来发给你就可以了，但是论坛就不一样了，我看一个帖子，系统需要到数据库中判断我是否有读帖子的权限，如果有，就读出帖子里面的内容，显示出来——这里至少访问了2次数据库，如果数据库的数据容量有200MB大小，系统很可能就要在这200MB大小的数据空间搜索一遍，这需要多少的CPU资源和时间？如果我是查找一个关键字，那么时间更加可观，因为前面的搜索可以限定在一个很小的范围内，比如用户权限只查用户表，帖子内容只查帖子表，而且查到就可以马上停止查询，而搜索肯定会对所有的数据进行一次判断，消耗的时间是相当的大。<br>CC就是充分利用了这个特点，模拟多个用户（多少线程就是多少用户）不停的进行访问（访问那些需要大量数据操作，就是需要大量CPU时间的页面）.这一点用一个一般的性能测试软件就可以做到大量模拟用户并发。</p>
-<p>CC攻击是DDoS(分布式拒绝服务)的一种，相比其它的DDoS攻击CC似乎更有技术含量一些。这种攻击你见不到虚假IP，见不到特别大的异常流量，但造成服务器无法进行正常连接，一条ADSL的普通用户足以挂掉一台高性能的Web服务器。由此可见其危害性，称其为”Web杀手”毫不为过。最让站长们忧虑的是这种攻击技术含量不是很高，利用工具和一些IP代理，一个初、中级的电脑水平的用户就能够实施DDoS攻击。</p>
-<p>那么怎样保证这些网站服务器的安全呢？防护CC攻击大家有必要了解CC攻击的原理及如果发现CC攻击和对CC攻击的防范措施。</p>
-<p>一、CC攻击的原理：<br>CC攻击的原理就是攻击者控制某些主机不停地发大量数据包给对方服务器造成服务器资源耗尽，一直到宕机崩溃。CC主要是用来攻击页面的，每个人都有这样的体验：当一个网页访问的人数特别多的时候，打开网页就慢了，CC就是模拟多个用户(多少线程就是多少用户)不停地进行访问那些需要大量数据操作(就是需要大量CPU时间)的页面，造成服务器资源的浪费，CPU长时间处于100%，永远都有处理不完的连接直至就网络拥塞，正常的访问被中止。</p>
-<p>二、CC攻击的种类：<br>CC攻击的种类有三种，直接攻击，代理攻击，僵尸网络攻击。</p>
-<p>直接攻击主要针对有重要缺陷的WEB应用程序，一般说来是程序写的有问题的时候才会出现这种情况，比较少见。</p>
-<p>僵尸网络攻击有点类似于DDOS攻击了，从WEB应用程序层面上已经无法防御。</p>
-<p>代理攻击：CC攻击者一般会操作一批代理服务器，比方说100个代理，然后每个代理同时发出10个请求，这样WEB服务器同时收到1000个并发请求的，并且在发出请求后，立刻断掉与代理的连接，避免代理返回的数据将本身的带宽堵死，而不能发动再次请求，这时WEB服务器会将响应这些请求的进程进行队列，数据库服务器也同样如此，这样一来，正常请求将会被排在很后被处理，就象本来你去食堂吃饭时，一般只有不到十个人在排队，今天前面却插了一千个人，那么轮到你的机会就很小很小了，这时就出现页面打开极其缓慢或者白屏。</p>
-<p>三、攻击症状<br>CC攻击有一定的隐蔽性，那如何确定服务器正在遭受或者曾经遭受CC攻击呢?我们可以通过以下三个方法来确定。</p>
-<p>(1).命令行法<br>一般遭受CC攻击时，Web服务器会出现80端口对外关闭的现象，因为这个端口已经被大量的垃圾数据堵塞了正常的连接被中止了。我们可以通过在命令行下输入命令netstat-an来查看，如果看到类似如下有大量显示雷同的连接记录基本就可以被CC攻击了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">……</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6:2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">……</div></pre></td></tr></table></figure></p>
-<p>其中”192.168.1.6”就是被用来代理攻击的主机的IP，”SYN_RECEIVED”是TCP连接状态标志，意思是”正在处于连接的初始同步状态”，表明无法建立握手应答处于等待状态。这就是攻击的特征，一般情况下这样的记录一般都会有很多条，表示来自不同的代理IP的攻击。</p>
-<p>(2).批处理法<br>上述方法需要手工输入命令且如果Web服务器IP连接太多看起来比较费劲，我们可以建立一个批处理文件，通过该脚本代码确定是否存在CC攻击。打开记事本键入如下代码保存为CC.bat：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@echooff</div><div class="line"></div><div class="line">time /t &gt;&gt;log.log</div><div class="line"></div><div class="line">netstat -n -p tcp |find &quot;:80&quot;&gt;&gt;Log.log</div><div class="line"></div><div class="line">notepad log.log</div><div class="line"></div><div class="line">exit</div></pre></td></tr></table></figure></p>
-<p>上面的脚本的含义是筛选出当前所有的到80端口的连接。当我们感觉服务器异常是就可以双击运行该批处理文件，然后在打开的log.log文件中查看所有的连接。如果同一个IP有比较多的到服务器的连接，那就基本可以确定该IP正在对服务器进行CC攻击。</p>
-<p>(3).查看系统日志<br>上面的两种方法有个弊端，只可以查看当前的CC攻击，对于确定Web服务器之前是否遭受CC攻击就无能为力了，此时我们可以通过Web日志来查，因为Web日志忠实地记录了所有IP访问Web资源的情况。通过查看日志我们可以Web服务器之前是否遭受CC攻击，并确定攻击者的IP然后采取进一步的措施。</p>
-<p>Web日志一般在C:\WINDOWS\system32\LogFiles\HTTPERR目录下，该目录下用类似httperr1.log的日志文件，这个文件就是记录Web访问错误的记录。管理员可以依据日志时间属性选择相应的日志打开进行分析是否Web被CC攻击了。默认情况下，Web日志记录的项并不是很多，我们可以通过IIS进行设置，让Web日志记录更多的项以便进行安全分析。其操作步骤是：</p>
-<p>“开始→管理工具”打开”Internet信息服务器”，展开左侧的项定位到到相应的Web站点，然后右键点击选择”属性”打开站点属性窗口，在”网站”选项卡下点击”属性”按钮，在”日志记录属性”窗口的”高级”选项卡下可以勾选相应的”扩展属性”，以便让Web日志进行记录。比如其中的”发送的字节数”、”接收的字节数”、”所用时间”这三项默认是没有选中的，但在记录判断CC攻击中是非常有用的，可以勾选。另外，如果你对安全的要求比较高，可以在”常规”选项卡下对”新日志计划”进行设置，让其”每小时”或者”每一天”进行记录。为了便于日后进行分析时好确定时间可以勾选”文件命名和创建使用当地时间”。</p>
-<p>四、CC攻击防御策略<br>确定Web服务器正在或者曾经遭受CC攻击，那如何进行有效的防范呢?</p>
-<p>(1).取消域名绑定<br>一般cc攻击都是针对网站的域名进行攻击，比如我们的网站域名是”www.star-net.cn”，那么攻击者就在攻击工具中设定攻击对象为该域名然后实施攻击。</p>
-<p>对于这样的攻击我们的措施是在IIS上取消这个域名的绑定，让CC攻击失去目标。具体操作步骤是：打开”IIS管理器”定位到具体站点右键”属性”打开该站点的属性面板，点击IP地址右侧的”高级”按钮，选择该域名项进行编辑，将”主机头值”删除或者改为其它的值(域名)。</p>
-<p>经过模拟测试，取消域名绑定后Web服务器的CPU马上恢复正常状态，通过IP进行访问连接一切正常。但是不足之处也很明显，取消或者更改域名对于别人的访问带来了不变，另外，对于针对IP的CC攻击它是无效的，就算更换域名攻击者发现之后，他也会对新域名实施攻击。</p>
-<p>(2).域名欺骗解析<br>如果发现针对域名的CC攻击，我们可以把被攻击的域名解析到127.0.0.1这个地址上。我们知道127.0.0.1是本地回环IP是用来进行网络测试的，如果把被攻击的域名解析到这个IP上，就可以实现攻击者自己攻击自己的目的，这样他再多的肉鸡或者代理也会宕机，让其自作自受。</p>
-<p>另外，当我们的Web服务器遭受CC攻击时把被攻击的域名解析到国家有权威的政府网站或者是网警的网站，让其网警来收拾他们。</p>
-<p>现在一般的Web站点都是利用类似”新网”这样的服务商提供的动态域名解析服务，大家可以登录进去之后进行设置。</p>
-<p>(3).更改Web端口<br>一般情况下Web服务器通过80端口对外提供服务，因此攻击者实施攻击就以默认的80端口进行攻击，所以，我们可以修改Web端口达到防CC攻击的目的。运行IIS管理器，定位到相应站点，打开站点”属性”面板，在”网站标识”下有个TCP端口默认为80，我们修改为其他的端口就可以了。</p>
-<p>(4).IIS屏蔽IP<br>我们通过命令或在查看日志发现了CC攻击的源IP，就可以在IIS中设置屏蔽该IP对Web站点的访问，从而达到防范IIS攻击的目的。在相应站点的”属性”面板中，点击”目录安全性”选项卡，点击”IP地址和域名现在”下的”编辑”按钮打开设置对话框。在此窗口中我们可以设置”授权访问”也就是”白名单”，也可以设置”拒绝访问”即”黑名单”。比如我们可以将攻击者的IP添加到”拒绝访问”列表中，就屏蔽了该IP对于Web的访问。</p>
-<p>五、CC攻击的防范手段<br>防止CC攻击，不一定非要用高防服务器。比如，用防CC攻击软件就可以有效的防止CC攻击。推荐一些CC的防范手段：</p>
-<p>1、优化代码<br>尽可能使用缓存来存储重复的查询内容，减少重复的数据查询资源开销。减少复杂框架的调用，减少不必要的数据请求和处理逻辑。程序执行中，及时释放资源，比如及时关闭mysql连接，及时关闭memcache连接等，减少空连接消耗。</p>
-<p>2、限制手段<br>对一些负载较高的程序增加前置条件判断，可行的判断方法如下：</p>
-<p>必须具有网站签发的session信息才可以使用（可简单阻止程序发起的集中请求）；必须具有正确的referer（可有效防止嵌入式代码的攻击）；禁止一些客户端类型的请求（比如一些典型的不良蜘蛛特征）；同一session多少秒内只能执行一次。</p>
-<p>3、完善日志<br>尽可能完整保留访问日志。日志分析程序，能够尽快判断出异常访问，比如单一ip密集访问；比如特定url同比请求激增。</p>
-<p>六、针对CC攻击的商业解决方案<br>很多的网站管理者是等到网站遭到攻击了，受到损失了，才去寻求解决的方案，在将来的互联网飞速发展的时代，一定要有安全隐患意识，不要等到损失大了，再去想办法来补救，这样为时已晚。然而当网站受到攻击时，大多数人想到的是—–快点找硬防，基本上都步了一个误区，就是认为网站或者服务器被攻击，购买硬件防火墙，什么事都万事大吉了，实际上这样的想法是极端错误的。多年的统计数据表明，想彻底解CC攻击是几乎不可能的，就好比治疗感冒一样，我们可以治疗，也可以预防，但却无法根治，但我们若采取积极有效的防御方法，则可在很大程度上降低或减缓生病的机率，防治DDOS攻击也是如此。</p>
-<p>实际上比较理想解决方案应该是”软件+硬件”的解决方案。此方案对于资金较为充足的企业网站来说，这个方案适合他们；硬件在DDOS防护上有优势，软件CC防护上有优势；相对于一些对于ICP内容网站、论坛社区BBS、电子商务eBusiness、音乐网站Music、电影网站File等网站服务器越来越普及，但由于种种原因往往会遭受竞争对手或打击报复者的恶意DDOS攻击，持续的攻击会导致大量用户流失，严重的甚至因人气全失而被迫关闭服务器，为了最大程度的保护运营者的利益，冰盾科技结合多年抗DDOS的实践经验给出了最少的安全投资可获得最大安全回报的抗DDOS解决方案。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。&lt;/p&gt;
-&lt;p&gt;首先，什么事CC攻击？&lt;/p&gt;
-&lt;p&gt;攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS,和伪装就叫：CC(ChallengeCollapsar)。&lt;br&gt;CC主要是用来攻击页面的。大家都有这样的经历，就是在访问论坛时，如果这个论坛比较大，访问的人比较多，打开页面的速度会比较慢，访问的人越多，论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="网络安全" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="CC攻击" scheme="http://sunhao.win/tags/CC%E6%94%BB%E5%87%BB/"/>
-    
-      <category term="DDOS攻击" scheme="http://sunhao.win/tags/DDOS%E6%94%BB%E5%87%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>study clojure</title>
-    <link href="http://sunhao.win/2017/02/21/study-clojure/"/>
-    <id>http://sunhao.win/2017/02/21/study-clojure/</id>
-    <published>2017-02-21T13:41:25.000Z</published>
-    <updated>2017-02-21T13:41:25.076Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Compass中文手册</title>
-    <link href="http://sunhao.win/2017/01/11/compass/"/>
-    <id>http://sunhao.win/2017/01/11/compass/</id>
-    <published>2017-01-11T07:10:57.000Z</published>
-    <updated>2017-03-03T08:57:26.022Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>compass目前已经不再维护，但有些东西仍值得学习。</p>
-<p><strong>Version: 1.0.1</strong></p>
-<h2 id="开始使用Compass"><a href="#开始使用Compass" class="headerlink" title="开始使用Compass"></a>开始使用Compass</h2><p>Compass 是一款使用<a href="http://sass-lang.com" target="_blank" rel="external">Sass语言</a> 编写的开源的css设计框架，使用<br>起来强大和简单. 如果你对Sass不熟悉, 可以去<a href="http://sass-lang.com" target="_blank" rel="external">sass-lang.com</a>学习如何使用.</p>
-<h2 id="安装Compass"><a href="#安装Compass" class="headerlink" title="安装Compass"></a>安装Compass</h2><p>请按照<a href="http://compass-style.org/install/" target="_blank" rel="external">Compass 安装指南</a>按步骤安装Compass和Sass。</p>
-<p>如果需要验证版本，可以运行以下命令:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass version</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="监视和编译你的项目"><a href="#监视和编译你的项目" class="headerlink" title="监视和编译你的项目"></a>监视和编译你的项目</h2><p>（ps：watch参数就是，监控你的项目是否则有文件改动，一旦有改动，就自动转成css。）</p>
-<p>当开发项目时, 你可以运行compass监视器 ，自动修改你的css文件到最新状态。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /path/to/project</div><div class="line">$ compass watch</div></pre></td></tr></table></figure>
-<p>当在生产环境中编译你的css文件的时, 通过 –production 编译器将默认对终端(就是我们用的浏览器)优化输出(其实就是精简):</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass compile --production</div></pre></td></tr></table></figure>
-<h2 id="使用Compass不用命令行"><a href="#使用Compass不用命令行" class="headerlink" title="使用Compass不用命令行"></a>使用Compass不用命令行</h2><p>你可以不用compass命令行. 在一些情况下, 对于一些不是明确支持Compasssass编译器和框架，这样更容易集成.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gem install compass-core</div><div class="line">$ cat &lt;&lt;- EOF &gt; _project-setup.scss</div><div class="line">\$project-path: absolute-path(join-file-segments(<span class="string">".."</span>));</div><div class="line">@<span class="keyword">import</span> <span class="string">"compass/configuration"</span>;</div><div class="line">\$compass-options: (http_path: <span class="string">"/"</span>);</div><div class="line">@include compass-configuration(\$compass-options);</div><div class="line">EOF</div><div class="line">Add to the top <span class="keyword">of</span> each sass file: @<span class="keyword">import</span> <span class="string">"project-setup"</span>;</div><div class="line">Compile using the Sass command line:</div><div class="line">$ sass -r compass-core --update sass:css</div></pre></td></tr></table></figure></p>
-<p>详情请读: <a href="http://compass-style.org/help/documentation/sass-based-configuration-options/" target="_blank" rel="external">Compass’s Sass-based配置选项</a>.</p>
-<h2 id="更多配置命令"><a href="#更多配置命令" class="headerlink" title="更多配置命令"></a>更多配置命令</h2><p>所有compass命令的文档可以通过运行下面的代码发现:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help</div></pre></td></tr></table></figure></p>
-<p>可以设置一个可选参数，指定具体的一个命令:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help &lt;command&gt;</div></pre></td></tr></table></figure></p>
-<p> <command> 就是指定的命令参数 (例如. compile)</p>
-<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><h2 id="教程-1"><a href="#教程-1" class="headerlink" title="教程"></a>教程</h2><h3 id="Compass-教程"><a href="#Compass-教程" class="headerlink" title="Compass 教程"></a>Compass 教程</h3><p>这个教程还在改进, 如果这里还有什么教程没有涉及到，请看 <a href="http://groups.google.com/group/compass-users" target="_blank" rel="external">Compass 联络表</a>， 那里有很多compass大神帮你解决。</p>
-<h3 id="Compass入门"><a href="#Compass入门" class="headerlink" title="Compass入门"></a>Compass入门</h3><p>如果你对Compass不熟悉, 你最好看看 <a href="http://compass-style.org/help/tutorials/best_practices/" target="_blank" rel="external">最佳练习</a>,  <a href="http://compass-style.org/help/tutorials/configuration-reference/" target="_blank" rel="external">配置参照</a>, <a href="http://compass-style.org/help/tutorials/configurable-variables/" target="_blank" rel="external">变量配置</a>, 还有 <a href="http://compass-style.org/help/tutorials/command-line/" target="_blank" rel="external">命令行手册</a>.</p>
-<h3 id="贡献点"><a href="#贡献点" class="headerlink" title="贡献点?"></a>贡献点?</h3><p>如果你使用Compass中有些建议和想法, 可以看下<a href="http://compass-style.org/help/tutorials/contributing/" target="_blank" rel="external">贡献</a> 和 <a href="http://compass-style.org/help/tutorials/extensions/" target="_blank" rel="external">创建插件</a>.</p>
-<h2 id="应用集成"><a href="#应用集成" class="headerlink" title="应用集成"></a>应用集成</h2><h3 id="应用集成-1"><a href="#应用集成-1" class="headerlink" title="应用集成"></a>应用集成</h3><h4 id="Ruby-on-Rails"><a href="#Ruby-on-Rails" class="headerlink" title="Ruby on Rails"></a>Ruby on Rails</h4><p>Rails 3.1（一款构建在 Ruby 语言之上的一款web框架）</p>
-<p>添加compass到你的依赖中:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'compass'</span></div></pre></td></tr></table></figure>
-<p>也可以去 <a href="https://gist.github.com/1184843" target="_blank" rel="external">gist</a>(一款代码分享平台)看看</p>
-<p>Rails 3</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass init rails /path/to/myrailsproject</div></pre></td></tr></table></figure>
-<p>Rails 2.3</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rake <span class="symbol">rails:</span>template LOCATION=<span class="symbol">http:</span>/<span class="regexp">/compass-style.org/rails</span><span class="regexp">/installer</span></div></pre></td></tr></table></figure>
-<h3 id="Sinatra"><a href="#Sinatra" class="headerlink" title="Sinatra"></a>Sinatra</h3><h4 id="Sinatra-（基于ruby的微型web框架）"><a href="#Sinatra-（基于ruby的微型web框架）" class="headerlink" title="Sinatra （基于ruby的微型web框架）"></a>Sinatra （基于ruby的微型web框架）</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'compass'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'sinatra'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'haml'</span></div><div class="line"></div><div class="line">configure <span class="keyword">do</span></div><div class="line">  set <span class="symbol">:haml</span>, &#123;<span class="symbol">:format</span> =&gt; <span class="symbol">:html5</span>&#125;</div><div class="line">  set <span class="symbol">:scss</span>, &#123;<span class="symbol">:style</span> =&gt; <span class="symbol">:compact</span>, <span class="symbol">:debug_info</span> =&gt; <span class="literal">false</span>&#125;</div><div class="line">  Compass.add_project_configuration(File.join(settings.root, <span class="string">'config'</span>, <span class="string">'compass.rb'</span>))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">get <span class="string">'/stylesheets/:name.css'</span> <span class="keyword">do</span></div><div class="line">  content_type <span class="string">'text/css'</span>, <span class="symbol">:charset</span> =&gt; <span class="string">'utf-8'</span></div><div class="line">  scss <span class="symbol">:<span class="string">"stylesheets/<span class="subst">#&#123;params[<span class="symbol">:name</span>]&#125;</span>"</span></span>, Compass.sass_engine_options</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">get <span class="string">'/'</span> <span class="keyword">do</span></div><div class="line">  haml <span class="symbol">:index</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>假设你保存配置文件到 <code>config/compass.rb</code>. 如果你保存样式表到 “views/stylesheets/” 目录，而不是  “views/”, 记得按你设置好的配置更新 <code>sass_dir</code> . 看看 <a href="https://gist.github.com/1184843" target="_blank" rel="external">sample compass-sinatra project</a> 实时运行!</p>
-<p><a href="https://github.com/adamstac/sinatra-bootstrap" target="_blank" rel="external">Sinatra Bootstrap</a> - 一个 支持Haml, Sass, Compass, jQuery 等 的Sinatra项目.</p>
-<h3 id="nanoc"><a href="#nanoc" class="headerlink" title="nanoc"></a>nanoc</h3><p>nanoc 是一个用 Ruby 实现的静态网页产生工具</p>
-<p>最小集成: 只需要拖他进去</p>
-<p>最简单的途径集成compass到nanoc. 更改 <code>config.rb</code> 指向到你所使用的样式表. 你需要单独运行一个窗口用Compass watch命令监控编译nanoc程序.</p>
-<p>实力项目，如: <a href="https://github.com/unthinkingly/unthinkingly-blog" target="_blank" rel="external">unthinkingly</a>.</p>
-<p>标准集成</p>
-<p>Nanoc文件规范的首要要点, 像这样加载 Compass 配置文件:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'compass'</span></div><div class="line"></div><div class="line">Compass.add_project_configuration <span class="string">'compass.rb'</span><span class="comment"># when using Compass &gt; 0.10</span></div><div class="line">sass_options = Compass.sass_engine_options<span class="comment"># when using Compass &gt; 0.10</span></div><div class="line"></div><div class="line">Compass.configuration.parse <span class="string">'compass.rb'</span>  <span class="keyword">when</span> using Compass &lt; <span class="number">0</span>.<span class="number">10</span></div><div class="line">sass_options = Compass.config.to_sass_engine_options  <span class="keyword">when</span> using Compass &lt; <span class="number">0</span>.<span class="number">10</span></div></pre></td></tr></table></figure></p>
-<p>创建并配置一个 <code>compass.rb</code> 文件到你站点的根目录  .示例配置:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">http_path = <span class="string">"/"</span></div><div class="line">project_path = File.expand_path(File.join(File.dirname(__FILE_<span class="number">_</span>), <span class="string">'..'</span>))</div><div class="line">css_dir = <span class="string">"output/stylesheets"</span></div><div class="line">sass_dir = <span class="string">"content/stylesheets"</span></div><div class="line">images_dir = <span class="string">"assets/images"</span></div><div class="line">javascripts_dir = <span class="string">"assets/javascripts"</span></div><div class="line">fonts_dir = <span class="string">"assets/fonts"</span></div><div class="line">http_javascripts_dir = <span class="string">"javascripts"</span></div><div class="line">http_stylesheets_dir = <span class="string">"stylesheets"</span></div><div class="line">http_images_dir = <span class="string">"images"</span></div><div class="line">http_fonts_dir = <span class="string">"fonts"</span></div></pre></td></tr></table></figure></p>
-<p>根据您的目录结构和配置，您可能需要更改一些目录的路径。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Sass 和 Compass过滤样式表, 从Compass按照配置好的sass引擎，调用sass进行过滤, 如下:</div><div class="line"></div><div class="line">    compile <span class="string">'/stylesheets/*'</span> <span class="keyword">do</span></div><div class="line">      filter <span class="symbol">:sass</span>, sass_options.merge(<span class="symbol">:syntax</span> =&gt; item[<span class="symbol">:extension</span>].to_sym)</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    nanoc projects using the formal approach</div></pre></td></tr></table></figure></p>
-<p><a href="https://github.com/Compass/compass/tree/stable/compass-style.org" target="_blank" rel="external">站点</a></p>
-<h2 id="最佳方法"><a href="#最佳方法" class="headerlink" title="最佳方法"></a>最佳方法</h2><p>按下面的方法可以使你的项目更以维护和创建.</p>
-<p>使用一个Base样式表文件</p>
-<p>创建一个_base.scss partial(部分) 用来初始化样式表中共同的变量和集成一些你经常使用的工具。</p>
-<p>_base.scss<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$blueprint-grid-columns : <span class="number">24</span>;</div><div class="line">$blueprint-grid-width   : <span class="number">30</span>px;</div><div class="line">$blueprint-grid-margin  : <span class="number">10</span>px;</div><div class="line">$font-color             <span class="symbol">:</span><span class="number">333</span>;</div><div class="line"></div><div class="line">@import <span class="string">"compass/reset"</span>;</div><div class="line">@import <span class="string">"compass/utilities"</span>;</div><div class="line">@import <span class="string">"blueprint"</span>;</div></pre></td></tr></table></figure></p>
-<p>// etc.<br>_base.scss 同时也是储存你自定义 mixins(混合)的好地方, 所以它可以供任何样式表用。</p>
-<p>你可以在其他样式表中包含它:</p>
-<p>application.scss</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@import &quot;base&quot;;</div><div class="line"></div><div class="line">#wrapper &#123;</div><div class="line">  @include container;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>// etc.<br>如果你想覆盖掉base.scss,可以在@import-ing之前，定义一些compass/framework 常量. 请参见<a href="http://compass-style.org/help/tutorials/configurable-variables/" target="_blank" rel="external">可配置的变量</a>里具体的例子. 请注意，您可以参考 <em>base.scss的，因为它是局部的,所以名字没有前置下划线和扩展名。(译者注:这里意思就是partial是公共部分，不属于私有，所以起名字的时候不要加</em>或者扩展名)</p>
-<p>编写自定义Mixins</p>
-<p>Mixins让你通过一条命令就可以把多个样式表插入选择器. 这样可以使你的源码避免重复，提升可维护性. 使用mixins让你的样式表源码像自己注释的文档  – 这样更易读，例如 @include round-corners(6px,f00) 要比列出多条语句强很多。</p>
-<p>自由标记样式表</p>
-<p>从一个站点的页面中提取出我们所关注的css样式. 这样看似更易于维护. 然而, 事实上, 由于CSS功能上的限制抽象成符合DRY原则的可维护的代码. 不过sass它能让我们能够创建完全抽象和重用的代码，允许我们把所有的样式移入到样式表里。  读这篇博客关于这个问题的更多信息</p>
-<p>一旦你有整洁的标记，使用mixin和继承的样式表。整洁清晰的抽象，您应该能够阅读网页的样式表,甚至没有在Web浏览器中加载该页,就想象出页面会是什么样子。</p>
-<p>如果你发现语义化的选择器使得你的css表臃肿，是时候到重构的时间了，例如，此样式表将产生不必要的膨胀:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@mixin three-column &#123;</div><div class="line">  .container &#123; @include container;  &#125;</div><div class="line">  .header,</div><div class="line">  .footer    &#123; @include column(24); &#125;</div><div class="line">  .sidebar   &#123; @include column(6);  &#125;</div><div class="line">  article    &#123; @include column(10); &#125;</div><div class="line">  .rightbar  &#123; @include column(8);  &#125;</div><div class="line">&#125;</div><div class="line">body#article,</div><div class="line">body#snippet,</div><div class="line">body#blog-post &#123; @include three-column; &#125;</div></pre></td></tr></table></figure>
-<p>相反的，问问自己，“这些页面非样式的实质共同点是什么？”在这种情况下，他们的所有内容页面，最好把这些页面的body类单独编辑。(译者注，上面的sass样式表，编写完很臃肿冗余的。这把所有页面的内容都合并在了一起。产生太多没必要的语句。所以为了省代码，不如单独写更易于维护)</p>
-<p>嵌套选择器不要太多层。</p>
-<p>从零开始进行样式处理或以应用程序的一些常见的基点，要比应付不想要的风格到您的新设计的容易多。这样，在标记书中使用一些选择器，最好使用一些基本嵌套样式。然后使用重构模式的出现，减少膨胀。</p>
-<p>重要的是过长嵌套的选择器会导致一个小渲染的性能损失，可以减缓您的Web页面。没有必要完全模仿你的css文档结构。嵌套只有足够深的选择器是唯一的部分。例如，不要使用table thead tr th，当一个简单th选择器时就足够了。这可能意味着你必须把你的风格分成若干选择器，让文档级联工作。</p>
-<h2 id="促进"><a href="#促进" class="headerlink" title="促进"></a>促进</h2><h3 id="促进Compass发展"><a href="#促进Compass发展" class="headerlink" title="促进Compass发展"></a>促进Compass发展</h3><p>感谢您有兴趣在促进compass发展。我们因你而变，如果这里有难以懂的地方，请让我们知道。<br>如果你发现文档中的错误，可以按步骤告知我们</p>
-<p>Step 1: 去github上注册个账号.</p>
-<p>Step 2: 用你的账户Fork Compass. </p>
-<h3 id="简单改进"><a href="#简单改进" class="headerlink" title="简单改进"></a>简单改进</h3><p>感谢gihub让我们的迭代更加加单. 克隆镜像到本地，commit你的项目。</p>
-<h3 id="编辑文档"><a href="#编辑文档" class="headerlink" title="编辑文档"></a>编辑文档</h3><p>compass文档存在两个地方. 一个在compass-style.org directory<br>但大部分Sass中的注释生成文档文件本身。一个在github。</p>
-<h3 id="修复Bugs"><a href="#修复Bugs" class="headerlink" title="修复Bugs"></a>修复Bugs</h3><p>Step 3: 如果发现bug请及时bug，以便我们更新</p>
-<p>Step 4: 如果你不知道如如何提交。点 the code</p>
-<p>Step 5: 修复bug推送进度. 请务必提到的bug ID在您的提交消息，像这样:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Fixed the display of the fizzlebuzz <span class="keyword">in</span> IE6.</div><div class="line"></div><div class="line">Closes GH-<span class="number">123</span>.</div></pre></td></tr></table></figure>
-<p>Step 6: 尽可能在多个浏览器上测试</p>
-<p>Step 7: 确保测试通过. 完善测试</p>
-<p>可以提交代码了</p>
-<h3 id="更改样式表"><a href="#更改样式表" class="headerlink" title="更改样式表"></a>更改样式表</h3><p>如果你有什么好想法，别害羞发给我哈。</p>
-<p>许多特征的想法很好，非常适合compass核心库。在这些情况下，<br>你可以创建一个罗盘的扩展。有时这是因为compass的哲学概念不合。有时这只是因为我们认为这个想法需要时间考验。。<br>Step 3: 如果你不知道如如何提交</p>
-<p>Step 4: 点添加特性.</p>
-<p>Step 5: 写测试发给我们.</p>
-<p>Step 6: 编写文档实例给我们</p>
-<p>结束</p>
-<h3 id="更改ruby"><a href="#更改ruby" class="headerlink" title="更改ruby"></a>更改ruby</h3><p>如果你是对Ruby的规划工作方面的事情，假设你知道怎么读的代码，并使用标准Ruby工具，例如rake, gem, bundler, test/unit, cucumber, rspec,等。如果您有任何问题，请询问。问题随着解决。</p>
-<h3 id="补丁提交"><a href="#补丁提交" class="headerlink" title="补丁提交"></a>补丁提交</h3><p>如果你有多个功能要提交，请创建一个主分支，然后合并，迭代更新。<br>    创建一个主分支:<br>$ git checkout -b new_branch_name<br>… 可以commit一下 …<br>$ git push origin new_branch_name<br>你可以看到url的改变:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://github.com/your_user_name/compass/commits/new_branch_name</div></pre></td></tr></table></figure></p>
-<p>如果你有单提交的补丁，保存到master分支。但请记住，这些变更可能被刻意地挑选出来。<br>一旦你的变更GitHub上，确保你针对选择上游分支开发，选择包含您的更改适当的分支并发送一个pull请求。。大部分的描述应该在commit信息中–因此，没有必要写一大堆在请求消息。</p>
-<h3 id="Pull-请求实例"><a href="#Pull-请求实例" class="headerlink" title="Pull 请求实例"></a>Pull 请求实例</h3><p>简单说Pull请求就是从fork到merge的整个过程</p>
-<p>像compass页面的pull request由<a href="https://github.com/Compass/compass/issues" target="_blank" rel="external">管理问题</a>托管。代码审查由compass的核心团队成员维护:</p>
-<p>更新被拒绝 – 更新不符合compass规范. 如果你的修改更好, 至少等到他已经到期，或者用户认可。<br>更新被拒绝, 除非 – 有时,有丢失的部分，或其他的变化需要作出的更改。建议指出要解决的问题<br>更新统一 – 更新合并到compass, 小的改动由提交者合并后提交。</p>
-<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">compass/</div><div class="line">  core/                     - compass配置和样式核心文件.</div><div class="line">    frameworks/             - 该目录框架自动加载。</div><div class="line">      compass/              - compass框架</div><div class="line">        stylesheets/        - compass库</div><div class="line">        templates/          - compass模板和模式</div><div class="line">    test/                   - 单元测试</div><div class="line">    lib/</div><div class="line">      compass-core.rb       - compass-core ruby 库</div><div class="line">      compass/</div><div class="line">        core/</div><div class="line">          sass_extensions/  - 增强 Sass</div><div class="line">            functions/      - Sass函数 </div><div class="line">            monkey_patches/ - sass 更改</div><div class="line">        configuration/      - 支持的项目配置</div><div class="line">  cli/                      - compass命令行</div><div class="line">    bin/</div><div class="line">      compass               - CLI 可执行文件</div><div class="line">    devbin/                 - 安装包后的脚本文件</div><div class="line">    test/                   - 单元测试</div><div class="line">    features/               - compass测试</div><div class="line">    lib/</div><div class="line">      compass.rb            - compass-core ruby 库</div><div class="line">      compass/</div><div class="line">        app_integration/    - 集成app框架</div><div class="line">        commands/           - UI 不支持命令</div><div class="line">        configuration/      - 一些特殊的命令</div><div class="line">        exec/               - UI 命令</div><div class="line">        installers/         - 安装模板支持</div><div class="line">  compass-style.org/        - 文档源码</div><div class="line">    output/                 - 生成文档</div><div class="line">  <span class="keyword">import</span>-once/              - 引入Compass</div></pre></td></tr></table></figure>
-<h3 id="一般哲学-其实就是规范"><a href="#一般哲学-其实就是规范" class="headerlink" title="一般哲学(其实就是规范)"></a>一般哲学(其实就是规范)</h3><p>1.用户可以指定选择器。compass永远不会强制用户使用一个样式的类名。</p>
-<p>2.Compass 不需要javascript</p>
-<p>3.compass核心与设计无关。这就是为什么compass没有栅格系统，因为栅格系统和设计有关。</p>
-<p>4.compass并不特别，compass能做的，扩展也能做。<br>5.Sass非常棒 – compass使Sass更容易，并证明如何使用Sass充分发挥其潜力。.<br>6.浏览器的兼容很头疼。需要共同解决。<br>7.默认情况下，compass支持尽可能多的浏览器，渐进增强，向后兼容。</p>
-<p>8.compass是一个Sass的试验场。watcher和 color function的例子转移到sass。</p>
-<h3 id="样式约定"><a href="#样式约定" class="headerlink" title="样式约定"></a>样式约定</h3><p>1.框架所有的样式都是(私有)部分. 它们由一个下划线开始. 否则, Sass 将直接在用户的css目录创建样式表<br>2.Compass不引入额外样式. 也有例外如 resets 和 集成的基类。<br>3.Mixins 提供两个级别的默认设置<br>. 第一是一个全局默认，可以重写一次<br>. 第二个默认mixin如果包含进来，可以重写.<br>4.Mixin 参数名称的公共API部分<br>,确保易懂，不要简短.<br>5.创建一个新的文件夹放样式表, 用一个和文件夹名一样的样式表导入所有的样式表 .<br>6.尽量避免通过选择器作为参数。</p>
-<h3 id="常见问题-amp-杂项信息"><a href="#常见问题-amp-杂项信息" class="headerlink" title="常见问题 &amp;杂项信息"></a>常见问题 &amp;杂项信息</h3><p>设置Git</p>
-<p>请按照以下这些指示来设置您的电子邮件地址和属性的信息。.</p>
-<p>下载git repo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:your_username/compass.git</div></pre></td></tr></table></figure></p>
-<p>链接远程 repo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd compass</div><div class="line">git remote add chriseppstein git://github.com/chriseppstein/compass.git</div></pre></td></tr></table></figure></p>
-<p>获取最近更新:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git fetch chriseppstein</div></pre></td></tr></table></figure></p>
-<h3 id="在开发中使用compass"><a href="#在开发中使用compass" class="headerlink" title="在开发中使用compass"></a>在开发中使用compass</h3><p>使用本地脚本可以放在 /path/to/compass/bin/compass 。 你可以添加 /path/to/compass/bin 到$PATH(环境变量), 或者选择其他目录.<br>创建安装gem:<br>编辑 VERSION 改变 version像这样: 1.0.0.something-unique-to-me.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem build compass.gemspec</div><div class="line">gem install compass-0.10.6.something-uniq-to-me.0.gem</div></pre></td></tr></table></figure></p>
-<p>– 如果安装gems到你的系统, 你可能需要用 sudo . 如果你不明白什么意思，就加上它(sudo意思就是superuser<br> do 的缩写)<br>捆绑环境, 你可以像这样用gem安装compass:<br>``linux<br>gem ‘compass’, :path =&gt; “/Users/myusername/some/path/to/compass”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ruby将自动执行捆绑命令</div><div class="line"></div><div class="line">配置ruby目录 . ruby的加载路径可以这么设置</div><div class="line">```linux</div><div class="line">export RUBYLIB=/Users/myusername/some/path/to/compass/lib</div></pre></td></tr></table></figure></p>
-<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p> 你必须安装Ruby到你的系统. 配置完git, 切换到root目录通过git checkout到compass分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd compass</div></pre></td></tr></table></figure></p>
-<p>捆绑安装Ruby gem.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install bundler</div></pre></td></tr></table></figure></p>
-<p>用sudo安装gems, </p>
-<p>配置依赖:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bundle install --binstubs devbin</div></pre></td></tr></table></figure></p>
-<p>核心库和样式测试:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bundle exec rake test features</div></pre></td></tr></table></figure></p>
-<p>运行性能测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./devbin/cucumber</div></pre></td></tr></table></figure></p>
-<p>如果样式测试失败, 捕获输出的测试项目在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test/fixtures/stylesheets/&lt;project&gt;/saved/</div></pre></td></tr></table></figure></p>
-<h3 id="编写样式测试"><a href="#编写样式测试" class="headerlink" title="编写样式测试"></a>编写样式测试</h3><p>Compass已经对每个样式表测试, 直接可以导入任何其他依赖关系和重构，不会影响到输出.</p>
-<p>在某种程度上，在不同的浏览器测试是一项巨大工程。如果你有想法，请让我们知道如何做到这一点<br>在test/fixtures/stylesheets目录, 有许多的compass项目. 测试添加更新文件,修改错误保证他们都通过. 安全起见，它可能错过一些问题。如果您添加一个新的样式表到compass，请确保添加一个新样式表，增加新的样式规则。</p>
-<h3 id="重新选择或重新定位-我们该怎么办"><a href="#重新选择或重新定位-我们该怎么办" class="headerlink" title="重新选择或重新定位. 我们该怎么办?"></a>重新选择或重新定位. 我们该怎么办?</h3><p>根据任何数目的原因，包括但不限于星星多少，您的更改不会简单合并到compass。例如，我们会考虑master的稳定，而不是改变的地方，或者我们可以把所有同类更改合并在一起，形成一个单一的提交在时间，或者我们可能希望改变你已经提交，它被安置到顶部但没有改变。在这些情况下，有两种方法你有两种选择:</p>
-<p>1.如果您有一些变化的一个分支，尚未接受，但其他分支上的变化被接受，那么您应该运行以下命令（确保fetch最新）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout branch_name; git rebase chriseppstein/master</div><div class="line">(假设的变化应用到主分支)</div></pre></td></tr></table></figure></p>
-<p>2.<br>如果你所有在分支的改变被接受或你不想再保留:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master; git branch -D branch_name; git push origin :branch_name</div></pre></td></tr></table></figure></p>
-<h2 id="创建Compass扩展"><a href="#创建Compass扩展" class="headerlink" title="创建Compass扩展"></a>创建Compass扩展</h2><h3 id="Compass扩展"><a href="#Compass扩展" class="headerlink" title="Compass扩展"></a>Compass扩展</h3><p>Compass,其核心，是在Sass基础上建立的框架。它是提供创建，安装和可重复使用的样式表的工具，它提供从全面布局小部件框架设计，甚至整页的设计。Sass让HTML页面的语义明确的和设计细节省力。<br>本文档描述了compass扩展的工具集，这样您就可以建立你自己的compass的扩展。</p>
-<p>基础布局</p>
-<p>my_extension<br>|<br>|- stylesheets (sass加载路径)<br>|  |<br>|  |- my_extension (not technically required, but it’s good to scope imports by the name of the extension)<br>|  |  |<br>|  |  |- _module_one.sass (this file would be imported using @import my_extension/module_one.sass)<br>|  |  |- _module_two.sass (this file would be imported using @import my_extension/module_two.sass)<br>|  |  |- …<br>|  |<br>|  |- _my_extension.sass (This file will import the entire extension using @import my_extension.sass)<br>|<br>|- templates (this is where templates/patterns go)<br>|  |<br>|  |- project (this should be provided if you’d like people to be able to base their project on the extension)<br>|  |  |<br>|  |  |- manifest.rb (this file should declare the contents of the template)<br>|  |  |- screen.sass (this would be the main stylesheet, importing from your extension and demonstrating its use)<br>|  |  |- print.sass (this file would set up basic print styles)<br>|  |  |- ie.sass (if you want, you can provide custom styles for IE)<br>|  |<br>|  |- some_pattern<br>|     |<br>|     |- manifest.rb<br>|     |- some.sass (some sass is probably in order, always import from the extension library as much as possible)<br>|     |- some_script.js (yes, you can provide javascript code)<br>|     |- some_image.png (and images)<br>|     |- some_content.html.haml (and even html and haml)<br>|     |- some_other_file.txt (and other arbitrary files)<br>|<br>|- lib (optional ruby code)<br>   |<br>   |- my_extension.rb (this code can register your framework if you deviate from conventions and require sass extensions, etc.)<br>   |- compass-my_extension.rb (This file is automatically required by compass if it is present. Avoiding the need to pass -r to the compass command line tool.)<br>   |<br>   |- my_extension<br>      |<br>      |- sass_extensions.rb (this is the standard location to place sass functions)<br>Names in bold are part of the extension naming convention.</p>
-<p>Generating an Extension</p>
-<p>If you want a leg up to get started working on your extension, you can use compass to generate an extension with the following command:</p>
-<p>compass create my_extension –using compass/extension<br>This will create a few basic files and folders to get you started.</p>
-<p>If you prefer to use the scss syntax for your extension run the following command instead:</p>
-<p>compass create my_extension –using compass/extension -x scss<br>Advanced Layout Options</p>
-<p>Library File Location</p>
-<p>The extension library file referenced above as my_extension/lib/my_extension.rb can actually be stored at any of the following three locations:</p>
-<p>my_extension/compass_init.rb<br>my_extension/lib/my_extension.rb (NOTE: You must use this one if you’re distributing as a rubygem.)<br>my_extension/my_extension.rb<br>The first of those locations found (in the above order) will be loaded. The compass_init.rb file takes priority, so that extensions that want to work differently as compass extensions than they do as normal ruby libraries, have a way of targeting compass.</p>
-<p>Stylesheet and Template Locations</p>
-<p>If you’d like to store your stylesheets and/or templates in a non-standard location within your extension, you must provide a library file and register the extension explicitly like so:</p>
-<p>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’)<br>stylesheets_dir = File.join(base_directory, ‘my’, ‘stylesheets’)<br>templates_dir   = File.join(base_directory, ‘my’, ‘templates’)<br>Compass::Frameworks.register(‘my_extension’, :stylesheets_directory =&gt; stylesheets_dir, :templates_directory =&gt; templates_dir)<br>If you’re following the standard naming convention, but the stylesheet and template directories are not at the top level, you can just do this instead:</p>
-<p> path from the library file to where you’re keeping your compass stuff.<br>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’, ‘compass’)<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; base_directory)<br>Adding Configuration Options to Compass</p>
-<p>For details on how to add new configuration options to compass read this.</p>
-<p>Conventions to Follow</p>
-<p>The following are not required, but are standards that your framework should attempt to adhere to unless there’s a good reason not to do so.</p>
-<p>Have a single import for your framework.<br>Break up your framework into modules so that people can import just smaller pieces for faster load times when they’re not using everything.<br>Use partials (files starting with an underscore) for stylesheets that are meant to be imported. If you do not Sass will generate css files for your libraries in some configurations.<br>Provide a project template. If you do not, your project should only be providing widgets or page designs, etc.<br>Building a Template (a.k.a. Pattern)<br>Manifest Files</p>
-<p>The manifest file declares the template contents and tells compass information about the files in the template.</p>
-<p>An Example Manifest File</p>
-<p>description “My awesome compass plugin.”</p>
-<p>stylesheet ‘screen.sass’, :media =&gt; ‘screen, projection’<br>stylesheet ‘partials/_base.sass’<br>stylesheet ‘print.sass’,  :media =&gt; ‘print’<br>stylesheet ‘ie.sass’,     :media =&gt; ‘screen, projection’, :condition =&gt; “lt IE 8”</p>
-<p>image ‘grid.png’<br>javascript ‘script.js’</p>
-<p>html ‘welcome.html.haml’, :erb =&gt; true<br>file ‘README’</p>
-<p>help %Q{<br>This is a message that users will see if they type</p>
-<p>  compass help my_extension</p>
-<p>You can use it to help them learn how to use your extension.<br>}</p>
-<p>welcome_message %Q{<br>This is a message that users will see after they install this pattern.<br>Use this to tell users what to do next.<br>}<br>You may also see some real manifest files here:</p>
-<p>blueprint<br>compass-css-lightbox<br>Manifest Declarations</p>
-<p>Easy Mode: If you just have some basic files and nothing fancy going on, simply place this line in your manifest:</p>
-<p>discover :all<br>If the file is missing discover :all is the default</p>
-<p>This will cause compass to find all the files in your template and use the files’ extension to determine where they should go. Alternatively, you can request that compass only discover files of a certain type. For example, the following will only discover javascript and image assets, you could then declare other file types on your own.</p>
-<p>discover :javascripts<br>discover :images<br>The following types may be discovered: :stylesheets, :images, :javascripts, :fonts, :html, :files, and :directories</p>
-<p>Normal Mode: There are seven kinds of manifest declarations:</p>
-<p>stylesheet - Declares a sass file.<br>image - Declares an image.<br>javascript - Declares a javascript file.<br>font - Declares a font file.<br>html - Declares an html file.<br>file - Declares a random file.<br>directory - Declares a directory should be created.<br>All declarations take the path to the file as their first argument. Note that the normal slash / can and should be used in a manifest. Compass will take care of the cross platform issues. The path to the file will be reproduced in the user’s project, so please keep that in mind when creating folders. The location where files are going to be installed is dictated by the user’s project configuration, however, a template can place things into subdirectories relative to those locations.</p>
-<p>Common options:</p>
-<p>:erb - When set to true, the file will be processed via the ERB templating language. See the “Advanced Manifests” section below for more details.<br>:to - The location where the file should be installed relative to the type-specific location.<br>:like - Most often used with a file declaration, this option allows you to install into the location of another manifest type (and also :css). E.g. :like =&gt; :css<br>Stylesheet options:</p>
-<p>:media - this is used as a hint to the user about the media attribute of the stylesheet link tag.<br>:condition - this is used to hint the user that a conditional comment should be used to import the stylesheet with the given condition.<br>Directory options:</p>
-<p>:within - where the directory should be created. If omitted, the directory will be relative to the project directory. Can be one of: the following<br>sass_dir<br>javascripts_dir<br>fonts_dir<br>images_dir<br>HTML files:</p>
-<p>You can provide html as haml or as plain html. If you provide haml, the haml will be converted to html when it is installed, unless the project allows haml files. Providing html files is usually done to demonstrate how to use a more complicated design and to get the user started off with working product.</p>
-<p>Advanced Manifests and Templates</p>
-<p>ERB Processing - This can be used to customize the contents of the file in an extension template. The template will be processed in the context of a TemplateContext instance, which gives you access to the full project configuration information as well as the command line options. Since it’s unlikely many templates will need this functionality, I leave it as an exercise of the user to figure it out and if they can’t to contact the compass-devs mailing list for assistance.<br>no_configuration_file! - calling this method within the manifest will tell the installer to skip the creation of a configuration file.<br>skip_compilation! - calling this method within the manifest will tell the installer to skip compilation of sass files to css.<br>Distributing Extensions as Ruby Gems</p>
-<p>Rubygems is a flexible, easy-to-use system for distributing ruby software. If you have any questions about rubygems, I suggest that you start looking for help here.</p>
-<p>The big advantages of using rubygems to distribute your extension is that it allows your extension to be a dependency for other projects and that each install is versioned, which makes supporting your extension easier.</p>
-<p>If distributing as a rubygem, it is a good idea to have a file compass-<framework>.rb in your lib directory that registers the compass framework. This will allow compass to automatically require the framework from within rubygems.</framework></p>
-<p>Tips for Developing Extensions</p>
-<p>If you’re developing a simple extension, you may find it convenient to place your extension within an existing compass project in the extension folder.<br>Never specify an extension in your imports as this can cause issue when the syntax of a file changes.<br>Packaging an Extension as a RubyGem</p>
-<p>You do not have to make your extension a ruby gem. But if you do, you get some benefits you would not have otherwise:</p>
-<p>Releases<br>Versions<br>A standard way of asking your users what release they are using.<br>Better integration with ruby-based projects via tools like Bundler.<br>Creating a Gem</p>
-<p>Before you begin, please ensure you have gem version 1.3.6 or greater. gem -v will tell you the currently installed version.</p>
-<p>Define your gemspec file at the top of your extension. Here’s an example of one. The gemspec should have the same name as your gem.<br>Register your framework by adding lib/my_extension.rb and registering it:</p>
-<p>require ‘compass’<br>extension_path = File.expand_path(File.join(File.dirname(<strong>FILE</strong>), “..”))<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; extension_path)<br>This is how compass knows where to find your extension’s files when a user requires it. For more options, go back up and read about Stylesheet and Template Locations.</p>
-<p>Build a gem: gem build my_extension.gemspec. This will build your gem file and add the current version to the name. E.g. my_extension-0.0.1.gem<br>Test your gem by installing it locally: gem install my_extension-0.0.1.gem<br>Releasing a Gem</p>
-<p>The ruby community is nice and will host your gem files for free. To release your gem:</p>
-<p>gem push my_extension-0.0.1.gem<br>Your ruby gem will be hosted on rubygems.org. Please familiarize yourself with their documentation.</p>
-<p>Installing Extensions<br>How extensions are installed varies according to the decisions you make about how you are packaging and releasing your gem. There will be a standard approach in a future release, but until then, it is suggested that you provide your users with succinct installation instructions.</p>
-<p>Installing Extensions Released as RubyGems</p>
-<p>When creating a new project:</p>
-<p>sudo gem install my_extension<br>compass create my_project -r my_extension –using my_extension<br>The -r option is annoying and will not be needed in a future version of compass. But for now, it tells compass to find and load the extension from the local rubygems repository.</p>
-<p>To install via rubygems into an existing project:</p>
-<p>gem install my_extension<br> edit the project configuration file and add:<br>require ‘my_extension’<br>compass install my_extension<br>Or if you have other patterns besides the project pattern:</p>
-<p>compass install my_extension/pattern<br>Installing Ad-hoc Extensions</p>
-<p>Ad-hoc extensions are any set of files and folders following the basic conventions described above. They could be installed via a zip file or by checking the code out from source control. Ad-hoc extensions will be automatically found in the extensions directory of a project and registered for import without needing a require statement in the compass configuration file.</p>
-<p>Currently, ad-hoc extensions can only be installed into the extensions directory of an existing compass project. This will be fixed in a future release of compass. Until then, you may need to instruct your users to create a bare project to get started:</p>
-<p>compass create my_project –bare<br>This will create a project directory, a sass directory (with no sass files) and a configuration file.</p>
-<p>The standard location for extensions is project_root/extensions for stand-alone projects and project_root/vendor/plugins/compass_extensions for rails projects. Additionally, the user may customize their extensions directory by setting extensions_dir in their compass configuration file.</p>
-<p>To install into an existing project, simply place the extension into a project’s extension directory. This could be done via a git clone or by extracting an archive. The name of the directory it creates should be the name of the extension. The project will now have access to the extension.</p>
-<p>Verifying that an Extension is Installed Correctly</p>
-<p>The user can verify that they have access to your extension by typing:</p>
-<p>compass help<br>And they should see the framework in the list of available frameworks. Alternatively, if you’ve provided a help message in the manifest, then the user can type:</p>
-<p>compass help my_extension</p>
-<ul>
-<li>or -<br>compass help my_extension/pattern_name<br>Note: The user might need to provide the -r option to help in order for compass to find a gem-based extension before a project exists. This is not needed for extensions installed into the extensions directory, or if the project is already required in the current directory’s project configuration.<h2 id="Extending-Compass"><a href="#Extending-Compass" class="headerlink" title="Extending Compass"></a>Extending Compass</h2><h2 id="Production-Stylesheets"><a href="#Production-Stylesheets" class="headerlink" title="Production Stylesheets"></a>Production Stylesheets</h2><h2 id="Spriting"><a href="#Spriting" class="headerlink" title="Spriting"></a>Spriting</h2><h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><h3 id="Magic-Selectors"><a href="#Magic-Selectors" class="headerlink" title="Magic Selectors"></a>Magic Selectors</h3><h3 id="Sprite-layouts"><a href="#Sprite-layouts" class="headerlink" title="Sprite layouts"></a>Sprite layouts</h3><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h2 id="Upgrading"><a href="#Upgrading" class="headerlink" title="Upgrading"></a>Upgrading</h2><h3 id="Lemonade-Upgrade"><a href="#Lemonade-Upgrade" class="headerlink" title="Lemonade Upgrade"></a>Lemonade Upgrade</h3><h3 id="Scared-to-Upgrade"><a href="#Scared-to-Upgrade" class="headerlink" title="Scared to Upgrade?"></a>Scared to Upgrade?</h3><h3 id="Upgrading-to-v0-11"><a href="#Upgrading-to-v0-11" class="headerlink" title="Upgrading to v0.11"></a>Upgrading to v0.11</h3><h2 id="Working-with-Configurable-Variables"><a href="#Working-with-Configurable-Variables" class="headerlink" title="Working with Configurable Variables"></a>Working with Configurable Variables</h2><h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><h1 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h1><h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h1&gt;&lt;p&gt;compass目前已经不再维护，但有些东西仍值得学习。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Version: 1.0.1&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;开始使用Compass&quot;&gt;&lt;a href=&quot;#开始使用Compass&quot; class=&quot;headerlink&quot; title=&quot;开始使用Compass&quot;&gt;&lt;/a&gt;开始使用Compass&lt;/h2&gt;&lt;p&gt;Compass 是一款使用&lt;a href=&quot;http://sass-lang.com&quot;&gt;Sass语言&lt;/a&gt; 编写的开源的css设计框架，使用&lt;br&gt;起来强大和简单. 如果你对Sass不熟悉, 可以去&lt;a href=&quot;http://sass-lang.com&quot;&gt;sass-lang.com&lt;/a&gt;学习如何使用.&lt;/p&gt;
-&lt;h2 id=&quot;安装Compass&quot;&gt;&lt;a href=&quot;#安装Compass&quot; class=&quot;headerlink&quot; title=&quot;安装Compass&quot;&gt;&lt;/a&gt;安装Compass&lt;/h2&gt;&lt;p&gt;请按照&lt;a href=&quot;http://compass-style.org/install/&quot;&gt;Compass 安装指南&lt;/a&gt;按步骤安装Compass和Sass。&lt;/p&gt;
-&lt;p&gt;如果需要验证版本，可以运行以下命令:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ compass version&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="compass" scheme="http://sunhao.win/tags/compass/"/>
     
   </entry>
   

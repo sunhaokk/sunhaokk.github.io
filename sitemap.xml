@@ -2,9 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/2017/04/18/php-interfaces-and-traits/</loc>
+    
+    <lastmod>2017-04-18T09:36:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/03/02/data-structure-set/</loc>
+    
+    <lastmod>2017-04-17T02:34:20.667Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/04/14/linux-fifo/</loc>
+    
+    <lastmod>2017-04-14T08:19:55.343Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/04/14/linux-mknod/</loc>
+    
+    <lastmod>2017-04-14T06:09:51.248Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/04/14/html5-prefetch/</loc>
+    
+    <lastmod>2017-04-14T05:55:26.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/2017/04/11/linux-kill/</loc>
+    
+    <lastmod>2017-04-11T10:12:24.396Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/2017/04/01/linux-shell-dot/</loc>
     
-    <lastmod>2017-04-01T07:16:57.252Z</lastmod>
+    <lastmod>2017-04-01T07:27:41.099Z</lastmod>
     
   </url>
   
@@ -82,13 +124,6 @@
     <loc>http://sunhao.win/2017/03/02/python-list-tuple-dict-set/</loc>
     
     <lastmod>2017-03-02T02:53:45.875Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sunhao.win/2017/03/02/data-structure-set/</loc>
-    
-    <lastmod>2017-03-02T02:11:52.000Z</lastmod>
     
   </url>
   

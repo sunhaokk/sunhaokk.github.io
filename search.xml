@@ -3,9 +3,16 @@
   
     
     <entry>
+      <title><![CDATA[mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor]]></title>
+      <url>%2F2017%2F04%2F19%2Fmysql-mysql5-7-Err-1067-Invaliddefaultvaluefor%2F</url>
+      <content type="text"><![CDATA[升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode [mysqld]sql_mode =”ALLOW_INVALID_DATES” 设置完后，查询下，如果是ALLOW_INVALID_DATES说明改成功。否则检查下。123456mysql&gt; select @@sql_mode; +----------------------------------------------------------------+ | @@sql_mode | +----------------------------------------------------------------+ | STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION | +----------------------------------------------------------------+ 如果忘记密码可以添加skip-grant-tables忽略权限验证]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[php-php7-fpm默认监听的scok]]></title>
       <url>%2F2017%2F04%2F19%2Fphp-php7-listen%2F</url>
-      <content type="text"><![CDATA[php7-fpm默认监听的scok。和以前不一样 。以前是监听9000端口。 1234567891011121314151617server &#123; listen 80; server_name ityhc.com www.ityhc.com; root /var/www/html/ityhc; index index.html index.htm index.php; location ~ \.php?.*$ &#123; root /var/www/html/ityhc; fastcgi_index index.php; fastcgi_pass unix:/run/php/php7.0-fpm.sock; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; include fastcgi_params; &#125; &#125;]]></content>
+      <content type="text"><![CDATA[php7-fpm默认监听的sock。和以前不一样 。以前是监听9000端口。 1234567891011121314151617server &#123; listen 80; server_name ityhc.com www.ityhc.com; root /var/www/html/ityhc; index index.html index.htm index.php; location ~ \.php?.*$ &#123; root /var/www/html/ityhc; fastcgi_index index.php; fastcgi_pass unix:/run/php/php7.0-fpm.sock; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; include fastcgi_params; &#125; &#125;]]></content>
     </entry>
 
     

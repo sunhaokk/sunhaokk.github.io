@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://sunhao.win/2017/04/19/php-php7-listen/</loc>
+    <lastmod>2017-04-19T08:28:39.806Z</lastmod>
+    <data>
+        <display>
+        <title>php-php7-fpm默认监听的scok</title>
+        <pubTime>2017-04-19T08:26:29.000Z</pubTime>
+        
+        <tag>listen</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://sunhao.win/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/2017/04/18/php-interfaces-and-traits/</loc>
     <lastmod>2017-04-18T09:36:44.000Z</lastmod>
     <data>
@@ -70,9 +90,9 @@
         <title>linux-mknod</title>
         <pubTime>2017-04-14T05:56:26.000Z</pubTime>
         
-        <tag>mknod</tag>
-         
         <tag>linux</tag>
+         
+        <tag>mknod</tag>
          
          
            

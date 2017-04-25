@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-04-24T01:23:57.000Z</updated>
+  <updated>2017-04-25T01:03:40.787Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,11 +16,207 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>linux-crontab</title>
+    <link href="http://sunhao.win/2017/04/25/linux-crontab/"/>
+    <id>http://sunhao.win/2017/04/25/linux-crontab/</id>
+    <published>2017-04-25T00:47:48.000Z</published>
+    <updated>2017-04-25T01:03:40.787Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170425/084113058.png" alt="mark"><br>该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。</p>
+<a id="more"></a>
+<p>使用权限:</p>
+<p>root用户和crontab文件的所有者</p>
+<p>语法:</p>
+<p>crontab [-e [UserName]|-l [UserName]|-r [UserName]|-v [UserName]|File ]</p>
+<p>说明:</p>
+<p>crontab 是用来让使用者在固定时间或固定间隔执行程序之用，换句话说，也就是类似使用者的时程表。</p>
+<p>-u user 是指设定指定 user 的时程表，这个前提是你必须要有其权限(比如说是 root)才能够指定他人的时程表。如果不使用 -u user 的话，就是表示设定自己的时程表。</p>
+<p>参数:</p>
+<p>-e [UserName]: 执行文字编辑器来设定时程表，内定的文字编辑器是 VI，如果你想用别的文字编辑器，则请先设定 VISUAL 环境变数来指定使用那个文字编辑器(比如说 setenv VISUAL joe)</p>
+<p>-r [UserName]: 删除目前的时程表</p>
+<p>-l [UserName]: 列出目前的时程表</p>
+<p>-v [UserName]:列出用户cron作业的状态</p>
+<p>时程表的格式如下:</p>
+<p>f1 f2 f3 f4 f5 program</p>
+<p>其中 f1 是表示分钟，f2 表示小时，f3 表示一个月份中的第几日，f4 表示月份，f5 表示一个星期中的第几天。program 表示要执行的程式。</p>
+<p>当 f1 为 <em> 时表示每分钟都要执行 program，f2 为 </em> 时表示每小时都要执行程式，其余类推</p>
+<p>当 f1 为 a-b 时表示从第 a 分钟到第 b 分钟这段时间内要执行，f2 为 a-b 时表示从第 a 到第 b 小时都要执行，其余类推</p>
+<p>当 f1 为 <em>/n 时表示每 n 分钟个时间间隔执行一次，f2 为 </em>/n 表示每 n 小时个时间间隔执行一次，其余类推</p>
+<p>当 f1 为 a, b, c,… 时表示第 a, b, c,… 分钟要执行，f2 为 a, b, c,… 时表示第 a, b, c…个小时要执行，其余类推</p>
+<p>使用者也可以将所有的设定先存放在档案 file 中，用 crontab file 的方式来设定时程表。</p>
+<p>由于unix版本不一样，所以部分语法有差别，例如在hp unix aix 中设定间隔执行如果采用*/n 方式将出现语法错误，在这类unix中 ，间隔执行只能以列举方式。</p>
+<p>使用方法</p>
+<p>用VI编辑一个文件 cronfile，然后在这个文件中输入格式良好的时程表。编辑完成后，保存并退出。[2] </p>
+<p>在命令行输入</p>
+<p>$: crontab cronfile</p>
+<p>这样就将cronfile文件提交给c r o n进程，同时，新创建cronfile的一个副本已经被放在/ v a r / s p o o l / c r o n目录中，文件名就是用户名。</p>
+<p>例子:</p>
+<p>每月每天每小时的第 0 分钟执行一次 /bin/ls :</p>
+<p>0 <em> </em> <em> </em> /bin/ls</p>
+<p>在 12 月内, 每天的早上 6 点到 12 点中，每隔 20 分钟执行一次 /usr/bin/backup :</p>
+<p><em>/20 6-12 </em> 12 * /usr/bin/backup</p>
+<p>周一到周五每天下午 5:00 寄一封信给 alex_mail_name :</p>
+<p>0 17 <em> </em> 1-5 mail -s “hi” alex_mail_name &lt; /tmp/maildata</p>
+<p>每月每天的午夜 0 点 20 分, 2 点 20 分, 4 点 20 分….执行 echo “haha”</p>
+<p>20 0-23/2 <em> </em> * echo “haha”</p>
+<p>晚上11点到早上8点之间每两个小时，早上8点</p>
+<p>0 23-7/2，8 <em> </em> * date</p>
+<p>在hpunix,中，每20分钟执行一次，表示为：0,20,40 <em> </em> <em> </em> 而不能采用*/n方式，否则出现语法错误</p>
+<p>30 21 <em> </em> * /usr/local/apache/bin/apachectl restart<br>上面的例子表示每晚的21:30重启apache。</p>
+<p>45 4 1,10,22 <em> </em> /usr/local/apache/bin/apachectl restart<br>上面的例子表示每月1、10、22日的4 : 45重启apache。</p>
+<p>10 1 <em> </em> 6,0 /usr/local/apache/bin/apachectl restart<br>上面的例子表示每周六、周日的1 : 10重启apache。</p>
+<p>0,30 18-23 <em> </em> * /usr/local/apache/bin/apachectl restart<br>上面的例子表示在每天18 : 00至23 : 00之间每隔30分钟重启apache。</p>
+<p>0 23 <em> </em> 6 /usr/local/apache/bin/apachectl restart<br>上面的例子表示每星期六的11 : 00 pm重启apache。</p>
+<ul>
+<li><p><em>/1 </em> <em> </em> /usr/local/apache/bin/apachectl restart<br>每一小时重启apache</p>
+</li>
+<li><p>23-7/1 <em> </em> * /usr/local/apache/bin/apachectl restart<br>晚上11点到早上7点之间，每隔一小时重启apache</p>
+</li>
+</ul>
+<p>0 11 4 * mon-wed /usr/local/apache/bin/apachectl restart<br>每月的4号与每周一到周三的11点重启apache</p>
+<p>0 4 1 jan * /usr/local/apache/bin/apachectl restart<br>一月一号的4点重启apache</p>
+<p>注意:</p>
+<ol>
+<li><p>当程式在你所指定的时间执行后，系统会寄一封信给你，显示该程式执行的内容，若是你不希望收到这样的信，请在每一行空一格之后加上 &gt; /dev/null 2&gt;&amp;1 即可。</p>
+</li>
+<li><p>%在crontab中被认为是newline，要用\来escape才行。比如crontab执行行中，如果有”date +%Y%m%d”，必须替换为：”date +\%Y\%m\%d”<br>创建crontab</p>
+</li>
+</ol>
+<p>在考虑向cron进程提交一个crontab文件之前，首先要做的一件事情就是设置环境变量EDITOR。cron进程根据它来确定使用哪个编辑器编辑crontab文件。99 %的UNIX和LINUX用户都使用vi，如果你也是这样，那么你就编辑$HOME目录下的.profile文件，在其中加入这样一行：<br>EDITOR=vi; export EDITOR<br>然后保存并退出。</p>
+<p>不妨创建一个名为<user>cron的文件，其中<user>是用户名，为了提交你刚刚创建的crontab文件，可以把这个新创建的文件作为cron命令的参数：</user></user></p>
+<p>$ crontab davecron</p>
+<p>现在该文件已经提交给cron进程，同时，新创建文件的一个副本已经被放在/var/spool/cron目录中，文件名就是用户名（即，dave）。</p>
+<p>列出crontab文件</p>
+<p>为了列出crontab文件，可以用：</p>
+<p>$crontab -l</p>
+<p>编辑crontab文件</p>
+<p>如果希望添加、删除或编辑crontab文件中的条目，而EDITOR环境变量又设置为vi，那么就可以用vi来编辑crontab文件，相应的命令为：</p>
+<p>$ crontab -e</p>
+<p>可以像使用vi编辑其他任何文件那样修改crontab文件并退出。</p>
+<p>删除crontab文件</p>
+<p>为了删除crontab文件，可以用：</p>
+<p>$ crontab -r<br>注释crontab文件<br>如果不希望删除写好的crontab文件，在该crontab文件前添加#将该文件注释掉。<br>恢复丢失的crontab文件<br>如果不小心误删了crontab文件，假设你在自己的$HOME目录下还有一个备份，那么可以将其拷贝到/var/spool/cron/<username>，其中<username>是用户名。如果由于权限问题无法完成拷贝，可以用：</username></username></p>
+<p>$ crontab <filename></filename></p>
+<p>其中，<filename>是你在$HOME目录中副本的文件名。</filename></p>
+<p>crontab中的输出配置</p>
+<p>crontab中经常配置运行脚本输出为：&gt;/dev/null 2&gt;&amp;1，来避免crontab运行中有内容输出。</p>
+<p>shell命令的结果可以通过‘&gt; ’的形式来定义输出</p>
+<p>/dev/null 代表空设备文件</p>
+<blockquote>
+<p>代表重定向到哪里，例如：echo “123” &gt; /home/123.txt</p>
+</blockquote>
+<p>1 表示stdout标准输出，系统默认值是1，所以”&gt;/dev/null”等同于”1&gt;/dev/null”</p>
+<p>2 表示stderr标准错误</p>
+<p>&amp; 表示等同于的意思，2&gt;&amp;1，表示2的输出重定向等同于1</p>
+<p>那么重定向输出语句的含义：</p>
+<p>1&gt;/dev/null 首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，不显示任何信息。</p>
+<p>2&gt;&amp;1 表示标准错误输出重定向等同于标准输出，因为之前标准输出已经重定向到了空设备文件，所以标准错误输出也重定向到空设备文件。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170425/084113058.png&quot; alt=&quot;mark&quot;&gt;&lt;br&gt;该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://sunhao.win/tags/linux/"/>
+    
+      <category term="crontab" scheme="http://sunhao.win/tags/crontab/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux-iftop查看带宽-iptables</title>
+    <link href="http://sunhao.win/2017/04/24/linux-iftop-iptables/"/>
+    <id>http://sunhao.win/2017/04/24/linux-iftop-iptables/</id>
+    <published>2017-04-24T03:10:48.000Z</published>
+    <updated>2017-04-24T03:48:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>iftop用于网络监控 if本身的意思就是interface的缩写</p>
+<p>安装直接yum install iftop就可以</p>
+<p>输入iftop即可登录</p>
+<p>默认监控eth0</p>
+<p>设置参数iftop -i eth1      -i参数就是选择网卡。这里选择eth1</p>
+<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170424/113333395.png" alt="mark"></p>
+<p>然后使用iptables禁掉占用高的ip</p>
+<p>iptables  -A  OUTPUT  -d  <em>.</em>.*.157 -j  REJECT</p>
+<a id="more"></a>
+<h3 id="1、iftop界面相关说明"><a href="#1、iftop界面相关说明" class="headerlink" title="1、iftop界面相关说明"></a>1、iftop界面相关说明</h3><p>界面上面显示的是类似刻度尺的刻度范围，为显示流量图形的长条作标尺用的。</p>
+<p>中间的&lt;= =&gt;这两个左右箭头，表示的是流量的方向。</p>
+<p>  TX：发送流量</p>
+<p>  RX：接收流量</p>
+<p>  TOTAL：总流量</p>
+<p>  Cumm：运行iftop到目前时间的总流量</p>
+<p>  peak：流量峰值</p>
+<p>  rates：分别表示过去 2s 10s 40s 的平均流量</p>
+<h3 id="2、iftop相关参数"><a href="#2、iftop相关参数" class="headerlink" title="2、iftop相关参数"></a>2、iftop相关参数</h3><p>常用的参数</p>
+<p>  -i设定监测的网卡，如：# iftop -i eth1</p>
+<p>  -B 以bytes为单位显示流量(默认是bits)，如：# iftop -B</p>
+<p>  -n使host信息默认直接都显示IP，如：# iftop -n</p>
+<p>  -N使端口信息默认直接都显示端口号，如: # iftop -N</p>
+<p>  -F显示特定网段的进出流量，如# iftop -F 10.10.1.0/24或# iftop -F 10.10.1.0/255.255.255.0<br>  -h（display this message），帮助，显示参数信息</p>
+<p>  -p使用这个参数后，中间的列表显示的本地主机信息，出现了本机以外的IP信息;</p>
+<p>  -b使流量图形条默认就显示;</p>
+<p>  -f这个暂时还不太会用，过滤计算包用的;</p>
+<p>  -P使host信息及端口信息默认就都显示;</p>
+<p>  -m设置界面最上边的刻度的最大值，刻度分五个大段显示，例：# iftop -m 100M</p>
+<p>进入iftop画面后的一些操作命令(注意大小写)</p>
+<p>  按h切换是否显示帮助;</p>
+<p>  按n切换显示本机的IP或主机名;</p>
+<p>  按s切换是否显示本机的host信息;</p>
+<p>  按d切换是否显示远端目标主机的host信息;</p>
+<p>  按t切换显示格式为2行/1行/只显示发送流量/只显示接收流量;</p>
+<p>  按N切换显示端口号或端口服务名称;</p>
+<p>  按S切换是否显示本机的端口信息;</p>
+<p>  按D切换是否显示远端目标主机的端口信息;</p>
+<p>  按p切换是否显示端口信息;</p>
+<p>  按P切换暂停/继续显示;</p>
+<p>  按b切换是否显示平均流量图形条;</p>
+<p>  按B切换计算2秒或10秒或40秒内的平均流量;</p>
+<p>  按T切换是否显示每个连接的总流量;</p>
+<p>  按l打开屏幕过滤功能，输入要过滤的字符，比如ip,按回车后，屏幕就只显示这个IP相关的流量信息;</p>
+<p>  按L切换显示画面上边的刻度;刻度不同，流量图形条会有变化;</p>
+<p>  按j或按k可以向上或向下滚动屏幕显示的连接记录;</p>
+<p>  按1或2或3可以根据右侧显示的三列流量数据进行排序;</p>
+<p>  按&lt;根据左边的本机名或IP排序;</p>
+<p>  按&gt;根据远端目标主机的主机名或IP排序;</p>
+<p>  按o切换是否固定只显示当前的连接;</p>
+<p>  按f可以编辑过滤代码，这是翻译过来的说法，我还没用过这个！</p>
+<p>  按!可以使用shell命令，</p>
+<p>  按q退出监控。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;iftop用于网络监控 if本身的意思就是interface的缩写&lt;/p&gt;
+&lt;p&gt;安装直接yum install iftop就可以&lt;/p&gt;
+&lt;p&gt;输入iftop即可登录&lt;/p&gt;
+&lt;p&gt;默认监控eth0&lt;/p&gt;
+&lt;p&gt;设置参数iftop -i eth1      -i参数就是选择网卡。这里选择eth1&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170424/113333395.png&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;p&gt;然后使用iptables禁掉占用高的ip&lt;/p&gt;
+&lt;p&gt;iptables  -A  OUTPUT  -d  &lt;em&gt;.&lt;/em&gt;.*.157 -j  REJECT&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="iftop" scheme="http://sunhao.win/tags/iftop/"/>
+    
+      <category term="iptables" scheme="http://sunhao.win/tags/iptables/"/>
+    
+  </entry>
+  
+  <entry>
     <title>架构师之路</title>
     <link href="http://sunhao.win/2017/04/24/soft-architect/"/>
     <id>http://sunhao.win/2017/04/24/soft-architect/</id>
     <published>2017-04-24T00:47:00.000Z</published>
-    <updated>2017-04-24T01:23:57.000Z</updated>
+    <updated>2017-04-24T07:24:20.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="架构师之路-1-—面向过程和面向对象"><a href="#架构师之路-1-—面向过程和面向对象" class="headerlink" title="架构师之路(1)—面向过程和面向对象"></a>架构师之路(1)—面向过程和面向对象</h2><p>自学收集，如需观看，请访问原文。<br><a href="http://blog.csdn.net/phphot/article/details/4050193" target="_blank" rel="external">http://blog.csdn.net/phphot/article/details/4050193</a></p>
 <h3 id="1、引言"><a href="#1、引言" class="headerlink" title="1、引言"></a>1、引言</h3><p>机算机科学是一门应用科学，它的知识体系是典型的倒三角结构，所用的基础知识并不多，只 是随着应用领域和方向的不同，产生了很多的分支，所以说编程并不是一件很困难的事情，一个高中生经过特定的训练就可以做得到。但是，会编程和编好程绝对是 两码事，同样的程序员，有的人几年之后成为了架构师，有的人却还在不停地coding，只不过ctrl-c、ctrl-v用得更加纯熟了。在中国，编程人 员最终的归途无外乎两条：一是转向技术管理，它的终点是CTO；二是继续深入，它的终点是首席架构师，成为CEO的人毕竟是少数。如果你现在还是个普通的 程序员，希望继续在技术这条路上前进的话，我想你还是应该先补充一点软件工程的思想，学习一点有关设计模式的知识，只有具备这些能力，你才能从整体和宏观 层面来考虑问题、分析问题和解决问题。本人Coding了很多年，中间走了不少弯路，虽然最终没什么大成就，但总算有一些心得，很愿意把自己的一些经验拿 出来跟大家分享，这或许对你的发展有所帮助。</p>
@@ -140,7 +336,8 @@
 <p> 由于正方形的度和宽度必须相等，所以在方法setLength和setWidth中，对长度和宽度赋值相同。类TestRectangle是我们的软件系统中的一个组件，它有一个resize方法要用到基类Rectangle，resize方法的功能是模拟长方形宽度逐步增长的效果:<br>  测试类TestRectangle：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRectangle</span> </span>&#123;</div><div class="line">  <span class="keyword">public</span> void resize(Rectangle objRect) &#123;</div><div class="line"> <span class="keyword">while</span>(objRect.getWidth() &lt;= objRect.getLength()  ) &#123;</div><div class="line">  objRect.setWidth(  objRect.getWidth () + <span class="number">1</span> );</div><div class="line"> &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 我们运行一下这段代码就会发现，假如我们把一个普通长方形作为参数传入resize方法，就会看到长方形宽度逐渐增长的效果，当宽度大于长度,代码就会停止，这种行为的结果符合我们的预期；假如我们再把一个正方形作为参数传入resize方法后，就会看到正方形的宽度和长度都在不断增长，代码会一直运行下去，直至系统产生溢出错误。所以，普通的长方形是适合这段代码的，正方形不适合。<br> 我们得出结论：在resize方法中，Rectangle类型的参数是不能被Square类型的参数所代替，如果进行了替换就得不到预期结果。因此，Square类和Rectangle类之间的继承关系违反了里氏代换原则，它们之间的继承关系不成立，正方形不是长方形。</p>
-<p>####　4.3 第二个例子：鸵鸟不是鸟<br> “鸵鸟非鸟”也是一个理解里氏代换原则的经典的例子。“鸵鸟非鸟”的另一个版本是“企鹅非鸟”，这两种说法本质上没有区别，前提条件都是这种鸟不会飞。生物学中对于鸟类的定义：“恒温动物，卵生，全身披有羽毛，身体呈流线形，有角质的喙，眼在头的两侧。前肢退化成翼，后肢有鳞状外皮，有四趾”。所以，从生物学角度来看，鸵鸟肯定是一种鸟。<br>我们设计一个与鸟有关的系统，鸵鸟类顺理成章地由鸟类派生，鸟类所有的特性和行为都被鸵鸟类继承。大多数的鸟类在人们的印象中都是会飞的，所以，我们给鸟类设计了一个名字为fly的方法，还给出了与飞行相关的一些属性,比如飞行速度（velocity）。<br>  鸟类Bird:</p>
+<p>####　4.3 第二个例子：鸵鸟不是鸟</p>
+<p> “鸵鸟非鸟”也是一个理解里氏代换原则的经典的例子。“鸵鸟非鸟”的另一个版本是“企鹅非鸟”，这两种说法本质上没有区别，前提条件都是这种鸟不会飞。生物学中对于鸟类的定义：“恒温动物，卵生，全身披有羽毛，身体呈流线形，有角质的喙，眼在头的两侧。前肢退化成翼，后肢有鳞状外皮，有四趾”。所以，从生物学角度来看，鸵鸟肯定是一种鸟。<br>我们设计一个与鸟有关的系统，鸵鸟类顺理成章地由鸟类派生，鸟类所有的特性和行为都被鸵鸟类继承。大多数的鸟类在人们的印象中都是会飞的，所以，我们给鸟类设计了一个名字为fly的方法，还给出了与飞行相关的一些属性,比如飞行速度（velocity）。<br>  鸟类Bird:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span> </span>&#123;</div><div class="line">double velocity;</div><div class="line"><span class="keyword">public</span> fly() &#123; <span class="comment">//I am flying; &#125;;</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> setVelocity(double velocity) &#123; this.velocity = velocity; &#125;;</div><div class="line"><span class="keyword">public</span> getVelocity() &#123; <span class="keyword">return</span> this.velocity; &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 鸵鸟不会飞怎么办？我们就让它扇扇翅膀表示一下吧，在fly方法里什么都不做。至于它的飞行速度，不会飞就只能设定为0了，于是我们就有了鸵鸟类的设计。<br>鸵鸟类Ostrich:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ostrich</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</div><div class="line"> <span class="keyword">public</span> fly() &#123; <span class="comment">//I do nothing; &#125;;</span></div><div class="line"> <span class="keyword">public</span> setVelocity(double velocity) &#123; this.velocity = <span class="number">0</span>; &#125;;</div><div class="line"><span class="keyword">public</span> getVelocity() &#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -197,6 +394,18 @@
 <p> 我们再把依赖注入应用到软件工程中：<br> Class A依赖于Class B,当Class A需要用到Class B的时候，IoC容器就会立刻创建一个Class B送给Class A使用。IoC容器就是一个类制造工厂，你需要什么，直接来拿，直接用就可以了，而不需要去关心你所用的东西是如何制成的，也不用关心最后是怎么被销毁 的，这一切全由IoC容器包办。</p>
 <h3 id="4-实现IoC容器"><a href="#4-实现IoC容器" class="headerlink" title="4 实现IoC容器"></a>4 实现IoC容器</h3><hr>
 <p>后记：之所以突然跳跃到39，是因为有的同学基础比较好，已经没有必要阅读有关面向对象、设 计模式以及软件工程的基本理论，那么可以从这里开始阅读。基础需要继续补全的同学，可以从4继续看，我会定期在两个方向进行更新。框架理论，是架构师知识 体系中非常重要的部分，我会逐步结合实例，把常见的一些框架方面的知识与大家共享。</p>
+<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">//例子1</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span></span>&#123;</div><div class="line"></div><div class="line">    protect <span class="function"><span class="keyword">function</span> <span class="title">fly</span><span class="params">()</span></span>&#123;</div><div class="line">    </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//翠鸟</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">KingFisher</span> <span class="keyword">extends</span> <span class="title">Bird</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//鸵鸟</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ostrich</span> <span class="keyword">extends</span> <span class="title">Bird</span></span>&#123;</div><div class="line">    <span class="comment">//鸵鸟不会飞啊</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//例子2</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</div><div class="line">    protect <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">($a, $b)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> $a + $b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//重载</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">($a, $b)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> $a + $b + <span class="number">100</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>里氏替换原则是对类继承的一种约束。对里氏替换原则有两种理解：</p>
+<p>不能随便去继承不合适的，有多余方法或者属性的类。（例子1）</p>
+<p>子类可以扩展父类的功能，但不能改变父类原有的功能。（例子2）</p>
+<p>看了第二个例子，有人会说那岂不是和重载矛盾了。初看是有点，但仔细理解，并不矛盾，我们可以这样处理矛盾：</p>
+<p>//例子2</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</div><div class="line">    protect <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">($a, $b)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> $a + $b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//重载</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">($a, $b, $c)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">isset</span>($c) ? $a + $b + <span class="number">100</span> : $a + $b;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>里氏替换原则包含一下几个隐藏含义：</p>
+<p>子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</p>
+<p>子类中可以增加自己特有的方法。</p>
+<p>当子类的方法重载父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松。</p>
+<p>当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。</p>
 ]]></content>
     
     <summary type="html">
@@ -953,128 +1162,6 @@ FILENAME cannot be read.
     
     
       <category term="学习" scheme="http://sunhao.win/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git文件状态</title>
-    <link href="http://sunhao.win/2017/03/06/git-filestatus/"/>
-    <id>http://sunhao.win/2017/03/06/git-filestatus/</id>
-    <published>2017-03-06T00:54:46.000Z</published>
-    <updated>2017-03-10T07:57:16.672Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170306/085148199.png" alt="mark"><br>灰色箭头不参与git快照。</p>
-<ol>
-<li>默认git有4种状态</li>
-<li>untracked  未跟踪 </li>
-<li>unmodified 未修改</li>
-<li>modified 修改</li>
-<li>staged  暂存区</li>
-</ol>
-<h3 id="其中我们工作区中只有-未修改-和修改。"><a href="#其中我们工作区中只有-未修改-和修改。" class="headerlink" title="其中我们工作区中只有  未修改 和修改。"></a>其中我们工作区中只有  未修改 和修改。</h3><h3 id="初始化，和commit后-所有为跟踪的文件都是-未修改的。"><a href="#初始化，和commit后-所有为跟踪的文件都是-未修改的。" class="headerlink" title="初始化，和commit后  所有为跟踪的文件都是 未修改的。"></a>初始化，和commit后  所有为跟踪的文件都是 未修改的。</h3><p>运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：<br><a id="more"></a><br>git diff –cached 查看已经暂存起来的变化：<br>git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交</p>
-<p>如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 “Changes not staged for commit” 部分（也就是未暂存清单）看到：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ rm grit.gemspec</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">        deleted:    grit.gemspec</div></pre></td></tr></table></figure>
-<p>no changes added to commit (use “git add” and/or “git commit -a”)<br>然后再运行 git rm 记录此次移除文件的操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ git rm grit.gemspec</div><div class="line">rm &apos;grit.gemspec&apos;</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes to be committed:</div><div class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</div><div class="line"></div><div class="line">        deleted:    grit.gemspec</div></pre></td></tr></table></figure>
-<p>另外一种情况是，我们想把文件从 Git 仓库中删除（亦即从暂存区域移除），但仍然希望保留在当前工作目录中。换句话说，仅是从跟踪清单中删除。比如一些大型日志文件或者一堆 .a 编译文件，不小心纳入仓库后，要移除跟踪但不删除文件，以便稍后在 .gitignore 文件中补上，用 –cached 选项即可：</p>
-<pre><code>$ git rm --cached readme.txt
-</code></pre><p>后面可以列出文件或者目录的名字，也可以使用 glob 模式。比方说：</p>
-<pre><code>$ git rm log/\*.log
-</code></pre><p>注意到星号 * 之前的反斜杠 \，因为 Git 有它自己的文件模式扩展匹配方式，所以我们不用 shell 来帮忙展开（译注：实际上不加反斜杠也可以运行，只不过按照 shell 扩展的话，仅仅删除指定目录下的文件而不会递归匹配。上面的例子本来就指定了目录，所以效果等同，但下面的例子就会用递归方式匹配，所以必须加反斜杠。）。此命令删除所有 log/ 目录下扩展名为 .log 的文件。类似的比如：</p>
-<pre><code>$ git rm \*~
-</code></pre><p>会递归删除当前目录及其子目录中所有 ~ 结尾的文件。</p>
-<p>图形化显示分支<br>  git log –pretty=format:”%h %s” –graph</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">选项	说明</div><div class="line">-p	按补丁格式显示每个更新之间的差异。</div><div class="line">--word-diff	按 word diff 格式显示差异。</div><div class="line">--stat	显示每次更新的文件修改统计信息。</div><div class="line">--shortstat	只显示 --stat 中最后的行数修改添加移除统计。</div><div class="line">--name-only	仅在提交信息后显示已修改的文件清单。</div><div class="line">--name-status	显示新增、修改、删除的文件清单。</div><div class="line">--abbrev-commit	仅显示 SHA-1 的前几个字符，而非所有的 40 个字符。</div><div class="line">--relative-date	使用较短的相对时间显示（比如，“2 weeks ago”）。</div><div class="line">--graph	显示 ASCII 图形表示的分支合并历史。</div><div class="line">--pretty	使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。</div><div class="line">--oneline	`--pretty=oneline --abbrev-commit` 的简化用法。</div></pre></td></tr></table></figure>
-<p>提交时忘了暂存某些修改，可以先补上暂存操作，然后再运行 –amend 提交：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git commit -m &apos;initial commit&apos;</div><div class="line">$ git add forgotten_file</div><div class="line">$ git commit --amend</div></pre></td></tr></table></figure></p>
-<p>取消对文件的修改<br>$ git checkout – benchmarks.rb</p>
-<p>添加远程仓库<br>git remote add [shortname] [url]</p>
-<p>从远程仓库抓取数据<br>$ git fetch [remote-name]</p>
-<p>默认情况下 git clone 命令本质上就是自动创建了本地的 master 分支用于跟踪远程仓库中的 master 分支（假设远程仓库确实有 master 分支）。所以一般我们运行 git pull，目的都是要从原始克隆的远端仓库中抓取数据后，合并到工作目录中的当前分支。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170306/085148199.png&quot; alt=&quot;mark&quot;&gt;&lt;br&gt;灰色箭头不参与git快照。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;默认git有4种状态&lt;/li&gt;
-&lt;li&gt;untracked  未跟踪 &lt;/li&gt;
-&lt;li&gt;unmodified 未修改&lt;/li&gt;
-&lt;li&gt;modified 修改&lt;/li&gt;
-&lt;li&gt;staged  暂存区&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;其中我们工作区中只有-未修改-和修改。&quot;&gt;&lt;a href=&quot;#其中我们工作区中只有-未修改-和修改。&quot; class=&quot;headerlink&quot; title=&quot;其中我们工作区中只有  未修改 和修改。&quot;&gt;&lt;/a&gt;其中我们工作区中只有  未修改 和修改。&lt;/h3&gt;&lt;h3 id=&quot;初始化，和commit后-所有为跟踪的文件都是-未修改的。&quot;&gt;&lt;a href=&quot;#初始化，和commit后-所有为跟踪的文件都是-未修改的。&quot; class=&quot;headerlink&quot; title=&quot;初始化，和commit后  所有为跟踪的文件都是 未修改的。&quot;&gt;&lt;/a&gt;初始化，和commit后  所有为跟踪的文件都是 未修改的。&lt;/h3&gt;&lt;p&gt;运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来：&lt;br&gt;
-    
-    </summary>
-    
-      <category term="git" scheme="http://sunhao.win/categories/git/"/>
-    
-    
-      <category term="git" scheme="http://sunhao.win/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>window命令mklink 创建符号链接 硬链接 目录联结</title>
-    <link href="http://sunhao.win/2017/03/05/window-mklink/"/>
-    <id>http://sunhao.win/2017/03/05/window-mklink/</id>
-    <published>2017-03-05T03:15:53.000Z</published>
-    <updated>2017-03-05T05:15:41.894Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近研究mklink 发现国内很多文档认识有错误  或者不充分，在此补充下。</p>
-<ol>
-<li>符号链接 用的比较多  也就是我们的快捷方式</li>
-<li>硬链接  用的很少  可以防止误删，省空间等、</li>
-<li>目录联结   一般用于共享目录<h3 id="链接的本质是创建一个指向原文件的路径"><a href="#链接的本质是创建一个指向原文件的路径" class="headerlink" title="链接的本质是创建一个指向原文件的路径"></a>链接的本质是创建一个指向原文件的路径</h3></li>
-</ol>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170305/130909564.png" alt="mark"><br>我们的文件其实是存在磁盘空间中， 文件名指向磁盘空间，最后访问文件名  访问到它所指向的空间。</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170305/112747867.png" alt="mark"></p>
-<ol>
-<li><p>符号链接<br>mklink /d</p>
-<p>和快捷方式几乎。但与其不同的是快捷方式是.link后缀的文件。</p>
-<p>删除原文件，这种链接就无效了</p>
-<a id="more"></a></li>
-<li><p>硬链接(hard link)<br>mklink /h</p>
-<p>指向到原文件空间中所在地址。只能用于文件，<br>其实就是又新建了个文件名，指向共同的磁盘空间。所以删除其中一个文件名，不影响另一个。</p>
-<p>与copy不同的是，copy实际是创建了两个不同的磁盘空间。</p>
-</li>
-</ol>
-<ol>
-<li><p>目录联接(junction)<br>mklink /j<br>所谓联结就是相当于一个中间件。<br>充当中介</p>
-<p>只能用于目录。而且它用的相对路径，所以复制到别的文件夹是无效的。</p>
-<p>这个用来做目录共享。</p>
-<p>比如说 我想让b电脑访问  a电脑的目录aa<br>但是我就想让他访问一会。所以我可以创建个目录联结。然后共享这个目录。  等b访问完，直接就可以删掉这个目录。</p>
-</li>
-</ol>
-<p>总的来说链接的本质是为了管理方便，充分利用磁盘空间，避免冗余。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近研究mklink 发现国内很多文档认识有错误  或者不充分，在此补充下。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;符号链接 用的比较多  也就是我们的快捷方式&lt;/li&gt;
-&lt;li&gt;硬链接  用的很少  可以防止误删，省空间等、&lt;/li&gt;
-&lt;li&gt;目录联结   一般用于共享目录&lt;h3 id=&quot;链接的本质是创建一个指向原文件的路径&quot;&gt;&lt;a href=&quot;#链接的本质是创建一个指向原文件的路径&quot; class=&quot;headerlink&quot; title=&quot;链接的本质是创建一个指向原文件的路径&quot;&gt;&lt;/a&gt;链接的本质是创建一个指向原文件的路径&lt;/h3&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170305/130909564.png&quot; alt=&quot;mark&quot;&gt;&lt;br&gt;我们的文件其实是存在磁盘空间中， 文件名指向磁盘空间，最后访问文件名  访问到它所指向的空间。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170305/112747867.png&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;符号链接&lt;br&gt;mklink /d&lt;/p&gt;
-&lt;p&gt;和快捷方式几乎。但与其不同的是快捷方式是.link后缀的文件。&lt;/p&gt;
-&lt;p&gt;删除原文件，这种链接就无效了&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="window" scheme="http://sunhao.win/categories/window/"/>
-    
-    
-      <category term="符号链接" scheme="http://sunhao.win/tags/%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5/"/>
-    
-      <category term="硬链接" scheme="http://sunhao.win/tags/%E7%A1%AC%E9%93%BE%E6%8E%A5/"/>
-    
-      <category term="目录联结" scheme="http://sunhao.win/tags/%E7%9B%AE%E5%BD%95%E8%81%94%E7%BB%93/"/>
-    
-      <category term="junction" scheme="http://sunhao.win/tags/junction/"/>
     
   </entry>
   

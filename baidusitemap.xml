@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://sunhao.win/2017/04/27/php-proxy/</loc>
+    <lastmod>2017-04-28T06:40:20.811Z</lastmod>
+    <data>
+        <display>
+        <title>反向代理 和 正向代理区别</title>
+        <pubTime>2017-04-27T09:00:38.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>proxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://sunhao.win/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/04/26/soft-unicode-utf8/</loc>
+    <lastmod>2017-04-26T08:56:59.104Z</lastmod>
+    <data>
+        <display>
+        <title>Unicode 和 UTF-8 有何区别？</title>
+        <pubTime>2017-04-26T08:53:56.000Z</pubTime>
+        
+        <tag>utf8</tag>
+         
+        <tag>unicode</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件" url="http://sunhao.win/categories/%E8%BD%AF%E4%BB%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/2017/04/25/linux-crontab/</loc>
     <lastmod>2017-04-25T01:03:40.787Z</lastmod>
     <data>

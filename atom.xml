@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-04-25T01:03:40.787Z</updated>
+  <updated>2017-04-28T06:40:20.811Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -14,6 +14,67 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>反向代理 和 正向代理区别</title>
+    <link href="http://sunhao.win/2017/04/27/php-proxy/"/>
+    <id>http://sunhao.win/2017/04/27/php-proxy/</id>
+    <published>2017-04-27T09:00:38.000Z</published>
+    <updated>2017-04-28T06:40:20.811Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个是代理客户端，为客户端收发请求，使真实客户端对服务器不可见。<br>一个是代理服务器，为服务器收发请求，使真实服务器对客户端不可见。<br>简单点说<br>代理的目的本身都是为了隐藏自己真实的地址。</p>
+<p>正向代理,是客户端用的,因为符合正常的网络请求，所以叫正向代理。<br>而反向代理，是服务器用的，所以叫反向代理。</p>
+<a id="more"></a>
+<p>A同学在大众创业、万众创新的大时代背景下开启他的创业之路，目前他遇到的最大的一个问题就是启动资金，于是他决定去找马云爸爸借钱，可想而知，最后碰一鼻子灰回来了，情急之下，他想到一个办法，找关系开后门，经过一番消息打探，原来A同学的大学老师王老师是马云的同学，于是A同学找到王老师，托王老师帮忙去马云那借500万过来，当然最后事成了。不过马云并不知道这钱是A同学借的，马云是借给王老师的，最后由王老师转交给A同学。这里的王老师在这个过程中扮演了一个非常关键的角色，就是代理，也可以说是正向代理，王老师代替A同学办这件事，这个过程中，真正借钱的人是谁，马云是不知道的，这点非常关键。   我们常说的代理也就是只正向代理，正向代理的过程，它隐藏了真实的请求客户端，服务端不知道真实的客户端是谁，客户端请求的服务都被代理服务器代替来请求，某些科学上网工具扮演的就是典型的正向代理角色。用浏览器访问 <a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a> 时，被残忍的block，于是你可以在国外搭建一台代理服务器，让代理帮我去请求google.com，代理把请求返回的相应结构再返回给我。</p>
+<p>client &lt;==&gt; proxy &lt;==&gt;server</p>
+<p>这里client知道server地址,但server不知道client地址  只是用proxy做了个请求.</p>
+<p>大家都有过这样的经历，拨打10086客服电话，可能一个地区的10086客服有几个或者几十个，你永远都不需要关心在电话那头的是哪一个，叫什么，男的，还是女的，漂亮的还是帅气的，你都不关心，你关心的是你的问题能不能得到专业的解答，你只需要拨通了10086的总机号码，电话那头总会有人会回答你，只是有时慢有时快而已。那么这里的10086总机号码就是我们说的反向代理。客户不知道真正提供服务人的是谁。   反向代理隐藏了真实的服务端，当我们请求 www.baidu.com 的时候，就像拨打10086一样，背后可能有成千上万台服务器为我们服务，但具体是哪一台，你不知道，也不需要知道，你只需要知道反向代理服务器是谁就好了，www.baidu.com 就是我们的反向代理服务器，反向代理服务器会帮我们把请求转发到真实的服务器那里去。Nginx就是性能非常好的反向代理服务器，用来做负载均衡。</p>
+<p>client &lt;==&gt; proxy &lt;==&gt; serverA or serverB</p>
+<p>这里客户端只知道proxy   具体哪个服务器内容,是proxy分配的</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个是代理客户端，为客户端收发请求，使真实客户端对服务器不可见。&lt;br&gt;一个是代理服务器，为服务器收发请求，使真实服务器对客户端不可见。&lt;br&gt;简单点说&lt;br&gt;代理的目的本身都是为了隐藏自己真实的地址。&lt;/p&gt;
+&lt;p&gt;正向代理,是客户端用的,因为符合正常的网络请求，所以叫正向代理。&lt;br&gt;而反向代理，是服务器用的，所以叫反向代理。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="php" scheme="http://sunhao.win/categories/php/"/>
+    
+    
+      <category term="php" scheme="http://sunhao.win/tags/php/"/>
+    
+      <category term="proxy" scheme="http://sunhao.win/tags/proxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Unicode 和 UTF-8 有何区别？</title>
+    <link href="http://sunhao.win/2017/04/26/soft-unicode-utf8/"/>
+    <id>http://sunhao.win/2017/04/26/soft-unicode-utf8/</id>
+    <published>2017-04-26T08:53:56.000Z</published>
+    <updated>2017-04-26T08:56:59.104Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久很久以前，有一群人，他们决定用8个可以开合的晶体管来组合成不同的状态，以表示世界上的万物。他们看到8个开关状态是好的，于是他们把这称为”字节“。再后来，他们又做了一些可以处理这些字节的机器，机器开动了，可以用字节来组合出很多状态，状态开始变来变去。他们看到这样是好的，于是它们就这机器称为”计算机“。开始计算机只在美国用。八位的字节一共可以组合出256(2的8次方)种不同的状态。<br><a id="more"></a></p>
+<p>他们把其中的编号从0开始的32种状态分别规定了特殊的用途，一但终端、打印机遇上约定好的这些字节被传过来时，就要做一些约定的动作。遇上0×10,<br>终端就换行，遇上0×07, 终端就向人们嘟嘟叫，例好遇上0x1b,<br>打印机就打印反白的字，或者终端就用彩色显示字母。他们看到这样很好，于是就把这些0×20以下的字节状态称为”控制码”。他们又把所有的空<br>格、标点符号、数字、大小写字母分别用连续的字节状态表示，一直编到了第127号，这样计算机就可以用不同字节来存储英语的文字了。大家看到这样，都感觉<br> 很好，于是大家都把这个方案叫做 ANSI 的”Ascii”编码（American Standard Code for Information Interchange，美国信息互换标准代码）。当时世界上所有的计算机都用同样的ASCII方案来保存英文文字。后来，就像建造巴比伦塔一样，世界各地的都开始使用计算机，但是很多国家用的不是英文，他们的字母里有许多是ASCII里没有的，为了可以在计算机<br>保存他们的文字，他们决定采用<br>127号之后的空位来表示这些新的字母、符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，一直把序号编到了最后一个状态255。从128<br> 到255这一页的字符集被称”扩展字符集“。从此之后，贪婪的人类再没有新的状态可以用了，美帝国主义可能没有想到还有第三世界国家的人们也希望可以用到计算机吧！等中国人们得到计算机时，已经没有可以利用的字节状态来表示汉字，况且有6000多个常用汉字需要保存呢。但是这难不倒智慧的中国人民，我们不客气<br>地把那些127号之后的奇异符号们直接取消掉,<br>规定：一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字，前面的一个字节（他称之为高字节）从0xA1用到<br>0xF7，后面一个字节（低字节）从0xA1到0xFE，这样我们就可以组合出大约7000多个简体汉字了。在这些编码里，我们还把数学符号、罗马希腊的<br>字母、日文的假名们都编进去了，连在 ASCII<br>里本来就有的数字、标点、字母都统统重新编了两个字节长的编码，这就是常说的”全角”字符，而原来在127号以下的那些就叫”半角”字符了。<br>中国人民看到这样很不错，于是就把这种汉字方案叫做 “GB2312“。GB2312 是对 ASCII 的中文扩展。但是中国的汉字太多了，我们很快就就发现有许多人的人名没有办法在这里打出来，特别是某些很会麻烦别人的国家领导人。于是我们不得不继续把<br>GB2312 没有用到的码位找出来老实不客气地用上。<br>后来还是不够用，于是干脆不再要求低字节一定是127号之后的内码，只要第一个字节是大于127就固定表示这是一个汉字的开始，不管后面跟的是不是扩展字<br>符集里的内容。结果扩展之后的编码方案被称为 GBK 标准，GBK包括了GB2312 的所有内容，同时又增加了近20000个新的汉字（包括繁体字）和符号。 后来少数民族也要用电脑了，于是我们再扩展，又加了几千个新的少数民族的字，GBK扩成了 GB18030。从此之后，中华民族的文化就可以在计算机时代中传承了。 中国的程序员们看到这一系列汉字编码的标准是好的，于是通称他们叫做 “DBCS“（Double<br> Byte Charecter Set<br>双字节字符集）。在DBCS系列标准里，最大的特点是两字节长的汉字字符和一字节长的英文字符并存于同一套编码方案里，因此他们写的程序为了支持中文处<br>理，必须要注意字串里的每一个字节的值，如果这个值是大于127的，那么就认为一个双字节字符集里的字符出现了。那时候凡是受过加持，会编程的计算机僧侣<br> 们都要每天念下面这个咒语数百遍： “一个汉字算两个英文字符！一个汉字算两个英文字符……”因为当时各个国家都像中国这样搞出一套自己的编码标准，结果互相之间谁也不懂谁的编码，谁也不支持别人的编码，连大陆和台湾这样只相隔了150海<br>里，使用着同一种语言的兄弟地区，也分别采用了不同的 DBCS<br>编码方案——当时的中国人想让电脑显示汉字，就必须装上一个”汉字系统”，专门用来处理汉字的显示、输入的问题，但是那个台湾的愚昧封建人士写的算命程序<br>就必须加装另一套支持 BIG5<br>编码的什么”倚天汉字系统”才可以用，装错了字符系统，显示就会乱了套！这怎么办？而且世界民族之林中还有那些一时用不上电脑的穷苦人民，他们的文字又怎<br>么办？ 真是计算机的巴比伦塔命题啊！正在这时，大天使加百列及时出现了——一个叫 ISO<br>（国际标谁化组织）的国际组织决定着手解决这个问题。他们采用的方法很简单：废了所有的地区性编码方案，重新搞一个包括了地球上所有文化、所有字母和符号<br> 的编码！他们打算叫它”Universal Multiple-Octet Coded Character Set”，简称 UCS, 俗称 “unicode“。<br>unicode开始制订时，计算机的存储器容量极大地发展了，空间再也不成为问题了。于是 ISO<br>就直接规定必须用两个字节，也就是16位来统一表示所有的字符，对于ASCII里的那些“半角”字符，unicode包持其原编码不变，只是将其长度由原<br>来的8位扩展为16位，而其他文化和语言的字符则全部重新统一编码。由于”半角”英文符号只需要用到低8位，所以其高8位永远是0，因此这种大气的方案在<br>保存英文文本时会多浪费一倍的空间。这时候，从旧社会里走过来的程序员开始发现一个奇怪的现象：他们的strlen函数靠不住了，一个汉字不再是相当于两个字符了，而是一个！是的，从unicode开始，无论是半角的英文字母，还是全角的汉字，它们都是统一的”一个字符“！同时，也都是统一的”两个字节“，请注意”字符”和”字节”两个术语的不同，“字节”是一个8位的物理存贮单元，而“字符”则是一个文化相关的符号。在unicode中，一个字符就是两个字节。一个汉字算两个英文字符的时代已经快过去了。unicode同样也不完美，这里就有两个的问题，一个是，如何才能区别unicode和ascii？计算机怎么知道三个字节表示一个符号，而不是<br>分别表示三个符号呢？第二个问题是，我们已经知道，英文字母只用一个字节表示就够了，如果unicode统一规定，每个符号用三个或四个字节表示，那么每<br>个英文字母前都必然有二到三个字节是0，这对于存储空间来说是极大的浪费，文本文件的大小会因此大出二三倍，这是难以接受的。unicode在很长一段时间内无法推广，直到互联网的出现，为解决unicode如何在网络上传输的问题，于是面向传输的众多 UTF（UCS Transfer Format）标准出现了，顾名思义，UTF-8就是每次8个位传输数据，而UTF-16就是每次16个位。UTF-8就是在互联网上使用最广的一种unicode的实现方式，这是为传输而设计的编码，并使编码无国界，这样就可以显示全世界上所有文化的字符了。UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度，当字符在ASCII<br>码的范围时，就用一个字节表示，保留了ASCII字符一个字节的编码做为它的一部分，注意的是unicode一个中文字符占2个字节，而UTF-8一个中<br>文字符占3个字节）。从unicode到uft-8并不是直接的对应，而是要过一些算法和规则来转换。Unicode符号范围 | UTF-8编码方式(十六进制)         |        （二进制）<br>—————————————————————–<br>0000 0000-0000 007F | 0xxxxxxx<br>0000 0080-0000 07FF | 110xxxxx 10xxxxxx<br>0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx<br>0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx原文：unicode,ansi,utf-8,unicode big endian编码的区别</p>
+<p>原文:<a href="https://wenku.baidu.com/view/cb9fe505cc17552707220865.html" target="_blank" rel="external">https://wenku.baidu.com/view/cb9fe505cc17552707220865.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久很久以前，有一群人，他们决定用8个可以开合的晶体管来组合成不同的状态，以表示世界上的万物。他们看到8个开关状态是好的，于是他们把这称为”字节“。再后来，他们又做了一些可以处理这些字节的机器，机器开动了，可以用字节来组合出很多状态，状态开始变来变去。他们看到这样是好的，于是它们就这机器称为”计算机“。开始计算机只在美国用。八位的字节一共可以组合出256(2的8次方)种不同的状态。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="软件" scheme="http://sunhao.win/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="utf8" scheme="http://sunhao.win/tags/utf8/"/>
+    
+      <category term="unicode" scheme="http://sunhao.win/tags/unicode/"/>
+    
+  </entry>
   
   <entry>
     <title>linux-crontab</title>
@@ -1008,160 +1069,6 @@ FILENAME cannot be read.
     
     
       <category term="php参数" scheme="http://sunhao.win/tags/php%E5%8F%82%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack热拔插教程hmr</title>
-    <link href="http://sunhao.win/2017/03/07/webpack-hmr-tutorial/"/>
-    <id>http://sunhao.win/2017/03/07/webpack-hmr-tutorial/</id>
-    <published>2017-03-07T00:50:58.000Z</published>
-    <updated>2017-03-07T06:17:26.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://andrewhfarmer.com/webpack-hmr-tutorial/" target="_blank" rel="external">http://andrewhfarmer.com/webpack-hmr-tutorial/</a><br>Struggling to set up HMR with Webpack?</p>
-<p>Are you finding the Webpack documentation to be lacking - particularly in the HMR section? Does it seem like they’ve left out some important parts?</p>
-<p>If so, read on! We’ll fill in the gaps together.</p>
-<p>By the way, HMR stands for ‘Hot Module Replacement’, sometimes called ‘hot module swapping’. It’s a Webpack feature that updates your JavaScript in-place without a browser refresh - whenever you make code changes. I love it because it enables a very fast developer workflow.<br>HMR Myths<br>First let’s get a couple myths about HMR out of the way.<br><a id="more"></a><br>Myth: HMR is only for React<br>Not true - it usually just takes 3 lines of code to enable HMR in arbitrary JavaScript. This Tutorial doesn’t even mention React - I’ll cover HMR in React in a subsequent post.</p>
-<p>Myth: HMR is only for ‘advanced’ users<br>Not true. Without good documentation, HMR is difficult for beginners and advanced users alike. With the right information (this article), HMR can be enabled with very minor changes to config/code.</p>
-<p>Myth: HMR is the same as ‘live reload’<br>Not true. Live reload is when the browser automatically refreshes the page whenever you make a code change. HMR is faster because it updates code in-place without refreshing.</p>
-<p>2 Steps to HMR Success<br>There are 2 steps to enabling HMR: config changes and code changes.</p>
-<ol>
-<li><p>Config / Project Setup<br>There are 3 ways to configure your project for HMR. I go into each way in detail in Part 1. Pick the way that’s right for you and either use the provided github repository, or follow the directions to adapt your existing code base.</p>
-</li>
-<li><p>JavaScript / HMR API<br>To get HMR to work you have to add a little bit of extra code to your JavaScript. In the simplest case this is just 3 lines of code. I’ll show you everything you need to add for your use-case in Part 2.</p>
-</li>
-</ol>
-<p>Part 1: Configuring Your Project<br>There are exactly 3 ways that you can configure your HMR project. Let’s go through each one. I’ll help you pick which one to use in the next section.</p>
-<ol>
-<li><p>webpack-dev-server CLI<br>Run the webpack-dev-server on the command-line. With this approach you don’t need to change your webpack.config.js file, so it’s the simplest.</p>
-</li>
-<li><p>webpack-dev-server API<br>Run WebpackDevServer from a node.js script. Requires some additions to your webpack.config.js.</p>
-</li>
-<li><p>webpack-hot-middleware w/ express<br>webpack-hot-middleware is used for running a webpack dev server with HMR inside an express server.</p>
-</li>
-</ol>
-<p>The Non-Way<br>If you are used to running the webpack CLI or the Webpack API (without express or webpack-dev-server), then you’ll have to change how you do things a little bit. HMR requires a server to work. To find out why, read my understanding HMR post.</p>
-<p>But how do I choose?<br>Follow this simple guide to pick one of the 3 ways above.</p>
-<p>If you are using a task runner like grunt or gulp you’ll want to use the webpack-dev-server API. You can run the server from one of your gulp/grunt tasks.</p>
-<p>If you use your own node scripts to run webpack, you’ll also want to use the webpack-dev-server API.</p>
-<p>If you use express to host your site: use webpack-hot-middleware. It will be integrated with your express server, so you won’t have to run another server for your bundled JS.</p>
-<p>If none of the above apply to you or you just want the simplest possible setup: use the webpack-dev-server CLI. It requires no configuration.</p>
-<p>Okay, I picked one, but how do I start?<br>Glad you asked! Below is a separate ‘Configuring X’ section for each of the 3 approaches.</p>
-<p>Scroll forward to the approach you decided to use, follow the directions, and then scroll down to Part 2.</p>
-<ol>
-<li>Configuring webpack-dev-server CLI<br>Read this section if you’ve decided to use the webpack-dev-server CLI. Otherwise, scroll to the next section.</li>
-</ol>
-<p>If you are starting a new project, use my webpack HMR with webpack-dev-server CLI starter project (wow that’s a mouthful). It has a README and lots of comments to explain what’s going on.</p>
-<p>If you are working with an existing project: just make sure you have a valid webpack.config.js and run webpack-dev-server.</p>
-<p>Here’s an example command:</p>
-<p>webpack-dev-server –content-base=www –inline –watch –hot<br>You may want to modify the above command for your use-case based on the CLI Docs.</p>
-<p>That’s it! When you use the webpack-dev-server CLI it does all the configuration for you.</p>
-<p>Gotcha: When using this approach, make sure your webpack.config.js does NOT contain any references to webpack-dev-server or HotModuleReplacementPlugin. You’ll get errors if you do.</p>
-<ol>
-<li>Configuring WebpackDevServer API<br>Read this section if you’ve decided to use the WebpackDevServer API. Otherwise, scroll to the next section.</li>
-</ol>
-<p>If you are starting a new project, use my webpack HMR with WebpackDevServer API starter project. It has a README and lots of comments to explain what’s going on.</p>
-<p>If you are working with an existing project, you’ll have to make 3 changes:</p>
-<p>Change #1: Add entry points to your webpack.config.js. Here’s an example. You need webpack/hot/dev-server and webpack-dev-server/client as shown, but index.js should be the name of your usual entry point.</p>
-<p>entry: [<br>  ‘./index.js’,<br>  ‘webpack/hot/dev-server’,<br>  ‘webpack-dev-server/client?<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a>‘,<br>],<br>Change #2: Add the HotModuleReplacementPlugin to your your webpack.config.js, like this:</p>
-<p>plugins: [<br>  new webpack.HotModuleReplacementPlugin(),<br>]<br>For a complete example, see the starter project webpack.config.js.</p>
-<p>Change #3: Run WebpackDevServer with the hot: true option. For an example, see the starter project server.js.</p>
-<ol>
-<li>Configuring webpack-hot-middleware &amp; express<br>Read this section if you’ve decided to use express and webpack-hot-middleware. Otherwise, scroll on to Part 2.</li>
-</ol>
-<p>If you are starting a new project, use my webpack HMR with webpack-hot-middleware &amp; express starter project. It has a README and lots of comments to explain what’s going on.</p>
-<p>If you are working with an existing express project, you’ll need to do 3 things:</p>
-<p>Change #1: Install webpack-hot-middleware and webpack-dev-middleware. I’m assuming you already have webpack and express.</p>
-<p>npm install –save-dev webpack-hot-middleware webpack-dev-middleware<br>Change #2: Adjust your webpack.config.js to look similar to this. The important bits are the entry and plugins section. You’ll want all the plugins I have listed:</p>
-<p>var path = require(‘path’);<br>var webpack = require(‘webpack’);</p>
-<p>var config = {<br>  context: path.join(<strong>dirname, ‘js’),<br>  entry: [<br>    ‘webpack-hot-middleware/client?path=/</strong>webpack_hmr&amp;timeout=20000’,<br>    ‘./index.js’,<br>  ],<br>  output: {<br>    path: path.join(__dirname, ‘www’),<br>    filename: ‘bundle.js’,<br>    publicPath: ‘/assets/‘,<br>  },<br>  plugins: [<br>    new webpack.optimize.OccurenceOrderPlugin(),<br>    new webpack.HotModuleReplacementPlugin(),<br>    new webpack.NoErrorsPlugin()<br>  ]<br>};<br>module.exports = config;<br>Change #3: Add the middleware to your express server.</p>
-<p>Add these requires:</p>
-<p>var webpackDevMiddleware = require(“webpack-dev-middleware”);<br>var webpackHotMiddleware = require(“webpack-hot-middleware”);<br>And these middleware .use statements:</p>
-<p>app.use(webpackDevMiddleware(compiler, {<br>  hot: true,<br>  filename: ‘bundle.js’,<br>  publicPath: ‘/assets/‘,<br>  stats: {<br>    colors: true,<br>  },<br>  historyApiFallback: true,<br>}));</p>
-<p>app.use(webpackHotMiddleware(compiler, {<br>  log: console.log,<br>  path: ‘/__webpack_hmr’,<br>  heartbeat: 10 * 1000,<br>}));<br>Part 2: Code Changes<br>Your Webpack project should now be configured for HMR. But if you fire up a browser at this point and make a code change, it won’t work. Either you won’t see the update, or you’ll get a full browser refresh.</p>
-<p>Why isn’t it working yet? Webpack doesn’t know when it is acceptable to reload a particular JS file.</p>
-<p>To let Webpack know which files can be updated, we’ll use the HMR JavaScript API a.k.a. the module.hot API.</p>
-<p>If you used any of my github starter projects, they are already using the module.hot API and you will see changes reflected immediately.<br>The Simple Way<br>To start, find your entry point (often called index.js or main.js) and add the following to the end:</p>
-<p>if (module.hot) {<br>  module.hot.accept();<br>}<br>This tells Webpack that this file and all of its dependencies can be replaced.</p>
-<p>Now make a code change that you could see the effect of onscreen. You SHOULD have seen an update!</p>
-<p>For many projects, that’s all there is to it.</p>
-<p>The Catch: Side Effects<br>If any of your files produce side effects when they run, for instance if they add elements to the DOM, then you’ll need to use module.hot.dispose to dispose of those side effects.</p>
-<p>Why? If you don’t, when Webpack reloads the module, all the side effects will be repeated.</p>
-<p>Here’s an example, box-creator.js:</p>
-<p>var sideEffectNode = document.createElement(‘div’);<br>sideEffectNode.textContent = ‘Side Effect’;<br>document.body.appendChild(sideEffectNode);</p>
-<p>// Remove the most recently-added <div> so that when the code runs again and<br>// adds a new <div>, we don’t end up with duplicate divs.<br>if (module.hot) {<br>  module.hot.dispose(function() {<br>    sideEffectNode.parentNode.removeChild(sideEffectNode);<br>  });<br>}<br>This is a file that simply adds a <div> to the DOM whenever it is loaded. It uses module.hot.dispose to remove the <div> when it is unloaded by the Webpack HMR Runtime.</div></div></div></div></p>
-<p>Conclusion<br>That’s all you need to know to get HMR working. If you want to dig deeper to solidify your understanding, read my article on understanding HMR.</p>
-<p>Coming soon: next I’ll post about how to apply HMR to your React project. Sign up for my list to be notified when that comes out!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://andrewhfarmer.com/webpack-hmr-tutorial/&quot;&gt;http://andrewhfarmer.com/webpack-hmr-tutorial/&lt;/a&gt;&lt;br&gt;Struggling to set up HMR with Webpack?&lt;/p&gt;
-&lt;p&gt;Are you finding the Webpack documentation to be lacking - particularly in the HMR section? Does it seem like they’ve left out some important parts?&lt;/p&gt;
-&lt;p&gt;If so, read on! We’ll fill in the gaps together.&lt;/p&gt;
-&lt;p&gt;By the way, HMR stands for ‘Hot Module Replacement’, sometimes called ‘hot module swapping’. It’s a Webpack feature that updates your JavaScript in-place without a browser refresh - whenever you make code changes. I love it because it enables a very fast developer workflow.&lt;br&gt;HMR Myths&lt;br&gt;First let’s get a couple myths about HMR out of the way.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="webpack" scheme="http://sunhao.win/categories/webpack/"/>
-    
-    
-      <category term="webpack" scheme="http://sunhao.win/tags/webpack/"/>
-    
-      <category term="hmr" scheme="http://sunhao.win/tags/hmr/"/>
-    
-      <category term="教程" scheme="http://sunhao.win/tags/%E6%95%99%E7%A8%8B/"/>
-    
-      <category term="热拔插" scheme="http://sunhao.win/tags/%E7%83%AD%E6%8B%94%E6%8F%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>laravel学习零散知识点</title>
-    <link href="http://sunhao.win/2017/03/06/laravel-study/"/>
-    <id>http://sunhao.win/2017/03/06/laravel-study/</id>
-    <published>2017-03-06T08:22:41.000Z</published>
-    <updated>2017-03-23T06:00:19.210Z</updated>
-    
-    <content type="html"><![CDATA[<p>&lt;?php<br>$firstname = “Bill”;<br>$lastname = “Gates”;<br>$age = “60”;</p>
-<p>$result = compact(“firstname”, “lastname”, “age”);</p>
-<p>print_r($result);<br>?&gt;<br>compact 紧凑的</p>
-<p>动人的; 雄辩的，有口才的; 有说明力的; 富于表情的，逼真的;<br>eloquent<br>英文发音：[‘lærəvel]</p>
-<p>作者 Taylor Otwell </p>
-<p>In Narnia, Cair Paravel is the name of the castle where the kings and queens of Narnia live. Laravel rhymes with Paravel. I thought the name had a classy and sophisticated ring to it.— Taylor Otwell —</p>
-<p>Laravel这个名字来自于纳尼亚传奇中的Cair Paravel城堡。Laravel 和Paravel 的发音相似，Taylor认为Laravel这个名字韵味深长而又优雅，所以命名为Laravel。<br>Cair Paravel 中的Paravel发音为[‘pærəvel] 推断Laravel发音取[‘lærəvel]</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&#123;!! !!&#125; 相当于 <span class="meta">&lt;?php</span> <span class="keyword">echo</span> $value; <span class="meta">?&gt;</span></div><div class="line">&#123;&#123; &#125;&#125; 相当于 <span class="meta">&lt;?php</span> <span class="keyword">echo</span> htmlspecialchars($value); <span class="meta">?&gt;</span></div><div class="line"></div><div class="line">csrf_field()</div><div class="line"></div><div class="line">csrf_field 函数生成一个包含 CSRF 令牌值的 HTML 隐藏域，例如，使用Blade语法示例如下：</div><div class="line"></div><div class="line">&#123;!! csrf_field() !!&#125;</div><div class="line">&#123;&#123;&#123;&#125;&#125;&#125; 完全转换html</div><div class="line">@<span class="keyword">if</span>()</div><div class="line"></div><div class="line">@<span class="keyword">else</span></div><div class="line">        ss</div><div class="line">@<span class="keyword">endif</span></div><div class="line"></div><div class="line">@<span class="keyword">foreach</span>()</div><div class="line"></div><div class="line">@<span class="keyword">endforeach</span></div><div class="line">@<span class="keyword">for</span></div><div class="line">@<span class="keyword">endfor</span></div><div class="line">@<span class="keyword">while</span></div><div class="line">@<span class="keyword">endwhile</span></div><div class="line">csrf_token()</div><div class="line"></div><div class="line">csrf_token 函数获取当前 CSRF 令牌的值：</div><div class="line"></div><div class="line">$token = csrf_token();</div></pre></td></tr></table></figure>
-<p>php artisan make:controller myController<br>php artisan route:list</p>
-<p>laravel  collect</p>
-<p>laravel  请求  query get has exists<br>has 和exists 的区别  has 判断 是否存在此参数 其此参数不为空<br>检索 only<br>去除 Request::except(‘name’,’age’) 去除<br>url Request::url()  全部 fullUrl()</p>
-<p>请求历史 flash flashExcept flashOnly old<br>请求文件 Request::file(‘’profile)-&gt;getSize()<br>getClientOriginalName<br>getClientOriginalExtension<br>session  教程<a href="http://blog.csdn.net/ghost_hell/article/details/53177072" target="_blank" rel="external">http://blog.csdn.net/ghost_hell/article/details/53177072</a><br>Hash::make()</p>
-<p>laravel<br>yield 用于定义个内容的片段   里面没有内容   只是内容的片段<br>section 用于定义给定片段的内容   定义了内容  可以多次继承覆盖</p>
-<p>服务容器  都是依靠构造函数或者某些情况下通过 setter 方法将类依赖注入到类<br><a id="more"></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;lt;?php&lt;br&gt;$firstname = “Bill”;&lt;br&gt;$lastname = “Gates”;&lt;br&gt;$age = “60”;&lt;/p&gt;
-&lt;p&gt;$result = compact(“firstname”, “lastname”, “age”);&lt;/p&gt;
-&lt;p&gt;print_r($result);&lt;br&gt;?&amp;gt;&lt;br&gt;compact 紧凑的&lt;/p&gt;
-&lt;p&gt;动人的; 雄辩的，有口才的; 有说明力的; 富于表情的，逼真的;&lt;br&gt;eloquent&lt;br&gt;英文发音：[‘lærəvel]&lt;/p&gt;
-&lt;p&gt;作者 Taylor Otwell &lt;/p&gt;
-&lt;p&gt;In Narnia, Cair Paravel is the name of the castle where the kings and queens of Narnia live. Laravel rhymes with Paravel. I thought the name had a classy and sophisticated ring to it.— Taylor Otwell —&lt;/p&gt;
-&lt;p&gt;Laravel这个名字来自于纳尼亚传奇中的Cair Paravel城堡。Laravel 和Paravel 的发音相似，Taylor认为Laravel这个名字韵味深长而又优雅，所以命名为Laravel。&lt;br&gt;Cair Paravel 中的Paravel发音为[‘pærəvel] 推断Laravel发音取[‘lærəvel]&lt;/p&gt;
-&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;!! !!&amp;#125; 相当于 &lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; $value; &lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&amp;#123; &amp;#125;&amp;#125; 相当于 &lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; htmlspecialchars($value); &lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_field()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_field 函数生成一个包含 CSRF 令牌值的 HTML 隐藏域，例如，使用Blade语法示例如下：&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;!! csrf_field() !!&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&amp;#123;&amp;#123;&amp;#125;&amp;#125;&amp;#125; 完全转换html&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        ss&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;endif&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt;()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;endforeach&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;endfor&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;endwhile&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_token()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;csrf_token 函数获取当前 CSRF 令牌的值：&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$token = csrf_token();&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;php artisan make:controller myController&lt;br&gt;php artisan route:list&lt;/p&gt;
-&lt;p&gt;laravel  collect&lt;/p&gt;
-&lt;p&gt;laravel  请求  query get has exists&lt;br&gt;has 和exists 的区别  has 判断 是否存在此参数 其此参数不为空&lt;br&gt;检索 only&lt;br&gt;去除 Request::except(‘name’,’age’) 去除&lt;br&gt;url Request::url()  全部 fullUrl()&lt;/p&gt;
-&lt;p&gt;请求历史 flash flashExcept flashOnly old&lt;br&gt;请求文件 Request::file(‘’profile)-&amp;gt;getSize()&lt;br&gt;getClientOriginalName&lt;br&gt;getClientOriginalExtension&lt;br&gt;session  教程&lt;a href=&quot;http://blog.csdn.net/ghost_hell/article/details/53177072&quot;&gt;http://blog.csdn.net/ghost_hell/article/details/53177072&lt;/a&gt;&lt;br&gt;Hash::make()&lt;/p&gt;
-&lt;p&gt;laravel&lt;br&gt;yield 用于定义个内容的片段   里面没有内容   只是内容的片段&lt;br&gt;section 用于定义给定片段的内容   定义了内容  可以多次继承覆盖&lt;/p&gt;
-&lt;p&gt;服务容器  都是依靠构造函数或者某些情况下通过 setter 方法将类依赖注入到类&lt;br&gt;
-    
-    </summary>
-    
-      <category term="laravel" scheme="http://sunhao.win/categories/laravel/"/>
-    
-    
-      <category term="学习" scheme="http://sunhao.win/tags/%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

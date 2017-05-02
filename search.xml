@@ -3,9 +3,23 @@
   
     
     <entry>
+      <title><![CDATA[respberry树莓派 无线网络配置]]></title>
+      <url>%2F2017%2F05%2F02%2Frespberry-wpanetwork%2F</url>
+      <content type="text"><![CDATA[执行命令: sudo iwlist wlan0 scan , 看看能否手动扫描周围的ESSID. 无线配置修改配置文件: sudo vim /etc/network/interfaces, 如果需要自动IP, 增加如下: 12345# wifi (dhcp config) :auto wlan0allow-hotplug wlan0iface wlan0 inet dhcpwpa-conf /etc/wpa_supplicant/wpa_supplicant.conf 如果需要固定IP, 增加的内容如下: 123456auto wlan0iface wlan0 inet staticwpa-conf /etc/wpa_supplicant/wpa_supplicant.confaddress 192.168.1.12netmask 255.255.255.0gateway 192.168.1.1 编辑/etc/wpa_supplicant/wpa_supplicant.conf, 增加如下几行: 12345678network=&#123; ssid=&quot;ssid1&quot; psk=&quot;密码&quot;&#125;network=&#123; ssid=&quot;ssid2&quot; psk=&quot;密码&quot;&#125; 这里存的是明文密码, 如果需要存储加密后的密码, 执行命令wpa_passphrase ssid password, 替换上面的psk密码.wpa_supplicant.conf里面更多参数详情, 请参考man手册链接, 上面的配置能应付大多数路由器了. 重启wlan0 重启无线网卡: sudo ifdown wlan0 and then sudo ifup wlan0然后运行ifconfig wlan0 查看无线网卡是否获能够取到了IP.如果固定ip 最好重启 reboot 输入密码]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[linux-source]]></title>
+      <url>%2F2017%2F05%2F02%2Flinux-source%2F</url>
+      <content type="text"><![CDATA[source: usage: source filename [arguments] source命令：source命令也称为“点命令”，也就是一个点符号（.）,是bash的内部命令。功能：使Shell读入指定的Shell程序文件并依次执行文件中的所有语句source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。用法：source filename 或 . filenamesource命令(从 C Shell 而来)是bash shell的内置命令;点命令(.)，就是个点符号(从Bourne Shell而来)是source的另一名称。]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[/bin,/sbin,/usr/bin,/usr/sbin区别]]></title>
       <url>%2F2017%2F05%2F02%2Flinux-diff-sbin-bin%2F</url>
-      <content type="text"><![CDATA[/bin,/sbin,/usr/bin,/usr/sbin区别/ : this is root directory root 用户根目录 /bin : commandsin this dir are all system installed user commands 系统的一些指令 /sbin: commands in this dir are all system installedsuper user commands超级用户指令系统管理命令，这里存放的是系统管理员使用的管理程序 /usr/bin: usercommands for applications 后期安装的一些软件的运行脚本 /usr/sbin:super user commands for applications 超级用户的一些管理程序 /usr/X11R6/bin: X application user commands /usr/X11R6/sbin: X application super usercommands Linux中的某些重要的目录： •主目录：/root、/home/username •用户可执行文件：/bin、/usr/bin、/usr/local/bin •系统可执行文件：/sbin、/usr/sbin、/usr/local/sbin •其他挂载点：/media、/mnt •配置：/etc •临时文件：/tmp •内核和Bootloader：/boot •服务器数据：/var、/srv •系统信息：/proc、/sys •共享库：/lib、/usr/lib、/usr/local/lib 每个用户都拥有一个主目录。所有用户的个人文件（配置、数据甚至应用程序）都放在其中。 根的主目录为/root。大多数非根主目录包含在/home 树中，通常以用户命名。 重要的二进制位于 /bin（用户二进制）以及 /sbin（系统二进制）中。 不重要的二进制（如图形环境或Office 工具）安装在/usr/bin 和 /usr/sbin中。进行这种分隔是为了尽可能地缩小根分区。使用源代码编译的软件通常位于 /usr/local/bin 和/usr/local/sbin中。]]></content>
+      <content type="text"><![CDATA[/bin,/sbin,/usr/bin,/usr/sbin区别/ : this is root directory root 用户根目录 /bin : commandsin this dir are all system installed user commands 系统的一些指令 /sbin: commands in this dir are all system installedsuper user commands超级用户指令系统管理命令，这里存放的是系统管理员使用的管理程序 /usr/bin: usercommands for applications 后期安装的一些软件的运行脚本 /usr/sbin:super user commands for applications 超级用户的一些管理程序 /usr/X11R6/bin: X application user commands /usr/X11R6/sbin: X application super usercommands Linux中的某些重要的目录： •主目录：/root、/home/username •用户可执行文件：/bin、/usr/bin、/usr/local/bin •系统可执行文件：/sbin、/usr/sbin、/usr/local/sbin •其他挂载点：/media、/mnt •配置：/etc •临时文件：/tmp •内核和Bootloader：/boot •服务器数据：/var、/srv •系统信息：/proc、/sys •共享库：/lib、/usr/lib、/usr/local/lib 每个用户都拥有一个主目录。所有用户的个人文件（配置、数据甚至应用程序）都放在其中。 根的主目录为/root。大多数非根主目录包含在/home 树中，通常以用户命名。 重要的二进制位于 /bin（用户二进制）以及 /sbin（系统二进制）中。 不重要的二进制（如图形环境或Office 工具）安装在/usr/bin 和 /usr/sbin中。进行这种分隔是为了尽可能地缩小根分区。使用源代码编译的软件通常位于 /usr/local/bin 和/usr/local/sbin中。 传统上的常规做法是：系统级的组件放在/bin、/lib； 根用户才能访问的放在/sbin； 系统repository提供的应用程序放在/usr/bin、/usr/lib； 用户自己编译的放在/usr/local/XXX。 现在有一些变化，在大约两年前，大量Linux系统都将/bin、/lib弄成/usr/bin、/usr/lib的符号链接。 此外，不同系统还会有很多的细微区别，比如Redhat系喜欢把32位的库放在/lib、/usr/lib，64位的库放在/lib64、/usr/ lib64，而Debian系喜欢把平台相关的那层名字放在/lib、/usr/lib的子目录里，比如/usr/lib/x86_64-linux-gnu/ 。然后，各种配置文件的文件名、路径也会有区别，比如ssh服务器的配置文件可能叫/etc/ssh/sshd.conf，也可能叫/etc/ssh/sshd_config。。。 分成三块的最早的渊源，据说是这样的： Unix开发者的机器的硬盘不够了，新加了一块，挂在/usr上； 又TM不够了，再加一块，挂在/usr/local上； 不知怎么，就变成规范了。。。。]]></content>
     </entry>
 
     
@@ -171,16 +185,16 @@
 
     
     <entry>
-      <title><![CDATA[window命令 端口占用、查杀进制]]></title>
-      <url>%2F2017%2F03%2F05%2Fwindow-tasklist-taskkill-netstat%2F</url>
-      <content type="text"><![CDATA[cmd关闭php的一个示例 首先用php -S 开启一个服务 另开一个窗口，查询占用了8081端口的进程：netstat -ano|findstr 8081，找到pid为12552 tasklist|findstr 12552 。发现就是我们的php服务 taskkill /f /t /im php.exe/f 强制/t 关闭子进程/im 文件名taskkill /f /PID 12552/PID 删除指定pid]]></content>
+      <title><![CDATA[window命令mklink 创建符号链接 硬链接 目录联结]]></title>
+      <url>%2F2017%2F03%2F05%2Fwindow-mklink%2F</url>
+      <content type="text"><![CDATA[最近研究mklink 发现国内很多文档认识有错误 或者不充分，在此补充下。 符号链接 用的比较多 也就是我们的快捷方式 硬链接 用的很少 可以防止误删，省空间等、 目录联结 一般用于共享目录链接的本质是创建一个指向原文件的路径 我们的文件其实是存在磁盘空间中， 文件名指向磁盘空间，最后访问文件名 访问到它所指向的空间。 符号链接mklink /d 和快捷方式几乎。但与其不同的是快捷方式是.link后缀的文件。 删除原文件，这种链接就无效了 硬链接(hard link)mklink /h 指向到原文件空间中所在地址。只能用于文件，其实就是又新建了个文件名，指向共同的磁盘空间。所以删除其中一个文件名，不影响另一个。 与copy不同的是，copy实际是创建了两个不同的磁盘空间。 目录联接(junction)mklink /j所谓联结就是相当于一个中间件。充当中介 只能用于目录。而且它用的相对路径，所以复制到别的文件夹是无效的。 这个用来做目录共享。 比如说 我想让b电脑访问 a电脑的目录aa但是我就想让他访问一会。所以我可以创建个目录联结。然后共享这个目录。 等b访问完，直接就可以删掉这个目录。 总的来说链接的本质是为了管理方便，充分利用磁盘空间，避免冗余。]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[window命令mklink 创建符号链接 硬链接 目录联结]]></title>
-      <url>%2F2017%2F03%2F05%2Fwindow-mklink%2F</url>
-      <content type="text"><![CDATA[最近研究mklink 发现国内很多文档认识有错误 或者不充分，在此补充下。 符号链接 用的比较多 也就是我们的快捷方式 硬链接 用的很少 可以防止误删，省空间等、 目录联结 一般用于共享目录链接的本质是创建一个指向原文件的路径 我们的文件其实是存在磁盘空间中， 文件名指向磁盘空间，最后访问文件名 访问到它所指向的空间。 符号链接mklink /d 和快捷方式几乎。但与其不同的是快捷方式是.link后缀的文件。 删除原文件，这种链接就无效了 硬链接(hard link)mklink /h 指向到原文件空间中所在地址。只能用于文件，其实就是又新建了个文件名，指向共同的磁盘空间。所以删除其中一个文件名，不影响另一个。 与copy不同的是，copy实际是创建了两个不同的磁盘空间。 目录联接(junction)mklink /j所谓联结就是相当于一个中间件。充当中介 只能用于目录。而且它用的相对路径，所以复制到别的文件夹是无效的。 这个用来做目录共享。 比如说 我想让b电脑访问 a电脑的目录aa但是我就想让他访问一会。所以我可以创建个目录联结。然后共享这个目录。 等b访问完，直接就可以删掉这个目录。 总的来说链接的本质是为了管理方便，充分利用磁盘空间，避免冗余。]]></content>
+      <title><![CDATA[window命令 端口占用、查杀进制]]></title>
+      <url>%2F2017%2F03%2F05%2Fwindow-tasklist-taskkill-netstat%2F</url>
+      <content type="text"><![CDATA[cmd关闭php的一个示例 首先用php -S 开启一个服务 另开一个窗口，查询占用了8081端口的进程：netstat -ano|findstr 8081，找到pid为12552 tasklist|findstr 12552 。发现就是我们的php服务 taskkill /f /t /im php.exe/f 强制/t 关闭子进程/im 文件名taskkill /f /PID 12552/PID 删除指定pid]]></content>
     </entry>
 
     

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-05-02T01:59:03.150Z</updated>
+  <updated>2017-05-02T07:59:46.240Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,11 +16,72 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>respberry树莓派 无线网络配置</title>
+    <link href="http://sunhao.win/2017/05/02/respberry-wpanetwork/"/>
+    <id>http://sunhao.win/2017/05/02/respberry-wpanetwork/</id>
+    <published>2017-05-02T07:56:14.000Z</published>
+    <updated>2017-05-02T07:59:46.240Z</updated>
+    
+    <content type="html"><![CDATA[<p>执行命令: sudo iwlist wlan0 scan , 看看能否手动扫描周围的ESSID.</p>
+<h3 id="无线配置"><a href="#无线配置" class="headerlink" title="无线配置"></a>无线配置</h3><p>修改配置文件: sudo vim /etc/network/interfaces, 如果需要自动IP, 增加如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># wifi (dhcp config) :</div><div class="line">auto wlan0</div><div class="line">allow-hotplug wlan0</div><div class="line">iface wlan0 inet dhcp</div><div class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</div></pre></td></tr></table></figure>
+<p>如果需要固定IP, 增加的内容如下:</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">auto wlan0</div><div class="line">iface wlan0 inet static</div><div class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</div><div class="line">address 192.168.1.12</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.1.1</div></pre></td></tr></table></figure>
+<p>编辑/etc/wpa_supplicant/wpa_supplicant.conf, 增加如下几行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">network=&#123;</div><div class="line">    ssid=&quot;ssid1&quot;</div><div class="line">    psk=&quot;密码&quot;</div><div class="line">&#125;</div><div class="line">network=&#123;</div><div class="line">    ssid=&quot;ssid2&quot;</div><div class="line">    psk=&quot;密码&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里存的是明文密码, 如果需要存储加密后的密码, 执行命令wpa_passphrase ssid password, 替换上面的psk密码.<br>wpa_supplicant.conf里面更多参数详情, 请参考man手册链接, 上面的配置能应付大多数路由器了.</p>
+<p>重启wlan0</p>
+<p>重启无线网卡: sudo ifdown wlan0 and then  sudo ifup wlan0<br>然后运行ifconfig wlan0 查看无线网卡是否获能够取到了IP.<br>如果固定ip  最好重启 reboot  输入密码</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;执行命令: sudo iwlist wlan0 scan , 看看能否手动扫描周围的ESSID.&lt;/p&gt;
+&lt;h3 id=&quot;无线配置&quot;&gt;&lt;a href=&quot;#无线配置&quot; class=&quot;headerlink&quot; title=&quot;无线配置&quot;&gt;&lt;/a&gt;无线配置&lt;/h3&gt;&lt;p&gt;修改配置文件: sudo vim /etc/network/interfaces, 如果需要自动IP, 增加如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# wifi (dhcp config) :&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;auto wlan0&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;allow-hotplug wlan0&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;iface wlan0 inet dhcp&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果需要固定IP, 增加的内容如下:&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="respberry" scheme="http://sunhao.win/categories/respberry/"/>
+    
+    
+      <category term="无线网络配置" scheme="http://sunhao.win/tags/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux-source</title>
+    <link href="http://sunhao.win/2017/05/02/linux-source/"/>
+    <id>http://sunhao.win/2017/05/02/linux-source/</id>
+    <published>2017-05-02T02:47:55.000Z</published>
+    <updated>2017-05-02T02:57:10.970Z</updated>
+    
+    <content type="html"><![CDATA[<p>source: usage: source filename [arguments]</p>
+<p>source命令：<br>source命令也称为“点命令”，也就是一个点符号（.）,是bash的内部命令。<br>功能：使Shell读入指定的Shell程序文件并依次执行文件中的所有语句<br>source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。<br>用法：<br>source filename 或 . filename<br>source命令(从 C Shell 而来)是bash shell的内置命令;点命令(.)，就是个点符号(从Bourne Shell而来)是source的另一名称。<br><a id="more"></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;source: usage: source filename [arguments]&lt;/p&gt;
+&lt;p&gt;source命令：&lt;br&gt;source命令也称为“点命令”，也就是一个点符号（.）,是bash的内部命令。&lt;br&gt;功能：使Shell读入指定的Shell程序文件并依次执行文件中的所有语句&lt;br&gt;source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。&lt;br&gt;用法：&lt;br&gt;source filename 或 . filename&lt;br&gt;source命令(从 C Shell 而来)是bash shell的内置命令;点命令(.)，就是个点符号(从Bourne Shell而来)是source的另一名称。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="source" scheme="http://sunhao.win/tags/source/"/>
+    
+  </entry>
+  
+  <entry>
     <title>/bin,/sbin,/usr/bin,/usr/sbin区别</title>
     <link href="http://sunhao.win/2017/05/02/linux-diff-sbin-bin/"/>
     <id>http://sunhao.win/2017/05/02/linux-diff-sbin-bin/</id>
     <published>2017-05-02T01:48:34.000Z</published>
-    <updated>2017-05-02T01:59:03.150Z</updated>
+    <updated>2017-05-02T02:13:59.255Z</updated>
     
     <content type="html"><![CDATA[<h2 id="bin-sbin-usr-bin-usr-sbin区别"><a href="#bin-sbin-usr-bin-usr-sbin区别" class="headerlink" title="/bin,/sbin,/usr/bin,/usr/sbin区别"></a>/bin,/sbin,/usr/bin,/usr/sbin区别</h2><p>/ : this is root directory             root 用户根目录</p>
 <p>/bin : commandsin this dir are all system installed user commands   系统的一些指令</p>
@@ -34,7 +95,19 @@
 根的主目录为/root。大多数非根主目录包含在/home 树中，通常以用户命名。
 重要的二进制位于 /bin（用户二进制）以及 /sbin（系统二进制）中。
 不重要的二进制（如图形环境或Office 工具）安装在/usr/bin 和 /usr/sbin中。进行这种分隔是为了尽可能地缩小根分区。使用源代码编译的软件通常位于 /usr/local/bin 和/usr/local/sbin中。
-</code></pre>]]></content>
+</code></pre><h3 id="传统上的常规做法是："><a href="#传统上的常规做法是：" class="headerlink" title="传统上的常规做法是："></a>传统上的常规做法是：</h3><p>系统级的组件放在/bin、/lib；</p>
+<p>根用户才能访问的放在/sbin；</p>
+<p>系统repository提供的应用程序放在/usr/bin、/usr/lib；</p>
+<p>用户自己编译的放在/usr/local/XXX。</p>
+<p>现在有一些变化，在大约两年前，大量Linux系统都将/bin、/lib弄成/usr/bin、/usr/lib的符号链接。</p>
+<p>此外，不同系统还会有很多的细微区别，比如Redhat系喜欢把32位的库放在/lib、/usr/lib，64位的库放在/lib64、/usr/</p>
+<p>lib64，而Debian系喜欢把平台相关的那层名字放在/lib、/usr/lib的子目录里，比如/usr/lib/x86_64-linux-gnu/</p>
+<p>。然后，各种配置文件的文件名、路径也会有区别，比如ssh服务器的配置文件可能叫/etc/ssh/sshd.conf，也可能叫/etc/ssh/sshd_config。。。</p>
+<p>分成三块的最早的渊源，据说是这样的：</p>
+<p>Unix开发者的机器的硬盘不够了，新加了一块，挂在/usr上；</p>
+<p>又TM不够了，再加一块，挂在/usr/local上；</p>
+<p>不知怎么，就变成规范了。。。。</p>
+]]></content>
     
     <summary type="html">
     
@@ -1023,62 +1096,6 @@ FILENAME cannot be read.
     
     
       <category term="vmware" scheme="http://sunhao.win/tags/vmware/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git fork和clone区别，fetch与pull区别</title>
-    <link href="http://sunhao.win/2017/03/10/git-fork-clone-fetch-pull/"/>
-    <id>http://sunhao.win/2017/03/10/git-fork-clone-fetch-pull/</id>
-    <published>2017-03-10T03:19:28.000Z</published>
-    <updated>2017-03-10T03:43:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>fork：github中，克隆别人仓库的项目到自己的仓库<br>clone：克隆github或者其他远程 git服务器仓库的项目到自己的 本地<br><a id="more"></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;fork：github中，克隆别人仓库的项目到自己的仓库&lt;br&gt;clone：克隆github或者其他远程 git服务器仓库的项目到自己的 本地&lt;br&gt;
-    
-    </summary>
-    
-      <category term="git" scheme="http://sunhao.win/categories/git/"/>
-    
-    
-      <category term="fork" scheme="http://sunhao.win/tags/fork/"/>
-    
-      <category term="clone" scheme="http://sunhao.win/tags/clone/"/>
-    
-      <category term="fetch" scheme="http://sunhao.win/tags/fetch/"/>
-    
-      <category term="pull" scheme="http://sunhao.win/tags/pull/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>apache配置</title>
-    <link href="http://sunhao.win/2017/03/09/apache-config/"/>
-    <id>http://sunhao.win/2017/03/09/apache-config/</id>
-    <published>2017-03-09T00:31:00.000Z</published>
-    <updated>2017-03-09T02:53:39.665Z</updated>
-    
-    <content type="html"><![CDATA[<p>优雅重启<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/apache2/bin/apachectl graceful</div></pre></td></tr></table></figure></p>
-<p>vhost配置路径<br>/usr/local/apache2/etc/extra</p>
-<p>httpd配置路径<br>/usr/local/apache2/etc<br><a id="more"></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;优雅重启&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/usr/local/apache2/bin/apachectl graceful&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;vhost配置路径&lt;br&gt;/usr/local/apache2/etc/extra&lt;/p&gt;
-&lt;p&gt;httpd配置路径&lt;br&gt;/usr/local/apache2/etc&lt;br&gt;
-    
-    </summary>
-    
-      <category term="apache" scheme="http://sunhao.win/categories/apache/"/>
-    
-    
-      <category term="apache" scheme="http://sunhao.win/tags/apache/"/>
     
   </entry>
   

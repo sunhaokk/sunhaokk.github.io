@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-04-28T06:40:20.811Z</updated>
+  <updated>2017-05-02T01:59:03.150Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>/bin,/sbin,/usr/bin,/usr/sbin区别</title>
+    <link href="http://sunhao.win/2017/05/02/linux-diff-sbin-bin/"/>
+    <id>http://sunhao.win/2017/05/02/linux-diff-sbin-bin/</id>
+    <published>2017-05-02T01:48:34.000Z</published>
+    <updated>2017-05-02T01:59:03.150Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="bin-sbin-usr-bin-usr-sbin区别"><a href="#bin-sbin-usr-bin-usr-sbin区别" class="headerlink" title="/bin,/sbin,/usr/bin,/usr/sbin区别"></a>/bin,/sbin,/usr/bin,/usr/sbin区别</h2><p>/ : this is root directory             root 用户根目录</p>
+<p>/bin : commandsin this dir are all system installed user commands   系统的一些指令</p>
+<p>/sbin: commands in this dir are all system installedsuper user commands<br>超级用户指令系统管理命令，这里存放的是系统管理员使用的管理程序 </p>
+<p>/usr/bin: usercommands for applications 后期安装的一些软件的运行脚本</p>
+<p>/usr/sbin:super user commands for applications 超级用户的一些管理程序</p>
+<p>/usr/X11R6/bin: X application user commands</p>
+<p>/usr/X11R6/sbin: X application super usercommands<br><a id="more"></a></p>
+<p>Linux中的某些重要的目录：<br>    •主目录：/root、/home/username<br>    •用户可执行文件：/bin、/usr/bin、/usr/local/bin<br>    •系统可执行文件：/sbin、/usr/sbin、/usr/local/sbin<br>    •其他挂载点：/media、/mnt<br>    •配置：/etc<br>    •临时文件：/tmp<br>    •内核和Bootloader：/boot<br>    •服务器数据：/var、/srv<br>    •系统信息：/proc、/sys<br>    •共享库：/lib、/usr/lib、/usr/local/lib</p>
+<pre><code>每个用户都拥有一个主目录。所有用户的个人文件（配置、数据甚至应用程序）都放在其中。
+根的主目录为/root。大多数非根主目录包含在/home 树中，通常以用户命名。
+重要的二进制位于 /bin（用户二进制）以及 /sbin（系统二进制）中。
+不重要的二进制（如图形环境或Office 工具）安装在/usr/bin 和 /usr/sbin中。进行这种分隔是为了尽可能地缩小根分区。使用源代码编译的软件通常位于 /usr/local/bin 和/usr/local/sbin中。
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;bin-sbin-usr-bin-usr-sbin区别&quot;&gt;&lt;a href=&quot;#bin-sbin-usr-bin-usr-sbin区别&quot; class=&quot;headerlink&quot; title=&quot;/bin,/sbin,/usr/bin,/usr/sbin区别&quot;&gt;&lt;/a&gt;/bin,/sbin,/usr/bin,/usr/sbin区别&lt;/h2&gt;&lt;p&gt;/ : this is root directory             root 用户根目录&lt;/p&gt;
+&lt;p&gt;/bin : commandsin this dir are all system installed user commands   系统的一些指令&lt;/p&gt;
+&lt;p&gt;/sbin: commands in this dir are all system installedsuper user commands&lt;br&gt;超级用户指令系统管理命令，这里存放的是系统管理员使用的管理程序 &lt;/p&gt;
+&lt;p&gt;/usr/bin: usercommands for applications 后期安装的一些软件的运行脚本&lt;/p&gt;
+&lt;p&gt;/usr/sbin:super user commands for applications 超级用户的一些管理程序&lt;/p&gt;
+&lt;p&gt;/usr/X11R6/bin: X application user commands&lt;/p&gt;
+&lt;p&gt;/usr/X11R6/sbin: X application super usercommands&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="sbin" scheme="http://sunhao.win/tags/sbin/"/>
+    
+      <category term="bin" scheme="http://sunhao.win/tags/bin/"/>
+    
+  </entry>
   
   <entry>
     <title>反向代理 和 正向代理区别</title>
@@ -1037,38 +1079,6 @@ FILENAME cannot be read.
     
     
       <category term="apache" scheme="http://sunhao.win/tags/apache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>php函数参数类和接口</title>
-    <link href="http://sunhao.win/2017/03/07/php-class-type-declaration/"/>
-    <id>http://sunhao.win/2017/03/07/php-class-type-declaration/</id>
-    <published>2017-03-07T05:46:37.000Z</published>
-    <updated>2017-03-07T06:24:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>参数为类的实例<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">C</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">// This doesn't extend C.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(C $c)</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> get_class($c).<span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(<span class="keyword">new</span> C);</div><div class="line">f(<span class="keyword">new</span> D);</div><div class="line">f(<span class="keyword">new</span> E);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>输出为</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">C</div><div class="line">D</div><div class="line"></div><div class="line">Fatal error: Uncaught TypeError: Argument <span class="number">1</span> passed to f() must be an instance of C, instance of E given, called in - on line <span class="number">14</span> <span class="keyword">and</span> defined in -:<span class="number">8</span></div><div class="line">Stack trace:</div><div class="line"><span class="comment">#0 -(14): f(Object(E))</span></div><div class="line"><span class="comment">#1 &#123;main&#125;</span></div><div class="line">  thrown in - on line <span class="number">8</span></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>参数为接口的实现</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">I</span> </span>&#123; <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>; &#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">implements</span> <span class="title">I</span> </span>&#123; <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125; &#125;</div><div class="line"></div><div class="line"><span class="comment">// This doesn't implement I.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(I $i)</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> get_class($i).<span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(<span class="keyword">new</span> C);</div><div class="line">f(<span class="keyword">new</span> E);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<p>输出为</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">C</div><div class="line">PHP Catchable fatal error:  Argument <span class="number">1</span> passed to f() must implement <span class="class"><span class="keyword">interface</span> <span class="title">I</span>, <span class="title">instance</span> <span class="title">of</span> <span class="title">E</span> <span class="title">given</span>, <span class="title">called</span> <span class="title">in</span> /<span class="title">code</span>/<span class="title">main</span>.<span class="title">php</span> <span class="title">on</span> <span class="title">line</span> 13 <span class="title">and</span> <span class="title">defined</span> <span class="title">in</span> /<span class="title">code</span>/<span class="title">main</span>.<span class="title">php</span> <span class="title">on</span> <span class="title">line</span> 8</span></div><div class="line">?&gt;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;参数为类的实例&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;C&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;D&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;C&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// This doesn&#39;t extend C.&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;E&lt;/span&gt; &lt;/span&gt;&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(C $c)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; get_class($c).&lt;span class=&quot;string&quot;&gt;&quot;\n&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; C);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; D);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; E);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;输出为&lt;/p&gt;
-&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;C&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;D&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Fatal error: Uncaught TypeError: Argument &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; passed to f() must be an instance of C, instance of E given, called in - on line &lt;span class=&quot;number&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; defined in -:&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Stack trace:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#0 -(14): f(Object(E))&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#1 &amp;#123;main&amp;#125;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  thrown in - on line &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="php" scheme="http://sunhao.win/categories/php/"/>
-    
-    
-      <category term="php参数" scheme="http://sunhao.win/tags/php%E5%8F%82%E6%95%B0/"/>
     
   </entry>
   

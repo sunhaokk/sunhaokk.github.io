@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://sunhao.win/2017/05/02/linux-diff-sbin-bin/</loc>
+    <lastmod>2017-05-02T01:59:03.150Z</lastmod>
+    <data>
+        <display>
+        <title>/bin,/sbin,/usr/bin,/usr/sbin区别</title>
+        <pubTime>2017-05-02T01:48:34.000Z</pubTime>
+        
+        <tag>sbin</tag>
+         
+        <tag>bin</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/2017/04/27/php-proxy/</loc>
     <lastmod>2017-04-28T06:40:20.811Z</lastmod>
     <data>
@@ -663,9 +685,9 @@
         <title>使用iptables应对SYN攻击,CC攻击,ACK攻击[转]</title>
         <pubTime>2017-02-24T06:58:05.000Z</pubTime>
         
-        <tag>CC攻击</tag>
-         
         <tag>SYN攻击</tag>
+         
+        <tag>CC攻击</tag>
          
         <tag>ACK攻击</tag>
          

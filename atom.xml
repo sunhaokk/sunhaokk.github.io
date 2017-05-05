@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-05-04T09:25:20.233Z</updated>
+  <updated>2017-05-05T06:47:39.145Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -14,6 +14,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>netwrok-dns</title>
+    <link href="http://sunhao.win/2017/05/05/netwrok-dns/"/>
+    <id>http://sunhao.win/2017/05/05/netwrok-dns/</id>
+    <published>2017-05-05T06:47:39.000Z</published>
+    <updated>2017-05-05T06:47:39.145Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>fg、bg、jobs、&amp;、nohup、ctrl+z、ctrl+c、screen命令</title>
@@ -1068,71 +1086,6 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
       <category term="linux" scheme="http://sunhao.win/tags/linux/"/>
     
       <category term="kill" scheme="http://sunhao.win/tags/kill/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux点命令执行linux.命令</title>
-    <link href="http://sunhao.win/2017/04/01/linux-shell-dot/"/>
-    <id>http://sunhao.win/2017/04/01/linux-shell-dot/</id>
-    <published>2017-04-01T01:07:54.000Z</published>
-    <updated>2017-04-01T07:27:41.099Z</updated>
-    
-    <content type="html"><![CDATA[<p>.: . filename [arguments]<br>   . 文件名 [参数]</p>
-<pre><code>Execute commands from a file in the current shell.
-在当前的shell脚本中加载一个文件执行里面的命令.
-
-Read and execute commands from FILENAME in the current shell.  The
-在当前的shell脚本中加载一个文件读取和执行里面的命令.
-
-entries in $PATH are used to find the directory containing FILENAME.
-$PATH环境变量用于查找文件目录
-
-If any ARGUMENTS are supplied, they become the positional parameters
-when FILENAME is executed.
-如果有形参，文件在被执行的时候实参就会传过去。
-ps:(parameter=形参(formal parameter)， argument=实参(actual parameter)。)
-
-Exit Status:
-退出状态:
-
-Returns the status of the last command executed in FILENAME; fails if
-FILENAME cannot be read.
-返回文件最后执行的命令的状态；如果无法读取文件返回失败。
-</code></pre><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &apos;ls -a&apos;&gt;&gt;myLS</div><div class="line">. myLS</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;.: . filename [arguments]&lt;br&gt;   . 文件名 [参数]&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Execute commands from a file in the current shell.
-在当前的shell脚本中加载一个文件执行里面的命令.
-
-Read and execute commands from FILENAME in the current shell.  The
-在当前的shell脚本中加载一个文件读取和执行里面的命令.
-
-entries in $PATH are used to find the directory containing FILENAME.
-$PATH环境变量用于查找文件目录
-
-If any ARGUMENTS are supplied, they become the positional parameters
-when FILENAME is executed.
-如果有形参，文件在被执行的时候实参就会传过去。
-ps:(parameter=形参(formal parameter)， argument=实参(actual parameter)。)
-
-Exit Status:
-退出状态:
-
-Returns the status of the last command executed in FILENAME; fails if
-FILENAME cannot be read.
-返回文件最后执行的命令的状态；如果无法读取文件返回失败。
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
-    
-    
-      <category term="linux.命令" scheme="http://sunhao.win/tags/linux-%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   

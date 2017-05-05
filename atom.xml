@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-05-02T07:59:46.240Z</updated>
+  <updated>2017-05-04T09:25:20.233Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>fg、bg、jobs、&amp;、nohup、ctrl+z、ctrl+c、screen命令</title>
+    <link href="http://sunhao.win/2017/05/04/linux-bg-fg-jobs-screen/"/>
+    <id>http://sunhao.win/2017/05/04/linux-bg-fg-jobs-screen/</id>
+    <published>2017-05-04T02:10:17.000Z</published>
+    <updated>2017-05-04T09:25:20.233Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、&amp;</p>
+<p>加在一个命令的最后，可以把这个命令放到后台执行，如</p>
+<p>watch  -n 10 sh  test.sh  &amp;  #每10s在后台执行一次test.sh脚本</p>
+<p>二、ctrl + z</p>
+<p>可以将一个正在前台执行的命令放到后台，并且处于暂停状态。</p>
+<p>三、jobs</p>
+<p>查看当前有多少在后台运行的命令</p>
+<p>jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell从当前的shell环境已知的列表中删除任务的进程标识。</p>
+<a id="more"></a>
+<p>四、fg</p>
+<p>将后台中的命令调至前台继续运行。如果后台中有多个命令，可以用fg %jobnumber（是命令编号，不是进程号）将选中的命令调出。</p>
+<p>五、bg</p>
+<p>将一个在后台暂停的命令，变成在后台继续执行。如果后台中有多个命令，可以用bg %jobnumber将选中的命令调出。</p>
+<p>六、kill</p>
+<p>法子1：通过jobs命令查看job号（假设为num），然后执行kill %num</p>
+<p>法子2：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid</p>
+<p>前台进程的终止：Ctrl+c</p>
+<p>七、nohup</p>
+<p>如果让程序始终在后台执行，即使关闭当前的终端也执行（之前的&amp;做不到），这时候需要nohup。该命令可以在你退出帐户/</p>
+<p>关闭终端之后继续运行相应的进程。关闭中断后，在另一个终端jobs已经无法看到后台跑得程序了，此时利用ps（进程查看命令）</p>
+<p>ps -aux | grep “test.sh”  #a:显示所有程序 u:以用户为主的格式来显示 x:显示所有程序，不以终端机来区分</p>
+<p>进程的终止： </p>
+<p>后台进程的终止：</p>
+<p>一、使用Screen创建一个Session</p>
+<p>　　screen -S sessionName 注：sessionName是要删除的session名字</p>
+<p>二、结束一个Screen创建的session</p>
+<p>1、首先使用screen -ls命令查看全部session列表</p>
+<p>2、使用screen -S sessionName -X quit, 注：sessionName是要删除的session名字</p>
+<p>三、恢复一个Screen的session</p>
+<p>1、Screen -r sessionName</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、&amp;amp;&lt;/p&gt;
+&lt;p&gt;加在一个命令的最后，可以把这个命令放到后台执行，如&lt;/p&gt;
+&lt;p&gt;watch  -n 10 sh  test.sh  &amp;amp;  #每10s在后台执行一次test.sh脚本&lt;/p&gt;
+&lt;p&gt;二、ctrl + z&lt;/p&gt;
+&lt;p&gt;可以将一个正在前台执行的命令放到后台，并且处于暂停状态。&lt;/p&gt;
+&lt;p&gt;三、jobs&lt;/p&gt;
+&lt;p&gt;查看当前有多少在后台运行的命令&lt;/p&gt;
+&lt;p&gt;jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell从当前的shell环境已知的列表中删除任务的进程标识。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
+    
+    
+      <category term="fg" scheme="http://sunhao.win/tags/fg/"/>
+    
+      <category term="bg" scheme="http://sunhao.win/tags/bg/"/>
+    
+      <category term="jobs" scheme="http://sunhao.win/tags/jobs/"/>
+    
+      <category term="screen" scheme="http://sunhao.win/tags/screen/"/>
+    
+  </entry>
   
   <entry>
     <title>respberry树莓派 无线网络配置</title>
@@ -1068,34 +1133,6 @@ FILENAME cannot be read.
     
     
       <category term="linux.命令" scheme="http://sunhao.win/tags/linux-%E5%91%BD%E4%BB%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vmware-nonet</title>
-    <link href="http://sunhao.win/2017/03/17/vmware-nonet/"/>
-    <id>http://sunhao.win/2017/03/17/vmware-nonet/</id>
-    <published>2017-03-17T08:19:47.000Z</published>
-    <updated>2017-03-17T09:45:35.707Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>很多小伙伴，在配置完虚拟机后，发现无法正常上网，这是为什么呢？
-导致这个原因大部分是因为，我们的电脑有多个网卡，而我们设置的桥接方式是自动配置的，无法正确识别，主网卡。
-这个时候我们可以通过 虚拟网络编辑器 编辑网桥 指定网卡就可以。
-</code></pre><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;pre&gt;&lt;code&gt;很多小伙伴，在配置完虚拟机后，发现无法正常上网，这是为什么呢？
-导致这个原因大部分是因为，我们的电脑有多个网卡，而我们设置的桥接方式是自动配置的，无法正确识别，主网卡。
-这个时候我们可以通过 虚拟网络编辑器 编辑网桥 指定网卡就可以。
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="vmware" scheme="http://sunhao.win/categories/vmware/"/>
-    
-    
-      <category term="vmware" scheme="http://sunhao.win/tags/vmware/"/>
     
   </entry>
   

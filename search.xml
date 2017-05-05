@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[fg、bg、jobs、&、nohup、ctrl+z、ctrl+c、screen命令]]></title>
+      <url>%2F2017%2F05%2F04%2Flinux-bg-fg-jobs-screen%2F</url>
+      <content type="text"><![CDATA[一、&amp; 加在一个命令的最后，可以把这个命令放到后台执行，如 watch -n 10 sh test.sh &amp; #每10s在后台执行一次test.sh脚本 二、ctrl + z 可以将一个正在前台执行的命令放到后台，并且处于暂停状态。 三、jobs 查看当前有多少在后台运行的命令 jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell从当前的shell环境已知的列表中删除任务的进程标识。 四、fg 将后台中的命令调至前台继续运行。如果后台中有多个命令，可以用fg %jobnumber（是命令编号，不是进程号）将选中的命令调出。 五、bg 将一个在后台暂停的命令，变成在后台继续执行。如果后台中有多个命令，可以用bg %jobnumber将选中的命令调出。 六、kill 法子1：通过jobs命令查看job号（假设为num），然后执行kill %num 法子2：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid 前台进程的终止：Ctrl+c 七、nohup 如果让程序始终在后台执行，即使关闭当前的终端也执行（之前的&amp;做不到），这时候需要nohup。该命令可以在你退出帐户/ 关闭终端之后继续运行相应的进程。关闭中断后，在另一个终端jobs已经无法看到后台跑得程序了，此时利用ps（进程查看命令） ps -aux | grep “test.sh” #a:显示所有程序 u:以用户为主的格式来显示 x:显示所有程序，不以终端机来区分 进程的终止： 后台进程的终止： 一、使用Screen创建一个Session screen -S sessionName 注：sessionName是要删除的session名字 二、结束一个Screen创建的session 1、首先使用screen -ls命令查看全部session列表 2、使用screen -S sessionName -X quit, 注：sessionName是要删除的session名字 三、恢复一个Screen的session 1、Screen -r sessionName]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[respberry树莓派 无线网络配置]]></title>
       <url>%2F2017%2F05%2F02%2Frespberry-wpanetwork%2F</url>
       <content type="text"><![CDATA[执行命令: sudo iwlist wlan0 scan , 看看能否手动扫描周围的ESSID. 无线配置修改配置文件: sudo vim /etc/network/interfaces, 如果需要自动IP, 增加如下: 12345# wifi (dhcp config) :auto wlan0allow-hotplug wlan0iface wlan0 inet dhcpwpa-conf /etc/wpa_supplicant/wpa_supplicant.conf 如果需要固定IP, 增加的内容如下: 123456auto wlan0iface wlan0 inet staticwpa-conf /etc/wpa_supplicant/wpa_supplicant.confaddress 192.168.1.12netmask 255.255.255.0gateway 192.168.1.1 编辑/etc/wpa_supplicant/wpa_supplicant.conf, 增加如下几行: 12345678network=&#123; ssid=&quot;ssid1&quot; psk=&quot;密码&quot;&#125;network=&#123; ssid=&quot;ssid2&quot; psk=&quot;密码&quot;&#125; 这里存的是明文密码, 如果需要存储加密后的密码, 执行命令wpa_passphrase ssid password, 替换上面的psk密码.wpa_supplicant.conf里面更多参数详情, 请参考man手册链接, 上面的配置能应付大多数路由器了. 重启wlan0 重启无线网卡: sudo ifdown wlan0 and then sudo ifup wlan0然后运行ifconfig wlan0 查看无线网卡是否获能够取到了IP.如果固定ip 最好重启 reboot 输入密码]]></content>

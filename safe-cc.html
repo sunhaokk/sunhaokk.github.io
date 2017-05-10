@@ -1,0 +1,955 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CC攻击,DDOS攻击," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Da'sBlog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。 首先，什么事CC攻击？ 攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS">
+<meta name="keywords" content="CC攻击,DDOS攻击">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器网站被CC攻击的解决方法">
+<meta property="og:url" content="http://sunhao.win/safe-cc.html">
+<meta property="og:site_name" content="Da&#39;sBlog">
+<meta property="og:description" content="作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。 首先，什么事CC攻击？ 攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS">
+<meta property="og:updated_time" content="2017-02-24T07:53:54.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务器网站被CC攻击的解决方法">
+<meta name="twitter:description" content="作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。 首先，什么事CC攻击？ 攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sunhao.win/safe-cc.html"/>
+
+
+
+
+
+  <title> 服务器网站被CC攻击的解决方法 | Da'sBlog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b8432f1a5c5c27d6783c25569df4b270";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Da'sBlog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+
+
+        
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-categories">
+
+
+        
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-archives">
+
+
+        
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-compass">
+
+
+        
+          <a href="/2017/01/11/compass" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            compass中文手册
+          </a>
+        </li>
+        
+
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://sunhao.win/safe-cc.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Sun Hao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Da'sBlog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Da'sBlog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                服务器网站被CC攻击的解决方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T14:02:15+08:00">
+                2017-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络安全/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/safe-cc.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>作为站长或者公司的网站的网管，什么最可怕？显然是网站受到的DDoS攻击。大家都有这样的经历，就是在访问某一公司网站或者论坛时，如果这个网站或者论坛流量比较大，访问的人比较多，打开页面的速度会比较慢，对不?!一般来说，访问的人越多，网站或论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。</p>
+<p>首先，什么事CC攻击？</p>
+<p>攻击者借助代理服务器生成指向受害主机的合法请求，实现DDOS,和伪装就叫：CC(ChallengeCollapsar)。<br>CC主要是用来攻击页面的。大家都有这样的经历，就是在访问论坛时，如果这个论坛比较大，访问的人比较多，打开页面的速度会比较慢，访问的人越多，论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。<br><a id="more"></a><br>一个静态页面不需要服务器多少资源，甚至可以说直接从内存中读出来发给你就可以了，但是论坛就不一样了，我看一个帖子，系统需要到数据库中判断我是否有读帖子的权限，如果有，就读出帖子里面的内容，显示出来——这里至少访问了2次数据库，如果数据库的数据容量有200MB大小，系统很可能就要在这200MB大小的数据空间搜索一遍，这需要多少的CPU资源和时间？如果我是查找一个关键字，那么时间更加可观，因为前面的搜索可以限定在一个很小的范围内，比如用户权限只查用户表，帖子内容只查帖子表，而且查到就可以马上停止查询，而搜索肯定会对所有的数据进行一次判断，消耗的时间是相当的大。<br>CC就是充分利用了这个特点，模拟多个用户（多少线程就是多少用户）不停的进行访问（访问那些需要大量数据操作，就是需要大量CPU时间的页面）.这一点用一个一般的性能测试软件就可以做到大量模拟用户并发。</p>
+<p>CC攻击是DDoS(分布式拒绝服务)的一种，相比其它的DDoS攻击CC似乎更有技术含量一些。这种攻击你见不到虚假IP，见不到特别大的异常流量，但造成服务器无法进行正常连接，一条ADSL的普通用户足以挂掉一台高性能的Web服务器。由此可见其危害性，称其为”Web杀手”毫不为过。最让站长们忧虑的是这种攻击技术含量不是很高，利用工具和一些IP代理，一个初、中级的电脑水平的用户就能够实施DDoS攻击。</p>
+<p>那么怎样保证这些网站服务器的安全呢？防护CC攻击大家有必要了解CC攻击的原理及如果发现CC攻击和对CC攻击的防范措施。</p>
+<p>一、CC攻击的原理：<br>CC攻击的原理就是攻击者控制某些主机不停地发大量数据包给对方服务器造成服务器资源耗尽，一直到宕机崩溃。CC主要是用来攻击页面的，每个人都有这样的体验：当一个网页访问的人数特别多的时候，打开网页就慢了，CC就是模拟多个用户(多少线程就是多少用户)不停地进行访问那些需要大量数据操作(就是需要大量CPU时间)的页面，造成服务器资源的浪费，CPU长时间处于100%，永远都有处理不完的连接直至就网络拥塞，正常的访问被中止。</p>
+<p>二、CC攻击的种类：<br>CC攻击的种类有三种，直接攻击，代理攻击，僵尸网络攻击。</p>
+<p>直接攻击主要针对有重要缺陷的WEB应用程序，一般说来是程序写的有问题的时候才会出现这种情况，比较少见。</p>
+<p>僵尸网络攻击有点类似于DDOS攻击了，从WEB应用程序层面上已经无法防御。</p>
+<p>代理攻击：CC攻击者一般会操作一批代理服务器，比方说100个代理，然后每个代理同时发出10个请求，这样WEB服务器同时收到1000个并发请求的，并且在发出请求后，立刻断掉与代理的连接，避免代理返回的数据将本身的带宽堵死，而不能发动再次请求，这时WEB服务器会将响应这些请求的进程进行队列，数据库服务器也同样如此，这样一来，正常请求将会被排在很后被处理，就象本来你去食堂吃饭时，一般只有不到十个人在排队，今天前面却插了一千个人，那么轮到你的机会就很小很小了，这时就出现页面打开极其缓慢或者白屏。</p>
+<p>三、攻击症状<br>CC攻击有一定的隐蔽性，那如何确定服务器正在遭受或者曾经遭受CC攻击呢?我们可以通过以下三个方法来确定。</p>
+<p>(1).命令行法<br>一般遭受CC攻击时，Web服务器会出现80端口对外关闭的现象，因为这个端口已经被大量的垃圾数据堵塞了正常的连接被中止了。我们可以通过在命令行下输入命令netstat-an来查看，如果看到类似如下有大量显示雷同的连接记录基本就可以被CC攻击了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">……</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6:2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">TCP 192.168.1.3:80 192.168.1.6: 2205 SYN_RECEIVED 4</div><div class="line"></div><div class="line">……</div></pre></td></tr></table></figure></p>
+<p>其中”192.168.1.6”就是被用来代理攻击的主机的IP，”SYN_RECEIVED”是TCP连接状态标志，意思是”正在处于连接的初始同步状态”，表明无法建立握手应答处于等待状态。这就是攻击的特征，一般情况下这样的记录一般都会有很多条，表示来自不同的代理IP的攻击。</p>
+<p>(2).批处理法<br>上述方法需要手工输入命令且如果Web服务器IP连接太多看起来比较费劲，我们可以建立一个批处理文件，通过该脚本代码确定是否存在CC攻击。打开记事本键入如下代码保存为CC.bat：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@echooff</div><div class="line"></div><div class="line">time /t &gt;&gt;log.log</div><div class="line"></div><div class="line">netstat -n -p tcp |find &quot;:80&quot;&gt;&gt;Log.log</div><div class="line"></div><div class="line">notepad log.log</div><div class="line"></div><div class="line">exit</div></pre></td></tr></table></figure></p>
+<p>上面的脚本的含义是筛选出当前所有的到80端口的连接。当我们感觉服务器异常是就可以双击运行该批处理文件，然后在打开的log.log文件中查看所有的连接。如果同一个IP有比较多的到服务器的连接，那就基本可以确定该IP正在对服务器进行CC攻击。</p>
+<p>(3).查看系统日志<br>上面的两种方法有个弊端，只可以查看当前的CC攻击，对于确定Web服务器之前是否遭受CC攻击就无能为力了，此时我们可以通过Web日志来查，因为Web日志忠实地记录了所有IP访问Web资源的情况。通过查看日志我们可以Web服务器之前是否遭受CC攻击，并确定攻击者的IP然后采取进一步的措施。</p>
+<p>Web日志一般在C:\WINDOWS\system32\LogFiles\HTTPERR目录下，该目录下用类似httperr1.log的日志文件，这个文件就是记录Web访问错误的记录。管理员可以依据日志时间属性选择相应的日志打开进行分析是否Web被CC攻击了。默认情况下，Web日志记录的项并不是很多，我们可以通过IIS进行设置，让Web日志记录更多的项以便进行安全分析。其操作步骤是：</p>
+<p>“开始→管理工具”打开”Internet信息服务器”，展开左侧的项定位到到相应的Web站点，然后右键点击选择”属性”打开站点属性窗口，在”网站”选项卡下点击”属性”按钮，在”日志记录属性”窗口的”高级”选项卡下可以勾选相应的”扩展属性”，以便让Web日志进行记录。比如其中的”发送的字节数”、”接收的字节数”、”所用时间”这三项默认是没有选中的，但在记录判断CC攻击中是非常有用的，可以勾选。另外，如果你对安全的要求比较高，可以在”常规”选项卡下对”新日志计划”进行设置，让其”每小时”或者”每一天”进行记录。为了便于日后进行分析时好确定时间可以勾选”文件命名和创建使用当地时间”。</p>
+<p>四、CC攻击防御策略<br>确定Web服务器正在或者曾经遭受CC攻击，那如何进行有效的防范呢?</p>
+<p>(1).取消域名绑定<br>一般cc攻击都是针对网站的域名进行攻击，比如我们的网站域名是”www.star-net.cn”，那么攻击者就在攻击工具中设定攻击对象为该域名然后实施攻击。</p>
+<p>对于这样的攻击我们的措施是在IIS上取消这个域名的绑定，让CC攻击失去目标。具体操作步骤是：打开”IIS管理器”定位到具体站点右键”属性”打开该站点的属性面板，点击IP地址右侧的”高级”按钮，选择该域名项进行编辑，将”主机头值”删除或者改为其它的值(域名)。</p>
+<p>经过模拟测试，取消域名绑定后Web服务器的CPU马上恢复正常状态，通过IP进行访问连接一切正常。但是不足之处也很明显，取消或者更改域名对于别人的访问带来了不变，另外，对于针对IP的CC攻击它是无效的，就算更换域名攻击者发现之后，他也会对新域名实施攻击。</p>
+<p>(2).域名欺骗解析<br>如果发现针对域名的CC攻击，我们可以把被攻击的域名解析到127.0.0.1这个地址上。我们知道127.0.0.1是本地回环IP是用来进行网络测试的，如果把被攻击的域名解析到这个IP上，就可以实现攻击者自己攻击自己的目的，这样他再多的肉鸡或者代理也会宕机，让其自作自受。</p>
+<p>另外，当我们的Web服务器遭受CC攻击时把被攻击的域名解析到国家有权威的政府网站或者是网警的网站，让其网警来收拾他们。</p>
+<p>现在一般的Web站点都是利用类似”新网”这样的服务商提供的动态域名解析服务，大家可以登录进去之后进行设置。</p>
+<p>(3).更改Web端口<br>一般情况下Web服务器通过80端口对外提供服务，因此攻击者实施攻击就以默认的80端口进行攻击，所以，我们可以修改Web端口达到防CC攻击的目的。运行IIS管理器，定位到相应站点，打开站点”属性”面板，在”网站标识”下有个TCP端口默认为80，我们修改为其他的端口就可以了。</p>
+<p>(4).IIS屏蔽IP<br>我们通过命令或在查看日志发现了CC攻击的源IP，就可以在IIS中设置屏蔽该IP对Web站点的访问，从而达到防范IIS攻击的目的。在相应站点的”属性”面板中，点击”目录安全性”选项卡，点击”IP地址和域名现在”下的”编辑”按钮打开设置对话框。在此窗口中我们可以设置”授权访问”也就是”白名单”，也可以设置”拒绝访问”即”黑名单”。比如我们可以将攻击者的IP添加到”拒绝访问”列表中，就屏蔽了该IP对于Web的访问。</p>
+<p>五、CC攻击的防范手段<br>防止CC攻击，不一定非要用高防服务器。比如，用防CC攻击软件就可以有效的防止CC攻击。推荐一些CC的防范手段：</p>
+<p>1、优化代码<br>尽可能使用缓存来存储重复的查询内容，减少重复的数据查询资源开销。减少复杂框架的调用，减少不必要的数据请求和处理逻辑。程序执行中，及时释放资源，比如及时关闭mysql连接，及时关闭memcache连接等，减少空连接消耗。</p>
+<p>2、限制手段<br>对一些负载较高的程序增加前置条件判断，可行的判断方法如下：</p>
+<p>必须具有网站签发的session信息才可以使用（可简单阻止程序发起的集中请求）；必须具有正确的referer（可有效防止嵌入式代码的攻击）；禁止一些客户端类型的请求（比如一些典型的不良蜘蛛特征）；同一session多少秒内只能执行一次。</p>
+<p>3、完善日志<br>尽可能完整保留访问日志。日志分析程序，能够尽快判断出异常访问，比如单一ip密集访问；比如特定url同比请求激增。</p>
+<p>六、针对CC攻击的商业解决方案<br>很多的网站管理者是等到网站遭到攻击了，受到损失了，才去寻求解决的方案，在将来的互联网飞速发展的时代，一定要有安全隐患意识，不要等到损失大了，再去想办法来补救，这样为时已晚。然而当网站受到攻击时，大多数人想到的是—–快点找硬防，基本上都步了一个误区，就是认为网站或者服务器被攻击，购买硬件防火墙，什么事都万事大吉了，实际上这样的想法是极端错误的。多年的统计数据表明，想彻底解CC攻击是几乎不可能的，就好比治疗感冒一样，我们可以治疗，也可以预防，但却无法根治，但我们若采取积极有效的防御方法，则可在很大程度上降低或减缓生病的机率，防治DDOS攻击也是如此。</p>
+<p>实际上比较理想解决方案应该是”软件+硬件”的解决方案。此方案对于资金较为充足的企业网站来说，这个方案适合他们；硬件在DDOS防护上有优势，软件CC防护上有优势；相对于一些对于ICP内容网站、论坛社区BBS、电子商务eBusiness、音乐网站Music、电影网站File等网站服务器越来越普及，但由于种种原因往往会遭受竞争对手或打击报复者的恶意DDOS攻击，持续的攻击会导致大量用户流失，严重的甚至因人气全失而被迫关闭服务器，为了最大程度的保护运营者的利益，冰盾科技结合多年抗DDOS的实践经验给出了最少的安全投资可获得最大安全回报的抗DDOS解决方案。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CC攻击/" rel="tag"># CC攻击</a>
+          
+            <a href="/tags/DDOS攻击/" rel="tag"># DDOS攻击</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/study-clojure.html" rel="next" title="study clojure">
+                <i class="fa fa-chevron-left"></i> study clojure
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/safe-iptables.html" rel="prev" title="使用iptables应对SYN攻击,CC攻击,ACK攻击[转]">
+                使用iptables应对SYN攻击,CC攻击,ACK攻击[转] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Sun Hao" />
+          <p class="site-author-name" itemprop="name">Sun Hao</p>
+          <p class="site-description motion-element" itemprop="description">Whoever wants to be first must be slave of all.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Hao</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "68d47669d3794a958fbaaee9328b90f3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

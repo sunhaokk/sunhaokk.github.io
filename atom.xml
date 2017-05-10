@@ -17,8 +17,8 @@
   
   <entry>
     <title>nginx重启，重载，测试，配置</title>
-    <link href="http://sunhao.win/2017/05/09/nginx-config/"/>
-    <id>http://sunhao.win/2017/05/09/nginx-config/</id>
+    <link href="http://sunhao.win/nginx-config.html"/>
+    <id>http://sunhao.win/nginx-config.html</id>
     <published>2017-05-09T06:13:42.000Z</published>
     <updated>2017-05-09T06:15:16.959Z</updated>
     
@@ -52,8 +52,8 @@
   
   <entry>
     <title>mysql2013错误</title>
-    <link href="http://sunhao.win/2017/05/09/mysql-2013%E9%94%99%E8%AF%AF/"/>
-    <id>http://sunhao.win/2017/05/09/mysql-2013错误/</id>
+    <link href="http://sunhao.win/mysql-2013%E9%94%99%E8%AF%AF.html"/>
+    <id>http://sunhao.win/mysql-2013错误.html</id>
     <published>2017-05-09T02:42:21.000Z</published>
     <updated>2017-05-09T02:48:35.933Z</updated>
     
@@ -77,8 +77,8 @@
   
   <entry>
     <title>netwrok-dns</title>
-    <link href="http://sunhao.win/2017/05/05/netwrok-dns/"/>
-    <id>http://sunhao.win/2017/05/05/netwrok-dns/</id>
+    <link href="http://sunhao.win/netwrok-dns.html"/>
+    <id>http://sunhao.win/netwrok-dns.html</id>
     <published>2017-05-05T06:47:39.000Z</published>
     <updated>2017-05-10T06:52:52.281Z</updated>
     
@@ -243,8 +243,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>fg、bg、jobs、&amp;、nohup、ctrl+z、ctrl+c、screen命令</title>
-    <link href="http://sunhao.win/2017/05/04/linux-bg-fg-jobs-screen/"/>
-    <id>http://sunhao.win/2017/05/04/linux-bg-fg-jobs-screen/</id>
+    <link href="http://sunhao.win/linux-bg-fg-jobs-screen.html"/>
+    <id>http://sunhao.win/linux-bg-fg-jobs-screen.html</id>
     <published>2017-05-04T02:10:17.000Z</published>
     <updated>2017-05-04T09:25:20.233Z</updated>
     
@@ -308,8 +308,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>respberry树莓派 无线网络配置</title>
-    <link href="http://sunhao.win/2017/05/02/respberry-wpanetwork/"/>
-    <id>http://sunhao.win/2017/05/02/respberry-wpanetwork/</id>
+    <link href="http://sunhao.win/respberry-wpanetwork.html"/>
+    <id>http://sunhao.win/respberry-wpanetwork.html</id>
     <published>2017-05-02T07:56:14.000Z</published>
     <updated>2017-05-02T07:59:46.240Z</updated>
     
@@ -344,8 +344,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>linux-source</title>
-    <link href="http://sunhao.win/2017/05/02/linux-source/"/>
-    <id>http://sunhao.win/2017/05/02/linux-source/</id>
+    <link href="http://sunhao.win/linux-source.html"/>
+    <id>http://sunhao.win/linux-source.html</id>
     <published>2017-05-02T02:47:55.000Z</published>
     <updated>2017-05-02T02:57:10.970Z</updated>
     
@@ -369,8 +369,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>/bin,/sbin,/usr/bin,/usr/sbin区别</title>
-    <link href="http://sunhao.win/2017/05/02/linux-diff-sbin-bin/"/>
-    <id>http://sunhao.win/2017/05/02/linux-diff-sbin-bin/</id>
+    <link href="http://sunhao.win/linux-diff-sbin-bin.html"/>
+    <id>http://sunhao.win/linux-diff-sbin-bin.html</id>
     <published>2017-05-02T01:48:34.000Z</published>
     <updated>2017-05-02T02:13:59.255Z</updated>
     
@@ -423,8 +423,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>反向代理 和 正向代理区别</title>
-    <link href="http://sunhao.win/2017/04/27/php-proxy/"/>
-    <id>http://sunhao.win/2017/04/27/php-proxy/</id>
+    <link href="http://sunhao.win/php-proxy.html"/>
+    <id>http://sunhao.win/php-proxy.html</id>
     <published>2017-04-27T09:00:38.000Z</published>
     <updated>2017-04-28T06:40:20.811Z</updated>
     
@@ -457,8 +457,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>Unicode 和 UTF-8 有何区别？</title>
-    <link href="http://sunhao.win/2017/04/26/soft-unicode-utf8/"/>
-    <id>http://sunhao.win/2017/04/26/soft-unicode-utf8/</id>
+    <link href="http://sunhao.win/soft-unicode-utf8.html"/>
+    <id>http://sunhao.win/soft-unicode-utf8.html</id>
     <published>2017-04-26T08:53:56.000Z</published>
     <updated>2017-04-26T08:56:59.104Z</updated>
     
@@ -484,8 +484,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>linux-crontab</title>
-    <link href="http://sunhao.win/2017/04/25/linux-crontab/"/>
-    <id>http://sunhao.win/2017/04/25/linux-crontab/</id>
+    <link href="http://sunhao.win/linux-crontab.html"/>
+    <id>http://sunhao.win/linux-crontab.html</id>
     <published>2017-04-25T00:47:48.000Z</published>
     <updated>2017-04-25T01:03:40.787Z</updated>
     
@@ -597,8 +597,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>linux-iftop查看带宽-iptables</title>
-    <link href="http://sunhao.win/2017/04/24/linux-iftop-iptables/"/>
-    <id>http://sunhao.win/2017/04/24/linux-iftop-iptables/</id>
+    <link href="http://sunhao.win/linux-iftop-iptables.html"/>
+    <id>http://sunhao.win/linux-iftop-iptables.html</id>
     <published>2017-04-24T03:10:48.000Z</published>
     <updated>2017-04-24T03:48:33.000Z</updated>
     
@@ -680,8 +680,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>架构师之路</title>
-    <link href="http://sunhao.win/2017/04/24/soft-architect/"/>
-    <id>http://sunhao.win/2017/04/24/soft-architect/</id>
+    <link href="http://sunhao.win/soft-architect.html"/>
+    <id>http://sunhao.win/soft-architect.html</id>
     <published>2017-04-24T00:47:00.000Z</published>
     <updated>2017-04-24T07:24:20.000Z</updated>
     
@@ -892,8 +892,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>php-disign-pattern设计模式</title>
-    <link href="http://sunhao.win/2017/04/21/php-disign-pattern/"/>
-    <id>http://sunhao.win/2017/04/21/php-disign-pattern/</id>
+    <link href="http://sunhao.win/php-disign-pattern.html"/>
+    <id>http://sunhao.win/php-disign-pattern.html</id>
     <published>2017-04-21T01:13:29.000Z</published>
     <updated>2017-04-21T01:31:04.255Z</updated>
     
@@ -923,8 +923,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>linux-shell-/bin/bash^M错误</title>
-    <link href="http://sunhao.win/2017/04/20/linux-shell-bin-bashM/"/>
-    <id>http://sunhao.win/2017/04/20/linux-shell-bin-bashM/</id>
+    <link href="http://sunhao.win/linux-shell-bin-bashM.html"/>
+    <id>http://sunhao.win/linux-shell-bin-bashM.html</id>
     <published>2017-04-20T07:38:56.000Z</published>
     <updated>2017-04-20T07:55:22.927Z</updated>
     
@@ -952,8 +952,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>linux-while-do-case与js和python,php对比</title>
-    <link href="http://sunhao.win/2017/04/20/linux-while-do/"/>
-    <id>http://sunhao.win/2017/04/20/linux-while-do/</id>
+    <link href="http://sunhao.win/linux-while-do.html"/>
+    <id>http://sunhao.win/linux-while-do.html</id>
     <published>2017-04-20T02:57:23.000Z</published>
     <updated>2017-04-20T03:14:07.526Z</updated>
     
@@ -986,8 +986,8 @@ iv.              TTL添加时系统会自动生成，默认为600秒。）
   
   <entry>
     <title>mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor</title>
-    <link href="http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/"/>
-    <id>http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/</id>
+    <link href="http://sunhao.win/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor.html"/>
+    <id>http://sunhao.win/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor.html</id>
     <published>2017-04-19T08:31:22.000Z</published>
     <updated>2017-05-09T02:41:24.664Z</updated>
     
@@ -1040,8 +1040,8 @@ sql_mode        = ALLOW_INVALID_DATES
   
   <entry>
     <title>php-php7-fpm默认监听的scok</title>
-    <link href="http://sunhao.win/2017/04/19/php-php7-listen/"/>
-    <id>http://sunhao.win/2017/04/19/php-php7-listen/</id>
+    <link href="http://sunhao.win/php-php7-listen.html"/>
+    <id>http://sunhao.win/php-php7-listen.html</id>
     <published>2017-04-19T08:26:29.000Z</published>
     <updated>2017-04-19T08:43:13.227Z</updated>
     
@@ -1065,8 +1065,8 @@ sql_mode        = ALLOW_INVALID_DATES
   
   <entry>
     <title>php-interfaces-and-traits</title>
-    <link href="http://sunhao.win/2017/04/18/php-interfaces-and-traits/"/>
-    <id>http://sunhao.win/2017/04/18/php-interfaces-and-traits/</id>
+    <link href="http://sunhao.win/php-interfaces-and-traits.html"/>
+    <id>http://sunhao.win/php-interfaces-and-traits.html</id>
     <published>2017-04-18T00:37:27.000Z</published>
     <updated>2017-04-18T09:36:44.000Z</updated>
     
@@ -1115,8 +1115,8 @@ sql_mode        = ALLOW_INVALID_DATES
   
   <entry>
     <title>linux-fifo</title>
-    <link href="http://sunhao.win/2017/04/14/linux-fifo/"/>
-    <id>http://sunhao.win/2017/04/14/linux-fifo/</id>
+    <link href="http://sunhao.win/linux-fifo.html"/>
+    <id>http://sunhao.win/linux-fifo.html</id>
     <published>2017-04-14T08:19:55.000Z</published>
     <updated>2017-04-14T08:19:55.343Z</updated>
     
@@ -1133,8 +1133,8 @@ sql_mode        = ALLOW_INVALID_DATES
   
   <entry>
     <title>linux-mknod</title>
-    <link href="http://sunhao.win/2017/04/14/linux-mknod/"/>
-    <id>http://sunhao.win/2017/04/14/linux-mknod/</id>
+    <link href="http://sunhao.win/linux-mknod.html"/>
+    <id>http://sunhao.win/linux-mknod.html</id>
     <published>2017-04-14T05:56:26.000Z</published>
     <updated>2017-04-14T06:09:51.248Z</updated>
     

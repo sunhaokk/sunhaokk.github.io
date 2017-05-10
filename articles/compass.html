@@ -1,0 +1,1103 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="compass," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Da'sBlog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="开始compass目前已经不再维护，但有些东西仍值得学习。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。 如果需要验证版本，可以运行以下命令:">
+<meta name="keywords" content="compass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compass中文手册">
+<meta property="og:url" content="http://sunhao.win/articles/compass.html">
+<meta property="og:site_name" content="Da&#39;sBlog">
+<meta property="og:description" content="开始compass目前已经不再维护，但有些东西仍值得学习。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。 如果需要验证版本，可以运行以下命令:">
+<meta property="og:updated_time" content="2017-03-03T08:57:26.022Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compass中文手册">
+<meta name="twitter:description" content="开始compass目前已经不再维护，但有些东西仍值得学习。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。 如果需要验证版本，可以运行以下命令:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sunhao.win/articles/compass.html"/>
+
+
+
+
+
+  <title> Compass中文手册 | Da'sBlog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b8432f1a5c5c27d6783c25569df4b270";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Da'sBlog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+
+
+        
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-categories">
+
+
+        
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-archives">
+
+
+        
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-compass">
+
+
+        
+          <a href="/2017/01/11/compass" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            compass中文手册
+          </a>
+        </li>
+        
+
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://sunhao.win/articles/compass.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Sun Hao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Da'sBlog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Da'sBlog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Compass中文手册
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T15:10:57+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/articles/compass.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>compass目前已经不再维护，但有些东西仍值得学习。</p>
+<p><strong>Version: 1.0.1</strong></p>
+<h2 id="开始使用Compass"><a href="#开始使用Compass" class="headerlink" title="开始使用Compass"></a>开始使用Compass</h2><p>Compass 是一款使用<a href="http://sass-lang.com" target="_blank" rel="external">Sass语言</a> 编写的开源的css设计框架，使用<br>起来强大和简单. 如果你对Sass不熟悉, 可以去<a href="http://sass-lang.com" target="_blank" rel="external">sass-lang.com</a>学习如何使用.</p>
+<h2 id="安装Compass"><a href="#安装Compass" class="headerlink" title="安装Compass"></a>安装Compass</h2><p>请按照<a href="http://compass-style.org/install/" target="_blank" rel="external">Compass 安装指南</a>按步骤安装Compass和Sass。</p>
+<p>如果需要验证版本，可以运行以下命令:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass version</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="监视和编译你的项目"><a href="#监视和编译你的项目" class="headerlink" title="监视和编译你的项目"></a>监视和编译你的项目</h2><p>（ps：watch参数就是，监控你的项目是否则有文件改动，一旦有改动，就自动转成css。）</p>
+<p>当开发项目时, 你可以运行compass监视器 ，自动修改你的css文件到最新状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /path/to/project</div><div class="line">$ compass watch</div></pre></td></tr></table></figure>
+<p>当在生产环境中编译你的css文件的时, 通过 –production 编译器将默认对终端(就是我们用的浏览器)优化输出(其实就是精简):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass compile --production</div></pre></td></tr></table></figure>
+<h2 id="使用Compass不用命令行"><a href="#使用Compass不用命令行" class="headerlink" title="使用Compass不用命令行"></a>使用Compass不用命令行</h2><p>你可以不用compass命令行. 在一些情况下, 对于一些不是明确支持Compasssass编译器和框架，这样更容易集成.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gem install compass-core</div><div class="line">$ cat &lt;&lt;- EOF &gt; _project-setup.scss</div><div class="line">\$project-path: absolute-path(join-file-segments(<span class="string">".."</span>));</div><div class="line">@<span class="keyword">import</span> <span class="string">"compass/configuration"</span>;</div><div class="line">\$compass-options: (http_path: <span class="string">"/"</span>);</div><div class="line">@include compass-configuration(\$compass-options);</div><div class="line">EOF</div><div class="line">Add to the top <span class="keyword">of</span> each sass file: @<span class="keyword">import</span> <span class="string">"project-setup"</span>;</div><div class="line">Compile using the Sass command line:</div><div class="line">$ sass -r compass-core --update sass:css</div></pre></td></tr></table></figure></p>
+<p>详情请读: <a href="http://compass-style.org/help/documentation/sass-based-configuration-options/" target="_blank" rel="external">Compass’s Sass-based配置选项</a>.</p>
+<h2 id="更多配置命令"><a href="#更多配置命令" class="headerlink" title="更多配置命令"></a>更多配置命令</h2><p>所有compass命令的文档可以通过运行下面的代码发现:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help</div></pre></td></tr></table></figure></p>
+<p>可以设置一个可选参数，指定具体的一个命令:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ compass help &lt;command&gt;</div></pre></td></tr></table></figure></p>
+<p> <command> 就是指定的命令参数 (例如. compile)</p>
+<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><h2 id="教程-1"><a href="#教程-1" class="headerlink" title="教程"></a>教程</h2><h3 id="Compass-教程"><a href="#Compass-教程" class="headerlink" title="Compass 教程"></a>Compass 教程</h3><p>这个教程还在改进, 如果这里还有什么教程没有涉及到，请看 <a href="http://groups.google.com/group/compass-users" target="_blank" rel="external">Compass 联络表</a>， 那里有很多compass大神帮你解决。</p>
+<h3 id="Compass入门"><a href="#Compass入门" class="headerlink" title="Compass入门"></a>Compass入门</h3><p>如果你对Compass不熟悉, 你最好看看 <a href="http://compass-style.org/help/tutorials/best_practices/" target="_blank" rel="external">最佳练习</a>,  <a href="http://compass-style.org/help/tutorials/configuration-reference/" target="_blank" rel="external">配置参照</a>, <a href="http://compass-style.org/help/tutorials/configurable-variables/" target="_blank" rel="external">变量配置</a>, 还有 <a href="http://compass-style.org/help/tutorials/command-line/" target="_blank" rel="external">命令行手册</a>.</p>
+<h3 id="贡献点"><a href="#贡献点" class="headerlink" title="贡献点?"></a>贡献点?</h3><p>如果你使用Compass中有些建议和想法, 可以看下<a href="http://compass-style.org/help/tutorials/contributing/" target="_blank" rel="external">贡献</a> 和 <a href="http://compass-style.org/help/tutorials/extensions/" target="_blank" rel="external">创建插件</a>.</p>
+<h2 id="应用集成"><a href="#应用集成" class="headerlink" title="应用集成"></a>应用集成</h2><h3 id="应用集成-1"><a href="#应用集成-1" class="headerlink" title="应用集成"></a>应用集成</h3><h4 id="Ruby-on-Rails"><a href="#Ruby-on-Rails" class="headerlink" title="Ruby on Rails"></a>Ruby on Rails</h4><p>Rails 3.1（一款构建在 Ruby 语言之上的一款web框架）</p>
+<p>添加compass到你的依赖中:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'compass'</span></div></pre></td></tr></table></figure>
+<p>也可以去 <a href="https://gist.github.com/1184843" target="_blank" rel="external">gist</a>(一款代码分享平台)看看</p>
+<p>Rails 3</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass init rails /path/to/myrailsproject</div></pre></td></tr></table></figure>
+<p>Rails 2.3</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rake <span class="symbol">rails:</span>template LOCATION=<span class="symbol">http:</span>/<span class="regexp">/compass-style.org/rails</span><span class="regexp">/installer</span></div></pre></td></tr></table></figure>
+<h3 id="Sinatra"><a href="#Sinatra" class="headerlink" title="Sinatra"></a>Sinatra</h3><h4 id="Sinatra-（基于ruby的微型web框架）"><a href="#Sinatra-（基于ruby的微型web框架）" class="headerlink" title="Sinatra （基于ruby的微型web框架）"></a>Sinatra （基于ruby的微型web框架）</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'compass'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'sinatra'</span></div><div class="line"><span class="keyword">require</span> <span class="string">'haml'</span></div><div class="line"></div><div class="line">configure <span class="keyword">do</span></div><div class="line">  set <span class="symbol">:haml</span>, &#123;<span class="symbol">:format</span> =&gt; <span class="symbol">:html5</span>&#125;</div><div class="line">  set <span class="symbol">:scss</span>, &#123;<span class="symbol">:style</span> =&gt; <span class="symbol">:compact</span>, <span class="symbol">:debug_info</span> =&gt; <span class="literal">false</span>&#125;</div><div class="line">  Compass.add_project_configuration(File.join(settings.root, <span class="string">'config'</span>, <span class="string">'compass.rb'</span>))</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">get <span class="string">'/stylesheets/:name.css'</span> <span class="keyword">do</span></div><div class="line">  content_type <span class="string">'text/css'</span>, <span class="symbol">:charset</span> =&gt; <span class="string">'utf-8'</span></div><div class="line">  scss <span class="symbol">:<span class="string">"stylesheets/<span class="subst">#&#123;params[<span class="symbol">:name</span>]&#125;</span>"</span></span>, Compass.sass_engine_options</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">get <span class="string">'/'</span> <span class="keyword">do</span></div><div class="line">  haml <span class="symbol">:index</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>假设你保存配置文件到 <code>config/compass.rb</code>. 如果你保存样式表到 “views/stylesheets/” 目录，而不是  “views/”, 记得按你设置好的配置更新 <code>sass_dir</code> . 看看 <a href="https://gist.github.com/1184843" target="_blank" rel="external">sample compass-sinatra project</a> 实时运行!</p>
+<p><a href="https://github.com/adamstac/sinatra-bootstrap" target="_blank" rel="external">Sinatra Bootstrap</a> - 一个 支持Haml, Sass, Compass, jQuery 等 的Sinatra项目.</p>
+<h3 id="nanoc"><a href="#nanoc" class="headerlink" title="nanoc"></a>nanoc</h3><p>nanoc 是一个用 Ruby 实现的静态网页产生工具</p>
+<p>最小集成: 只需要拖他进去</p>
+<p>最简单的途径集成compass到nanoc. 更改 <code>config.rb</code> 指向到你所使用的样式表. 你需要单独运行一个窗口用Compass watch命令监控编译nanoc程序.</p>
+<p>实力项目，如: <a href="https://github.com/unthinkingly/unthinkingly-blog" target="_blank" rel="external">unthinkingly</a>.</p>
+<p>标准集成</p>
+<p>Nanoc文件规范的首要要点, 像这样加载 Compass 配置文件:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'compass'</span></div><div class="line"></div><div class="line">Compass.add_project_configuration <span class="string">'compass.rb'</span><span class="comment"># when using Compass &gt; 0.10</span></div><div class="line">sass_options = Compass.sass_engine_options<span class="comment"># when using Compass &gt; 0.10</span></div><div class="line"></div><div class="line">Compass.configuration.parse <span class="string">'compass.rb'</span>  <span class="keyword">when</span> using Compass &lt; <span class="number">0</span>.<span class="number">10</span></div><div class="line">sass_options = Compass.config.to_sass_engine_options  <span class="keyword">when</span> using Compass &lt; <span class="number">0</span>.<span class="number">10</span></div></pre></td></tr></table></figure></p>
+<p>创建并配置一个 <code>compass.rb</code> 文件到你站点的根目录  .示例配置:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">http_path = <span class="string">"/"</span></div><div class="line">project_path = File.expand_path(File.join(File.dirname(__FILE_<span class="number">_</span>), <span class="string">'..'</span>))</div><div class="line">css_dir = <span class="string">"output/stylesheets"</span></div><div class="line">sass_dir = <span class="string">"content/stylesheets"</span></div><div class="line">images_dir = <span class="string">"assets/images"</span></div><div class="line">javascripts_dir = <span class="string">"assets/javascripts"</span></div><div class="line">fonts_dir = <span class="string">"assets/fonts"</span></div><div class="line">http_javascripts_dir = <span class="string">"javascripts"</span></div><div class="line">http_stylesheets_dir = <span class="string">"stylesheets"</span></div><div class="line">http_images_dir = <span class="string">"images"</span></div><div class="line">http_fonts_dir = <span class="string">"fonts"</span></div></pre></td></tr></table></figure></p>
+<p>根据您的目录结构和配置，您可能需要更改一些目录的路径。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Sass 和 Compass过滤样式表, 从Compass按照配置好的sass引擎，调用sass进行过滤, 如下:</div><div class="line"></div><div class="line">    compile <span class="string">'/stylesheets/*'</span> <span class="keyword">do</span></div><div class="line">      filter <span class="symbol">:sass</span>, sass_options.merge(<span class="symbol">:syntax</span> =&gt; item[<span class="symbol">:extension</span>].to_sym)</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    nanoc projects using the formal approach</div></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/Compass/compass/tree/stable/compass-style.org" target="_blank" rel="external">站点</a></p>
+<h2 id="最佳方法"><a href="#最佳方法" class="headerlink" title="最佳方法"></a>最佳方法</h2><p>按下面的方法可以使你的项目更以维护和创建.</p>
+<p>使用一个Base样式表文件</p>
+<p>创建一个_base.scss partial(部分) 用来初始化样式表中共同的变量和集成一些你经常使用的工具。</p>
+<p>_base.scss<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$blueprint-grid-columns : <span class="number">24</span>;</div><div class="line">$blueprint-grid-width   : <span class="number">30</span>px;</div><div class="line">$blueprint-grid-margin  : <span class="number">10</span>px;</div><div class="line">$font-color             <span class="symbol">:</span><span class="number">333</span>;</div><div class="line"></div><div class="line">@import <span class="string">"compass/reset"</span>;</div><div class="line">@import <span class="string">"compass/utilities"</span>;</div><div class="line">@import <span class="string">"blueprint"</span>;</div></pre></td></tr></table></figure></p>
+<p>// etc.<br>_base.scss 同时也是储存你自定义 mixins(混合)的好地方, 所以它可以供任何样式表用。</p>
+<p>你可以在其他样式表中包含它:</p>
+<p>application.scss</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@import &quot;base&quot;;</div><div class="line"></div><div class="line">#wrapper &#123;</div><div class="line">  @include container;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>// etc.<br>如果你想覆盖掉base.scss,可以在@import-ing之前，定义一些compass/framework 常量. 请参见<a href="http://compass-style.org/help/tutorials/configurable-variables/" target="_blank" rel="external">可配置的变量</a>里具体的例子. 请注意，您可以参考 <em>base.scss的，因为它是局部的,所以名字没有前置下划线和扩展名。(译者注:这里意思就是partial是公共部分，不属于私有，所以起名字的时候不要加</em>或者扩展名)</p>
+<p>编写自定义Mixins</p>
+<p>Mixins让你通过一条命令就可以把多个样式表插入选择器. 这样可以使你的源码避免重复，提升可维护性. 使用mixins让你的样式表源码像自己注释的文档  – 这样更易读，例如 @include round-corners(6px,f00) 要比列出多条语句强很多。</p>
+<p>自由标记样式表</p>
+<p>从一个站点的页面中提取出我们所关注的css样式. 这样看似更易于维护. 然而, 事实上, 由于CSS功能上的限制抽象成符合DRY原则的可维护的代码. 不过sass它能让我们能够创建完全抽象和重用的代码，允许我们把所有的样式移入到样式表里。  读这篇博客关于这个问题的更多信息</p>
+<p>一旦你有整洁的标记，使用mixin和继承的样式表。整洁清晰的抽象，您应该能够阅读网页的样式表,甚至没有在Web浏览器中加载该页,就想象出页面会是什么样子。</p>
+<p>如果你发现语义化的选择器使得你的css表臃肿，是时候到重构的时间了，例如，此样式表将产生不必要的膨胀:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@mixin three-column &#123;</div><div class="line">  .container &#123; @include container;  &#125;</div><div class="line">  .header,</div><div class="line">  .footer    &#123; @include column(24); &#125;</div><div class="line">  .sidebar   &#123; @include column(6);  &#125;</div><div class="line">  article    &#123; @include column(10); &#125;</div><div class="line">  .rightbar  &#123; @include column(8);  &#125;</div><div class="line">&#125;</div><div class="line">body#article,</div><div class="line">body#snippet,</div><div class="line">body#blog-post &#123; @include three-column; &#125;</div></pre></td></tr></table></figure>
+<p>相反的，问问自己，“这些页面非样式的实质共同点是什么？”在这种情况下，他们的所有内容页面，最好把这些页面的body类单独编辑。(译者注，上面的sass样式表，编写完很臃肿冗余的。这把所有页面的内容都合并在了一起。产生太多没必要的语句。所以为了省代码，不如单独写更易于维护)</p>
+<p>嵌套选择器不要太多层。</p>
+<p>从零开始进行样式处理或以应用程序的一些常见的基点，要比应付不想要的风格到您的新设计的容易多。这样，在标记书中使用一些选择器，最好使用一些基本嵌套样式。然后使用重构模式的出现，减少膨胀。</p>
+<p>重要的是过长嵌套的选择器会导致一个小渲染的性能损失，可以减缓您的Web页面。没有必要完全模仿你的css文档结构。嵌套只有足够深的选择器是唯一的部分。例如，不要使用table thead tr th，当一个简单th选择器时就足够了。这可能意味着你必须把你的风格分成若干选择器，让文档级联工作。</p>
+<h2 id="促进"><a href="#促进" class="headerlink" title="促进"></a>促进</h2><h3 id="促进Compass发展"><a href="#促进Compass发展" class="headerlink" title="促进Compass发展"></a>促进Compass发展</h3><p>感谢您有兴趣在促进compass发展。我们因你而变，如果这里有难以懂的地方，请让我们知道。<br>如果你发现文档中的错误，可以按步骤告知我们</p>
+<p>Step 1: 去github上注册个账号.</p>
+<p>Step 2: 用你的账户Fork Compass. </p>
+<h3 id="简单改进"><a href="#简单改进" class="headerlink" title="简单改进"></a>简单改进</h3><p>感谢gihub让我们的迭代更加加单. 克隆镜像到本地，commit你的项目。</p>
+<h3 id="编辑文档"><a href="#编辑文档" class="headerlink" title="编辑文档"></a>编辑文档</h3><p>compass文档存在两个地方. 一个在compass-style.org directory<br>但大部分Sass中的注释生成文档文件本身。一个在github。</p>
+<h3 id="修复Bugs"><a href="#修复Bugs" class="headerlink" title="修复Bugs"></a>修复Bugs</h3><p>Step 3: 如果发现bug请及时bug，以便我们更新</p>
+<p>Step 4: 如果你不知道如如何提交。点 the code</p>
+<p>Step 5: 修复bug推送进度. 请务必提到的bug ID在您的提交消息，像这样:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Fixed the display of the fizzlebuzz <span class="keyword">in</span> IE6.</div><div class="line"></div><div class="line">Closes GH-<span class="number">123</span>.</div></pre></td></tr></table></figure>
+<p>Step 6: 尽可能在多个浏览器上测试</p>
+<p>Step 7: 确保测试通过. 完善测试</p>
+<p>可以提交代码了</p>
+<h3 id="更改样式表"><a href="#更改样式表" class="headerlink" title="更改样式表"></a>更改样式表</h3><p>如果你有什么好想法，别害羞发给我哈。</p>
+<p>许多特征的想法很好，非常适合compass核心库。在这些情况下，<br>你可以创建一个罗盘的扩展。有时这是因为compass的哲学概念不合。有时这只是因为我们认为这个想法需要时间考验。。<br>Step 3: 如果你不知道如如何提交</p>
+<p>Step 4: 点添加特性.</p>
+<p>Step 5: 写测试发给我们.</p>
+<p>Step 6: 编写文档实例给我们</p>
+<p>结束</p>
+<h3 id="更改ruby"><a href="#更改ruby" class="headerlink" title="更改ruby"></a>更改ruby</h3><p>如果你是对Ruby的规划工作方面的事情，假设你知道怎么读的代码，并使用标准Ruby工具，例如rake, gem, bundler, test/unit, cucumber, rspec,等。如果您有任何问题，请询问。问题随着解决。</p>
+<h3 id="补丁提交"><a href="#补丁提交" class="headerlink" title="补丁提交"></a>补丁提交</h3><p>如果你有多个功能要提交，请创建一个主分支，然后合并，迭代更新。<br>    创建一个主分支:<br>$ git checkout -b new_branch_name<br>… 可以commit一下 …<br>$ git push origin new_branch_name<br>你可以看到url的改变:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://github.com/your_user_name/compass/commits/new_branch_name</div></pre></td></tr></table></figure></p>
+<p>如果你有单提交的补丁，保存到master分支。但请记住，这些变更可能被刻意地挑选出来。<br>一旦你的变更GitHub上，确保你针对选择上游分支开发，选择包含您的更改适当的分支并发送一个pull请求。。大部分的描述应该在commit信息中–因此，没有必要写一大堆在请求消息。</p>
+<h3 id="Pull-请求实例"><a href="#Pull-请求实例" class="headerlink" title="Pull 请求实例"></a>Pull 请求实例</h3><p>简单说Pull请求就是从fork到merge的整个过程</p>
+<p>像compass页面的pull request由<a href="https://github.com/Compass/compass/issues" target="_blank" rel="external">管理问题</a>托管。代码审查由compass的核心团队成员维护:</p>
+<p>更新被拒绝 – 更新不符合compass规范. 如果你的修改更好, 至少等到他已经到期，或者用户认可。<br>更新被拒绝, 除非 – 有时,有丢失的部分，或其他的变化需要作出的更改。建议指出要解决的问题<br>更新统一 – 更新合并到compass, 小的改动由提交者合并后提交。</p>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">compass/</div><div class="line">  core/                     - compass配置和样式核心文件.</div><div class="line">    frameworks/             - 该目录框架自动加载。</div><div class="line">      compass/              - compass框架</div><div class="line">        stylesheets/        - compass库</div><div class="line">        templates/          - compass模板和模式</div><div class="line">    test/                   - 单元测试</div><div class="line">    lib/</div><div class="line">      compass-core.rb       - compass-core ruby 库</div><div class="line">      compass/</div><div class="line">        core/</div><div class="line">          sass_extensions/  - 增强 Sass</div><div class="line">            functions/      - Sass函数 </div><div class="line">            monkey_patches/ - sass 更改</div><div class="line">        configuration/      - 支持的项目配置</div><div class="line">  cli/                      - compass命令行</div><div class="line">    bin/</div><div class="line">      compass               - CLI 可执行文件</div><div class="line">    devbin/                 - 安装包后的脚本文件</div><div class="line">    test/                   - 单元测试</div><div class="line">    features/               - compass测试</div><div class="line">    lib/</div><div class="line">      compass.rb            - compass-core ruby 库</div><div class="line">      compass/</div><div class="line">        app_integration/    - 集成app框架</div><div class="line">        commands/           - UI 不支持命令</div><div class="line">        configuration/      - 一些特殊的命令</div><div class="line">        exec/               - UI 命令</div><div class="line">        installers/         - 安装模板支持</div><div class="line">  compass-style.org/        - 文档源码</div><div class="line">    output/                 - 生成文档</div><div class="line">  <span class="keyword">import</span>-once/              - 引入Compass</div></pre></td></tr></table></figure>
+<h3 id="一般哲学-其实就是规范"><a href="#一般哲学-其实就是规范" class="headerlink" title="一般哲学(其实就是规范)"></a>一般哲学(其实就是规范)</h3><p>1.用户可以指定选择器。compass永远不会强制用户使用一个样式的类名。</p>
+<p>2.Compass 不需要javascript</p>
+<p>3.compass核心与设计无关。这就是为什么compass没有栅格系统，因为栅格系统和设计有关。</p>
+<p>4.compass并不特别，compass能做的，扩展也能做。<br>5.Sass非常棒 – compass使Sass更容易，并证明如何使用Sass充分发挥其潜力。.<br>6.浏览器的兼容很头疼。需要共同解决。<br>7.默认情况下，compass支持尽可能多的浏览器，渐进增强，向后兼容。</p>
+<p>8.compass是一个Sass的试验场。watcher和 color function的例子转移到sass。</p>
+<h3 id="样式约定"><a href="#样式约定" class="headerlink" title="样式约定"></a>样式约定</h3><p>1.框架所有的样式都是(私有)部分. 它们由一个下划线开始. 否则, Sass 将直接在用户的css目录创建样式表<br>2.Compass不引入额外样式. 也有例外如 resets 和 集成的基类。<br>3.Mixins 提供两个级别的默认设置<br>. 第一是一个全局默认，可以重写一次<br>. 第二个默认mixin如果包含进来，可以重写.<br>4.Mixin 参数名称的公共API部分<br>,确保易懂，不要简短.<br>5.创建一个新的文件夹放样式表, 用一个和文件夹名一样的样式表导入所有的样式表 .<br>6.尽量避免通过选择器作为参数。</p>
+<h3 id="常见问题-amp-杂项信息"><a href="#常见问题-amp-杂项信息" class="headerlink" title="常见问题 &amp;杂项信息"></a>常见问题 &amp;杂项信息</h3><p>设置Git</p>
+<p>请按照以下这些指示来设置您的电子邮件地址和属性的信息。.</p>
+<p>下载git repo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:your_username/compass.git</div></pre></td></tr></table></figure></p>
+<p>链接远程 repo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd compass</div><div class="line">git remote add chriseppstein git://github.com/chriseppstein/compass.git</div></pre></td></tr></table></figure></p>
+<p>获取最近更新:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git fetch chriseppstein</div></pre></td></tr></table></figure></p>
+<h3 id="在开发中使用compass"><a href="#在开发中使用compass" class="headerlink" title="在开发中使用compass"></a>在开发中使用compass</h3><p>使用本地脚本可以放在 /path/to/compass/bin/compass 。 你可以添加 /path/to/compass/bin 到$PATH(环境变量), 或者选择其他目录.<br>创建安装gem:<br>编辑 VERSION 改变 version像这样: 1.0.0.something-unique-to-me.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem build compass.gemspec</div><div class="line">gem install compass-0.10.6.something-uniq-to-me.0.gem</div></pre></td></tr></table></figure></p>
+<p>– 如果安装gems到你的系统, 你可能需要用 sudo . 如果你不明白什么意思，就加上它(sudo意思就是superuser<br> do 的缩写)<br>捆绑环境, 你可以像这样用gem安装compass:<br>``linux<br>gem ‘compass’, :path =&gt; “/Users/myusername/some/path/to/compass”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ruby将自动执行捆绑命令</div><div class="line"></div><div class="line">配置ruby目录 . ruby的加载路径可以这么设置</div><div class="line">```linux</div><div class="line">export RUBYLIB=/Users/myusername/some/path/to/compass/lib</div></pre></td></tr></table></figure></p>
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p> 你必须安装Ruby到你的系统. 配置完git, 切换到root目录通过git checkout到compass分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd compass</div></pre></td></tr></table></figure></p>
+<p>捆绑安装Ruby gem.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install bundler</div></pre></td></tr></table></figure></p>
+<p>用sudo安装gems, </p>
+<p>配置依赖:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bundle install --binstubs devbin</div></pre></td></tr></table></figure></p>
+<p>核心库和样式测试:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bundle exec rake test features</div></pre></td></tr></table></figure></p>
+<p>运行性能测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./devbin/cucumber</div></pre></td></tr></table></figure></p>
+<p>如果样式测试失败, 捕获输出的测试项目在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test/fixtures/stylesheets/&lt;project&gt;/saved/</div></pre></td></tr></table></figure></p>
+<h3 id="编写样式测试"><a href="#编写样式测试" class="headerlink" title="编写样式测试"></a>编写样式测试</h3><p>Compass已经对每个样式表测试, 直接可以导入任何其他依赖关系和重构，不会影响到输出.</p>
+<p>在某种程度上，在不同的浏览器测试是一项巨大工程。如果你有想法，请让我们知道如何做到这一点<br>在test/fixtures/stylesheets目录, 有许多的compass项目. 测试添加更新文件,修改错误保证他们都通过. 安全起见，它可能错过一些问题。如果您添加一个新的样式表到compass，请确保添加一个新样式表，增加新的样式规则。</p>
+<h3 id="重新选择或重新定位-我们该怎么办"><a href="#重新选择或重新定位-我们该怎么办" class="headerlink" title="重新选择或重新定位. 我们该怎么办?"></a>重新选择或重新定位. 我们该怎么办?</h3><p>根据任何数目的原因，包括但不限于星星多少，您的更改不会简单合并到compass。例如，我们会考虑master的稳定，而不是改变的地方，或者我们可以把所有同类更改合并在一起，形成一个单一的提交在时间，或者我们可能希望改变你已经提交，它被安置到顶部但没有改变。在这些情况下，有两种方法你有两种选择:</p>
+<p>1.如果您有一些变化的一个分支，尚未接受，但其他分支上的变化被接受，那么您应该运行以下命令（确保fetch最新）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout branch_name; git rebase chriseppstein/master</div><div class="line">(假设的变化应用到主分支)</div></pre></td></tr></table></figure></p>
+<p>2.<br>如果你所有在分支的改变被接受或你不想再保留:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master; git branch -D branch_name; git push origin :branch_name</div></pre></td></tr></table></figure></p>
+<h2 id="创建Compass扩展"><a href="#创建Compass扩展" class="headerlink" title="创建Compass扩展"></a>创建Compass扩展</h2><h3 id="Compass扩展"><a href="#Compass扩展" class="headerlink" title="Compass扩展"></a>Compass扩展</h3><p>Compass,其核心，是在Sass基础上建立的框架。它是提供创建，安装和可重复使用的样式表的工具，它提供从全面布局小部件框架设计，甚至整页的设计。Sass让HTML页面的语义明确的和设计细节省力。<br>本文档描述了compass扩展的工具集，这样您就可以建立你自己的compass的扩展。</p>
+<p>基础布局</p>
+<p>my_extension<br>|<br>|- stylesheets (sass加载路径)<br>|  |<br>|  |- my_extension (not technically required, but it’s good to scope imports by the name of the extension)<br>|  |  |<br>|  |  |- _module_one.sass (this file would be imported using @import my_extension/module_one.sass)<br>|  |  |- _module_two.sass (this file would be imported using @import my_extension/module_two.sass)<br>|  |  |- …<br>|  |<br>|  |- _my_extension.sass (This file will import the entire extension using @import my_extension.sass)<br>|<br>|- templates (this is where templates/patterns go)<br>|  |<br>|  |- project (this should be provided if you’d like people to be able to base their project on the extension)<br>|  |  |<br>|  |  |- manifest.rb (this file should declare the contents of the template)<br>|  |  |- screen.sass (this would be the main stylesheet, importing from your extension and demonstrating its use)<br>|  |  |- print.sass (this file would set up basic print styles)<br>|  |  |- ie.sass (if you want, you can provide custom styles for IE)<br>|  |<br>|  |- some_pattern<br>|     |<br>|     |- manifest.rb<br>|     |- some.sass (some sass is probably in order, always import from the extension library as much as possible)<br>|     |- some_script.js (yes, you can provide javascript code)<br>|     |- some_image.png (and images)<br>|     |- some_content.html.haml (and even html and haml)<br>|     |- some_other_file.txt (and other arbitrary files)<br>|<br>|- lib (optional ruby code)<br>   |<br>   |- my_extension.rb (this code can register your framework if you deviate from conventions and require sass extensions, etc.)<br>   |- compass-my_extension.rb (This file is automatically required by compass if it is present. Avoiding the need to pass -r to the compass command line tool.)<br>   |<br>   |- my_extension<br>      |<br>      |- sass_extensions.rb (this is the standard location to place sass functions)<br>Names in bold are part of the extension naming convention.</p>
+<p>Generating an Extension</p>
+<p>If you want a leg up to get started working on your extension, you can use compass to generate an extension with the following command:</p>
+<p>compass create my_extension –using compass/extension<br>This will create a few basic files and folders to get you started.</p>
+<p>If you prefer to use the scss syntax for your extension run the following command instead:</p>
+<p>compass create my_extension –using compass/extension -x scss<br>Advanced Layout Options</p>
+<p>Library File Location</p>
+<p>The extension library file referenced above as my_extension/lib/my_extension.rb can actually be stored at any of the following three locations:</p>
+<p>my_extension/compass_init.rb<br>my_extension/lib/my_extension.rb (NOTE: You must use this one if you’re distributing as a rubygem.)<br>my_extension/my_extension.rb<br>The first of those locations found (in the above order) will be loaded. The compass_init.rb file takes priority, so that extensions that want to work differently as compass extensions than they do as normal ruby libraries, have a way of targeting compass.</p>
+<p>Stylesheet and Template Locations</p>
+<p>If you’d like to store your stylesheets and/or templates in a non-standard location within your extension, you must provide a library file and register the extension explicitly like so:</p>
+<p>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’)<br>stylesheets_dir = File.join(base_directory, ‘my’, ‘stylesheets’)<br>templates_dir   = File.join(base_directory, ‘my’, ‘templates’)<br>Compass::Frameworks.register(‘my_extension’, :stylesheets_directory =&gt; stylesheets_dir, :templates_directory =&gt; templates_dir)<br>If you’re following the standard naming convention, but the stylesheet and template directories are not at the top level, you can just do this instead:</p>
+<p> path from the library file to where you’re keeping your compass stuff.<br>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’, ‘compass’)<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; base_directory)<br>Adding Configuration Options to Compass</p>
+<p>For details on how to add new configuration options to compass read this.</p>
+<p>Conventions to Follow</p>
+<p>The following are not required, but are standards that your framework should attempt to adhere to unless there’s a good reason not to do so.</p>
+<p>Have a single import for your framework.<br>Break up your framework into modules so that people can import just smaller pieces for faster load times when they’re not using everything.<br>Use partials (files starting with an underscore) for stylesheets that are meant to be imported. If you do not Sass will generate css files for your libraries in some configurations.<br>Provide a project template. If you do not, your project should only be providing widgets or page designs, etc.<br>Building a Template (a.k.a. Pattern)<br>Manifest Files</p>
+<p>The manifest file declares the template contents and tells compass information about the files in the template.</p>
+<p>An Example Manifest File</p>
+<p>description “My awesome compass plugin.”</p>
+<p>stylesheet ‘screen.sass’, :media =&gt; ‘screen, projection’<br>stylesheet ‘partials/_base.sass’<br>stylesheet ‘print.sass’,  :media =&gt; ‘print’<br>stylesheet ‘ie.sass’,     :media =&gt; ‘screen, projection’, :condition =&gt; “lt IE 8”</p>
+<p>image ‘grid.png’<br>javascript ‘script.js’</p>
+<p>html ‘welcome.html.haml’, :erb =&gt; true<br>file ‘README’</p>
+<p>help %Q{<br>This is a message that users will see if they type</p>
+<p>  compass help my_extension</p>
+<p>You can use it to help them learn how to use your extension.<br>}</p>
+<p>welcome_message %Q{<br>This is a message that users will see after they install this pattern.<br>Use this to tell users what to do next.<br>}<br>You may also see some real manifest files here:</p>
+<p>blueprint<br>compass-css-lightbox<br>Manifest Declarations</p>
+<p>Easy Mode: If you just have some basic files and nothing fancy going on, simply place this line in your manifest:</p>
+<p>discover :all<br>If the file is missing discover :all is the default</p>
+<p>This will cause compass to find all the files in your template and use the files’ extension to determine where they should go. Alternatively, you can request that compass only discover files of a certain type. For example, the following will only discover javascript and image assets, you could then declare other file types on your own.</p>
+<p>discover :javascripts<br>discover :images<br>The following types may be discovered: :stylesheets, :images, :javascripts, :fonts, :html, :files, and :directories</p>
+<p>Normal Mode: There are seven kinds of manifest declarations:</p>
+<p>stylesheet - Declares a sass file.<br>image - Declares an image.<br>javascript - Declares a javascript file.<br>font - Declares a font file.<br>html - Declares an html file.<br>file - Declares a random file.<br>directory - Declares a directory should be created.<br>All declarations take the path to the file as their first argument. Note that the normal slash / can and should be used in a manifest. Compass will take care of the cross platform issues. The path to the file will be reproduced in the user’s project, so please keep that in mind when creating folders. The location where files are going to be installed is dictated by the user’s project configuration, however, a template can place things into subdirectories relative to those locations.</p>
+<p>Common options:</p>
+<p>:erb - When set to true, the file will be processed via the ERB templating language. See the “Advanced Manifests” section below for more details.<br>:to - The location where the file should be installed relative to the type-specific location.<br>:like - Most often used with a file declaration, this option allows you to install into the location of another manifest type (and also :css). E.g. :like =&gt; :css<br>Stylesheet options:</p>
+<p>:media - this is used as a hint to the user about the media attribute of the stylesheet link tag.<br>:condition - this is used to hint the user that a conditional comment should be used to import the stylesheet with the given condition.<br>Directory options:</p>
+<p>:within - where the directory should be created. If omitted, the directory will be relative to the project directory. Can be one of: the following<br>sass_dir<br>javascripts_dir<br>fonts_dir<br>images_dir<br>HTML files:</p>
+<p>You can provide html as haml or as plain html. If you provide haml, the haml will be converted to html when it is installed, unless the project allows haml files. Providing html files is usually done to demonstrate how to use a more complicated design and to get the user started off with working product.</p>
+<p>Advanced Manifests and Templates</p>
+<p>ERB Processing - This can be used to customize the contents of the file in an extension template. The template will be processed in the context of a TemplateContext instance, which gives you access to the full project configuration information as well as the command line options. Since it’s unlikely many templates will need this functionality, I leave it as an exercise of the user to figure it out and if they can’t to contact the compass-devs mailing list for assistance.<br>no_configuration_file! - calling this method within the manifest will tell the installer to skip the creation of a configuration file.<br>skip_compilation! - calling this method within the manifest will tell the installer to skip compilation of sass files to css.<br>Distributing Extensions as Ruby Gems</p>
+<p>Rubygems is a flexible, easy-to-use system for distributing ruby software. If you have any questions about rubygems, I suggest that you start looking for help here.</p>
+<p>The big advantages of using rubygems to distribute your extension is that it allows your extension to be a dependency for other projects and that each install is versioned, which makes supporting your extension easier.</p>
+<p>If distributing as a rubygem, it is a good idea to have a file compass-<framework>.rb in your lib directory that registers the compass framework. This will allow compass to automatically require the framework from within rubygems.</framework></p>
+<p>Tips for Developing Extensions</p>
+<p>If you’re developing a simple extension, you may find it convenient to place your extension within an existing compass project in the extension folder.<br>Never specify an extension in your imports as this can cause issue when the syntax of a file changes.<br>Packaging an Extension as a RubyGem</p>
+<p>You do not have to make your extension a ruby gem. But if you do, you get some benefits you would not have otherwise:</p>
+<p>Releases<br>Versions<br>A standard way of asking your users what release they are using.<br>Better integration with ruby-based projects via tools like Bundler.<br>Creating a Gem</p>
+<p>Before you begin, please ensure you have gem version 1.3.6 or greater. gem -v will tell you the currently installed version.</p>
+<p>Define your gemspec file at the top of your extension. Here’s an example of one. The gemspec should have the same name as your gem.<br>Register your framework by adding lib/my_extension.rb and registering it:</p>
+<p>require ‘compass’<br>extension_path = File.expand_path(File.join(File.dirname(<strong>FILE</strong>), “..”))<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; extension_path)<br>This is how compass knows where to find your extension’s files when a user requires it. For more options, go back up and read about Stylesheet and Template Locations.</p>
+<p>Build a gem: gem build my_extension.gemspec. This will build your gem file and add the current version to the name. E.g. my_extension-0.0.1.gem<br>Test your gem by installing it locally: gem install my_extension-0.0.1.gem<br>Releasing a Gem</p>
+<p>The ruby community is nice and will host your gem files for free. To release your gem:</p>
+<p>gem push my_extension-0.0.1.gem<br>Your ruby gem will be hosted on rubygems.org. Please familiarize yourself with their documentation.</p>
+<p>Installing Extensions<br>How extensions are installed varies according to the decisions you make about how you are packaging and releasing your gem. There will be a standard approach in a future release, but until then, it is suggested that you provide your users with succinct installation instructions.</p>
+<p>Installing Extensions Released as RubyGems</p>
+<p>When creating a new project:</p>
+<p>sudo gem install my_extension<br>compass create my_project -r my_extension –using my_extension<br>The -r option is annoying and will not be needed in a future version of compass. But for now, it tells compass to find and load the extension from the local rubygems repository.</p>
+<p>To install via rubygems into an existing project:</p>
+<p>gem install my_extension<br> edit the project configuration file and add:<br>require ‘my_extension’<br>compass install my_extension<br>Or if you have other patterns besides the project pattern:</p>
+<p>compass install my_extension/pattern<br>Installing Ad-hoc Extensions</p>
+<p>Ad-hoc extensions are any set of files and folders following the basic conventions described above. They could be installed via a zip file or by checking the code out from source control. Ad-hoc extensions will be automatically found in the extensions directory of a project and registered for import without needing a require statement in the compass configuration file.</p>
+<p>Currently, ad-hoc extensions can only be installed into the extensions directory of an existing compass project. This will be fixed in a future release of compass. Until then, you may need to instruct your users to create a bare project to get started:</p>
+<p>compass create my_project –bare<br>This will create a project directory, a sass directory (with no sass files) and a configuration file.</p>
+<p>The standard location for extensions is project_root/extensions for stand-alone projects and project_root/vendor/plugins/compass_extensions for rails projects. Additionally, the user may customize their extensions directory by setting extensions_dir in their compass configuration file.</p>
+<p>To install into an existing project, simply place the extension into a project’s extension directory. This could be done via a git clone or by extracting an archive. The name of the directory it creates should be the name of the extension. The project will now have access to the extension.</p>
+<p>Verifying that an Extension is Installed Correctly</p>
+<p>The user can verify that they have access to your extension by typing:</p>
+<p>compass help<br>And they should see the framework in the list of available frameworks. Alternatively, if you’ve provided a help message in the manifest, then the user can type:</p>
+<p>compass help my_extension</p>
+<ul>
+<li>or -<br>compass help my_extension/pattern_name<br>Note: The user might need to provide the -r option to help in order for compass to find a gem-based extension before a project exists. This is not needed for extensions installed into the extensions directory, or if the project is already required in the current directory’s project configuration.<h2 id="Extending-Compass"><a href="#Extending-Compass" class="headerlink" title="Extending Compass"></a>Extending Compass</h2><h2 id="Production-Stylesheets"><a href="#Production-Stylesheets" class="headerlink" title="Production Stylesheets"></a>Production Stylesheets</h2><h2 id="Spriting"><a href="#Spriting" class="headerlink" title="Spriting"></a>Spriting</h2><h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><h3 id="Magic-Selectors"><a href="#Magic-Selectors" class="headerlink" title="Magic Selectors"></a>Magic Selectors</h3><h3 id="Sprite-layouts"><a href="#Sprite-layouts" class="headerlink" title="Sprite layouts"></a>Sprite layouts</h3><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h2 id="Upgrading"><a href="#Upgrading" class="headerlink" title="Upgrading"></a>Upgrading</h2><h3 id="Lemonade-Upgrade"><a href="#Lemonade-Upgrade" class="headerlink" title="Lemonade Upgrade"></a>Lemonade Upgrade</h3><h3 id="Scared-to-Upgrade"><a href="#Scared-to-Upgrade" class="headerlink" title="Scared to Upgrade?"></a>Scared to Upgrade?</h3><h3 id="Upgrading-to-v0-11"><a href="#Upgrading-to-v0-11" class="headerlink" title="Upgrading to v0.11"></a>Upgrading to v0.11</h3><h2 id="Working-with-Configurable-Variables"><a href="#Working-with-Configurable-Variables" class="headerlink" title="Working with Configurable Variables"></a>Working with Configurable Variables</h2><h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><h1 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h1><h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/compass/" rel="tag"># compass</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/study-clojure.html" rel="prev" title="study clojure">
+                study clojure <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Sun Hao" />
+          <p class="site-author-name" itemprop="name">Sun Hao</p>
+          <p class="site-description motion-element" itemprop="description">Whoever wants to be first must be slave of all.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用Compass"><span class="nav-number">1.1.</span> <span class="nav-text">开始使用Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Compass"><span class="nav-number">1.2.</span> <span class="nav-text">安装Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监视和编译你的项目"><span class="nav-number">1.3.</span> <span class="nav-text">监视和编译你的项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Compass不用命令行"><span class="nav-number">1.4.</span> <span class="nav-text">使用Compass不用命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多配置命令"><span class="nav-number">1.5.</span> <span class="nav-text">更多配置命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#教程"><span class="nav-number">2.</span> <span class="nav-text">教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#教程-1"><span class="nav-number">2.1.</span> <span class="nav-text">教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass-教程"><span class="nav-number">2.1.1.</span> <span class="nav-text">Compass 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass入门"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compass入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贡献点"><span class="nav-number">2.1.3.</span> <span class="nav-text">贡献点?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用集成"><span class="nav-number">2.2.</span> <span class="nav-text">应用集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用集成-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ruby-on-Rails"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">Ruby on Rails</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sinatra"><span class="nav-number">2.2.2.</span> <span class="nav-text">Sinatra</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-（基于ruby的微型web框架）"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Sinatra （基于ruby的微型web框架）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nanoc"><span class="nav-number">2.2.3.</span> <span class="nav-text">nanoc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳方法"><span class="nav-number">2.3.</span> <span class="nav-text">最佳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#促进"><span class="nav-number">2.4.</span> <span class="nav-text">促进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#促进Compass发展"><span class="nav-number">2.4.1.</span> <span class="nav-text">促进Compass发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单改进"><span class="nav-number">2.4.2.</span> <span class="nav-text">简单改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑文档"><span class="nav-number">2.4.3.</span> <span class="nav-text">编辑文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复Bugs"><span class="nav-number">2.4.4.</span> <span class="nav-text">修复Bugs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改样式表"><span class="nav-number">2.4.5.</span> <span class="nav-text">更改样式表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改ruby"><span class="nav-number">2.4.6.</span> <span class="nav-text">更改ruby</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补丁提交"><span class="nav-number">2.4.7.</span> <span class="nav-text">补丁提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pull-请求实例"><span class="nav-number">2.4.8.</span> <span class="nav-text">Pull 请求实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目结构"><span class="nav-number">2.4.9.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般哲学-其实就是规范"><span class="nav-number">2.4.10.</span> <span class="nav-text">一般哲学(其实就是规范)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式约定"><span class="nav-number">2.4.11.</span> <span class="nav-text">样式约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题-amp-杂项信息"><span class="nav-number">2.4.12.</span> <span class="nav-text">常见问题 &杂项信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在开发中使用compass"><span class="nav-number">2.4.13.</span> <span class="nav-text">在开发中使用compass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试"><span class="nav-number">2.4.14.</span> <span class="nav-text">运行测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写样式测试"><span class="nav-number">2.4.15.</span> <span class="nav-text">编写样式测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新选择或重新定位-我们该怎么办"><span class="nav-number">2.4.16.</span> <span class="nav-text">重新选择或重新定位. 我们该怎么办?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Compass扩展"><span class="nav-number">2.5.</span> <span class="nav-text">创建Compass扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass扩展"><span class="nav-number">2.5.1.</span> <span class="nav-text">Compass扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extending-Compass"><span class="nav-number">2.6.</span> <span class="nav-text">Extending Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Production-Stylesheets"><span class="nav-number">2.7.</span> <span class="nav-text">Production Stylesheets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spriting"><span class="nav-number">2.8.</span> <span class="nav-text">Spriting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Customization"><span class="nav-number">2.8.1.</span> <span class="nav-text">Customization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magic-Selectors"><span class="nav-number">2.8.2.</span> <span class="nav-text">Magic Selectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sprite-layouts"><span class="nav-number">2.8.3.</span> <span class="nav-text">Sprite layouts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing"><span class="nav-number">2.9.</span> <span class="nav-text">Testing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upgrading"><span class="nav-number">2.10.</span> <span class="nav-text">Upgrading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lemonade-Upgrade"><span class="nav-number">2.10.1.</span> <span class="nav-text">Lemonade Upgrade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scared-to-Upgrade"><span class="nav-number">2.10.2.</span> <span class="nav-text">Scared to Upgrade?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Upgrading-to-v0-11"><span class="nav-number">2.10.3.</span> <span class="nav-text">Upgrading to v0.11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Working-with-Configurable-Variables"><span class="nav-number">2.11.</span> <span class="nav-text">Working with Configurable Variables</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Documentation"><span class="nav-number">4.</span> <span class="nav-text">Documentation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Support"><span class="nav-number">5.</span> <span class="nav-text">Support</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bugs"><span class="nav-number">6.</span> <span class="nav-text">Bugs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Hao</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "68d47669d3794a958fbaaee9328b90f3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

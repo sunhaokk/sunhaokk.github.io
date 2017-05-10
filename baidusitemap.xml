@@ -5,14 +5,79 @@
     
   <url>
     <loc>http://sunhao.win/2017/05/05/netwrok-dns/</loc>
-    <lastmod>2017-05-05T06:47:39.145Z</lastmod>
+    <lastmod>2017-05-10T06:52:52.281Z</lastmod>
     <data>
         <display>
         <title>netwrok-dns</title>
         <pubTime>2017-05-05T06:47:39.000Z</pubTime>
         
+        <tag>dns</tag>
+         
          
            
+             
+              <breadCrumb title="netwrok" url="http://sunhao.win/categories/netwrok/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/05/09/nginx-config/</loc>
+    <lastmod>2017-05-09T06:15:16.959Z</lastmod>
+    <data>
+        <display>
+        <title>nginx重启，重载，测试，配置</title>
+        <pubTime>2017-05-09T06:13:42.000Z</pubTime>
+        
+        <tag>nginx配置</tag>
+         
+         
+           
+             
+              <breadCrumb title="nginx" url="http://sunhao.win/categories/nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/05/09/mysql-2013%E9%94%99%E8%AF%AF/</loc>
+    <lastmod>2017-05-09T02:48:35.933Z</lastmod>
+    <data>
+        <display>
+        <title>mysql2013错误</title>
+        <pubTime>2017-05-09T02:42:21.000Z</pubTime>
+        
+        <tag>2013错误</tag>
+         
+         
+           
+             
+              <breadCrumb title="mysql" url="http://sunhao.win/categories/mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/</loc>
+    <lastmod>2017-05-09T02:41:24.664Z</lastmod>
+    <data>
+        <display>
+        <title>mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor</title>
+        <pubTime>2017-04-19T08:31:22.000Z</pubTime>
+        
+        <tag>Err1067</tag>
+         
+         
+           
+             
+              <breadCrumb title="mysql" url="http://sunhao.win/categories/mysql/"/>
+          
         </display>
     </data>
     </url>
@@ -270,26 +335,6 @@
            
              
               <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/</loc>
-    <lastmod>2017-04-19T08:47:20.833Z</lastmod>
-    <data>
-        <display>
-        <title>mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor</title>
-        <pubTime>2017-04-19T08:31:22.000Z</pubTime>
-        
-        <tag>Err1067</tag>
-         
-         
-           
-             
-              <breadCrumb title="mysql" url="http://sunhao.win/categories/mysql/"/>
           
         </display>
     </data>

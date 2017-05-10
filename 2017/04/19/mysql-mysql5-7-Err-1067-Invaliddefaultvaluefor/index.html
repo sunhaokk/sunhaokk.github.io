@@ -89,22 +89,17 @@
 
 
 
-<meta name="description" content="升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode
-[mysqld]sql_mode =”ALLOW_INVALID_DATES”
-设置完后，查询下，如果是ALLOW_INVALID_DATES说明改成功。否则检查下。123456mysql&amp;gt; select @@sql_mode;   +--------">
+<meta name="description" content="升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode.5.7在/etc/mysql/mysql.conf.d/mysqld.cnf [mysqld] # # * Basic Settings # user            = mysql pid-file        = /var/run/mysqld/">
+<meta name="keywords" content="Err1067">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor">
 <meta property="og:url" content="http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/index.html">
-<meta property="og:site_name" content="Da'sBlog">
-<meta property="og:description" content="升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode
-[mysqld]sql_mode =”ALLOW_INVALID_DATES”
-设置完后，查询下，如果是ALLOW_INVALID_DATES说明改成功。否则检查下。123456mysql&amp;gt; select @@sql_mode;   +--------">
-<meta property="og:updated_time" content="2017-04-19T08:47:20.833Z">
+<meta property="og:site_name" content="Da&#39;sBlog">
+<meta property="og:description" content="升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode.5.7在/etc/mysql/mysql.conf.d/mysqld.cnf [mysqld] # # * Basic Settings # user            = mysql pid-file        = /var/run/mysqld/">
+<meta property="og:updated_time" content="2017-05-09T02:41:24.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor">
-<meta name="twitter:description" content="升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode
-[mysqld]sql_mode =”ALLOW_INVALID_DATES”
-设置完后，查询下，如果是ALLOW_INVALID_DATES说明改成功。否则检查下。123456mysql&amp;gt; select @@sql_mode;   +--------">
+<meta name="twitter:description" content="升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode.5.7在/etc/mysql/mysql.conf.d/mysqld.cnf [mysqld] # # * Basic Settings # user            = mysql pid-file        = /var/run/mysqld/">
 
 
 
@@ -401,8 +396,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/" itemprop="commentCount"></span>
+                <a class="cloud-tie-join-count" href="/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -433,11 +428,23 @@
       
 
       
-        <p>升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode</p>
-<p>[mysqld]<br>sql_mode =”ALLOW_INVALID_DATES”</p>
-<p>设置完后，查询下，如果是ALLOW_INVALID_DATES说明改成功。否则检查下。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select @@sql_mode;   </div><div class="line">+----------------------------------------------------------------+   </div><div class="line">| @@sql_mode                                                     |   </div><div class="line">+----------------------------------------------------------------+   </div><div class="line">| STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |   </div><div class="line">+----------------------------------------------------------------+</div></pre></td></tr></table></figure></p>
+        <p>升级到mysql5.7后，还原数据出现[Err]1067-Invaliddefaultvaluefor，更改mysqld组的sql_mode.<br>5.7在/etc/mysql/mysql.conf.d/mysqld.cnf</p>
+<pre><code>[mysqld]
+#
+# * Basic Settings
+#
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+sql_mode        = ALLOW_INVALID_DATES
+</code></pre><p>设置完后，查询下，如果是ALLOW_INVALID_DATES说明改成功。否则检查下。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select @@sql_mode;   </div><div class="line">+----------------------------------------------------------------+   </div><div class="line">| @@sql_mode                                                     |   </div><div class="line">+----------------------------------------------------------------+   </div><div class="line">| STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |   </div><div class="line">+----------------------------------------------------------------+</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>如果忘记密码<br>可以添加<br>skip-grant-tables<br>忽略权限验证</p>
 
       
     </div>
@@ -501,24 +508,11 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/"
-     data-title="mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor"
-     data-content=""
-     data-url="http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
       
     </div>
   </div>
@@ -527,16 +521,11 @@
           </div>
           
 
-  <p>热评文章</p>
-  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-
 
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/"
-           data-title="mysql-mysql5.7-[Err]1067-Invaliddefaultvaluefor" data-url="http://sunhao.win/2017/04/19/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor/">
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -573,7 +562,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -582,7 +571,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -591,7 +580,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -653,7 +642,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -758,35 +747,31 @@
 
   
 
-  
-    
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"sunhaowin"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+
+
+
+	
+
+
+
+
 
   
     
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "68d47669d3794a958fbaaee9328b90f3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
   
-
-
-
-
-
-
 
 
 

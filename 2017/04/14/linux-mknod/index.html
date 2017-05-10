@@ -90,10 +90,11 @@
 
 
 <meta name="description" content="12345678#将其中的1,3这样的数字记录下来，这表示主设备号和次设备号（一般来说主设备号用来区分设备的种类；次设备号则是为了作唯一性区分，标明不同属性——注意，在unix系统中是把设备也当作文件来对待的），在redhat 9下，ls加不加-L参数都无所谓，但是在Solaris下则一定要加上才可以显示[root@localhost test1]# ls -lL /dev/null crw-rw">
+<meta name="keywords" content="linux,mknod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux-mknod">
 <meta property="og:url" content="http://sunhao.win/2017/04/14/linux-mknod/index.html">
-<meta property="og:site_name" content="Da'sBlog">
+<meta property="og:site_name" content="Da&#39;sBlog">
 <meta property="og:description" content="12345678#将其中的1,3这样的数字记录下来，这表示主设备号和次设备号（一般来说主设备号用来区分设备的种类；次设备号则是为了作唯一性区分，标明不同属性——注意，在unix系统中是把设备也当作文件来对待的），在redhat 9下，ls加不加-L参数都无所谓，但是在Solaris下则一定要加上才可以显示[root@localhost test1]# ls -lL /dev/null crw-rw">
 <meta property="og:updated_time" content="2017-04-14T06:09:51.248Z">
 <meta name="twitter:card" content="summary">
@@ -395,8 +396,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/14/linux-mknod/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/14/linux-mknod/" itemprop="commentCount"></span>
+                <a class="cloud-tie-join-count" href="/2017/04/14/linux-mknod/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -519,24 +520,11 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/04/14/linux-mknod/"
-     data-title="linux-mknod"
-     data-content=""
-     data-url="http://sunhao.win/2017/04/14/linux-mknod/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
       
     </div>
   </div>
@@ -545,16 +533,11 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
           </div>
           
 
-  <p>热评文章</p>
-  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-
 
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/14/linux-mknod/"
-           data-title="linux-mknod" data-url="http://sunhao.win/2017/04/14/linux-mknod/">
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -591,7 +574,7 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -600,7 +583,7 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -609,7 +592,7 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -671,7 +654,7 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -776,35 +759,31 @@ c表示字符设备文件与设备传送数据的时候是以字符的形式传�
 
   
 
-  
-    
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"sunhaowin"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+
+
+
+	
+
+
+
+
 
   
     
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "68d47669d3794a958fbaaee9328b90f3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
   
-
-
-
-
-
-
 
 
 

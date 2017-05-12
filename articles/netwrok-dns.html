@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170505/155336775.png">
 <meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170505/153318984.png">
 <meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170512/144511980.png">
-<meta property="og:updated_time" content="2017-05-12T09:17:51.673Z">
+<meta property="og:updated_time" content="2017-05-12T09:22:26.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写给前端工程师的DNS基础知识">
 <meta name="twitter:description" content="DNS在工作中，经常切换本地和服务器，添加各种解析。遇到DNS引起的一些问题。发现网上资料很混乱，用心整理写了下，希望对大家有帮助。 DNS（Domain Name System，域名系统），最初，由于ip长且难记，通过ip访问网站不方便。。所以后来通过发明了DNS服务器，这个时候我们访问网站输入网站域名，DNS服务器就解析我们的域名为ip。这样我们实际访问的就是对应的ip地址啦。 抽象点DNS就">
@@ -510,11 +510,11 @@
 <p>在浏览器中访问的时候，会优先访问浏览器缓存，如果访问指定域名,没有命中返回,则访问OS缓存。最后再次访问dns服务器。</p>
 <p>所以我们在调试的时候，更换了本地hosts仍然访问的是旧地址,那么就等一会吧。</p>
 <p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170505/153318984.png" alt="mark"></p>
-<p>首先我们要解决的是浏览器dns缓存,我们可以看到chrome会自动缓存70s dns。</p>
+<p>我们可以看到chrome会自动缓存70s dns。</p>
 <h3 id="hosts"><a href="#hosts" class="headerlink" title="hosts"></a>hosts</h3><p>在DNS系统之前，对应ip都是保存在hosts文件之中，现在系统仍然保留它。</p>
 <p>实际通过浏览器访问，会先查询浏览器dns缓存，再查询hosts里面是否有记录</p>
 <p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170512/144511980.png" alt="mark"></p>
-<p>一般win系么Hosts文件就在C:\WINDOWS\system32\drivers\etc中</p>
+<p>一般win系统Hosts文件就在C:\WINDOWS\system32\drivers\etc中</p>
 <p>通过hosts我们可以把域名改成本地的地址，进行调试开发。</p>
 <p>对于经常访问的网站，也可以直接设置到hosts里，加快访问速度。</p>
 <!--### 域名迁移  换DNS服务商-->
@@ -761,7 +761,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

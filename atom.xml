@@ -80,7 +80,7 @@
     <link href="http://sunhao.win/articles/netwrok-dns.html"/>
     <id>http://sunhao.win/articles/netwrok-dns.html</id>
     <published>2017-05-05T06:47:39.000Z</published>
-    <updated>2017-05-12T07:19:11.357Z</updated>
+    <updated>2017-05-12T09:17:51.673Z</updated>
     
     <content type="html"><![CDATA[<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>在工作中，经常切换本地和服务器，添加各种解析。遇到DNS引起的一些问题。发现网上资料很混乱，用心整理写了下，希望对大家有帮助。</p>
 <p>DNS（Domain Name System，域名系统），最初，由于ip长且难记，通过ip访问网站不方便。。所以后来通过发明了DNS服务器，这个时候我们访问网站输入网站域名，DNS服务器就解析我们的域名为ip。这样我们实际访问的就是对应的ip地址啦。</p>
@@ -105,8 +105,7 @@
 <p>(1)国家顶级域名nTLD：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)。</p>
 <p>(2)通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。<br>(3)基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。</p>
 <p>顶级域名服务器主要负责管理在该顶级域名服务器注册的二级域名。</p>
-<p>###权威DNS和权威域名服务器</p>
-<p>权威DNS服务器是经过上一级授权，对域名进行解析的服务器，同时它可以把解析授权转授给其他人。</p>
+<h3 id="权威DNS和权威域名服务器"><a href="#权威DNS和权威域名服务器" class="headerlink" title="权威DNS和权威域名服务器"></a>权威DNS和权威域名服务器</h3><p>权威DNS服务器是经过上一级授权，对域名进行解析的服务器，同时它可以把解析授权转授给其他人。</p>
 <p>例如，<br>在互联网上,谁售出的域名,就把域名授权给谁，比如sunhao.win是阿里售出的，所以权威服务器是阿里的dns解析服务器。(为了保障安全和保障一般权威DNS服务器都是俩)</p>
 <p>dns9.hichina.com<br>dns10.hichina.com</p>
 <p>但是由于业务我从后台调整解析到yunjiasu。</p>

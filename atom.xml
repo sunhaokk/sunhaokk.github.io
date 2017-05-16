@@ -200,11 +200,11 @@
   </entry>
   
   <entry>
-    <title>fg、bg、jobs、&amp;、nohup、ctrl+z、ctrl+c、screen命令</title>
+    <title>fg、bg、jobs、nohup、ctrl+z、ctrl+c、screen命令</title>
     <link href="http://sunhao.win/articles/linux-bg-fg-jobs-screen.html"/>
     <id>http://sunhao.win/articles/linux-bg-fg-jobs-screen.html</id>
     <published>2017-05-04T02:10:17.000Z</published>
-    <updated>2017-05-04T09:25:20.233Z</updated>
+    <updated>2017-05-16T05:57:57.165Z</updated>
     
     <content type="html"><![CDATA[<p>一、&amp;</p>
 <p>加在一个命令的最后，可以把这个命令放到后台执行，如</p>

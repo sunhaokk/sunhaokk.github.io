@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/articles/linux-bg-fg-jobs-screen.html</loc>
+    
+    <lastmod>2017-05-16T05:57:57.165Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/articles/netwrok-dns.html</loc>
     
     <lastmod>2017-05-15T00:11:47.229Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://sunhao.win/articles/mysql-mysql5-7-Err-1067-Invaliddefaultvaluefor.html</loc>
     
     <lastmod>2017-05-09T02:41:24.664Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sunhao.win/articles/linux-bg-fg-jobs-screen.html</loc>
-    
-    <lastmod>2017-05-04T09:25:20.233Z</lastmod>
     
   </url>
   

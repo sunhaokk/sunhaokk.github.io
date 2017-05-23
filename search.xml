@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[linux如何查杀指定用户进程]]></title>
+      <url>%2Farticles%2Flinux-kill9-psef.html</url>
+      <content type="text"><![CDATA[首先w查看登录用户 通过ps -ef | grep pts/0 查看pts/0上的用户 我们可以看到pid是17866 其余的ppid都是最终指向的都是这个。 -e 显示所有进程。-f 全格式。ps e 列出程序时，显示每个程序所使用的环境变量。ps f 用ASCII字符显示树状结构，表达程序间的相互关系 我们通过kill -9 强制关闭进程。一般情况下 请不要这样，因为是强制关闭。]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[nginx重启，重载，测试，配置]]></title>
       <url>%2Farticles%2Fnginx-config.html</url>
       <content type="text"><![CDATA[nginx -s reload ：修改配置后重新加载生效nginx -s reopen ：重新打开日志文件nginx -t -c /path/to/nginx.conf 测试nginx配置文件是否正确 关闭nginx：nginx -s stop :快速停止nginx quit ：完整有序的停止nginx 其他的停止nginx 方式： ps -ef | grep nginx kill -QUIT 主进程号 ：从容停止Nginxkill -TERM 主进程号 ：快速停止Nginxpkill -9 nginx ：强制停止Nginx 启动nginx:nginx -c /path/to/nginx.conf 平滑重启nginx：kill -HUP 主进程号]]></content>

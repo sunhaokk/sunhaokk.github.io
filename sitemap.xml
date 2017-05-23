@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/articles/linux-kill9-psef.html</loc>
+    
+    <lastmod>2017-05-23T03:23:50.476Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/articles/linux-bg-fg-jobs-screen.html</loc>
     
     <lastmod>2017-05-16T05:57:57.165Z</lastmod>

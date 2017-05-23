@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://sunhao.win/articles/linux-kill9-psef.html</loc>
+    <lastmod>2017-05-23T03:23:50.476Z</lastmod>
+    <data>
+        <display>
+        <title>linux如何查杀指定用户进程</title>
+        <pubTime>2017-05-23T03:02:20.000Z</pubTime>
+        
+        <tag>kill</tag>
+         
+        <tag>ps</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/articles/linux-bg-fg-jobs-screen.html</loc>
     <lastmod>2017-05-16T05:57:57.165Z</lastmod>
     <data>

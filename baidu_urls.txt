@@ -1,6 +1,7 @@
+http://sunhao.win/articles/web-module.html
 http://sunhao.win/articles/linux-kill9-psef.html
 http://sunhao.win/articles/nginx-config.html
-http://sunhao.win/articles/mysql-2013错误.html
+http://sunhao.win/articles/mysql-2013error.html
 http://sunhao.win/articles/netwrok-dns.html
 http://sunhao.win/articles/linux-bg-fg-jobs-screen.html
 http://sunhao.win/articles/respberry-wpanetwork.html

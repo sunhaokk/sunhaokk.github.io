@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[前端面试题-谈谈你对模块化的理解]]></title>
+      <url>%2Farticles%2Fweb-module.html</url>
+      <content type="text"><![CDATA[点评很多面试公司会问一下，你对模块化的理解。表面上很简单，，但却可以评测出一个人对于前端工程化的认识，实际能力，和学习能力。所以需要充分的准备。切记不可随口回答。一场战斗的胜利去决定于站前的准备。 为什么需要模块，什么是组件化。它们之间有什么区别？首先我们需要从语义上明白什么是模块 模块，英文名module。又称构件,是能够单独命名并独立地完成一定功能的程序语句的集合（即程序代码和数据结构的集合体）。它具有两个基本的特征：外部特征和内部特征。外部特征是指模块跟外部环境联系的接口（即其他模块或程序调用该模块的方式，包括有输入输出参数、引用的全局变量）和模块的功能；内部特征是指模块的内部环境具有的特点（即该模块的局部数据和程序代码）。 两个重点，一,它有一个接口，二,它内部程序不对外访问。 简单理解，模块就是多个函数的集合………… 再简单点，模块就是手机，里面跑着各种各样的程序，我们通过触摸控制。触摸屏就是我们的接口，里面程序就是内部特征。 还是有点抽象。我们写个小程序。 123456789101112131415function phone() &#123; function weChat() &#123; console.log('我是不插它'); &#125; function touch() &#123; weChat(); &#125; return &#123; ctltouch: touch &#125;&#125; var iphone8 = phone();iphone8.ctltouch(); //VM230:3 我是不插它 待续]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[linux如何查杀指定用户进程]]></title>
       <url>%2Farticles%2Flinux-kill9-psef.html</url>
       <content type="text"><![CDATA[首先w查看登录用户 通过ps -ef | grep pts/0 查看pts/0上的用户 我们可以看到pid是17866 其余的ppid都是最终指向的都是这个。 -e 显示所有进程。-f 全格式。ps e 列出程序时，显示每个程序所使用的环境变量。ps f 用ASCII字符显示树状结构，表达程序间的相互关系 我们通过kill -9 强制关闭进程。一般情况下 请不要这样，因为是强制关闭。]]></content>
@@ -18,7 +25,7 @@
     
     <entry>
       <title><![CDATA[mysql2013错误]]></title>
-      <url>%2Farticles%2Fmysql-2013%E9%94%99%E8%AF%AF.html</url>
+      <url>%2Farticles%2Fmysql-2013error.html</url>
       <content type="text"><![CDATA[mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart 如果忘记密码可以添加skip-grant-tables忽略权限验证]]></content>
     </entry>
 

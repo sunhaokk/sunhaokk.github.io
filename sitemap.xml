@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/articles/web-module.html</loc>
+    
+    <lastmod>2017-05-24T03:14:24.503Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/articles/linux-kill9-psef.html</loc>
     
     <lastmod>2017-05-23T03:23:50.476Z</lastmod>
@@ -30,7 +37,7 @@
   </url>
   
   <url>
-    <loc>http://sunhao.win/articles/mysql-2013%E9%94%99%E8%AF%AF.html</loc>
+    <loc>http://sunhao.win/articles/mysql-2013error.html</loc>
     
     <lastmod>2017-05-09T02:48:35.933Z</lastmod>
     

@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="2013错误," />
+  <meta name="keywords" content="linux,lsyncd," />
 
 
 
@@ -89,20 +89,17 @@
 
 
 
-<meta name="description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart">
-<meta name="keywords" content="2013错误">
+<meta name="description" content="最近一直搞服务器文件备份，思量再三，rsync inotify-tools配置太麻烦，索性转成lsyncd。配置简单，运行快。效率提高不少。 直接打开https://github.com/axkibe/lsyncd/releases下载安装就好。 123456789# cmake -DCMAKE_INSTALL_PREFIX=/usr/local/# make &amp;amp;&amp;amp; make in">
+<meta name="keywords" content="linux,lsyncd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql2013错误">
-<meta property="og:url" content="http://sunhao.win/articles/mysql-2013错误.html">
+<meta property="og:title" content="linux-lsyncd同步备份文件">
+<meta property="og:url" content="http://sunhao.win/articles/linux-lsyncd.html">
 <meta property="og:site_name" content="Da&#39;sBlog">
-<meta property="og:description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart">
-<meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png">
-<meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104641667.png">
-<meta property="og:updated_time" content="2017-05-09T02:48:35.933Z">
+<meta property="og:description" content="最近一直搞服务器文件备份，思量再三，rsync inotify-tools配置太麻烦，索性转成lsyncd。配置简单，运行快。效率提高不少。 直接打开https://github.com/axkibe/lsyncd/releases下载安装就好。 123456789# cmake -DCMAKE_INSTALL_PREFIX=/usr/local/# make &amp;amp;&amp;amp; make in">
+<meta property="og:updated_time" content="2017-06-06T02:29:24.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql2013错误">
-<meta name="twitter:description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart">
-<meta name="twitter:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png">
+<meta name="twitter:title" content="linux-lsyncd同步备份文件">
+<meta name="twitter:description" content="最近一直搞服务器文件备份，思量再三，rsync inotify-tools配置太麻烦，索性转成lsyncd。配置简单，运行快。效率提高不少。 直接打开https://github.com/axkibe/lsyncd/releases下载安装就好。 123456789# cmake -DCMAKE_INSTALL_PREFIX=/usr/local/# make &amp;amp;&amp;amp; make in">
 
 
 
@@ -130,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://sunhao.win/articles/mysql-2013错误.html"/>
+  <link rel="canonical" href="http://sunhao.win/articles/linux-lsyncd.html"/>
 
 
 
 
 
-  <title> mysql2013错误 | Da'sBlog </title>
+  <title> linux-lsyncd同步备份文件 | Da'sBlog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +253,7 @@
 
 
         
-          <a href="/2017/01/11/compass" rel="section">
+          <a href="/articles/compass" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
             
@@ -319,7 +316,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://sunhao.win/articles/mysql-2013错误.html">
+  <link itemprop="mainEntityOfPage" href="http://sunhao.win/articles/linux-lsyncd.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Sun Hao">
@@ -343,7 +340,7 @@
             
             
               
-                mysql2013错误
+                linux-lsyncd同步备份文件
               
             
           </h2>
@@ -358,8 +355,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-09T10:42:21+08:00">
-                2017-05-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-06T09:57:04+08:00">
+                2017-06-06
               </time>
             
 
@@ -381,8 +378,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -399,7 +396,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/articles/mysql-2013错误.html#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/articles/linux-lsyncd.html#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -431,10 +428,10 @@
       
 
       
-        <p>mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0<br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png" alt="mark"><br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104641667.png" alt="mark"><br>默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。<br>然后重启下服务器<br>/etc/init.d/mysql restart</p>
-<a id="more"></a>
-<p>如果忘记密码<br>可以添加<br>skip-grant-tables<br>忽略权限验证</p>
-
+        <p>最近一直搞服务器文件备份，思量再三，rsync inotify-tools配置太麻烦，索性转成lsyncd。配置简单，运行快。效率提高不少。</p>
+<p>直接打开<a href="https://github.com/axkibe/lsyncd/releases下载安装就好。" target="_blank" rel="external">https://github.com/axkibe/lsyncd/releases下载安装就好。</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># cmake -DCMAKE_INSTALL_PREFIX=/usr/local/</div><div class="line"># make &amp;&amp; make install</div><div class="line"></div><div class="line"></div><div class="line">--&quot;--&quot;是lua的注释标记</div><div class="line">--mkdir /usr/local/lsyncd</div><div class="line">--cd /usr/local/lsyncd</div><div class="line">--vim lsyncd.lua    --注意：lua语法的规则</div><div class="line">--vim lsyncd.sunhao.conf    --注意：后缀换成conf也可以，就是一个配置文件</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">--文件配置语法lsyncd.sunhao.conf</div><div class="line"></div><div class="line">settings&#123;</div><div class="line">    logfile = &quot;/var/log/lsyncd.log&quot;,     --日志路径</div><div class="line">    statusFile = &quot;/var/log/lsyncd-status.log&quot;, --状态文件</div><div class="line">    pidfile = &quot;/var/run/lsyncd.pid&quot;, --pid文件路径</div><div class="line">    statusInterval = 1,  --状态文件写入最短时间</div><div class="line">    nodaemon = false,    --daemon运行</div><div class="line">    maxProcesses = 1,    --最大进程</div><div class="line">    maxDelays = 1        --最大延迟</div><div class="line">&#125;</div><div class="line">--多host同步</div><div class="line">servers = &#123;</div><div class="line">    &quot;192.168.1.10&quot;, --前置服务器</div><div class="line">    --&quot;192.168.1.13&quot; --静态服务器</div><div class="line">&#125;</div><div class="line">--同步规则</div><div class="line">for _, server in ipairs(servers) do    --迭代servers</div><div class="line">    sync&#123;</div><div class="line">             </div><div class="line">            default.rsyncssh,      --默认rsync+ssh,rsync版本需要升级3以上版本</div><div class="line">        source = &quot;/www/apache2/sunhao/html/&quot;,     --源目录</div><div class="line">        delete = true,          </div><div class="line">        host = server,         </div><div class="line">        targetdir = &quot;/www/sunhao/html/&quot;,  --目标目录</div><div class="line">        exclude=&#123;                 </div><div class="line">            &quot;.txt&quot;             --排除</div><div class="line">        &#125;,</div><div class="line">        rsync = &#123;</div><div class="line">            binary = &quot;/usr/bin/rsync&quot;, --之前要装好rsync</div><div class="line">            archive = true,    --归档</div><div class="line">            compress = false,  --压缩</div><div class="line">            owner = true,      --属主</div><div class="line">            perms = true,      --权限</div><div class="line">            whole_file = false</div><div class="line">        &#125;,</div><div class="line">        ssh = &#123;</div><div class="line">            port = 22</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">end</div><div class="line"></div><div class="line">--执行脚本 lsyncd -log Exec /usr/local/lsyncd/lsyncd.sunhao.conf</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -457,7 +454,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/2013错误/" rel="tag"># 2013错误</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/lsyncd/" rel="tag"># lsyncd</a>
           
         </div>
       
@@ -470,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/netwrok-dns.html" rel="next" title="写给前端工程师的DNS基础知识">
-                <i class="fa fa-chevron-left"></i> 写给前端工程师的DNS基础知识
+              <a href="/articles/php-install-zlib.html" rel="next" title="php在现有环境下编译安装zlib等扩展">
+                <i class="fa fa-chevron-left"></i> php在现有环境下编译安装zlib等扩展
               </a>
             
           </div>
@@ -479,10 +478,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/nginx-config.html" rel="prev" title="nginx重启，重载，测试，配置">
-                nginx重启，重载，测试，配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -568,7 +563,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -577,7 +572,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -586,7 +581,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -648,7 +643,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

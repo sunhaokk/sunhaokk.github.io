@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/articles/linux-lsyncd.html</loc>
+    
+    <lastmod>2017-06-06T02:29:24.651Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/linux-nfs.html</loc>
+    
+    <lastmod>2017-06-06T01:56:02.393Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/php-install-zlib.html</loc>
+    
+    <lastmod>2017-06-05T03:01:24.986Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/compass.html</loc>
+    
+    <lastmod>2017-05-24T08:59:06.116Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/articles/web-module.html</loc>
     
     <lastmod>2017-05-24T03:14:24.503Z</lastmod>
@@ -243,13 +271,6 @@
     <loc>http://sunhao.win/articles/window-mklink.html</loc>
     
     <lastmod>2017-03-05T05:15:41.894Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sunhao.win/articles/compass.html</loc>
-    
-    <lastmod>2017-03-03T08:57:26.022Z</lastmod>
     
   </url>
   

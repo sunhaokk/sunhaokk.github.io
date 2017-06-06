@@ -4,6 +4,89 @@
 
     
   <url>
+    <loc>http://sunhao.win/articles/linux-lsyncd.html</loc>
+    <lastmod>2017-06-06T02:29:24.651Z</lastmod>
+    <data>
+        <display>
+        <title>linux-lsyncd同步备份文件</title>
+        <pubTime>2017-06-06T01:57:04.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>lsyncd</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/linux-nfs.html</loc>
+    <lastmod>2017-06-06T01:56:02.393Z</lastmod>
+    <data>
+        <display>
+        <title>linux用nfs共享目录文档</title>
+        <pubTime>2017-05-26T03:22:27.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>nfs</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/php-install-zlib.html</loc>
+    <lastmod>2017-06-05T03:01:24.986Z</lastmod>
+    <data>
+        <display>
+        <title>php在现有环境下编译安装zlib等扩展</title>
+        <pubTime>2017-05-31T07:58:10.000Z</pubTime>
+        
+        <tag>zlib</tag>
+         
+        <tag>编译</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://sunhao.win/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/compass.html</loc>
+    <lastmod>2017-05-24T08:59:06.116Z</lastmod>
+    <data>
+        <display>
+        <title>Compass中文开发规范手册</title>
+        <pubTime>2017-01-11T07:10:57.000Z</pubTime>
+        
+        <tag>compass</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/articles/web-module.html</loc>
     <lastmod>2017-05-24T03:14:24.503Z</lastmod>
     <data>
@@ -747,23 +830,6 @@
              
               <breadCrumb title="window" url="http://sunhao.win/categories/window/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sunhao.win/articles/compass.html</loc>
-    <lastmod>2017-03-03T08:57:26.022Z</lastmod>
-    <data>
-        <display>
-        <title>Compass中文手册</title>
-        <pubTime>2017-01-11T07:10:57.000Z</pubTime>
-        
-        <tag>compass</tag>
-         
-         
-           
         </display>
     </data>
     </url>

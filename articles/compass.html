@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="开始compass目前已经不再维护，但有些东西仍值得学习。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。 如果需要验证版本，可以运行以下命令:">
+<meta name="description" content="开始compass目前已经不再维护，但我仔细看了下，规范和开发方式，仍值得学习，目前只翻译规范，具体的api占时不计划翻译。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装">
 <meta name="keywords" content="compass">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Compass中文手册">
+<meta property="og:title" content="Compass中文开发规范手册">
 <meta property="og:url" content="http://sunhao.win/articles/compass.html">
 <meta property="og:site_name" content="Da&#39;sBlog">
-<meta property="og:description" content="开始compass目前已经不再维护，但有些东西仍值得学习。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。 如果需要验证版本，可以运行以下命令:">
-<meta property="og:updated_time" content="2017-03-03T08:57:26.022Z">
+<meta property="og:description" content="开始compass目前已经不再维护，但我仔细看了下，规范和开发方式，仍值得学习，目前只翻译规范，具体的api占时不计划翻译。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装">
+<meta property="og:updated_time" content="2017-05-24T08:59:06.116Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Compass中文手册">
-<meta name="twitter:description" content="开始compass目前已经不再维护，但有些东西仍值得学习。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装Compass和Sass。 如果需要验证版本，可以运行以下命令:">
+<meta name="twitter:title" content="Compass中文开发规范手册">
+<meta name="twitter:description" content="开始compass目前已经不再维护，但我仔细看了下，规范和开发方式，仍值得学习，目前只翻译规范，具体的api占时不计划翻译。 Version: 1.0.1 开始使用CompassCompass 是一款使用Sass语言 编写的开源的css设计框架，使用起来强大和简单. 如果你对Sass不熟悉, 可以去sass-lang.com学习如何使用. 安装Compass请按照Compass 安装指南按步骤安装">
 
 
 
@@ -133,7 +133,7 @@
 
 
 
-  <title> Compass中文手册 | Da'sBlog </title>
+  <title> Compass中文开发规范手册 | Da'sBlog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -340,7 +340,7 @@
             
             
               
-                Compass中文手册
+                Compass中文开发规范手册
               
             
           </h2>
@@ -406,7 +406,7 @@
       
 
       
-        <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>compass目前已经不再维护，但有些东西仍值得学习。</p>
+        <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>compass目前已经不再维护，但我仔细看了下，规范和开发方式，仍值得学习，目前只翻译规范，具体的api占时不计划翻译。</p>
 <p><strong>Version: 1.0.1</strong></p>
 <h2 id="开始使用Compass"><a href="#开始使用Compass" class="headerlink" title="开始使用Compass"></a>开始使用Compass</h2><p>Compass 是一款使用<a href="http://sass-lang.com" target="_blank" rel="external">Sass语言</a> 编写的开源的css设计框架，使用<br>起来强大和简单. 如果你对Sass不熟悉, 可以去<a href="http://sass-lang.com" target="_blank" rel="external">sass-lang.com</a>学习如何使用.</p>
 <h2 id="安装Compass"><a href="#安装Compass" class="headerlink" title="安装Compass"></a>安装Compass</h2><p>请按照<a href="http://compass-style.org/install/" target="_blank" rel="external">Compass 安装指南</a>按步骤安装Compass和Sass。</p>
@@ -518,80 +518,241 @@
 <p>2.<br>如果你所有在分支的改变被接受或你不想再保留:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master; git branch -D branch_name; git push origin :branch_name</div></pre></td></tr></table></figure></p>
 <h2 id="创建Compass扩展"><a href="#创建Compass扩展" class="headerlink" title="创建Compass扩展"></a>创建Compass扩展</h2><h3 id="Compass扩展"><a href="#Compass扩展" class="headerlink" title="Compass扩展"></a>Compass扩展</h3><p>Compass,其核心，是在Sass基础上建立的框架。它是提供创建，安装和可重复使用的样式表的工具，它提供从全面布局小部件框架设计，甚至整页的设计。Sass让HTML页面的语义明确的和设计细节省力。<br>本文档描述了compass扩展的工具集，这样您就可以建立你自己的compass的扩展。</p>
 <p>基础布局</p>
-<p>my_extension<br>|<br>|- stylesheets (sass加载路径)<br>|  |<br>|  |- my_extension (not technically required, but it’s good to scope imports by the name of the extension)<br>|  |  |<br>|  |  |- _module_one.sass (this file would be imported using @import my_extension/module_one.sass)<br>|  |  |- _module_two.sass (this file would be imported using @import my_extension/module_two.sass)<br>|  |  |- …<br>|  |<br>|  |- _my_extension.sass (This file will import the entire extension using @import my_extension.sass)<br>|<br>|- templates (this is where templates/patterns go)<br>|  |<br>|  |- project (this should be provided if you’d like people to be able to base their project on the extension)<br>|  |  |<br>|  |  |- manifest.rb (this file should declare the contents of the template)<br>|  |  |- screen.sass (this would be the main stylesheet, importing from your extension and demonstrating its use)<br>|  |  |- print.sass (this file would set up basic print styles)<br>|  |  |- ie.sass (if you want, you can provide custom styles for IE)<br>|  |<br>|  |- some_pattern<br>|     |<br>|     |- manifest.rb<br>|     |- some.sass (some sass is probably in order, always import from the extension library as much as possible)<br>|     |- some_script.js (yes, you can provide javascript code)<br>|     |- some_image.png (and images)<br>|     |- some_content.html.haml (and even html and haml)<br>|     |- some_other_file.txt (and other arbitrary files)<br>|<br>|- lib (optional ruby code)<br>   |<br>   |- my_extension.rb (this code can register your framework if you deviate from conventions and require sass extensions, etc.)<br>   |- compass-my_extension.rb (This file is automatically required by compass if it is present. Avoiding the need to pass -r to the compass command line tool.)<br>   |<br>   |- my_extension<br>      |<br>      |- sass_extensions.rb (this is the standard location to place sass functions)<br>Names in bold are part of the extension naming convention.</p>
-<p>Generating an Extension</p>
-<p>If you want a leg up to get started working on your extension, you can use compass to generate an extension with the following command:</p>
-<p>compass create my_extension –using compass/extension<br>This will create a few basic files and folders to get you started.</p>
-<p>If you prefer to use the scss syntax for your extension run the following command instead:</p>
-<p>compass create my_extension –using compass/extension -x scss<br>Advanced Layout Options</p>
-<p>Library File Location</p>
-<p>The extension library file referenced above as my_extension/lib/my_extension.rb can actually be stored at any of the following three locations:</p>
-<p>my_extension/compass_init.rb<br>my_extension/lib/my_extension.rb (NOTE: You must use this one if you’re distributing as a rubygem.)<br>my_extension/my_extension.rb<br>The first of those locations found (in the above order) will be loaded. The compass_init.rb file takes priority, so that extensions that want to work differently as compass extensions than they do as normal ruby libraries, have a way of targeting compass.</p>
-<p>Stylesheet and Template Locations</p>
-<p>If you’d like to store your stylesheets and/or templates in a non-standard location within your extension, you must provide a library file and register the extension explicitly like so:</p>
-<p>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’)<br>stylesheets_dir = File.join(base_directory, ‘my’, ‘stylesheets’)<br>templates_dir   = File.join(base_directory, ‘my’, ‘templates’)<br>Compass::Frameworks.register(‘my_extension’, :stylesheets_directory =&gt; stylesheets_dir, :templates_directory =&gt; templates_dir)<br>If you’re following the standard naming convention, but the stylesheet and template directories are not at the top level, you can just do this instead:</p>
-<p> path from the library file to where you’re keeping your compass stuff.<br>base_directory  = File.join(File.dirname(<strong>FILE</strong>), ‘..’, ‘compass’)<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; base_directory)<br>Adding Configuration Options to Compass</p>
-<p>For details on how to add new configuration options to compass read this.</p>
-<p>Conventions to Follow</p>
-<p>The following are not required, but are standards that your framework should attempt to adhere to unless there’s a good reason not to do so.</p>
-<p>Have a single import for your framework.<br>Break up your framework into modules so that people can import just smaller pieces for faster load times when they’re not using everything.<br>Use partials (files starting with an underscore) for stylesheets that are meant to be imported. If you do not Sass will generate css files for your libraries in some configurations.<br>Provide a project template. If you do not, your project should only be providing widgets or page designs, etc.<br>Building a Template (a.k.a. Pattern)<br>Manifest Files</p>
-<p>The manifest file declares the template contents and tells compass information about the files in the template.</p>
-<p>An Example Manifest File</p>
-<p>description “My awesome compass plugin.”</p>
-<p>stylesheet ‘screen.sass’, :media =&gt; ‘screen, projection’<br>stylesheet ‘partials/_base.sass’<br>stylesheet ‘print.sass’,  :media =&gt; ‘print’<br>stylesheet ‘ie.sass’,     :media =&gt; ‘screen, projection’, :condition =&gt; “lt IE 8”</p>
-<p>image ‘grid.png’<br>javascript ‘script.js’</p>
-<p>html ‘welcome.html.haml’, :erb =&gt; true<br>file ‘README’</p>
-<p>help %Q{<br>This is a message that users will see if they type</p>
-<p>  compass help my_extension</p>
-<p>You can use it to help them learn how to use your extension.<br>}</p>
-<p>welcome_message %Q{<br>This is a message that users will see after they install this pattern.<br>Use this to tell users what to do next.<br>}<br>You may also see some real manifest files here:</p>
-<p>blueprint<br>compass-css-lightbox<br>Manifest Declarations</p>
-<p>Easy Mode: If you just have some basic files and nothing fancy going on, simply place this line in your manifest:</p>
-<p>discover :all<br>If the file is missing discover :all is the default</p>
-<p>This will cause compass to find all the files in your template and use the files’ extension to determine where they should go. Alternatively, you can request that compass only discover files of a certain type. For example, the following will only discover javascript and image assets, you could then declare other file types on your own.</p>
-<p>discover :javascripts<br>discover :images<br>The following types may be discovered: :stylesheets, :images, :javascripts, :fonts, :html, :files, and :directories</p>
-<p>Normal Mode: There are seven kinds of manifest declarations:</p>
-<p>stylesheet - Declares a sass file.<br>image - Declares an image.<br>javascript - Declares a javascript file.<br>font - Declares a font file.<br>html - Declares an html file.<br>file - Declares a random file.<br>directory - Declares a directory should be created.<br>All declarations take the path to the file as their first argument. Note that the normal slash / can and should be used in a manifest. Compass will take care of the cross platform issues. The path to the file will be reproduced in the user’s project, so please keep that in mind when creating folders. The location where files are going to be installed is dictated by the user’s project configuration, however, a template can place things into subdirectories relative to those locations.</p>
-<p>Common options:</p>
-<p>:erb - When set to true, the file will be processed via the ERB templating language. See the “Advanced Manifests” section below for more details.<br>:to - The location where the file should be installed relative to the type-specific location.<br>:like - Most often used with a file declaration, this option allows you to install into the location of another manifest type (and also :css). E.g. :like =&gt; :css<br>Stylesheet options:</p>
-<p>:media - this is used as a hint to the user about the media attribute of the stylesheet link tag.<br>:condition - this is used to hint the user that a conditional comment should be used to import the stylesheet with the given condition.<br>Directory options:</p>
-<p>:within - where the directory should be created. If omitted, the directory will be relative to the project directory. Can be one of: the following<br>sass_dir<br>javascripts_dir<br>fonts_dir<br>images_dir<br>HTML files:</p>
-<p>You can provide html as haml or as plain html. If you provide haml, the haml will be converted to html when it is installed, unless the project allows haml files. Providing html files is usually done to demonstrate how to use a more complicated design and to get the user started off with working product.</p>
-<p>Advanced Manifests and Templates</p>
-<p>ERB Processing - This can be used to customize the contents of the file in an extension template. The template will be processed in the context of a TemplateContext instance, which gives you access to the full project configuration information as well as the command line options. Since it’s unlikely many templates will need this functionality, I leave it as an exercise of the user to figure it out and if they can’t to contact the compass-devs mailing list for assistance.<br>no_configuration_file! - calling this method within the manifest will tell the installer to skip the creation of a configuration file.<br>skip_compilation! - calling this method within the manifest will tell the installer to skip compilation of sass files to css.<br>Distributing Extensions as Ruby Gems</p>
-<p>Rubygems is a flexible, easy-to-use system for distributing ruby software. If you have any questions about rubygems, I suggest that you start looking for help here.</p>
-<p>The big advantages of using rubygems to distribute your extension is that it allows your extension to be a dependency for other projects and that each install is versioned, which makes supporting your extension easier.</p>
-<p>If distributing as a rubygem, it is a good idea to have a file compass-<framework>.rb in your lib directory that registers the compass framework. This will allow compass to automatically require the framework from within rubygems.</framework></p>
-<p>Tips for Developing Extensions</p>
-<p>If you’re developing a simple extension, you may find it convenient to place your extension within an existing compass project in the extension folder.<br>Never specify an extension in your imports as this can cause issue when the syntax of a file changes.<br>Packaging an Extension as a RubyGem</p>
-<p>You do not have to make your extension a ruby gem. But if you do, you get some benefits you would not have otherwise:</p>
-<p>Releases<br>Versions<br>A standard way of asking your users what release they are using.<br>Better integration with ruby-based projects via tools like Bundler.<br>Creating a Gem</p>
-<p>Before you begin, please ensure you have gem version 1.3.6 or greater. gem -v will tell you the currently installed version.</p>
-<p>Define your gemspec file at the top of your extension. Here’s an example of one. The gemspec should have the same name as your gem.<br>Register your framework by adding lib/my_extension.rb and registering it:</p>
-<p>require ‘compass’<br>extension_path = File.expand_path(File.join(File.dirname(<strong>FILE</strong>), “..”))<br>Compass::Frameworks.register(‘my_extension’, :path =&gt; extension_path)<br>This is how compass knows where to find your extension’s files when a user requires it. For more options, go back up and read about Stylesheet and Template Locations.</p>
-<p>Build a gem: gem build my_extension.gemspec. This will build your gem file and add the current version to the name. E.g. my_extension-0.0.1.gem<br>Test your gem by installing it locally: gem install my_extension-0.0.1.gem<br>Releasing a Gem</p>
-<p>The ruby community is nice and will host your gem files for free. To release your gem:</p>
-<p>gem push my_extension-0.0.1.gem<br>Your ruby gem will be hosted on rubygems.org. Please familiarize yourself with their documentation.</p>
-<p>Installing Extensions<br>How extensions are installed varies according to the decisions you make about how you are packaging and releasing your gem. There will be a standard approach in a future release, but until then, it is suggested that you provide your users with succinct installation instructions.</p>
-<p>Installing Extensions Released as RubyGems</p>
-<p>When creating a new project:</p>
-<p>sudo gem install my_extension<br>compass create my_project -r my_extension –using my_extension<br>The -r option is annoying and will not be needed in a future version of compass. But for now, it tells compass to find and load the extension from the local rubygems repository.</p>
-<p>To install via rubygems into an existing project:</p>
-<p>gem install my_extension<br> edit the project configuration file and add:<br>require ‘my_extension’<br>compass install my_extension<br>Or if you have other patterns besides the project pattern:</p>
-<p>compass install my_extension/pattern<br>Installing Ad-hoc Extensions</p>
-<p>Ad-hoc extensions are any set of files and folders following the basic conventions described above. They could be installed via a zip file or by checking the code out from source control. Ad-hoc extensions will be automatically found in the extensions directory of a project and registered for import without needing a require statement in the compass configuration file.</p>
-<p>Currently, ad-hoc extensions can only be installed into the extensions directory of an existing compass project. This will be fixed in a future release of compass. Until then, you may need to instruct your users to create a bare project to get started:</p>
-<p>compass create my_project –bare<br>This will create a project directory, a sass directory (with no sass files) and a configuration file.</p>
-<p>The standard location for extensions is project_root/extensions for stand-alone projects and project_root/vendor/plugins/compass_extensions for rails projects. Additionally, the user may customize their extensions directory by setting extensions_dir in their compass configuration file.</p>
-<p>To install into an existing project, simply place the extension into a project’s extension directory. This could be done via a git clone or by extracting an archive. The name of the directory it creates should be the name of the extension. The project will now have access to the extension.</p>
-<p>Verifying that an Extension is Installed Correctly</p>
-<p>The user can verify that they have access to your extension by typing:</p>
-<p>compass help<br>And they should see the framework in the list of available frameworks. Alternatively, if you’ve provided a help message in the manifest, then the user can type:</p>
-<p>compass help my_extension</p>
-<ul>
-<li>or -<br>compass help my_extension/pattern_name<br>Note: The user might need to provide the -r option to help in order for compass to find a gem-based extension before a project exists. This is not needed for extensions installed into the extensions directory, or if the project is already required in the current directory’s project configuration.<h2 id="Extending-Compass"><a href="#Extending-Compass" class="headerlink" title="Extending Compass"></a>Extending Compass</h2><h2 id="Production-Stylesheets"><a href="#Production-Stylesheets" class="headerlink" title="Production Stylesheets"></a>Production Stylesheets</h2><h2 id="Spriting"><a href="#Spriting" class="headerlink" title="Spriting"></a>Spriting</h2><h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><h3 id="Magic-Selectors"><a href="#Magic-Selectors" class="headerlink" title="Magic Selectors"></a>Magic Selectors</h3><h3 id="Sprite-layouts"><a href="#Sprite-layouts" class="headerlink" title="Sprite layouts"></a>Sprite layouts</h3><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h2 id="Upgrading"><a href="#Upgrading" class="headerlink" title="Upgrading"></a>Upgrading</h2><h3 id="Lemonade-Upgrade"><a href="#Lemonade-Upgrade" class="headerlink" title="Lemonade Upgrade"></a>Lemonade Upgrade</h3><h3 id="Scared-to-Upgrade"><a href="#Scared-to-Upgrade" class="headerlink" title="Scared to Upgrade?"></a>Scared to Upgrade?</h3><h3 id="Upgrading-to-v0-11"><a href="#Upgrading-to-v0-11" class="headerlink" title="Upgrading to v0.11"></a>Upgrading to v0.11</h3><h2 id="Working-with-Configurable-Variables"><a href="#Working-with-Configurable-Variables" class="headerlink" title="Working with Configurable Variables"></a>Working with Configurable Variables</h2><h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><h1 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h1><h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1></li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">my_extension</div><div class="line">|</div><div class="line">|- stylesheets (sass加载路径)</div><div class="line">|  |</div><div class="line">|  |- my_extension (不是必须，但可以方便扩展)</div><div class="line">|  |  |</div><div class="line">|  |  |- _module_one.sass (可以通过 @import my_extension/module_one.sass导入)</div><div class="line">|  |  |- _module_two.sass (可以通过@import my_extension/module_two.sass导入)</div><div class="line">|  |  |- ...</div><div class="line">|  |</div><div class="line">|  |- _my_extension.sass (可以通过 @import my_extension.sass全部导入)</div><div class="line">|</div><div class="line">|- templates (templates/patterns)</div><div class="line">|  |</div><div class="line">|  |- project (项目)</div><div class="line">|  |  |</div><div class="line">|  |  |- manifest.rb (声明)</div><div class="line">|  |  |- screen.sass (主样式表)</div><div class="line">|  |  |- print.sass (输出样式表)</div><div class="line">|  |  |- ie.sass (针对ie的样式表)</div><div class="line">|  |</div><div class="line">|  |- some_pattern</div><div class="line">|     |</div><div class="line">|     |- manifest.rb</div><div class="line">|     |- some.sass (导入的第三方工具)</div><div class="line">|     |- some_script.js (js)</div><div class="line">|     |- some_image.png (图片)</div><div class="line">|     |- some_content.html.haml (html 和 haml)</div><div class="line">|     |- some_other_file.txt (任意文件)</div><div class="line">|</div><div class="line">|- lib (ruby配置)</div><div class="line">   |</div><div class="line">   |- my_extension.rb (注册修改框架配置)</div><div class="line">   |- compass-my_extension.rb T自动加载. 可以通过 -r 命令阻止.)</div><div class="line">   |</div><div class="line">   |- my_extension</div><div class="line">      |</div><div class="line">      |- sass_extensions.rb (sass标准函数)</div></pre></td></tr></table></figure>
+<p>粗体部分的名称是扩展的命名约定的一部分。</p>
+<h3 id="生成扩展"><a href="#生成扩展" class="headerlink" title="生成扩展"></a>生成扩展</h3><p>如果你想扩展,可以通过compass的命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass create my_extension --using compass/extension</div></pre></td></tr></table></figure>
+<p>这个会创建一些初始的文件和文件夹</p>
+<p>如果你喜欢用scss语法可以通过下面命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass create my_extension --using compass/extension -x scss</div></pre></td></tr></table></figure>
+<p>高级布局配置</p>
+<p>库文件的位置</p>
+<p>库引自 my_extension/lib/my_extension.rb 存的三个位置:</p>
+<p>my_extension/compass_init.rb</p>
+<p>my_extension/lib/my_extension.rb (注意:这个必须引入)</p>
+<p>my_extension/my_extension.rb</p>
+<p>这个地方将被首先加载。compass_init.rb文件优先，这样，作为compass扩展要针对不同的工作，更有针对性。</p>
+<h3 id="样式表和模板"><a href="#样式表和模板" class="headerlink" title="样式表和模板"></a>样式表和模板</h3><p>如果您想存储您的样式表/或模板，在您的扩展内的一个非标准的位置，您必须提供一个库文件和注册了这些扩展明确，像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">base_directory  = File.join(File.dirname(__FILE__), &apos;..&apos;)</div><div class="line">stylesheets_dir = File.join(base_directory, &apos;my&apos;, &apos;stylesheets&apos;)</div><div class="line">templates_dir   = File.join(base_directory, &apos;my&apos;, &apos;templates&apos;)</div><div class="line">Compass::Frameworks.register(&apos;my_extension&apos;, :stylesheets_directory =&gt; stylesheets_dir, :templates_directory =&gt; templates_dir)</div></pre></td></tr></table></figure>
+<p>如果你是以下的标准命名约定，但没有在顶级样式表和模板目录，你可以这样做:</p>
+<p>把compass保存在库文件路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">base_directory  = File.join(File.dirname(__FILE__), &apos;..&apos;, &apos;compass&apos;)</div><div class="line">Compass::Frameworks.register(&apos;my_extension&apos;, :path =&gt; base_directory)</div></pre></td></tr></table></figure>
+<h3 id="添加Compass配置"><a href="#添加Compass配置" class="headerlink" title="添加Compass配置"></a>添加Compass配置</h3><p>约定:</p>
+<p>这不是必须，但你的框架最好尽可能坚持。</p>
+<p>单一入口</p>
+<p>拆分框架到模块，这样在不全部引入时，速度更快。</p>
+<p>把样式表拆分成部分 (以_为开头的文件) 导入. 如果你不那么做<br>sass会生成css文件.</p>
+<p>提供一个项目模板. I如果你不那么做, 至少提供一部分或者页面</p>
+<h3 id="创建模板-a-k-a-规范"><a href="#创建模板-a-k-a-规范" class="headerlink" title="创建模板(a.k.a. 规范)"></a>创建模板(a.k.a. 规范)</h3><p>Manifest Files 元文件</p>
+<p>元文件声明模板包含的compass文件信息 </p>
+<p>示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">description &quot;My awesome compass plugin.&quot;</div><div class="line"></div><div class="line">stylesheet &apos;screen.sass&apos;, :media =&gt; &apos;screen, projection&apos;</div><div class="line">stylesheet &apos;partials/_base.sass&apos;</div><div class="line">stylesheet &apos;print.sass&apos;,  :media =&gt; &apos;print&apos;</div><div class="line">stylesheet &apos;ie.sass&apos;,     :media =&gt; &apos;screen, projection&apos;, :condition =&gt; &quot;lt IE 8&quot;</div><div class="line"></div><div class="line">image &apos;grid.png&apos;</div><div class="line">javascript &apos;script.js&apos;</div><div class="line"></div><div class="line">html &apos;welcome.html.haml&apos;, :erb =&gt; true</div><div class="line">file &apos;README&apos;</div><div class="line"></div><div class="line">help %Q&#123;</div><div class="line">	帮助信息</div><div class="line">&#125;</div><div class="line"></div><div class="line">welcome_message %Q&#123;</div><div class="line">在用户安装的时候指导如果安装</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以去下面看看例子</p>
+<p>blueprint</p>
+<p>compass-css-lightbox</p>
+<p><a href="https://github.com/mirisuzanne/compass-css-lightbox/blob/master/templates/project/manifest.rb" target="_blank" rel="external">https://github.com/mirisuzanne/compass-css-lightbox/blob/master/templates/project/manifest.rb</a></p>
+<h3 id="Manifest-声明"><a href="#Manifest-声明" class="headerlink" title="Manifest 声明"></a>Manifest 声明</h3><p>简单模式: 如果你只需要一些基本文件，并没什么特别的事，简单地把这一行放在你的清单:</p>
+<pre><code>discover :all
+</code></pre><p>如果文件丢失，discover :all 是缺省</p>
+<p>这将导致compass找到所有你的模板文件，并使用文件扩展名来判断应该去的地方。或者，您也可以限定compass发现某一类型的文件。比如说，以下只会发现，JavaScript，图像，你也可以声明其他文件类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">discover :javascripts</div><div class="line">discover :images</div></pre></td></tr></table></figure>
+<p>下面将发现: :stylesheets, :images, :javascripts, :fonts, :html, :files, and :directories</p>
+<p>普通模式: 7中声明方式:</p>
+<pre><code>stylesheet - Declares a sass file.
+image - Declares an image.
+javascript - Declares a javascript file.
+font - Declares a font file.
+html - Declares an html file.
+file - Declares a random file.
+directory - Declares a directory should be created.
+</code></pre><p>所有声明的文件的路径作为他们的第一个参数。请注意，正常/可以而且应该使用。compass会兼顾所有平台的问题。文件的路径将在用户的项目，所以请记住这一点当创建文件夹。要安装文件的位置取决于用户的项目配置，模板可以向这些地点相对子目录的东西的地方。</p>
+<p>常规配置:</p>
+<p>:erb - 设置为true时，通过ERB模板语言。下面会有详细介绍。<br>:to - 应该相对安装文件的位置。</p>
+<p>:like - 最常用的与文件声明，此选项允许您安装到另一个位置的类型（包括:CSS）。例如。:like =&gt; :css</p>
+<p>:media - 这是用来作为一个提示用户关于媒体属性的样式表链接的标记。</p>
+<p>:condition - 这是用来提示用户，应使用给定的条件下，导入的样式表。</p>
+<p>目录配置:</p>
+<p>在哪里应该创建该目录。如果省略，则相对于项目目录的目录。可以是下列值之一:以下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sass_dir</div><div class="line">javascripts_dir</div><div class="line">fonts_dir</div><div class="line">images_dir</div><div class="line">HTML files:</div></pre></td></tr></table></figure>
+<p>HAML可以提供HTML或纯HTML。如果您提供HAML，HAML的安装时，它将被转换为HTML，除非项目允许HAML文件。提供HTML文件通常是以演示如何使用一个更复杂的设计和获得用户开始工作产品。</p>
+<p>高级Manifests模板</p>
+<p>ERB（ruby脚本）Processing  - 这可用于在一个扩展自定义文件的内容模板。模板将模板内容的上下文中处理成实例，从而使您可以访问完整的项目配置信息，以及作为命令行选项。因为它是不太可能有大量模板将需要此功能，我把它作为一个练习，开发者可以邮件咨询。</p>
+<p>no_configuration_file! - 调用此方法将告诉安装程序清单内跳过创建一个配置文件。</p>
+<p>skip_compilation! - 会告诉安装程序清单内调用此方法跳过Sass的CSS文件汇编。</p>
+<p>Ruby Gems分布扩展</p>
+<p>RubyGems是一个灵活，易用的系统，为分布式Ruby软件。RubyGems如果你有任何疑问，我建议你开始寻找帮助。</p>
+<p>分发您的扩展使用RubyGems大优势是，它允许您的扩展将其他项目的依赖项和每个安装的版本，这使得支持您的扩展变得更加容易。</p>
+<p>如果作为一个RubyGem分配，这是一个好主意，有一个compass.rb在你的lib目录中注册的compass框架。这将使compass自动加载RubyGems内框架。</p>
+<h3 id="研发技巧"><a href="#研发技巧" class="headerlink" title="研发技巧"></a>研发技巧</h3><p>如果你研发一个简单的扩展, 你会发现在已有项目文件夹内开发会非常便捷.</p>
+<p>如没有指定一个扩展你的时候进口，会造成问题的文件的语法变化。</p>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>版本</p>
+<p>方便用户使用。 通过打捆工具集成与Ruby为基础的项目。</p>
+<p>创建Gem</p>
+<p>在您开始之前，请确保你的ruby版本1.3。6或更高版本 ruby -v 可以检测版本</p>
+<p>在您的扩展顶部定义gemspec文件。这里的一个例子。gemspec应该与gem有相同的名称。</p>
+<p>通过添加 lib/my_extension.rb 注册到框架:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">require &apos;compass&apos;</div><div class="line">extension_path = File.expand_path(File.join(File.dirname(__FILE__), &quot;..&quot;))</div><div class="line">Compass::Frameworks.register(&apos;my_extension&apos;, :path =&gt; extension_path)</div></pre></td></tr></table></figure>
+<p>这就是compass知道在哪里可以找到您的扩展文件，当用户需要它。更多选项，去备份和阅读样式表和模板的位置。</p>
+<p>创建 gem: gem 创建 my_extension.gemspec. 创建gem并添加版本到名字 . 例如. my_extension-0.0.1.gem</p>
+<p>测试: gem install my_extension-0.0.1.gem</p>
+<h3 id="发布gem"><a href="#发布gem" class="headerlink" title="发布gem"></a>发布gem</h3><p>ruby社区是一个免费发布的平台:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem push my_extension-0.0.1.gem</div></pre></td></tr></table></figure>
+<p>你的ruby gem发布到rubygems.org. 请关注他们</p>
+<p>安装扩展</p>
+<p>如何安装扩展是根据你所做的决定如何，你的包装发布你的gem。将在将来的版本中的标准方法，但在那之前，建议您为您的用户提供简洁的安装说明。</p>
+<p>通过RubyGems安装发布</p>
+<p>创建一个新的项目:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo gem install my_extension</div><div class="line"></div><div class="line">compass create my_project -r my_extension --using my_extension</div></pre></td></tr></table></figure>
+<p>-r 配置忽略未来版本. 但是现在, 从本地加载rubygems镜像.</p>
+<p>通过安装rubygems进入已经存在项目:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install my_extension</div></pre></td></tr></table></figure>
+<p>编辑添加配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">require &apos;my_extension&apos;</div><div class="line">compass install my_extension</div></pre></td></tr></table></figure>
+<p>或者添加以下规范到文件里:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compass install my_extension/pattern</div><div class="line">Installing Ad-hoc Extensions</div></pre></td></tr></table></figure>
+<p>Ad-hoc扩展的任何一组文件和上文所述的基本公约的以下文件夹。他们可以通过一个ZIP文件安装或从源代码管理中，通过检查代码。Ad-hoc的扩展将被自动发现在一个项目的扩展目录和进口注册，而无需一个require语句在compass的配置文件。</p>
+<p>目前，Ad-hoc扩展一些广告暂时只能安装到现有的compass项目的扩展目录。这个问题将在未来解决。在那之前，您可能需要将指导您的用户可以创建一个项目开始:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass create my_project --bare</div></pre></td></tr></table></figure>
+<p>这将创建一个项目栌, 一个sass目录 (没有文件)和一个配置文件.</p>
+<p>为扩展的标准位置对于独立的项目和<br>project_root/vendor/plugins/compass_extensions project_root/extensions Rails项目。此外，用户可以定制他们在他们的compass项s的extensions_dir通过设置扩展目录的配置文件。</p>
+<p>安装到现有的项目，将扩展到项目的扩展目录。这可以通过一个git克隆或提取的存档。它创建的目录的名称应扩展的名称。该项目将获得扩展。</p>
+<p>验证扩展是正确安装</p>
+<p>用户可以通过输入验证他们访问您的扩展:<br><code>compass help</code></p>
+<p>他们应该可以看到列表中的可用框架的框架。或者，如果您已经在元文件中提供帮助信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass help my_extension</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass help my_extension/pattern_name</div></pre></td></tr></table></figure>
+<p>注意:用户可能需要提供-R选项，方便回退。这不是需要扩展安装到扩展目录，或者如果所需要的项目已经在当前目录中的项目配置。</p>
+<h2 id="Compass的扩展"><a href="#Compass的扩展" class="headerlink" title="Compass的扩展"></a>Compass的扩展</h2><h3 id="雪碧图引擎"><a href="#雪碧图引擎" class="headerlink" title="雪碧图引擎"></a>雪碧图引擎</h3><p>雪碧图引擎是一个合成图片的接口</p>
+<p>要求</p>
+<p>获取雪碧图引擎的两种方式 construct_sprite, 和 save(filename)</p>
+<p>引入后就可以访问合成的图片了</p>
+<p>配置</p>
+<p>在配置文件里打开雪碧图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sprite_engine = :&lt;engine name&gt;</div></pre></td></tr></table></figure>
+<p>以下例子将加载</p>
+<pre><code>Compass::SassExtension::Sprites::ChunkyPngEngine.new(width, height, images)
 
+sprite_engine = :chunky_png
+</code></pre><p>类定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">module Compass</div><div class="line">  module SassExtensions</div><div class="line">    module Sprites</div><div class="line">      class ChunkyPngEngine &lt; Compass::SassExtensions::Sprites::Engine</div><div class="line"></div><div class="line">        def construct_sprite</div><div class="line">          #do something</div><div class="line">        end    </div><div class="line"></div><div class="line">        def save(filename)</div><div class="line">          #save file</div><div class="line">        end</div><div class="line"></div><div class="line">      end</div><div class="line">    end</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+<h3 id="增加配置属性到Compass"><a href="#增加配置属性到Compass" class="headerlink" title="增加配置属性到Compass"></a>增加配置属性到Compass</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Compass::Configuration.add_configuration_property(:foobar, &quot;this is a foobar&quot;) do</div><div class="line">  if environment == :production</div><div class="line">    &quot;foo&quot;</div><div class="line">  else</div><div class="line">    &quot;bar&quot;</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>这将做几件事:</p>
+<pre><code>1,让用户可以设置foobar它们的配置文件中配置属性。
+
+2,foobar的Ruby代码可以读取和写入的任何配置对象的属性。 
+
+3,# this is a foobar中。注释不是必需的，你可以简单的忽略，如果你喜欢
+
+4,提供的代码块允许您指定一个合理的根据其他设置的默认值的配置或使用任意代码以确定什么价值应该是开的。例如，它可以读取一个配置文件，也可以基于用户的操作系统的变化。
+</code></pre><h2 id="生成样式表"><a href="#生成样式表" class="headerlink" title="生成样式表"></a>生成样式表</h2><p>可以参考可用的配置选项。</p>
+<p>用于生成的编译样式表</p>
+<p>配置 A: 默认</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass compile -e production --force</div></pre></td></tr></table></figure>
+<p>注:这是compass的默认值，您所指定的选择中显式地配置不会改变。</p>
+<p>配置 B: 覆盖您的配置文件设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compass compile --output-style compressed --force</div></pre></td></tr></table></figure>
+<p>配置 C: 创建一个单独的配置文件用于生产</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cp config.rb prod_config.rb</div><div class="line"></div><div class="line"></div><div class="line">..edit prod_config.rb to suit  your needs..</div><div class="line"></div><div class="line">compass compile -c prod_config.rb --force</div></pre></td></tr></table></figure>
+<h2 id="精灵图"><a href="#精灵图" class="headerlink" title="精灵图"></a>精灵图</h2><h3 id="精灵图-1"><a href="#精灵图-1" class="headerlink" title="精灵图"></a>精灵图</h3><p>ps:精灵图和雪碧图 都是一个</p>
+<p>Compass让创建精灵图更简单. 你可以把精灵图片放到一个文件夹下, 导入你的样式表, 你可以通过多种方法使用雪碧图</p>
+<p><em>*主:必须是<a href="https://github.com/wvanbergen/chunky_png支持的" target="_blank" rel="external">https://github.com/wvanbergen/chunky_png支持的</a></em>.</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>下面我们打包4个icons:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">images/my-icons/new.png</div><div class="line">images/my-icons/edit.png</div><div class="line">images/my-icons/save.png</div><div class="line">images/my-icons/delete.png</div></pre></td></tr></table></figure>
+<p>相互间隔32px.</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>**注意:  my-icons 只适用于本例, “my-icons” 代表包含您的精灵文件夹名称。</p>
+<p>最简单的方法就是单独使用类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@import &quot;compass/utilities/sprites&quot;;</div><div class="line">@import &quot;my-icons/*.png&quot;;</div><div class="line">@include all-my-icons-sprites;</div></pre></td></tr></table></figure>
+<p>你将获得CSS输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.my-icons-sprite,</div><div class="line">.my-icons-delete,</div><div class="line">.my-icons-edit,</div><div class="line">.my-icons-new,</div><div class="line">.my-icons-save   &#123; background: url(&apos;/images/my-icons-s34fe0604ab.png&apos;) no-repeat; &#125;</div><div class="line"></div><div class="line">.my-icons-delete &#123; background-position: 0 0; &#125;</div><div class="line">.my-icons-edit   &#123; background-position: 0 -32px; &#125;</div><div class="line">.my-icons-new    &#123; background-position: 0 -64px; &#125;</div><div class="line">.my-icons-save   &#123; background-position: 0 -96px; &#125;</div></pre></td></tr></table></figure>
+<p>你可以使用 my-icons-XXX类来标记需要。</p>
+<p>我们分析下原理。import语句告诉compass生成的样式表定制你的精灵。这个样式表是有魔力的，它是不会写到硬盘上，并且可以自定义设置你之前导入配置变量。看到自定义选项页。这个样式表的目标是提供一个简单的命名惯例，为你的精灵，让他们很容易记住和使用。你不该关心什么是雪碧地图生成的名字，也没有一杯雪碧是位于哪里的。</p>
+<p>嵌套文件夹</p>
+<p>**Note: The use of orange is only for this example, “orange” represents the folder name that contains your sprites.</p>
+<p>Sprites stored in a nested folder will use the last folder name in the path as the sprite name.</p>
+<p>例如:</p>
+<p>  @import “themes/orange/*.png”;<br>  @include all-orange-sprites;</p>
+<p>选择器控制</p>
+<p>**Note: The use of my-icons is only for this example, “my-icons” represents the folder name that contains your sprites.</p>
+<p>If you want control over what selectors are generated, it is easy to do. In this example, this is done by using the magic my-icons-sprite mixin. Note that the mixin’s name is dependent on the name of the folder in which you’ve placed your icons.</p>
+<p>@import “my-icons/*.png”;</p>
+<p>.actions {<br>  .new    { @include my-icons-sprite(new);    }<br>  .edit   { @include my-icons-sprite(edit);   }<br>  .save   { @include my-icons-sprite(save);   }<br>  .delete { @include my-icons-sprite(delete); }<br>}<br>And your stylesheet will compile to:</p>
+<p>.my-icons-sprite,<br>.actions .new,<br>.actions .edit,<br>.actions .save,<br>.actions .delete { background: url(‘/images/my-icons-s34fe0604ab.png’) no-repeat; }</p>
+<p>.actions .new    { background-position: 0 -64px; }<br>.actions .edit   { background-position: 0 -32px; }<br>.actions .save   { background-position: 0 -96px; }<br>.actions .delete { background-position: 0 0;     }</p>
+<p>Sass Functions</p>
+<p>**Note: The use of my-icons is only for this example, “my-icons” represents the folder name that contains your sprites.</p>
+<p>Getting the image dimensions of a sprite</p>
+<p>You can get a unit value by using the magical dimension functions <map>-sprite-height and <map>-sprite-width If you are looking to just return the dimensions see the docs</map></map></p>
+<p>Example:</p>
+<p>@import “my-icons/*.png”;<br>$box-padding: 5px;<br>$height: my-icons-sprite-height(some_icon);<br>$width: my-icons-sprite-width(some_icon);</p>
+<p>.somediv {<br>  height:$height + $box-padding;<br>  width:$width + $box-padding;<br>}</p>
+<p>Magic Imports</p>
+<p>**Note: The use of my-icons is only for this example, “my-icons” represents the folder name that contains your sprites.</p>
+<p>As noted above, compass will magically create sprite stylesheets for you. Some people like magic, some people are scared by it, and others are curious about how the magic works. If you would like to avoid the magic, you can use compass to generate an import for you. On the command line:</p>
+<p>compass sprite “images/my-icons/*.png”<br>This will create file using your project’s preferred syntax, or you can specify the output filename using the -f option and the syntax will be inferred from the extension. If you do this, you’ll need to remember to regenerate the import whenever you rename, add, or remove sprites.</p>
+<p>Using the magic imports is recommended for most situations. But there are times when you might want to avoid it. For instance, if your sprite map has more than about 20 to 30 sprites, you may find that hand crafting the import will speed up compilation times. See the section on performance considerations for more details.</p>
+<p>Performance Considerations</p>
+<p>Reading PNG files and assembling new images and saving them to disk might have a non-trivial impact to your stylesheet compilation times. Especially for the first compile. Please keep this in mind.</p>
+<p>Large numbers of sprites</p>
+<p>The magic stylesheet can get very large when there are large numbers of sprites. 50 sprites will cause there to be over 150 variables created and then passed into the sprite-map function. You may find that customizing the sprite function call to only pass those values that you are overriding will provide a small performance boost. See a concrete example.</p>
+<p>Oily PNG</p>
+<p>Compass generates PNG files using a pure-ruby library called chunky_png. This library can be made faster by installing a simple C extension called oily_png. Add it to your Gemfile if you have one in your project:</p>
+<p>gem ‘oily_png’<br>Or install the Rubygem:</p>
+<p>gem install oily_png<br>Compass will automatically detect its presence.</p>
+<h3 id="Customization"><a href="#Customization" class="headerlink" title="Customization"></a>Customization</h3><p>Customization Options</p>
+<p>Options Applying to All Sprite Maps</p>
+<p>These options allow you to customize the behavior of all sprites referenced in your stylesheet. In many cases, there’s a configuration option that allows you to change the default for that sprite map or even an individual sprite image.</p>
+<p>NOTE: These configuration options must be set before you import the sprites.</p>
+<p>$sprite-selectors - Which interaction states should be considered for creating magic sprite selectors.<br>$disable-magic-sprite-selectors - Set to true to turn off magic selectors. Defaults to false.<br>$default-sprite-separator - Defaults to a dash. You can set this to an underscore (“_”) if you’re one of those people.<br>Options per Sprite Map</p>
+<p>When constructing the sprite map, the entire sprite map and its associated stylesheet can be configured in the following ways. Each option is specified by setting a configuration variable before importing the sprite. The variables are named according to the name of the folder containing the sprites. In the examples below the sprites were contained within a folder called icon.</p>
+<p>$<map>-spacing – The amount of transparent space, in pixels, around each sprite. Defaults to 0px. E.g. $icon-spacing: 20px.<br>$<map>-repeat – Whether or not each sprite should repeat along the x axis. Defaults to no-repeat. E.g. $icon-repeat: repeat-x.<br>$<map>-position – The position of the sprite in the sprite map along the x-axis. Can be specified in pixels or percentage of the sprite map’s width. 100% would cause the sprite to be on the right-hand side of the sprite map. Defaults to 0px. E.g. $icon-position: 100%.<br>$<map>-sprite-dimensions – Whether or not the dimensions of the sprite should be included in each sprite’s CSS output. Can be true or false. Defaults to false.<br>$<map>-sprite-base-class – The base class for these sprites. Defaults to .<map>-sprite. E.g. $icon-sprite-base-class: “.action-icon”<br>$<map>-clean-up – Whether or not to removed the old sprite file when a new one is created. Defaults to true<br>$<map>-class-separator – If you set this to an underscore (“_”) then all the generated selectors for this sprite will use underscores instead dashes. To change this value for all sprites, set $default-sprite-separator to an underscore.<br>Options per Sprite</map></map></map></map></map></map></map></map></p>
+<p>When constructing the sprite map, each sprite can be configured in the following ways:</p>
+<p>$<map>-<sprite>-spacing – The amount of transparent space, in pixels, around the sprite. Defaults to the sprite map’s spacing which defaults to 0px. E.g. $icon-new-spacing: 20px.<br>$<map>-<sprite>-repeat – Whether or not the sprite should repeat along the x axis. Defaults to the sprite map’s repeat which defaults to no-repeat. E.g. $icon-new-repeat: repeat-x.<br>$<map>-<sprite>-position – The position of the sprite in the sprite map along the x-axis. Can be specified in pixels or percentage of the sprite map’s width. 100% would cause the sprite to be on the right-hand side of the sprite map. Defaults to the sprite map’s position value which defaults to 0px. E.g. $icon-new-position: 100%.</sprite></map></sprite></map></sprite></map></p>
+<h3 id="Magic-Selectors"><a href="#Magic-Selectors" class="headerlink" title="Magic Selectors"></a>Magic Selectors</h3><p>Magic Selectors</p>
+<p>If you want to add selectors for your sprites, it’s easy todo by adding _active _target or _hover to the file name, In the example below we have a sprite directory that looks like: <em> note you can use - in file names also ex. glossy-active.png </em> <em> my-buttons/glossy.png </em> my-buttons/glossy_hover.png <em> my-buttons/glossy_active.png </em> my-buttons/glossy_target.png</p>
+<p>Now in our sass file we add:</p>
+<p>@import “my-buttons/*.png”;</p>
+<p>a {<br>  @include my-buttons-sprite(glossy)<br>}<br>And your stylesheet will compile to:</p>
+<p>.my-buttons-sprite, a {<br>  background: url(‘/my-buttons-sedfef809e2.png’) no-repeat;<br>}</p>
+<p>a {<br>  background-position: 0 0;<br>}<br>a:hover, a.glossy_hover, a.glossy-hover {<br>  background-position: 0 -40px;<br>}<br>a:target, a.glossy_target, a.glossy-target {<br>  background-position: 0 -60px;<br>}<br>a:active, a.glossy_active, a.glossy-active {<br>  background-position: 0 -20;<br>}<br>Alternatively you can use the @include all-my-buttons-sprites; after the import and get the following output:</p>
+<p>.my-buttons-sprite, .my-buttons-glossy {<br>  background: url(‘/my-buttons-sedfef809e2.png’) no-repeat;<br>}</p>
+<p>.my-buttons-glossy {<br>  background-position: 0 0;<br>}<br>.my-buttons-glossy:hover, .my-buttons-glossy.glossy_hover, .my-buttons-glossy.glossy-hover {<br>  background-position: 0 -40px;<br>}<br>.my-buttons-glossy:target, .my-buttons-glossy.glossy_target, .my-buttons-glossy.glossy-target {<br>  background-position: 0 -60px;<br>}<br>.my-buttons-glossy:active, .my-buttons-glossy.glossy_active, .my-buttons-glossy.glossy-active {<br>  background-position: 0 -20px;<br>}<br>Disabling</p>
+<p>To disable this feature set $disable-magic-sprite-selectors to true before calling the sprite mixin</p>
+<p>a {<br>  $disable-magic-sprite-selectors:true;<br>  @include my-buttons-sprite(glossy)<br>}</p>
+<h3 id="Sprite-layouts"><a href="#Sprite-layouts" class="headerlink" title="Sprite layouts"></a>Sprite layouts</h3><p>Sorting</p>
+<p>Default is none sprites will be orderd however they are recived from the file system</p>
+<p>You can sort by:</p>
+<p>width<br>height<br>size<br>name<br>none<br>Example</p>
+<p>$my-sprite-sort-by : ‘width’;<br>Default search direction is acending if you wish to sort decending prepend a !</p>
+<p>$my-sprite-sort-by : ‘!width’;<br>Sprite Layouts</p>
+<p>Example:</p>
+<p>$icon-layout:horizontal;<br>@import “icon/*.png”;</p>
+<p>$dropcap-layout:diagonal<br>@import “dropcap/*.png”;<br>Vertical</p>
+<p>@import “mysprite/*.png”;<br>Example Output:</p>
+<p>Vertical Example</p>
+<p>Horizontal</p>
+<p>$mysprite-layout:horizontal;<br>@import “mysprite/*.png”;<br>Example Output:</p>
+<p>Horizontal Example</p>
+<p>Notes:</p>
+<p>Responds to the same configuration options that vertical has.<br>Diagonal</p>
+<p>$mysprite-layout:diagonal;<br>@import “mysprite/*.png”;<br>Example Output:</p>
+<p>Diagonal Example</p>
+<p>Notes:</p>
+<p>Configuration options do not effect the layout<br>This is incredibly resource intensive on the browser<br>Smart</p>
+<p>$mysprite-layout:smart;<br>@import “mysprite/*.png”;<br>Example Output:</p>
+<p>Smart Example</p>
+<p>Notes:</p>
+<p>Configuration options do not effect the layout<br>Most efficient use of browser memory<br>Example icons from Open Icon Library and are released under public domain</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">require &apos;compass/test_case&apos;</div><div class="line">class StylesheetsTest &lt; Compass::TestCase</div><div class="line">  def test_stylesheets</div><div class="line">    my_sass_files.each do |sass_file|</div><div class="line">      assert_compiles(sass_file) do |result|</div><div class="line">        assert_not_blank result</div><div class="line">      end</div><div class="line">    end</div><div class="line">  end</div><div class="line">  protected</div><div class="line">  def my_sass_files</div><div class="line">    Dir.glob(File.expand_path(File.join(File.dirname(__FILE__), &quot;../..&quot;, &quot;app/stylesheets/**/[^_]*.sass&quot;)))</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+<h2 id="升级-不再维护，这个不用看啦"><a href="#升级-不再维护，这个不用看啦" class="headerlink" title="升级(不再维护，这个不用看啦)"></a>升级(不再维护，这个不用看啦)</h2><h2 id="配置变量"><a href="#配置变量" class="headerlink" title="配置变量"></a>配置变量</h2><p>Sass中有两种定义变量的方法. 第一种，最常见的:</p>
+<pre><code>$my-constant : #fedcba
+</code></pre><p>第二种是提供一个默认值。比如说:</p>
+<pre><code>$my-constant : #fedcba !default
+</code></pre><p>许多模块允许你设置默认值，导入模块之前，您必须设置变量。比如说:</p>
+<pre><code>$blueprint-grid-columns = 12
+@import &quot;blueprint/grid&quot;
+</code></pre><p>因此，把多个部分引入一个。这通常被称为“base”命名样式表通常是 _base.scss or _base.sass.</p>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h1 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h1><h1 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h1><h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1>
       
     </div>
 
@@ -730,7 +891,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -748,7 +909,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -796,7 +957,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用Compass"><span class="nav-number">1.1.</span> <span class="nav-text">开始使用Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Compass"><span class="nav-number">1.2.</span> <span class="nav-text">安装Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监视和编译你的项目"><span class="nav-number">1.3.</span> <span class="nav-text">监视和编译你的项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Compass不用命令行"><span class="nav-number">1.4.</span> <span class="nav-text">使用Compass不用命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多配置命令"><span class="nav-number">1.5.</span> <span class="nav-text">更多配置命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#教程"><span class="nav-number">2.</span> <span class="nav-text">教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#教程-1"><span class="nav-number">2.1.</span> <span class="nav-text">教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass-教程"><span class="nav-number">2.1.1.</span> <span class="nav-text">Compass 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass入门"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compass入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贡献点"><span class="nav-number">2.1.3.</span> <span class="nav-text">贡献点?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用集成"><span class="nav-number">2.2.</span> <span class="nav-text">应用集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用集成-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ruby-on-Rails"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">Ruby on Rails</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sinatra"><span class="nav-number">2.2.2.</span> <span class="nav-text">Sinatra</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-（基于ruby的微型web框架）"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Sinatra （基于ruby的微型web框架）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nanoc"><span class="nav-number">2.2.3.</span> <span class="nav-text">nanoc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳方法"><span class="nav-number">2.3.</span> <span class="nav-text">最佳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#促进"><span class="nav-number">2.4.</span> <span class="nav-text">促进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#促进Compass发展"><span class="nav-number">2.4.1.</span> <span class="nav-text">促进Compass发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单改进"><span class="nav-number">2.4.2.</span> <span class="nav-text">简单改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑文档"><span class="nav-number">2.4.3.</span> <span class="nav-text">编辑文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复Bugs"><span class="nav-number">2.4.4.</span> <span class="nav-text">修复Bugs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改样式表"><span class="nav-number">2.4.5.</span> <span class="nav-text">更改样式表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改ruby"><span class="nav-number">2.4.6.</span> <span class="nav-text">更改ruby</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补丁提交"><span class="nav-number">2.4.7.</span> <span class="nav-text">补丁提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pull-请求实例"><span class="nav-number">2.4.8.</span> <span class="nav-text">Pull 请求实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目结构"><span class="nav-number">2.4.9.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般哲学-其实就是规范"><span class="nav-number">2.4.10.</span> <span class="nav-text">一般哲学(其实就是规范)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式约定"><span class="nav-number">2.4.11.</span> <span class="nav-text">样式约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题-amp-杂项信息"><span class="nav-number">2.4.12.</span> <span class="nav-text">常见问题 &杂项信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在开发中使用compass"><span class="nav-number">2.4.13.</span> <span class="nav-text">在开发中使用compass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试"><span class="nav-number">2.4.14.</span> <span class="nav-text">运行测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写样式测试"><span class="nav-number">2.4.15.</span> <span class="nav-text">编写样式测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新选择或重新定位-我们该怎么办"><span class="nav-number">2.4.16.</span> <span class="nav-text">重新选择或重新定位. 我们该怎么办?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Compass扩展"><span class="nav-number">2.5.</span> <span class="nav-text">创建Compass扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass扩展"><span class="nav-number">2.5.1.</span> <span class="nav-text">Compass扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extending-Compass"><span class="nav-number">2.6.</span> <span class="nav-text">Extending Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Production-Stylesheets"><span class="nav-number">2.7.</span> <span class="nav-text">Production Stylesheets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spriting"><span class="nav-number">2.8.</span> <span class="nav-text">Spriting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Customization"><span class="nav-number">2.8.1.</span> <span class="nav-text">Customization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magic-Selectors"><span class="nav-number">2.8.2.</span> <span class="nav-text">Magic Selectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sprite-layouts"><span class="nav-number">2.8.3.</span> <span class="nav-text">Sprite layouts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing"><span class="nav-number">2.9.</span> <span class="nav-text">Testing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upgrading"><span class="nav-number">2.10.</span> <span class="nav-text">Upgrading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lemonade-Upgrade"><span class="nav-number">2.10.1.</span> <span class="nav-text">Lemonade Upgrade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scared-to-Upgrade"><span class="nav-number">2.10.2.</span> <span class="nav-text">Scared to Upgrade?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Upgrading-to-v0-11"><span class="nav-number">2.10.3.</span> <span class="nav-text">Upgrading to v0.11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Working-with-Configurable-Variables"><span class="nav-number">2.11.</span> <span class="nav-text">Working with Configurable Variables</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Documentation"><span class="nav-number">4.</span> <span class="nav-text">Documentation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Support"><span class="nav-number">5.</span> <span class="nav-text">Support</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bugs"><span class="nav-number">6.</span> <span class="nav-text">Bugs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用Compass"><span class="nav-number">1.1.</span> <span class="nav-text">开始使用Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Compass"><span class="nav-number">1.2.</span> <span class="nav-text">安装Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监视和编译你的项目"><span class="nav-number">1.3.</span> <span class="nav-text">监视和编译你的项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Compass不用命令行"><span class="nav-number">1.4.</span> <span class="nav-text">使用Compass不用命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多配置命令"><span class="nav-number">1.5.</span> <span class="nav-text">更多配置命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#教程"><span class="nav-number">2.</span> <span class="nav-text">教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#教程-1"><span class="nav-number">2.1.</span> <span class="nav-text">教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass-教程"><span class="nav-number">2.1.1.</span> <span class="nav-text">Compass 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass入门"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compass入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贡献点"><span class="nav-number">2.1.3.</span> <span class="nav-text">贡献点?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用集成"><span class="nav-number">2.2.</span> <span class="nav-text">应用集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用集成-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ruby-on-Rails"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">Ruby on Rails</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sinatra"><span class="nav-number">2.2.2.</span> <span class="nav-text">Sinatra</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-（基于ruby的微型web框架）"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Sinatra （基于ruby的微型web框架）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nanoc"><span class="nav-number">2.2.3.</span> <span class="nav-text">nanoc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳方法"><span class="nav-number">2.3.</span> <span class="nav-text">最佳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#促进"><span class="nav-number">2.4.</span> <span class="nav-text">促进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#促进Compass发展"><span class="nav-number">2.4.1.</span> <span class="nav-text">促进Compass发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单改进"><span class="nav-number">2.4.2.</span> <span class="nav-text">简单改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑文档"><span class="nav-number">2.4.3.</span> <span class="nav-text">编辑文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复Bugs"><span class="nav-number">2.4.4.</span> <span class="nav-text">修复Bugs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改样式表"><span class="nav-number">2.4.5.</span> <span class="nav-text">更改样式表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改ruby"><span class="nav-number">2.4.6.</span> <span class="nav-text">更改ruby</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补丁提交"><span class="nav-number">2.4.7.</span> <span class="nav-text">补丁提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pull-请求实例"><span class="nav-number">2.4.8.</span> <span class="nav-text">Pull 请求实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目结构"><span class="nav-number">2.4.9.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般哲学-其实就是规范"><span class="nav-number">2.4.10.</span> <span class="nav-text">一般哲学(其实就是规范)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式约定"><span class="nav-number">2.4.11.</span> <span class="nav-text">样式约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题-amp-杂项信息"><span class="nav-number">2.4.12.</span> <span class="nav-text">常见问题 &杂项信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在开发中使用compass"><span class="nav-number">2.4.13.</span> <span class="nav-text">在开发中使用compass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试"><span class="nav-number">2.4.14.</span> <span class="nav-text">运行测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写样式测试"><span class="nav-number">2.4.15.</span> <span class="nav-text">编写样式测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新选择或重新定位-我们该怎么办"><span class="nav-number">2.4.16.</span> <span class="nav-text">重新选择或重新定位. 我们该怎么办?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Compass扩展"><span class="nav-number">2.5.</span> <span class="nav-text">创建Compass扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compass扩展"><span class="nav-number">2.5.1.</span> <span class="nav-text">Compass扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成扩展"><span class="nav-number">2.5.2.</span> <span class="nav-text">生成扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式表和模板"><span class="nav-number">2.5.3.</span> <span class="nav-text">样式表和模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Compass配置"><span class="nav-number">2.5.4.</span> <span class="nav-text">添加Compass配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建模板-a-k-a-规范"><span class="nav-number">2.5.5.</span> <span class="nav-text">创建模板(a.k.a. 规范)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manifest-声明"><span class="nav-number">2.5.6.</span> <span class="nav-text">Manifest 声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研发技巧"><span class="nav-number">2.5.7.</span> <span class="nav-text">研发技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布"><span class="nav-number">2.5.8.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布gem"><span class="nav-number">2.5.9.</span> <span class="nav-text">发布gem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compass的扩展"><span class="nav-number">2.6.</span> <span class="nav-text">Compass的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#雪碧图引擎"><span class="nav-number">2.6.1.</span> <span class="nav-text">雪碧图引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加配置属性到Compass"><span class="nav-number">2.6.2.</span> <span class="nav-text">增加配置属性到Compass</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成样式表"><span class="nav-number">2.7.</span> <span class="nav-text">生成样式表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精灵图"><span class="nav-number">2.8.</span> <span class="nav-text">精灵图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#精灵图-1"><span class="nav-number">2.8.1.</span> <span class="nav-text">精灵图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.8.1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本用法"><span class="nav-number">2.8.1.2.</span> <span class="nav-text">基本用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customization"><span class="nav-number">2.8.2.</span> <span class="nav-text">Customization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magic-Selectors"><span class="nav-number">2.8.3.</span> <span class="nav-text">Magic Selectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sprite-layouts"><span class="nav-number">2.8.4.</span> <span class="nav-text">Sprite layouts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">2.9.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">2.9.1.</span> <span class="nav-text">单元测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级-不再维护，这个不用看啦"><span class="nav-number">2.10.</span> <span class="nav-text">升级(不再维护，这个不用看啦)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置变量"><span class="nav-number">2.11.</span> <span class="nav-text">配置变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Documentation"><span class="nav-number">4.</span> <span class="nav-text">Documentation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Support"><span class="nav-number">5.</span> <span class="nav-text">Support</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bugs"><span class="nav-number">6.</span> <span class="nav-text">Bugs</span></a></li></ol></div>
             
 
           </div>

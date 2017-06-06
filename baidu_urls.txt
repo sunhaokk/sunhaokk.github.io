@@ -1,3 +1,6 @@
+http://sunhao.win/articles/linux-lsyncd.html
+http://sunhao.win/articles/php-install-zlib.html
+http://sunhao.win/articles/linux-nfs.html
 http://sunhao.win/articles/web-module.html
 http://sunhao.win/articles/linux-kill9-psef.html
 http://sunhao.win/articles/nginx-config.html

@@ -4,6 +4,58 @@
 
     
   <url>
+    <loc>http://sunhao.win/articles/study-typescript.html</loc>
+    <lastmod>2017-06-13T01:07:16.205Z</lastmod>
+    <data>
+        <display>
+        <title>《TypeScript 中文入门教程》 8、函数</title>
+        <pubTime>2017-06-13T01:00:43.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/linux-ubuntu-ansible.html</loc>
+    <lastmod>2017-06-07T03:50:43.011Z</lastmod>
+    <data>
+        <display>
+        <title>linux-ubuntu-ansible</title>
+        <pubTime>2017-06-07T03:43:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/linux-ubuntu-samba.html</loc>
+    <lastmod>2017-06-06T09:27:54.569Z</lastmod>
+    <data>
+        <display>
+        <title>linux-ubuntu-samba配置</title>
+        <pubTime>2017-06-06T08:46:09.000Z</pubTime>
+        
+        <tag>ubuntu</tag>
+         
+        <tag>samba</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/articles/linux-lsyncd.html</loc>
     <lastmod>2017-06-06T02:29:24.651Z</lastmod>
     <data>

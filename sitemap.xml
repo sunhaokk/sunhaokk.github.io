@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/articles/study-typescript.html</loc>
+    
+    <lastmod>2017-06-13T01:07:16.205Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/linux-ubuntu-ansible.html</loc>
+    
+    <lastmod>2017-06-07T03:50:43.011Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/linux-ubuntu-samba.html</loc>
+    
+    <lastmod>2017-06-06T09:27:54.569Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/articles/linux-lsyncd.html</loc>
     
     <lastmod>2017-06-06T02:29:24.651Z</lastmod>

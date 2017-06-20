@@ -4,6 +4,67 @@
 
     
   <url>
+    <loc>http://sunhao.win/articles/compass.html</loc>
+    <lastmod>2017-06-20T08:59:48.921Z</lastmod>
+    <data>
+        <display>
+        <title>Compass中文开发规范手册</title>
+        <pubTime>2017-01-11T07:10:57.000Z</pubTime>
+        
+        <tag>compass</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/linux-ssh.html</loc>
+    <lastmod>2017-06-20T07:25:57.653Z</lastmod>
+    <data>
+        <display>
+        <title>ssh详细登录过程</title>
+        <pubTime>2017-06-20T07:22:00.000Z</pubTime>
+        
+        <tag>ssh</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://sunhao.win/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/npm-install.html</loc>
+    <lastmod>2017-06-15T07:50:02.611Z</lastmod>
+    <data>
+        <display>
+        <title>npm版本说明及安装范围版本</title>
+        <pubTime>2017-06-15T06:38:39.000Z</pubTime>
+        
+        <tag>npm</tag>
+         
+        <tag>install</tag>
+         
+        <tag>npm版本</tag>
+         
+         
+           
+             
+              <breadCrumb title="npm" url="http://sunhao.win/categories/npm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sunhao.win/articles/study-typescript.html</loc>
     <lastmod>2017-06-13T01:07:16.205Z</lastmod>
     <data>
@@ -116,23 +177,6 @@
              
               <breadCrumb title="php" url="http://sunhao.win/categories/php/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sunhao.win/articles/compass.html</loc>
-    <lastmod>2017-05-24T08:59:06.116Z</lastmod>
-    <data>
-        <display>
-        <title>Compass中文开发规范手册</title>
-        <pubTime>2017-01-11T07:10:57.000Z</pubTime>
-        
-        <tag>compass</tag>
-         
-         
-           
         </display>
     </data>
     </url>

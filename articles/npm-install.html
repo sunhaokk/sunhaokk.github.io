@@ -1,0 +1,1061 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="npm,install,npm版本," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Da'sBlog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近安装测试环境需要安装webpack1版本。但是用cnpm安装的时候默认已经是2.6.1了 那么我们怎么安装指定版本呢。 Semver语义化版本控制规范首先node采用semver规范，感兴趣的可以研究下。在这我们要明白版本号。http://semver.org/lang/zh-CN/ 版本格式：主版本号.次版本号.修订号，版本号递增规则如下：主版本号：当你做了不兼容的API 修改，次版本号：当">
+<meta name="keywords" content="npm,install,npm版本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm版本说明及安装范围版本">
+<meta property="og:url" content="http://sunhao.win/articles/npm-install.html">
+<meta property="og:site_name" content="Da&#39;sBlog">
+<meta property="og:description" content="最近安装测试环境需要安装webpack1版本。但是用cnpm安装的时候默认已经是2.6.1了 那么我们怎么安装指定版本呢。 Semver语义化版本控制规范首先node采用semver规范，感兴趣的可以研究下。在这我们要明白版本号。http://semver.org/lang/zh-CN/ 版本格式：主版本号.次版本号.修订号，版本号递增规则如下：主版本号：当你做了不兼容的API 修改，次版本号：当">
+<meta property="og:updated_time" content="2017-06-15T07:50:02.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="npm版本说明及安装范围版本">
+<meta name="twitter:description" content="最近安装测试环境需要安装webpack1版本。但是用cnpm安装的时候默认已经是2.6.1了 那么我们怎么安装指定版本呢。 Semver语义化版本控制规范首先node采用semver规范，感兴趣的可以研究下。在这我们要明白版本号。http://semver.org/lang/zh-CN/ 版本格式：主版本号.次版本号.修订号，版本号递增规则如下：主版本号：当你做了不兼容的API 修改，次版本号：当">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sunhao.win/articles/npm-install.html"/>
+
+
+
+
+
+  <title> npm版本说明及安装范围版本 | Da'sBlog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b8432f1a5c5c27d6783c25569df4b270";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Da'sBlog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+
+
+        
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-categories">
+
+
+        
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-archives">
+
+
+        
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-compass">
+
+
+        
+          <a href="/articles/compass" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            compass中文手册
+          </a>
+        </li>
+        
+
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://sunhao.win/articles/npm-install.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Sun Hao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Da'sBlog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Da'sBlog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                npm版本说明及安装范围版本
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-15T14:38:39+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/npm/" itemprop="url" rel="index">
+                    <span itemprop="name">npm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/articles/npm-install.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近安装测试环境需要安装webpack1版本。但是用cnpm安装的时候默认已经是2.6.1了</p>
+<p>那么我们怎么安装指定版本呢。</p>
+<h3 id="Semver语义化版本控制规范"><a href="#Semver语义化版本控制规范" class="headerlink" title="Semver语义化版本控制规范"></a>Semver语义化版本控制规范</h3><p>首先node采用semver规范，感兴趣的可以研究下。在这我们要明白版本号。<br><a href="http://semver.org/lang/zh-CN/" target="_blank" rel="external">http://semver.org/lang/zh-CN/</a></p>
+<p>版本格式：主版本号.次版本号.修订号，版本号递增规则如下：<br>主版本号：当你做了不兼容的API 修改，<br>次版本号：当你做了向下兼容的功能性新增，<br>修订号：当你做了向下兼容的问题修正。<br>先行版本号及版本编译信息可以加到“主版本号.次版本号.修订号”的后面，作为延伸<br>例如1.2.19   1是版本号 ，2是次版本号，19是修订号 </p>
+<a id="more"></a>
+<h3 id="我们看看我们配置的依赖包"><a href="#我们看看我们配置的依赖包" class="headerlink" title="我们看看我们配置的依赖包"></a>我们看看我们配置的依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;devDependencies&quot;: &#123;</div><div class="line">   &quot;rimraf&quot;: &quot;^2.6.1&quot;,</div><div class="line">   &quot;webpack&quot;: &quot;^2.6.1&quot;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>其中^2.6.1就是版本号。我们看看官方解释</p>
+<p>dependencies</p>
+<p>Dependencies are specified in a simple object that maps a package name to a version range. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or git URL.</p>
+<p>Dependencies是将包名映射到版本范围的简单对象。版本范围是一个字符串，它具有一个或多个空格分隔的描述符。Dependencies也可以用tarball或git来标识。</p>
+<p>Please do not put test harnesses or transpilers in your dependencies object. See devDependencies, below.</p>
+<p>See semver for more details about specifying version ranges.</p>
+<p>请不要在您的依赖对象中放置testharnesses或transpilers。请看下面的devDependencies。</p>
+<p>ps:testharnesses测试实例工具，transpilers编译es6的工具</p>
+<pre><code>version Must match version exactly
+版本必须精确匹配
+
+&gt;version Must be greater than version
+&gt;大于指定版本
+
+&gt;=version etc
+&gt;=大于等于指定版本
+
+&lt;version
+&lt;=小于指定版本
+
+&lt;=version
+&lt;=小于等于指定版本
+
+~version &quot;Approximately equivalent to version&quot; See semver
+~近似于版本  例如2.1.1版本  他的近似版本类似 2.1.x  x任意
+
+
+^version &quot;Compatible with version&quot; See semver
+^兼容版本
+
+1.2.x 1.2.0, 1.2.1, etc., but not 1.3.0
+例如1.2.x 1.2.0, 1.2.1, 等., 但1.3.0就不是了
+
+http://... See &apos;URLs as Dependencies&apos; below
+
+* Matches any version
+*匹配任意版本
+
+&quot;&quot; (just an empty string) Same as *
+&quot;&quot;(空字符串)和*一样
+
+version1 - version2 Same as &gt;=version1 &lt;=version2.
+version1 - version2 例如 &gt;=version1 &lt;=version2. 大于等于version1小于等于version2
+
+range1 || range2 Passes if either range1 or range2 are satisfied.
+range1 || range2 例如1.2.1||2.2.1 这两个版本都可以。
+</code></pre><p>git… See ‘Git URLs as Dependencies’ below</p>
+<p>git方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git://github.com/user/project.git#commit-ish</div><div class="line">git+ssh://user@hostname:project.git#commit-ish</div><div class="line">git+ssh://user@hostname/project.git#commit-ish</div><div class="line">git+http://user@hostname/project/blah.git#commit-ish</div><div class="line">git+https://user@hostname/project/blah.git#commit-ish</div></pre></td></tr></table></figure></p>
+<p>user/repo See ‘GitHub URLs’ below</p>
+<p>github方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;foo&quot;,</div><div class="line">  &quot;version&quot;: &quot;0.0.0&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;express&quot;: &quot;expressjs/express&quot;,</div><div class="line">    &quot;mocha&quot;: &quot;mochajs/mocha#4727d357ea&quot;,</div><div class="line">    &quot;module&quot;: &quot;user/repo#feature\/branch&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>tag A specific version tagged and published as tag See npm-dist-tag</p>
+<p>通过一个版本标记类似，tag是我们发布包做的标记。<br>    npm install name@tag </p>
+<pre><code>path/path/path See Local Paths below
+</code></pre><p>通过本地安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;baz&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;bar&quot;: &quot;file:../foo/bar&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>For example, these are all valid:</p>
+<p>示例</p>
+<pre><code>{ &quot;dependencies&quot; :
+  { &quot;foo&quot; : &quot;1.0.0 - 2.9999.9999&quot;
+  , &quot;bar&quot; : &quot;&gt;=1.0.2 &lt;2.1.2&quot;
+  , &quot;baz&quot; : &quot;&gt;1.0.2 &lt;=2.3.4&quot;
+  , &quot;boo&quot; : &quot;2.0.1&quot;
+  , &quot;qux&quot; : &quot;&lt;1.0.0 || &gt;=2.3.1 &lt;2.4.5 || &gt;=2.5.2 &lt;3.0.0&quot;
+  , &quot;asd&quot; : &quot;http://asdf.com/asdf.tar.gz&quot;
+  , &quot;til&quot; : &quot;~1.2&quot;
+  , &quot;elf&quot; : &quot;~1.2.3&quot;
+  , &quot;two&quot; : &quot;2.x&quot;
+  , &quot;thr&quot; : &quot;3.3.x&quot;
+  , &quot;lat&quot; : &quot;latest&quot;
+  , &quot;dyl&quot; : &quot;file:../dyl&quot;
+  }
+}
+</code></pre><h3 id="我们再看一下安装规范"><a href="#我们再看一下安装规范" class="headerlink" title="我们再看一下安装规范"></a>我们再看一下安装规范</h3><pre><code>npm install &lt;name&gt;@&lt;version&gt;
+
+指定安装的package 版本
+
+npm install (with no args in a package dir)
+npm install &lt;tarball file&gt;
+npm install &lt;tarball url&gt;
+npm install &lt;folder&gt;
+npm install [@&lt;scope&gt;/]&lt;name&gt; [--save|--save-dev|--save-optional] [--save-exact]
+npm install [@&lt;scope&gt;/]&lt;name&gt;@&lt;tag&gt;
+npm install [@&lt;scope&gt;/]&lt;name&gt;@&lt;version&gt;
+npm install [@&lt;scope&gt;/]&lt;name&gt;@&lt;version range&gt;
+npm i (with any of the previous argument usage)
+</code></pre><p>好了   说重点  安装我们的webpack1</p>
+<pre><code>npm install webpack@^1.* --save-dev
+</code></pre><h3 id="额外赠送"><a href="#额外赠送" class="headerlink" title="额外赠送"></a>额外赠送</h3><p>npm init  会引导你创建一个package.json文件，包括名称、版本、作者这些信息等</p>
+<p>npm remove <name>移除</name></p>
+<p>npm update <name>更新</name></p>
+<p>npm ls 列出当前安装的了所有包</p>
+<p>npm root 查看当前包的安装路径</p>
+<p>npm root -g  查看全局的包的安装路径</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+            <a href="/tags/install/" rel="tag"># install</a>
+          
+            <a href="/tags/npm版本/" rel="tag"># npm版本</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/study-typescript.html" rel="next" title="《TypeScript 中文入门教程》 8、函数">
+                <i class="fa fa-chevron-left"></i> 《TypeScript 中文入门教程》 8、函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/linux-ssh.html" rel="prev" title="ssh详细登录过程">
+                ssh详细登录过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Sun Hao" />
+          <p class="site-author-name" itemprop="name">Sun Hao</p>
+          <p class="site-description motion-element" itemprop="description">Whoever wants to be first must be slave of all.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Semver语义化版本控制规范"><span class="nav-number">1.</span> <span class="nav-text">Semver语义化版本控制规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们看看我们配置的依赖包"><span class="nav-number">2.</span> <span class="nav-text">我们看看我们配置的依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们再看一下安装规范"><span class="nav-number">3.</span> <span class="nav-text">我们再看一下安装规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外赠送"><span class="nav-number">4.</span> <span class="nav-text">额外赠送</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Hao</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "68d47669d3794a958fbaaee9328b90f3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

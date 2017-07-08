@@ -43,7 +43,7 @@
     <link href="http://sunhao.win/articles/mysql-replication.html"/>
     <id>http://sunhao.win/articles/mysql-replication.html</id>
     <published>2017-07-01T06:42:05.000Z</published>
-    <updated>2017-07-08T09:02:09.050Z</updated>
+    <updated>2017-07-08T09:16:34.255Z</updated>
     
     <content type="html"><![CDATA[<h2 id="利用docker实现mysql主从同步-读写分离"><a href="#利用docker实现mysql主从同步-读写分离" class="headerlink" title="利用docker实现mysql主从同步/读写分离"></a>利用docker实现mysql主从同步/读写分离</h2><p>为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。<br>有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。</p>
 <p>通过本文实际你会操作到。</p>
@@ -57,7 +57,14 @@
 <p>没有也没事，就是看着会有点吃力。</p>
 <p>环境是centos，mycat是1.6.docker是1.12.6</p>
 <h3 id="下载mysql镜像。"><a href="#下载mysql镜像。" class="headerlink" title="下载mysql镜像。"></a>下载mysql镜像。</h3><pre><code>docker pull mysql
-</code></pre><p>下载完输入</p>
+
+
+ps:如果下载太慢，请添加腾讯源,依次执行
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;OPTIONS=&apos;--registry-mirror=https://mirror.ccs.tencentyun.com&apos;&quot; &gt;&gt; /etc/sysconfig/docker</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl daemon-reload</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service docker restart</div></pre></td></tr></table></figure>
+<p>或者直接去阿里仓库下<a href="https://dev.aliyun.com/search.html把上面的--registry-mirror=https://mirror.ccs.tencentyun.com换成你的专属源就可以" target="_blank" rel="external">https://dev.aliyun.com/search.html把上面的--registry-mirror=https://mirror.ccs.tencentyun.com换成你的专属源就可以</a></p>
+<p>下载完输入</p>
 <pre><code>docker images
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">docker.io/mysql             latest              44a8e1a5c0b2        8 days ago          407 MB</div></pre></td></tr></table></figure>
 <h3 id="利用mysql镜像，创建用于主从同步的两个新镜像。"><a href="#利用mysql镜像，创建用于主从同步的两个新镜像。" class="headerlink" title="利用mysql镜像，创建用于主从同步的两个新镜像。"></a>利用mysql镜像，创建用于主从同步的两个新镜像。</h3><p>我们当前所在的服务器叫<strong>宿主服务器</strong>，</p>
@@ -213,7 +220,14 @@
 &lt;p&gt;没有也没事，就是看着会有点吃力。&lt;/p&gt;
 &lt;p&gt;环境是centos，mycat是1.6.docker是1.12.6&lt;/p&gt;
 &lt;h3 id=&quot;下载mysql镜像。&quot;&gt;&lt;a href=&quot;#下载mysql镜像。&quot; class=&quot;headerlink&quot; title=&quot;下载mysql镜像。&quot;&gt;&lt;/a&gt;下载mysql镜像。&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;docker pull mysql
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;下载完输入&lt;/p&gt;
+
+
+ps:如果下载太慢，请添加腾讯源,依次执行
+&lt;/code&gt;&lt;/pre&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;echo &amp;quot;OPTIONS=&amp;apos;--registry-mirror=https://mirror.ccs.tencentyun.com&amp;apos;&amp;quot; &amp;gt;&amp;gt; /etc/sysconfig/docker&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;systemctl daemon-reload&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;service docker restart&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;或者直接去阿里仓库下&lt;a href=&quot;https://dev.aliyun.com/search.html把上面的--registry-mirror=https://mirror.ccs.tencentyun.com换成你的专属源就可以&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://dev.aliyun.com/search.html把上面的--registry-mirror=https://mirror.ccs.tencentyun.com换成你的专属源就可以&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载完输入&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker images
 &lt;/code&gt;&lt;/pre&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;docker.io/mysql             latest              44a8e1a5c0b2        8 days ago          407 MB&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;利用mysql镜像，创建用于主从同步的两个新镜像。&quot;&gt;&lt;a href=&quot;#利用mysql镜像，创建用于主从同步的两个新镜像。&quot; class=&quot;headerlink&quot; title=&quot;利用mysql镜像，创建用于主从同步的两个新镜像。&quot;&gt;&lt;/a&gt;利用mysql镜像，创建用于主从同步的两个新镜像。&lt;/h3&gt;&lt;p&gt;我们当前所在的服务器叫&lt;strong&gt;宿主服务器&lt;/strong&gt;，&lt;/p&gt;

@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://sunhao.win/articles/mysql-replication.html</loc>
-    <lastmod>2017-07-08T00:33:51.041Z</lastmod>
+    <lastmod>2017-07-08T01:15:37.944Z</lastmod>
     <data>
         <display>
         <title>利用docker实现mysql主从同步/读写分离，附赠docker搭建mycat读写分离。</title>

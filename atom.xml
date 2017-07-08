@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-07-08T01:15:37.944Z</updated>
+  <updated>2017-07-08T08:38:15.569Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,11 +16,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>node-js-module-study</title>
+    <link href="http://sunhao.win/articles/node-js-module-study.html"/>
+    <id>http://sunhao.win/articles/node-js-module-study.html</id>
+    <published>2017-07-08T06:08:53.000Z</published>
+    <updated>2017-07-08T08:38:15.569Z</updated>
+    
+    <content type="html"><![CDATA[<p>browserify<br>cross-env</p>
+<p><a href="http://www.cnblogs.com/libin-1/p/6254390.html插件开发" target="_blank" rel="external">http://www.cnblogs.com/libin-1/p/6254390.html插件开发</a></p>
+<p>promise<br><a id="more"></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;browserify&lt;br&gt;cross-env&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/libin-1/p/6254390.html插件开发&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/libin-1/p/6254390.html插件开发&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;promise&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>利用docker实现mysql主从同步/读写分离，附赠docker搭建mycat读写分离。</title>
     <link href="http://sunhao.win/articles/mysql-replication.html"/>
     <id>http://sunhao.win/articles/mysql-replication.html</id>
     <published>2017-07-01T06:42:05.000Z</published>
-    <updated>2017-07-08T01:15:37.944Z</updated>
+    <updated>2017-07-08T09:02:09.050Z</updated>
     
     <content type="html"><![CDATA[<h2 id="利用docker实现mysql主从同步-读写分离"><a href="#利用docker实现mysql主从同步-读写分离" class="headerlink" title="利用docker实现mysql主从同步/读写分离"></a>利用docker实现mysql主从同步/读写分离</h2><p>为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。<br>有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。</p>
 <p>通过本文实际你会操作到。</p>
@@ -48,7 +71,7 @@
 <h4 id="在slave文件夹下-创建-my-cnf-内容为"><a href="#在slave文件夹下-创建-my-cnf-内容为" class="headerlink" title="在slave文件夹下  创建 my.cnf 内容为"></a>在slave文件夹下  创建 my.cnf 内容为</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line"></div><div class="line">log-bin=mysql-bin   //[必须]启用二进制日志</div><div class="line"></div><div class="line">server-id=2//[必须]服务器唯一ID，默认是1，一般取IP最后一段，这里看情况分配</div></pre></td></tr></table></figure>
 <h4 id="切换到master目录下构建master-mysql镜像"><a href="#切换到master目录下构建master-mysql镜像" class="headerlink" title="切换到master目录下构建master/mysql镜像"></a>切换到master目录下构建master/mysql镜像</h4><pre><code>docker build -t master/mysql .
 </code></pre><p>（命令最后有个.，不要忘记，代表当前目录）</p>
-<h4 id="然后切换到master目录下构建slave-mysql镜像"><a href="#然后切换到master目录下构建slave-mysql镜像" class="headerlink" title="然后切换到master目录下构建slave/mysql镜像"></a>然后切换到master目录下构建slave/mysql镜像</h4><pre><code>docker build -t slave/mysql .
+<h4 id="然后切换到slave目录下构建slave-mysql镜像"><a href="#然后切换到slave目录下构建slave-mysql镜像" class="headerlink" title="然后切换到slave目录下构建slave/mysql镜像"></a>然后切换到slave目录下构建slave/mysql镜像</h4><pre><code>docker build -t slave/mysql .
 </code></pre><p>（命令最后有个.，不要忘记，代表当前目录）</p>
 <h4 id="查看是否创建成功"><a href="#查看是否创建成功" class="headerlink" title="查看是否创建成功"></a>查看是否创建成功</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@VM_118_220_centos ~]# docker images</div><div class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">slave/mysql                 latest              8c496048d7ba        About an hour ago   407 MB</div><div class="line">master/mysql                latest              7be30b0b631b        2 hours ago         407 MB</div><div class="line">docker.io/mysql             latest              44a8e1a5c0b2        8 days ago          407 MB</div></pre></td></tr></table></figure>
 <h3 id="用镜像创建容器"><a href="#用镜像创建容器" class="headerlink" title="用镜像创建容器"></a>用镜像创建容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306 --name mysql-master -e MYSQL_ROOT_PASSWORD=mysql -d master/mysql</div><div class="line"></div><div class="line">docker run -p 3306 --name mysql-slave -e MYSQL_ROOT_PASSWORD=mysql -d slave/mysql</div></pre></td></tr></table></figure>
@@ -1124,31 +1147,6 @@ no_subtree_check ：即使输出目录是一个子目录，nfs服务器也不检
     
     
       <category term="无线网络配置" scheme="http://sunhao.win/tags/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux-source</title>
-    <link href="http://sunhao.win/articles/linux-source.html"/>
-    <id>http://sunhao.win/articles/linux-source.html</id>
-    <published>2017-05-02T02:47:55.000Z</published>
-    <updated>2017-05-02T02:57:10.970Z</updated>
-    
-    <content type="html"><![CDATA[<p>source: usage: source filename [arguments]</p>
-<p>source命令：<br>source命令也称为“点命令”，也就是一个点符号（.）,是bash的内部命令。<br>功能：使Shell读入指定的Shell程序文件并依次执行文件中的所有语句<br>source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。<br>用法：<br>source filename 或 . filename<br>source命令(从 C Shell 而来)是bash shell的内置命令;点命令(.)，就是个点符号(从Bourne Shell而来)是source的另一名称。<br><a id="more"></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;source: usage: source filename [arguments]&lt;/p&gt;
-&lt;p&gt;source命令：&lt;br&gt;source命令也称为“点命令”，也就是一个点符号（.）,是bash的内部命令。&lt;br&gt;功能：使Shell读入指定的Shell程序文件并依次执行文件中的所有语句&lt;br&gt;source命令通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。&lt;br&gt;用法：&lt;br&gt;source filename 或 . filename&lt;br&gt;source命令(从 C Shell 而来)是bash shell的内置命令;点命令(.)，就是个点符号(从Bourne Shell而来)是source的另一名称。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
-    
-    
-      <category term="source" scheme="http://sunhao.win/tags/source/"/>
     
   </entry>
   

@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://sunhao.win/articles/mysql-replication.html</loc>
-    <lastmod>2017-07-08T01:15:37.944Z</lastmod>
+    <lastmod>2017-07-08T09:02:09.050Z</lastmod>
     <data>
         <display>
         <title>利用docker实现mysql主从同步/读写分离，附赠docker搭建mycat读写分离。</title>
@@ -18,6 +18,21 @@
              
               <breadCrumb title="mysql" url="http://sunhao.win/categories/mysql/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sunhao.win/articles/node-js-module-study.html</loc>
+    <lastmod>2017-07-08T08:38:15.569Z</lastmod>
+    <data>
+        <display>
+        <title>node-js-module-study</title>
+        <pubTime>2017-07-08T06:08:53.000Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>

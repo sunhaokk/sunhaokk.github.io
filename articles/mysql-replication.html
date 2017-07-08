@@ -1,0 +1,1130 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Da'sBlog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="利用docker实现mysql主从同步/读写分离为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。 通过本文实际你会操作到。  mysql的主从同步 docker镜像和容器的创建 docker容器间的数据传递 mycat入门  以下需要大">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用docker实现mysql主从同步&#x2F;读写分离，附赠docker搭建mycat读写分离。">
+<meta property="og:url" content="http://sunhao.win/articles/mysql-replication.html">
+<meta property="og:site_name" content="Da&#39;sBlog">
+<meta property="og:description" content="利用docker实现mysql主从同步/读写分离为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。 通过本文实际你会操作到。  mysql的主从同步 docker镜像和容器的创建 docker容器间的数据传递 mycat入门  以下需要大">
+<meta property="og:updated_time" content="2017-07-08T00:33:51.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用docker实现mysql主从同步&#x2F;读写分离，附赠docker搭建mycat读写分离。">
+<meta name="twitter:description" content="利用docker实现mysql主从同步/读写分离为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。 通过本文实际你会操作到。  mysql的主从同步 docker镜像和容器的创建 docker容器间的数据传递 mycat入门  以下需要大">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sunhao.win/articles/mysql-replication.html"/>
+
+
+
+
+
+  <title> 利用docker实现mysql主从同步/读写分离，附赠docker搭建mycat读写分离。 | Da'sBlog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b8432f1a5c5c27d6783c25569df4b270";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Da'sBlog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+
+
+        
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-categories">
+
+
+        
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-archives">
+
+
+        
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+        
+
+
+      
+        
+        <li class="menu-item menu-item-compass">
+
+
+        
+          <a href="/articles/compass" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            compass中文手册
+          </a>
+        </li>
+        
+
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://sunhao.win/articles/mysql-replication.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Sun Hao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Da'sBlog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Da'sBlog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                利用docker实现mysql主从同步/读写分离，附赠docker搭建mycat读写分离。
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-01T14:42:05+08:00">
+                2017-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/articles/mysql-replication.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="利用docker实现mysql主从同步-读写分离"><a href="#利用docker实现mysql主从同步-读写分离" class="headerlink" title="利用docker实现mysql主从同步/读写分离"></a>利用docker实现mysql主从同步/读写分离</h2><p>为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。<br>有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。</p>
+<p>通过本文实际你会操作到。</p>
+<ol>
+<li>mysql的主从同步</li>
+<li>docker镜像和容器的创建</li>
+<li>docker容器间的数据传递</li>
+<li>mycat入门</li>
+</ol>
+<p>以下需要大于100的智商和mysql基础docker基础，linux基础。</p>
+<p>没有也没事，就是看着会有点吃力。</p>
+<p>环境是centos，mycat是1.6.docker是1.12.6</p>
+<h3 id="下载mysql镜像。"><a href="#下载mysql镜像。" class="headerlink" title="下载mysql镜像。"></a>下载mysql镜像。</h3><pre><code>docker pull mysql
+</code></pre><p>下载完输入</p>
+<pre><code>docker images
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">docker.io/mysql             latest              44a8e1a5c0b2        8 days ago          407 MB</div></pre></td></tr></table></figure>
+<h3 id="利用mysql镜像，创建用于主从同步的两个新镜像。"><a href="#利用mysql镜像，创建用于主从同步的两个新镜像。" class="headerlink" title="利用mysql镜像，创建用于主从同步的两个新镜像。"></a>利用mysql镜像，创建用于主从同步的两个新镜像。</h3><p>我们当前所在的服务器叫<strong>宿主服务器</strong>，</p>
+<p>我们要利用docker 虚拟两个docker容器服务器，一个主服务器，一个从服务器。</p>
+<a id="more"></a>
+<h4 id="创建master-主-和slave-从-两个文件夹"><a href="#创建master-主-和slave-从-两个文件夹" class="headerlink" title="创建master(主)和slave(从)两个文件夹"></a>创建master(主)和slave(从)两个文件夹</h4><pre><code>/usr/mysql/master
+/usr/mysql/slave
+</code></pre><h4 id="在master和slave文件夹下-创建-Dockerfile-内容为"><a href="#在master和slave文件夹下-创建-Dockerfile-内容为" class="headerlink" title="在master和slave文件夹下  创建 Dockerfile 内容为"></a>在master和slave文件夹下  创建 Dockerfile 内容为</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">FROM mysql</div><div class="line"></div><div class="line">COPY my.cnf /etc/mysql/  </div><div class="line"></div><div class="line">EXPOSE 3306</div><div class="line"></div><div class="line">CMD [&quot;mysqld&quot;]</div></pre></td></tr></table></figure>
+<h4 id="在master文件夹下-创建-my-cnf-内容为"><a href="#在master文件夹下-创建-my-cnf-内容为" class="headerlink" title="在master文件夹下  创建 my.cnf 内容为"></a>在master文件夹下  创建 my.cnf 内容为</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line"></div><div class="line">log-bin=mysql-bin   //[必须]启用二进制日志</div><div class="line"></div><div class="line">server-id=1//[必须]服务器唯一ID，默认是1，一般取IP最后一段，这里看情况分配</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="在slave文件夹下-创建-my-cnf-内容为"><a href="#在slave文件夹下-创建-my-cnf-内容为" class="headerlink" title="在slave文件夹下  创建 my.cnf 内容为"></a>在slave文件夹下  创建 my.cnf 内容为</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line"></div><div class="line">log-bin=mysql-bin   //[必须]启用二进制日志</div><div class="line"></div><div class="line">server-id=2//[必须]服务器唯一ID，默认是1，一般取IP最后一段，这里看情况分配</div></pre></td></tr></table></figure>
+<h4 id="切换到master目录下构建master-mysql镜像"><a href="#切换到master目录下构建master-mysql镜像" class="headerlink" title="切换到master目录下构建master/mysql镜像"></a>切换到master目录下构建master/mysql镜像</h4><pre><code>docker build -t master/mysql .
+</code></pre><p>（命令最后有个.，不要忘记，代表当前目录）</p>
+<h4 id="然后切换到master目录下构建slave-mysql镜像"><a href="#然后切换到master目录下构建slave-mysql镜像" class="headerlink" title="然后切换到master目录下构建slave/mysql镜像"></a>然后切换到master目录下构建slave/mysql镜像</h4><pre><code>docker build -t slave/mysql .
+</code></pre><p>（命令最后有个.，不要忘记，代表当前目录）</p>
+<h4 id="查看是否创建成功"><a href="#查看是否创建成功" class="headerlink" title="查看是否创建成功"></a>查看是否创建成功</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@VM_118_220_centos ~]# docker images</div><div class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">slave/mysql                 latest              8c496048d7ba        About an hour ago   407 MB</div><div class="line">master/mysql                latest              7be30b0b631b        2 hours ago         407 MB</div><div class="line">docker.io/mysql             latest              44a8e1a5c0b2        8 days ago          407 MB</div></pre></td></tr></table></figure>
+<h3 id="用镜像创建容器"><a href="#用镜像创建容器" class="headerlink" title="用镜像创建容器"></a>用镜像创建容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306 --name mysql-master -e MYSQL_ROOT_PASSWORD=mysql -d master/mysql</div><div class="line"></div><div class="line">docker run -p 3306 --name mysql-slave -e MYSQL_ROOT_PASSWORD=mysql -d slave/mysql</div></pre></td></tr></table></figure>
+<h4 id="从这里开始，建议打开两个终端窗口，方便操作。"><a href="#从这里开始，建议打开两个终端窗口，方便操作。" class="headerlink" title="从这里开始，建议打开两个终端窗口，方便操作。"></a>从这里开始，建议打开两个终端窗口，方便操作。</h4><h5 id="master终端执行"><a href="#master终端执行" class="headerlink" title="master终端执行"></a>master终端执行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker exec -it mysql-master bash</div><div class="line"></div><div class="line">mysql -uroot -p</div></pre></td></tr></table></figure>
+<p>输入密码mysql进入到mysql环境</p>
+<h5 id="slave终端执行"><a href="#slave终端执行" class="headerlink" title="slave终端执行"></a>slave终端执行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker exec -it mysql-slave bash</div><div class="line"></div><div class="line">mysql -uroot -p</div></pre></td></tr></table></figure>
+<p>输入密码mysql进入到mysql环境</p>
+<h3 id="mysql主从配置"><a href="#mysql主从配置" class="headerlink" title="mysql主从配置"></a>mysql主从配置</h3><p>mysql配置</p>
+<h4 id="在主容器mysql中输入以下命令："><a href="#在主容器mysql中输入以下命令：" class="headerlink" title="在主容器mysql中输入以下命令："></a>在主容器mysql中输入以下命令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt;GRANT REPLICATION SLAVE ON *.* TO &apos;user&apos;@&apos;192.168.99.100&apos; IDENTIFIED BY &apos;mysql&apos;;（指定ip）或者</div><div class="line"></div><div class="line">mysql&gt;GRANT REPLICATION SLAVE ON *.* to &apos;user&apos;@&apos;%&apos; identified by &apos;mysql&apos;;（所有ip）</div></pre></td></tr></table></figure>
+<p>然后查看主容器数据库状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">mysql&gt; show master status;</div><div class="line">+------------------+----------+--------------+------------------+-------------------+</div><div class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |</div><div class="line">+------------------+----------+--------------+------------------+-------------------+</div><div class="line">| mysql-bin.000003 |     1338 |              |                  |                   |</div><div class="line">+------------------+----------+--------------+------------------+-------------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<p>记录File 的值和Position的值。</p>
+<p>下面要用到，到这里为止，主库千万不要再做任何操作，防止状态改变。</p>
+<h4 id="然后我们配置一下从库"><a href="#然后我们配置一下从库" class="headerlink" title="然后我们配置一下从库"></a>然后我们配置一下从库</h4><h4 id="查看master-mysql的对外端口号"><a href="#查看master-mysql的对外端口号" class="headerlink" title="查看master/mysql的对外端口号"></a>查看master/mysql的对外端口号</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker ps</div><div class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES</div><div class="line">8d1e3b87d499        slave/mysql         &quot;docker-entrypoint.sh&quot;   2 hours ago         Up 2 hours          0.0.0.0:32769-&gt;3306/tcp   mysql-slave</div><div class="line">980e5ea48152        master/mysql        &quot;docker-entrypoint.sh&quot;   2 hours ago         Up 2 hours          0.0.0.0:32768-&gt;3306/tcp   mysql-master</div></pre></td></tr></table></figure>
+<p>0.0.0.0:32768-&gt;3306/tcp其中32768为master的端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt;change master to</div><div class="line"></div><div class="line">master_host=&apos;x.x.x.x&apos;,</div><div class="line"></div><div class="line">master_user=&apos;user&apos;,</div><div class="line"></div><div class="line">master_log_file=&apos;mysql-bin.000003&apos;,</div><div class="line"></div><div class="line">master_log_pos=1201,</div><div class="line"></div><div class="line">master_port=32768,</div><div class="line"></div><div class="line">master_password=&apos;mysql&apos;;</div><div class="line"></div><div class="line">Query OK, 0 rows affected, 2 warnings (0.03 sec)</div><div class="line"></div><div class="line">mysql&gt; start slave;</div><div class="line">Query OK, 0 rows affected (0.01 sec)</div></pre></td></tr></table></figure>
+<p>master_host=’x.x.x.x’ //这里填master主机ip</p>
+<p>master_log_file=’mysql-bin.000003’,  //这里填写File 的值</p>
+<p>master_log_pos=1338,//这里填写Position的值。</p>
+<p>mysql&gt; start slave;//启动从服务器复制功能</p>
+<p>如果不小心配置错,输入mysql&gt; stop slave;然后重新录入一遍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">mysql&gt;change master to</div><div class="line"></div><div class="line">master_host=&apos;x.x.x.x&apos;,</div><div class="line"></div><div class="line">master_user=&apos;user&apos;,</div><div class="line"></div><div class="line">master_log_file=&apos;mysql-bin.000003&apos;,</div><div class="line"></div><div class="line">master_log_pos=1201,</div><div class="line"></div><div class="line">master_port=32768,</div><div class="line"></div><div class="line">master_password=&apos;mysql&apos;;</div></pre></td></tr></table></figure>
+<p>就可以了</p>
+<h3 id="检查主从连接状态"><a href="#检查主从连接状态" class="headerlink" title="检查主从连接状态"></a>检查主从连接状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show slave status\G</div><div class="line">*************************** 1. row ***************************</div><div class="line">               Slave_IO_State: Waiting for master to send event</div><div class="line">                  Master_Host: x.x.x.x</div><div class="line">                  Master_User: user</div><div class="line">                  Master_Port: 32768</div><div class="line">                Connect_Retry: 60</div><div class="line">              Master_Log_File: mysql-bin.000003</div><div class="line">          Read_Master_Log_Pos: 1338</div><div class="line">               Relay_Log_File: 8d1e3b87d499-relay-bin.000002</div><div class="line">                Relay_Log_Pos: 1221</div><div class="line">        Relay_Master_Log_File: mysql-bin.000003</div><div class="line">             Slave_IO_Running: Yes</div><div class="line">            Slave_SQL_Running: Yes</div><div class="line">              Replicate_Do_DB: </div><div class="line">          Replicate_Ignore_DB: </div><div class="line">           Replicate_Do_Table: </div><div class="line">       Replicate_Ignore_Table: </div><div class="line">      Replicate_Wild_Do_Table: </div><div class="line">  Replicate_Wild_Ignore_Table: </div><div class="line">                   Last_Errno: 0</div><div class="line">                   Last_Error: </div><div class="line">                 Skip_Counter: 0</div><div class="line">          Exec_Master_Log_Pos: 1338</div><div class="line">              Relay_Log_Space: 1435</div><div class="line">              Until_Condition: None</div><div class="line">               Until_Log_File: </div><div class="line">                Until_Log_Pos: 0</div><div class="line">           Master_SSL_Allowed: No</div><div class="line">           Master_SSL_CA_File: </div><div class="line">           Master_SSL_CA_Path: </div><div class="line">              Master_SSL_Cert: </div><div class="line">            Master_SSL_Cipher: </div><div class="line">               Master_SSL_Key: </div><div class="line">        Seconds_Behind_Master: 0</div><div class="line">Master_SSL_Verify_Server_Cert: No</div><div class="line">                Last_IO_Errno: 0</div><div class="line">                Last_IO_Error: </div><div class="line">               Last_SQL_Errno: 0</div><div class="line">               Last_SQL_Error: </div><div class="line">  Replicate_Ignore_Server_Ids: </div><div class="line">             Master_Server_Id: 1</div><div class="line">                  Master_UUID: cd327a00-5e18-11e7-98f7-0242ac110006</div><div class="line">             Master_Info_File: /var/lib/mysql/master.info</div><div class="line">                    SQL_Delay: 0</div><div class="line">          SQL_Remaining_Delay: NULL</div><div class="line">      Slave_SQL_Running_State: Slave has read all relay log; waiting for more updates</div><div class="line">           Master_Retry_Count: 86400</div><div class="line">                  Master_Bind: </div><div class="line">      Last_IO_Error_Timestamp: </div><div class="line">     Last_SQL_Error_Timestamp: </div><div class="line">               Master_SSL_Crl: </div><div class="line">           Master_SSL_Crlpath: </div><div class="line">           Retrieved_Gtid_Set: </div><div class="line">            Executed_Gtid_Set: </div><div class="line">                Auto_Position: 0</div><div class="line">         Replicate_Rewrite_DB: </div><div class="line">                 Channel_Name: </div><div class="line">           Master_TLS_Version: </div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<p>这两个必须是Yes 为No 或者connect说明没有连接上</p>
+<p> Slave_IO_Running: Yes</p>
+<p> Slave_SQL_Running: Yes</p>
+<h3 id="测试主从连接"><a href="#测试主从连接" class="headerlink" title="测试主从连接"></a>测试主从连接</h3><p>注意设置主从后，操作只能在master终端上，slave上的操作不会同步到master上。</p>
+<h4 id="登陆master终端，"><a href="#登陆master终端，" class="headerlink" title="登陆master终端，"></a>登陆master终端，</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">mysql&gt; create database sunhao;</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; show databases;</div><div class="line">+--------------------+</div><div class="line">| Database           |</div><div class="line">+--------------------+</div><div class="line">| information_schema |</div><div class="line">| mysql              |</div><div class="line">| performance_schema |</div><div class="line">| sunhao             |</div><div class="line">| sys                |</div><div class="line">+--------------------+</div><div class="line">5 rows in set (0.00 sec)</div><div class="line"></div><div class="line"></div><div class="line">mysql&gt; use sunhao</div><div class="line">Database changed</div><div class="line">mysql&gt;  create table sunhao(id int(3),name char(10));</div><div class="line">Query OK, 0 rows affected (0.04 sec)</div><div class="line"></div><div class="line">mysql&gt; insert into sunhao values(1,&apos;xiaoshuai&apos;);</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from sunhao;</div><div class="line">+------+-----------+</div><div class="line">| id   | name      |</div><div class="line">+------+-----------+</div><div class="line">|    1 | xiaoshuai |</div><div class="line">+------+-----------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<h4 id="登陆slave服务器"><a href="#登陆slave服务器" class="headerlink" title="登陆slave服务器"></a>登陆slave服务器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show databases;</div><div class="line">+--------------------+</div><div class="line">| Database           |</div><div class="line">+--------------------+</div><div class="line">| information_schema |</div><div class="line">| mysql              |</div><div class="line">| performance_schema |</div><div class="line">| sunhao             |</div><div class="line">| sys                |</div><div class="line">+--------------------+</div><div class="line">5 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; use sunhao</div><div class="line">Reading table information for completion of table and column names</div><div class="line">You can turn off this feature to get a quicker startup with -A</div><div class="line">Database changed</div><div class="line"></div><div class="line">mysql&gt; select * from sunhao;</div><div class="line"></div><div class="line">+------+-----------+</div><div class="line">| id   | name      |</div><div class="line">+------+-----------+</div><div class="line">|    1 | xiaoshuai |</div><div class="line">+------+-----------+</div></pre></td></tr></table></figure>
+<p>####</p>
+<p>如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）：</p>
+<p>这里我们做一次完整的测试</p>
+<p>(1)在主服务器数据库插入新的数据，并进行锁表操作，不让数据再进行写入动作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into sunhao values(2,&apos;xiaoshuai&apos;);</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from sunhao;                   </div><div class="line">+------+-----------+</div><div class="line">| id   | name      |</div><div class="line">+------+-----------+</div><div class="line">|    1 | xiaoshuai |</div><div class="line">|    2 | xiaoshuai |</div><div class="line">+------+-----------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; FLUSH TABLES WITH READ LOCK;</div><div class="line"></div><div class="line"></div><div class="line">mysql&gt; show full processlist; </div><div class="line"></div><div class="line">`</div></pre></td></tr></table></figure>
+<p>(2)退出服务器，用mysqldump备份数据文件到/var/lib,然后顺便多余的用tar打包一下玩。哈哈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; exit</div><div class="line">Bye</div><div class="line"></div><div class="line">root@980e5ea48152:/var/lib/mysql# mysqldump -u root -p  sunhao &gt; /var/lib/sunhao.dump    </div><div class="line">Enter password: </div><div class="line"></div><div class="line"></div><div class="line">root@980e5ea48152:/var/lib# tar -zcvf ./sunhao.dump .tar  ./sunhao.dump</div></pre></td></tr></table></figure>
+<p>(3)打开宿主服务器，复制mysql主服务器文件sunhao.dump.tar。到宿主服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root]# docker ps </div><div class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES</div><div class="line">8d1e3b87d499        slave/mysql         &quot;docker-entrypoint.sh&quot;   4 hours ago         Up 4 hours          0.0.0.0:32769-&gt;3306/tcp   mysql-slave</div><div class="line">980e5ea48152        master/mysql        &quot;docker-entrypoint.sh&quot;   4 hours ago         Up 4 hours          0.0.0.0:32768-&gt;3306/tcp   mysql-master</div><div class="line"></div><div class="line"></div><div class="line">mkdir -p /var/mydata</div><div class="line">docker cp 980e:/var/lib/sunhao.dump.tar /var/mydata/</div><div class="line"></div><div class="line">cd /var/mydata</div><div class="line">[root@VM_128_230_centos mydata]# ls</div><div class="line">sunhao.dump.tar</div></pre></td></tr></table></figure>
+<p>解释:docker cp 980e:/var/lib/sunhao.dump.tar /var/mydata/</p>
+<p>980e是980e5ea48152的缩写。保证不重复简写就可以</p>
+<p>980e:/var/lib/sunhao.dump.tar   意思就是选中的容器下面你的文件下的sunhao.dump.tar文件</p>
+<p>/var/mydata/ 目标文件</p>
+<p>(4)在宿主主机上输入</p>
+<pre><code>[root]# docker cp /var/mydata/sunhao.dump.tar 8d1e3b87d49936414c0e91ffdc60a054e7f4ef8b15baee295350565519abba0e:/var/lib/
+</code></pre><p>(5)在从服务器上输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@8d1e3b87d499:/# cd /var/lib/</div><div class="line">root@8d1e3b87d499:/var/lib# tar -zcvf sunhao.dump.tar</div></pre></td></tr></table></figure>
+<p>(6)在从服务器上输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar -zxvpf /var/lib/mysqlbak.sql.tar</div><div class="line"></div><div class="line">mysql -uroot -pmysql sunhao &lt; /var/lib/sunhao.dump;</div></pre></td></tr></table></figure>
+<p>如果写入成功,这个时候就可以用select查询到数据。</p>
+<p>(2)取消主服务器数据库锁定<br>    mysql&gt; UNLOCK TABLES;</p>
+<h2 id="docker搭建mycat读写分离"><a href="#docker搭建mycat读写分离" class="headerlink" title="docker搭建mycat读写分离"></a>docker搭建mycat读写分离</h2><h3 id="制作mycat容器，并运行"><a href="#制作mycat容器，并运行" class="headerlink" title="制作mycat容器，并运行"></a>制作mycat容器，并运行</h3><ol>
+<li>首先在本地新建个文件夹/usr/mycat。然后去mycat官网下载最新版本，这里我下载的是1.6版本。安装完解压到这里。<br> <a href="http://dl.mycat.io/" target="_blank" rel="external">http://dl.mycat.io/</a><br> <a href="http://dl.mycat.io/1.6-RELEASE/" title="http://dl.mycat.io/1.6-RELEASE/" target="_blank" rel="external">http://dl.mycat.io/1.6-RELEASE/</a></li>
+<li>编写Dockerfile，内容为</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 来源镜像,因为mycat依赖java，所以这里直接选的java环境。</div><div class="line">FROM java</div><div class="line"></div><div class="line"></div><div class="line">RUN  mkdir -p /var/local/mycat/</div><div class="line"></div><div class="line"># Add复制Mycat到容器</div><div class="line">ADD  mycat/ /var/local/mycat/ </div><div class="line"></div><div class="line"></div><div class="line">ENTRYPOINT  [&quot;/var/local/mycat/bin/mycat&quot;,&quot;console&quot;,&quot;&amp;&quot;]</div><div class="line"></div><div class="line"># 对外端口</div><div class="line">EXPOSE 8066 9066</div><div class="line"></div><div class="line"># 启动控制台</div><div class="line">CMD  [&quot;/var/local/mycat/bin/mycat&quot;,&quot;console&quot;,&quot;&amp;&quot;]</div></pre></td></tr></table></figure>
+<ol>
+<li><p>先别急着构建镜像，我们先修改下mycat的配置文件。</p>
+<p> [root@centos mycat]# ll<br> total 15324<br> -rw-r–r– 1 root root      357 Jul  5 15:26 Dockerfile<br> -rw-r–r– 1 root root 15662280 Jul  3 15:07 Mycat-server-1.6-RELEASE-20161028204710-linux.tar.gz<br> drwxr-xr-x 7 root root     4096 Jul  5 15:27 mycat</p>
+</li>
+<li><p>在我用的1.6版本。mycat对外端口是注释掉的。我们要打开下。我们编辑/usr/mycat/mycat/conf/server.xml.找到第32-35行。去掉注释符号。<!-- --></p>
+<pre><code>&lt;!--
+    &lt;property name=&quot;serverPort&quot;&gt;8066&lt;/property&gt; &lt;property name=&quot;managerPort&quot;&gt;9066&lt;/property&gt; 
+    &lt;property name=&quot;idleTimeout&quot;&gt;300000&lt;/property&gt; &lt;property name=&quot;bindIp&quot;&gt;0.0.0.0&lt;/property&gt; 
+    &lt;property name=&quot;frontWriteQueueSize&quot;&gt;4096&lt;/property&gt; &lt;property name=&quot;processors&quot;&gt;32&lt;/property&gt; --&gt;
+</code></pre></li>
+</ol>
+<ol>
+<li>我们往下看  有这么几句。这里分别默认两个用户。   name为root的管理员，可以进行读写。和普通用户只能进行读。我们也可以手动创建修改，另外password是密码  schemas是用户所能操作的库。  在这里我什么都没有改。下面都是默认。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;user name=&quot;root&quot;&gt;</div><div class="line">		&lt;property name=&quot;password&quot;&gt;123456&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;schemas&quot;&gt;TESTDB&lt;/property&gt;</div><div class="line">		</div><div class="line">		&lt;!-- 表级 DML 权限设置 --&gt;</div><div class="line">		&lt;!-- 		</div><div class="line">		&lt;privileges check=&quot;false&quot;&gt;</div><div class="line">			&lt;schema name=&quot;TESTDB&quot; dml=&quot;0110&quot; &gt;</div><div class="line">				&lt;table name=&quot;tb01&quot; dml=&quot;0000&quot;&gt;&lt;/table&gt;</div><div class="line">				&lt;table name=&quot;tb02&quot; dml=&quot;1111&quot;&gt;&lt;/table&gt;</div><div class="line">			&lt;/schema&gt;</div><div class="line">		&lt;/privileges&gt;		</div><div class="line">		 --&gt;</div><div class="line">	&lt;/user&gt;</div><div class="line"></div><div class="line">	&lt;user name=&quot;user&quot;&gt;</div><div class="line">		&lt;property name=&quot;password&quot;&gt;user&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;schemas&quot;&gt;TESTDB&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;readOnly&quot;&gt;true&lt;/property&gt;</div><div class="line">	&lt;/user&gt;</div></pre></td></tr></table></figure>
+<p>6.我们编辑/usr/mycat/mycat/conf/schema.xml，这个是我们配置分片和逻辑库表，规则的地方，数据节点，和数据源。其中schema是我们所操作的逻辑库。默认为TESTDB。下面分别是各个逻辑表。在这里直接默认。我只是为了区分dh和db两个字的区别，把db1-3改了data1-3你们可以不用管。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;schema name=&quot;TESTDB&quot; checkSQLschema=&quot;false&quot; sqlMaxLimit=&quot;100&quot;&gt;</div><div class="line">	&lt;!-- auto sharding by id (long) --&gt;</div><div class="line">	&lt;table name=&quot;travelrecord&quot; dataNode=&quot;dn1,dn2,dn3&quot; rule=&quot;auto-sharding-long&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- global table is auto cloned to all defined data nodes ,so can join</div><div class="line">		with any table whose sharding node is in the same data node --&gt;</div><div class="line">	&lt;table name=&quot;company&quot; primaryKey=&quot;ID&quot; type=&quot;global&quot; dataNode=&quot;dn1,dn2,dn3&quot; /&gt;</div><div class="line">	&lt;table name=&quot;goods&quot; primaryKey=&quot;ID&quot; type=&quot;global&quot; dataNode=&quot;dn1,dn2&quot; /&gt;</div><div class="line">	&lt;!-- random sharding using mod sharind rule --&gt;</div><div class="line">	&lt;table name=&quot;hotnews&quot; primaryKey=&quot;ID&quot; autoIncrement=&quot;true&quot; dataNode=&quot;dn1,dn2,dn3&quot;</div><div class="line">		   rule=&quot;mod-long&quot; /&gt;</div><div class="line">	&lt;!-- &lt;table name=&quot;dual&quot; primaryKey=&quot;ID&quot; dataNode=&quot;dnx,dnoracle2&quot; type=&quot;global&quot;</div><div class="line">		needAddLimit=&quot;false&quot;/&gt; &lt;table name=&quot;worker&quot; primaryKey=&quot;ID&quot; dataNode=&quot;jdbc_dn1,jdbc_dn2,jdbc_dn3&quot;</div><div class="line">		rule=&quot;mod-long&quot; /&gt; --&gt;</div><div class="line">	&lt;table name=&quot;employee&quot; primaryKey=&quot;ID&quot; dataNode=&quot;dn1,dn2&quot;</div><div class="line">		   rule=&quot;sharding-by-intfile&quot; /&gt;</div><div class="line">	&lt;table name=&quot;customer&quot; primaryKey=&quot;ID&quot; dataNode=&quot;dn1,dn2&quot;</div><div class="line">		   rule=&quot;sharding-by-intfile&quot;&gt;</div><div class="line">		&lt;childTable name=&quot;orders&quot; primaryKey=&quot;ID&quot; joinKey=&quot;customer_id&quot;</div><div class="line">					parentKey=&quot;id&quot;&gt;</div><div class="line">			&lt;childTable name=&quot;order_items&quot; joinKey=&quot;order_id&quot;</div><div class="line">						parentKey=&quot;id&quot; /&gt;</div><div class="line">		&lt;/childTable&gt;</div><div class="line">		&lt;childTable name=&quot;customer_addr&quot; primaryKey=&quot;ID&quot; joinKey=&quot;customer_id&quot;</div><div class="line">					parentKey=&quot;id&quot; /&gt;</div><div class="line">	&lt;/table&gt;</div><div class="line">	&lt;!-- &lt;table name=&quot;oc_call&quot; primaryKey=&quot;ID&quot; dataNode=&quot;dn1$0-743&quot; rule=&quot;latest-month-calldate&quot;</div><div class="line">		/&gt; --&gt;</div><div class="line">&lt;/schema&gt;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>在schema.xml往下修改。43-55行。数据源地址dataHost。这些就是我们的数据源，mycat把逻辑表的数据，读写都来源于我们配置地址。其中<br>writeHost写入源。设置多个，默认也只用第一个。readHost是读服务器。heartbeat是我们检测数据库是否正常运行的。</li>
+</ol>
+<p>在这里 mycat 有两种配置方式。</p>
+<p>分别是两个writeHost和一个writeHost一个readHost</p>
+<p>第一种如果写入失败，还是可读。</p>
+<p>第二种如果写入失败，不可读。</p>
+<p>我们采用安全稳妥的方式。一个writeHost一个readHost</p>
+<pre><code>我的配置为
+
+&lt;dataHost name=&quot;localhost1&quot; maxCon=&quot;1000&quot; minCon=&quot;20&quot; balance=&quot;1&quot;
+          writeType=&quot;0&quot; dbType=&quot;mysql&quot; dbDriver=&quot;native&quot; switchType=&quot;2&quot;  slaveThreshold=&quot;100&quot;&gt;
+
+    &lt;heartbeat&gt;show slave status&lt;/heartbeat&gt;
+    &lt;!-- can have multi write hosts --&gt;
+    &lt;writeHost host=&quot;hostM1&quot; url=&quot;115.159.124.18:68&quot; user=&quot;root&quot;    password=&quot;mysql&quot;&gt;
+        &lt;!-- can have multi read hosts --&gt;
+        &lt;readHost host=&quot;hostS1&quot; url=&quot;115.159.124.18:69&quot; user=&quot;root&quot;    password=&quot;mysql&quot; /&gt;
+
+    &lt;/writeHost&gt;
+
+&lt;/dataHost&gt;
+</code></pre><p>hostM1和hostS1分别对应我们创建的两个docker容器的对外端口。</p>
+<ol>
+<li>修改/usr/mycat/mycat/conf/log4j2.xml  这个是配置日志文件的，我们打开debug方便我们学习。修改第25行info为debug</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;asyncRoot level=&quot;debug&quot; includeLocation=&quot;true&quot;&gt;</div><div class="line"></div><div class="line">     &lt;AppenderRef ref=&quot;Console&quot; /&gt;</div><div class="line">     &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line"></div><div class="line"> &lt;/asyncRoot&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>docker build -t sunhao/mycat:1.6  . 别忘了最后面的圆点</p>
+</li>
+<li><p>docker  run –name sunhaomycat  -d -p 8066:8066 -p 9066:9066 sunhao/mycat:1.6</p>
+</li>
+</ol>
+<h3 id="就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端"><a href="#就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端" class="headerlink" title="就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端"></a>就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端</h3><p>1个宿主，1个mysql主，1个mysql从，1个用来看mycat日志。</p>
+<h4 id="宿主环境操作"><a href="#宿主环境操作" class="headerlink" title="宿主环境操作"></a>宿主环境操作</h4><p>在宿主终端上，安装mysql。并且连接我们的mycat。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@VM_128_230_centos mycat]# mysql -uroot -p123456 -h115.159.124.18 -P8066</div><div class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 8</div><div class="line">Server version: 5.6.29-mycat-1.6-RELEASE-20161028204710 MyCat Server (OpenCloundDB)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">MySQL [(none)]&gt;</div></pre></td></tr></table></figure>
+<p>完美，Server version: 5.6.29-mycat-1.6-RELEASE-20161028204710 MyCat Server 出现这，说明mycat运行了。</p>
+<p>进行简单的操作。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Database changed</div><div class="line">MySQL [TESTDB]&gt; show databases;</div><div class="line">+----------+</div><div class="line">| DATABASE |</div><div class="line">+----------+</div><div class="line">| TESTDB   |</div><div class="line">+----------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">MySQL [TESTDB]&gt; show tables;</div><div class="line">+------------------+</div><div class="line">| Tables in TESTDB |</div><div class="line">+------------------+</div><div class="line">| company          |</div><div class="line">| customer         |</div><div class="line">| customer_addr    |</div><div class="line">| employee         |</div><div class="line">| goods            |</div><div class="line">| hotnews          |</div><div class="line">| orders           |</div><div class="line">| order_items      |</div><div class="line">| travelrecord     |</div><div class="line">+------------------+</div><div class="line">9 rows in set (0.00 sec)</div><div class="line"></div><div class="line">MySQL [TESTDB]&gt;</div></pre></td></tr></table></figure>
+<h4 id="测试下写入"><a href="#测试下写入" class="headerlink" title="测试下写入"></a>测试下写入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">MySQL [TESTDB]&gt; create table travelrecord (id bigint not null primary key,user_id varchar(100),traveldate DATE, fee decimal,days int);</div><div class="line">ERROR 1105 (HY000): Table &apos;travelrecord&apos; already exists</div><div class="line">MySQL [TESTDB]&gt; insert into travelrecord(id,user_id,traveldate,fee,days)  values(1,@@hostname,20170707,100,10);</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">MySQL [TESTDB]&gt; </div><div class="line">MySQL [TESTDB]&gt; insert into travelrecord(id,user_id,traveldate,fee,days)  values(10000001,@@hostname,20170707,100,10);</div><div class="line">Query OK, 1 row affected (0.00 sec)</div></pre></td></tr></table></figure>
+<p>分别进入mysql主和mysql从可以看到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">MySQL [data2]&gt; use data3                  </div><div class="line">Reading table information for completion of table and column names</div><div class="line">You can turn off this feature to get a quicker startup with -A</div><div class="line"></div><div class="line">Database changed</div><div class="line">MySQL [data3]&gt; select * from travelrecord;</div><div class="line">+----------+--------------+------------+------+------+</div><div class="line">| id       | user_id      | traveldate | fee  | days |</div><div class="line">+----------+--------------+------------+------+------+</div><div class="line">| 10000001 | 980e5ea48152 | 2017-07-07 |  100 |   10 |</div><div class="line">+----------+--------------+------------+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">MySQL [data3]&gt; use data1;                 </div><div class="line">Reading table information for completion of table and column names</div><div class="line">You can turn off this feature to get a quicker startup with -A</div><div class="line"></div><div class="line">Database changed</div><div class="line">MySQL [data1]&gt; select * from travelrecord;</div><div class="line">+----+--------------+------------+------+------+</div><div class="line">| id | user_id      | traveldate | fee  | days |</div><div class="line">+----+--------------+------------+------+------+</div><div class="line">|  1 | 980e5ea48152 | 2017-07-07 |  100 |   10 |</div><div class="line">+----+--------------+------------+------+------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">MySQL [data1]&gt;</div></pre></td></tr></table></figure>
+<h4 id="测试读取分离"><a href="#测试读取分离" class="headerlink" title="测试读取分离"></a>测试读取分离</h4><p>打开一个终端，用</p>
+<pre><code>docker exec -it 61e74eee274d9d0f0404a572dec1d14c8b03dfd480e13d3c96fa04c534df0556  bash
+</code></pre><p>进入我们的mycat容器</p>
+<p>其中61e74为你的mycat容器</p>
+<p>这个就是我们的日志终端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root@61e74eee274d:/var/local/mycat/logs# ls</div><div class="line">2017-07  mycat.log  mycat.pid  wrapper.log</div><div class="line">root@61e74eee274d:/var/local/mycat/logs# tail -f  mycat.log</div></pre></td></tr></table></figure>
+<p>在宿主环境mycat下</p>
+<p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">MySQL [TESTDB]&gt; select * from travelrecord ;</div><div class="line">ERROR 2006 (HY000): MySQL server has gone away</div><div class="line">No connection. Trying to reconnect...</div><div class="line">Connection id:    9</div><div class="line">Current database: TESTDB</div><div class="line"></div><div class="line">+----------+--------------+------------+------+------+</div><div class="line">| id       | user_id      | traveldate | fee  | days |</div><div class="line">+----------+--------------+------------+------+------+</div><div class="line">|        1 | 980e5ea48152 | 2017-07-07 |  100 |   10 |</div><div class="line">| 10000001 | 980e5ea48152 | 2017-07-07 |  100 |   10 |</div><div class="line">+----------+--------------+------------+------+------+</div><div class="line">2 rows in set (0.02 sec)</div></pre></td></tr></table></figure>
+<p>然后切回我们的日志终端，按ctrl+c中断。</p>
+<p>然后输入cat tail 进行查看，很长在最后面找个空白的大坑（自己体会）慢慢找。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">017-07-07 06:28:16.863 DEBUG [$_NIOREACTOR-5-RW] (io.mycat.backend.datasource.PhysicalDatasource.releaseChannel(PhysicalDatasource.java:442)) - release channel MySQLConnection [id=5, lastTime=1499408896859, user=root, schema=data3, old shema=data3, borrowed=true, fromSlaveDB=false, threadId=527, charset=latin1, txIsolation=3, autocommit=true, attachment=null, respHandler=null, host=115.159.184.18, port=32774, statusSync=null, writeQueue=0, modifiedSQLExecuted=false]</div><div class="line">2017-07-07 06:28:16.864 DEBUG [$_NIOREACTOR-3-RW] (io.mycat.backend.datasource.PhysicalDatasource.releaseChannel(PhysicalDatasource.java:442)) - release channel MySQLConnection [id=33, lastTime=1499408896859, user=root, schema=data3, old shema=data3, borrowed=true, fromSlaveDB=true, threadId=108, charset=latin1, txIsolation=3, autocommit=true, attachment=null, respHandler=null, host=115.159.184.18, port=32770, statusSync=null, writeQueue=0, modifiedSQLExecuted=false]</div><div class="line">2017-07-07 06:28:24.473 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.net.FrontendConnection.query(FrontendConnection.java:288)) - ServerConnection [id=2, schema=TESTDB, host=115.159.184.18, user=root,txIsolation=3, autocommit=true, schema=TESTDB] select * from travelrecord</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.server.ServerQueryHandler.query(ServerQueryHandler.java:57)) - ServerConnection [id=2, schema=TESTDB, host=115.159.184.18, user=root,txIsolation=3, autocommit=true, schema=TESTDB]select * from travelrecord</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.cache.impl.EnchachePool.get(EnchachePool.java:71)) - SQLRouteCache hit cache ,key:TESTDBselect * from travelrecord</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.server.NonBlockingSession.execute(NonBlockingSession.java:110)) - ServerConnection [id=2, schema=TESTDB, host=115.159.184.18, user=root,txIsolation=3, autocommit=true, schema=TESTDB]select * from travelrecord, route=&#123;</div><div class="line">   1 -&gt; dn1&#123;SELECT *</div><div class="line">FROM travelrecord</div><div class="line">LIMIT 100&#125;</div><div class="line">   2 -&gt; dn2&#123;SELECT *</div><div class="line">FROM travelrecord</div><div class="line">LIMIT 100&#125;</div><div class="line">   3 -&gt; dn3&#123;SELECT *</div><div class="line">FROM travelrecord</div><div class="line">LIMIT 100&#125;</div><div class="line">&#125; rrs </div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.&lt;init&gt;(MultiNodeQueryHandler.java:101)) - execute mutinode query select * from travelrecord</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.&lt;init&gt;(MultiNodeQueryHandler.java:137)) - has data merge logic </div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:170)) - rrs.getRunOnSlave()-null</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:180)) - node.getRunOnSlave()1-null</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:182)) - node.getRunOnSlave()2-null</div><div class="line">2017-07-07 06:28:24.474 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBNode.getConnection(PhysicalDBNode.java:96)) - rrs.getRunOnSlave() null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBNode.getConnection(PhysicalDBNode.java:127)) - rrs.getRunOnSlave() null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBPool.getRWBanlanceCon(PhysicalDBPool.java:456)) - select read source hostS1 for dataHost:localhost1</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:180)) - node.getRunOnSlave()1-null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:182)) - node.getRunOnSlave()2-null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBNode.getConnection(PhysicalDBNode.java:96)) - rrs.getRunOnSlave() null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBNode.getConnection(PhysicalDBNode.java:127)) - rrs.getRunOnSlave() null</div><div class="line"></div><div class="line"></div><div class="line">就是这了我们可以看到select read source hostS1 for dataHost:localhost1来至哪个服务器</div><div class="line"></div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBPool.getRWBanlanceCon(PhysicalDBPool.java:456)) - select read source hostS1 for dataHost:localhost1</div><div class="line"></div><div class="line"></div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:180)) - node.getRunOnSlave()1-null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.mysql.nio.handler.MultiNodeQueryHandler.execute(MultiNodeQueryHandler.java:182)) - node.getRunOnSlave()2-null</div><div class="line">2017-07-07 06:28:24.475 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBNode.getConnection(PhysicalDBNode.java:96)) - rrs.getRunOnSlave() null</div><div class="line">2017-07-07 06:28:24.476 DEBUG [$_NIOREACTOR-29-RW] (io.mycat.backend.datasource.PhysicalDBNode.getConnection</div></pre></td></tr></table></figure>
+<h4 id="如果配置不小心错了，可以用docker-cp-复制到镜像里，然后重启镜像"><a href="#如果配置不小心错了，可以用docker-cp-复制到镜像里，然后重启镜像" class="headerlink" title="如果配置不小心错了，可以用docker cp 复制到镜像里，然后重启镜像"></a>如果配置不小心错了，可以用docker cp 复制到镜像里，然后重启镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker cp /usr/mycat/mycat/conf 61e74eee274d9d0f0404a572dec1d14c8b03dfd480e13d3c96fa04c534df0556:/var/local/mycat/conf</div><div class="line"></div><div class="line">docker restart 61e74eee274d9d0f0404a572dec1d14c8b03dfd480e13d3c96fa04c534df0556</div></pre></td></tr></table></figure>
+<h3 id="总结，docker用来单机测试堪称完美，对于资源不足，环境变化大的。方便太多。推荐大家多做练习。"><a href="#总结，docker用来单机测试堪称完美，对于资源不足，环境变化大的。方便太多。推荐大家多做练习。" class="headerlink" title="总结，docker用来单机测试堪称完美，对于资源不足，环境变化大的。方便太多。推荐大家多做练习。"></a>总结，docker用来单机测试堪称完美，对于资源不足，环境变化大的。方便太多。推荐大家多做练习。</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="Sun Hao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="Sun Hao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/gulp-config-src.html" rel="next" title="gulp教程之gulp中文API">
+                <i class="fa fa-chevron-left"></i> gulp教程之gulp中文API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Sun Hao" />
+          <p class="site-author-name" itemprop="name">Sun Hao</p>
+          <p class="site-description motion-element" itemprop="description">Whoever wants to be first must be slave of all.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用docker实现mysql主从同步-读写分离"><span class="nav-number">1.</span> <span class="nav-text">利用docker实现mysql主从同步/读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载mysql镜像。"><span class="nav-number">1.1.</span> <span class="nav-text">下载mysql镜像。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用mysql镜像，创建用于主从同步的两个新镜像。"><span class="nav-number">1.2.</span> <span class="nav-text">利用mysql镜像，创建用于主从同步的两个新镜像。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建master-主-和slave-从-两个文件夹"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建master(主)和slave(从)两个文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在master和slave文件夹下-创建-Dockerfile-内容为"><span class="nav-number">1.2.2.</span> <span class="nav-text">在master和slave文件夹下  创建 Dockerfile 内容为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在master文件夹下-创建-my-cnf-内容为"><span class="nav-number">1.2.3.</span> <span class="nav-text">在master文件夹下  创建 my.cnf 内容为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在slave文件夹下-创建-my-cnf-内容为"><span class="nav-number">1.2.4.</span> <span class="nav-text">在slave文件夹下  创建 my.cnf 内容为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切换到master目录下构建master-mysql镜像"><span class="nav-number">1.2.5.</span> <span class="nav-text">切换到master目录下构建master/mysql镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#然后切换到master目录下构建slave-mysql镜像"><span class="nav-number">1.2.6.</span> <span class="nav-text">然后切换到master目录下构建slave/mysql镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看是否创建成功"><span class="nav-number">1.2.7.</span> <span class="nav-text">查看是否创建成功</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用镜像创建容器"><span class="nav-number">1.3.</span> <span class="nav-text">用镜像创建容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从这里开始，建议打开两个终端窗口，方便操作。"><span class="nav-number">1.3.1.</span> <span class="nav-text">从这里开始，建议打开两个终端窗口，方便操作。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#master终端执行"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">master终端执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#slave终端执行"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">slave终端执行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql主从配置"><span class="nav-number">1.4.</span> <span class="nav-text">mysql主从配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在主容器mysql中输入以下命令："><span class="nav-number">1.4.1.</span> <span class="nav-text">在主容器mysql中输入以下命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#然后我们配置一下从库"><span class="nav-number">1.4.2.</span> <span class="nav-text">然后我们配置一下从库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看master-mysql的对外端口号"><span class="nav-number">1.4.3.</span> <span class="nav-text">查看master/mysql的对外端口号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查主从连接状态"><span class="nav-number">1.5.</span> <span class="nav-text">检查主从连接状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试主从连接"><span class="nav-number">1.6.</span> <span class="nav-text">测试主从连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆master终端，"><span class="nav-number">1.6.1.</span> <span class="nav-text">登陆master终端，</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆slave服务器"><span class="nav-number">1.6.2.</span> <span class="nav-text">登陆slave服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker搭建mycat读写分离"><span class="nav-number">2.</span> <span class="nav-text">docker搭建mycat读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作mycat容器，并运行"><span class="nav-number">2.1.</span> <span class="nav-text">制作mycat容器，并运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端"><span class="nav-number">2.2.</span> <span class="nav-text">就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#宿主环境操作"><span class="nav-number">2.2.1.</span> <span class="nav-text">宿主环境操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试下写入"><span class="nav-number">2.2.2.</span> <span class="nav-text">测试下写入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试读取分离"><span class="nav-number">2.2.3.</span> <span class="nav-text">测试读取分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果配置不小心错了，可以用docker-cp-复制到镜像里，然后重启镜像"><span class="nav-number">2.2.4.</span> <span class="nav-text">如果配置不小心错了，可以用docker cp 复制到镜像里，然后重启镜像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结，docker用来单机测试堪称完美，对于资源不足，环境变化大的。方便太多。推荐大家多做练习。"><span class="nav-number">2.3.</span> <span class="nav-text">总结，docker用来单机测试堪称完美，对于资源不足，环境变化大的。方便太多。推荐大家多做练习。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Hao</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "68d47669d3794a958fbaaee9328b90f3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

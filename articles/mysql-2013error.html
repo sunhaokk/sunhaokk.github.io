@@ -89,19 +89,19 @@
 
 
 
-<meta name="description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart">
+<meta name="description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart MySQL Error (2013): Lost c">
 <meta name="keywords" content="2013错误">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql2013错误">
 <meta property="og:url" content="http://sunhao.win/articles/mysql-2013error.html">
 <meta property="og:site_name" content="Da&#39;sBlog">
-<meta property="og:description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart">
+<meta property="og:description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart MySQL Error (2013): Lost c">
 <meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png">
 <meta property="og:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104641667.png">
-<meta property="og:updated_time" content="2017-05-09T02:48:35.933Z">
+<meta property="og:updated_time" content="2017-07-01T06:43:58.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql2013错误">
-<meta name="twitter:description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart">
+<meta name="twitter:description" content="mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。然后重启下服务器/etc/init.d/mysql restart MySQL Error (2013): Lost c">
 <meta name="twitter:image" content="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png">
 
 
@@ -432,6 +432,8 @@
 
       
         <p>mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0<br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png" alt="mark"><br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104641667.png" alt="mark"><br>默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。<br>然后重启下服务器<br>/etc/init.d/mysql restart</p>
+<p>MySQL Error (2013): Lost connection to MySQL server at waiting for initial communication packet</p>
+<p>打开my.ini，找到[mysqld]项，在其后加入一句：skip-name-resolve，保存，重启mysql服务即可~</p>
 <a id="more"></a>
 <p>如果忘记密码<br>可以添加<br>skip-grant-tables<br>忽略权限验证</p>
 
@@ -448,6 +450,27 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="Sun Hao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="Sun Hao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
@@ -568,7 +591,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -577,7 +600,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -586,7 +609,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

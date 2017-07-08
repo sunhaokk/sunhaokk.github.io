@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunhao.win/articles/mysql-replication.html</loc>
+    
+    <lastmod>2017-07-08T00:33:51.041Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/mysql-2013error.html</loc>
+    
+    <lastmod>2017-07-01T06:43:58.796Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/gulp-config-src.html</loc>
+    
+    <lastmod>2017-06-26T07:34:31.613Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/vue-lifecycle.html</loc>
+    
+    <lastmod>2017-06-23T06:48:32.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sunhao.win/articles/webpack-config.html</loc>
+    
+    <lastmod>2017-06-21T08:28:34.564Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunhao.win/articles/compass.html</loc>
     
     <lastmod>2017-06-20T08:59:48.921Z</lastmod>
@@ -96,13 +131,6 @@
     <loc>http://sunhao.win/articles/nginx-config.html</loc>
     
     <lastmod>2017-05-09T06:15:16.959Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sunhao.win/articles/mysql-2013error.html</loc>
-    
-    <lastmod>2017-05-09T02:48:35.933Z</lastmod>
     
   </url>
   

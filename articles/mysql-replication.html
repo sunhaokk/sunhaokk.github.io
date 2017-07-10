@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://sunhao.win/articles/mysql-replication.html">
 <meta property="og:site_name" content="Da&#39;sBlog">
 <meta property="og:description" content="利用docker实现mysql主从同步/读写分离为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。 通过本文实际你会操作到。  mysql的主从同步 docker镜像和容器的创建 docker容器间的数据传递 mycat入门  以下需要大">
-<meta property="og:updated_time" content="2017-07-08T09:16:34.255Z">
+<meta property="og:updated_time" content="2017-07-08T09:44:35.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用docker实现mysql主从同步&#x2F;读写分离，附赠docker搭建mycat读写分离。">
 <meta name="twitter:description" content="利用docker实现mysql主从同步/读写分离为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。 通过本文实际你会操作到。  mysql的主从同步 docker镜像和容器的创建 docker容器间的数据传递 mycat入门  以下需要大">
@@ -391,35 +391,8 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a class="cloud-tie-join-count" href="/articles/mysql-replication.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
           
           
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
 
 
     <div class="post-body" itemprop="articleBody">
@@ -495,7 +468,7 @@ ps:如果下载太慢，请添加腾讯源,依次执行
 <h4 id="如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）："><a href="#如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）：" class="headerlink" title="如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）："></a>如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）：</h4><p>这里我们做一次完整的测试</p>
 <p>(1)在主服务器数据库插入新的数据，并进行锁表操作，不让数据再进行写入动作</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into sunhao values(2,'xiaoshuai');</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from sunhao;                   </div><div class="line">+------+-----------+</div><div class="line">| id   | name      |</div><div class="line">+------+-----------+</div><div class="line">|    1 | xiaoshuai |</div><div class="line">|    2 | xiaoshuai |</div><div class="line">+------+-----------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; FLUSH TABLES WITH READ LOCK;</div><div class="line"></div><div class="line"></div><div class="line">mysql&gt; show full processlist; </div><div class="line"></div><div class="line">`</div></pre></td></tr></table></figure>
-<p>(2)退出服务器，用mysqldump备份数据文件到/var/lib,然后顺便多余的用tar打包一下玩。哈哈。</p>
+<p>(2)退出mysql，用mysqldump备份数据文件到/var/lib,然后顺便多余的用tar打包一下玩。哈哈。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; exit</div><div class="line">Bye</div><div class="line"></div><div class="line">root@980e5ea48152:/var/lib/mysql# mysqldump -u root -p  sunhao &gt; /var/lib/sunhao.dump    </div><div class="line">Enter password: </div><div class="line"></div><div class="line"></div><div class="line">root@980e5ea48152:/var/lib# tar -zcvf ./sunhao.dump .tar  ./sunhao.dump</div></pre></td></tr></table></figure>
 <p>(3)打开宿主服务器，复制mysql主服务器文件sunhao.dump.tar。到宿主服务器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root]# docker ps </div><div class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES</div><div class="line">8d1e3b87d499        slave/mysql         &quot;docker-entrypoint.sh&quot;   4 hours ago         Up 4 hours          0.0.0.0:32769-&gt;3306/tcp   mysql-slave</div><div class="line">980e5ea48152        master/mysql        &quot;docker-entrypoint.sh&quot;   4 hours ago         Up 4 hours          0.0.0.0:32768-&gt;3306/tcp   mysql-master</div><div class="line"></div><div class="line"></div><div class="line">mkdir -p /var/mydata</div><div class="line">docker cp 980e:/var/lib/sunhao.dump.tar /var/mydata/</div><div class="line"></div><div class="line">cd /var/mydata</div><div class="line">[root@VM_128_230_centos mydata]# ls</div><div class="line">sunhao.dump.tar</div></pre></td></tr></table></figure>
@@ -705,10 +678,7 @@ ps:如果下载太慢，请添加腾讯源,依次执行
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
-  </div>
-
 
         </div>
         
@@ -847,11 +817,11 @@ ps:如果下载太慢，请添加腾讯源,依次执行
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  Theme -
+  Thème -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
@@ -966,23 +936,32 @@ ps:如果下载太慢，请添加腾讯源,依次执行
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "68d47669d3794a958fbaaee9328b90f3",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
   
 
 
 
 
 
+  
 
+
+
+
+	
+		 <script type="text/javascript"> 
+		(function(){ 
+		var appid = 'cyt6znJnO'; 
+		var conf = 'bebfc6b2d5432323e395bea732c5b989'; 
+		var width = window.innerWidth || document.documentElement.clientWidth; 
+		if (width < 960) { 
+		window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+		<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+	
 
   
   

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-07-08T08:38:15.569Z</updated>
+  <updated>2017-07-08T09:36:50.502Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -20,18 +20,20 @@
     <link href="http://sunhao.win/articles/node-js-module-study.html"/>
     <id>http://sunhao.win/articles/node-js-module-study.html</id>
     <published>2017-07-08T06:08:53.000Z</published>
-    <updated>2017-07-08T08:38:15.569Z</updated>
+    <updated>2017-07-08T09:36:50.502Z</updated>
     
     <content type="html"><![CDATA[<p>browserify<br>cross-env</p>
 <p><a href="http://www.cnblogs.com/libin-1/p/6254390.html插件开发" target="_blank" rel="external">http://www.cnblogs.com/libin-1/p/6254390.html插件开发</a></p>
-<p>promise<br><a id="more"></a></p>
+<p>promise</p>
+<p><a href="https://www.kancloud.cn/yunye/axios/234846" target="_blank" rel="external">https://www.kancloud.cn/yunye/axios/234846</a><br><a id="more"></a></p>
 ]]></content>
     
     <summary type="html">
     
       &lt;p&gt;browserify&lt;br&gt;cross-env&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/libin-1/p/6254390.html插件开发&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/libin-1/p/6254390.html插件开发&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;promise&lt;br&gt;
+&lt;p&gt;promise&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.kancloud.cn/yunye/axios/234846&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.kancloud.cn/yunye/axios/234846&lt;/a&gt;&lt;br&gt;
     
     </summary>
     
@@ -43,7 +45,7 @@
     <link href="http://sunhao.win/articles/mysql-replication.html"/>
     <id>http://sunhao.win/articles/mysql-replication.html</id>
     <published>2017-07-01T06:42:05.000Z</published>
-    <updated>2017-07-08T09:16:34.255Z</updated>
+    <updated>2017-07-08T09:44:35.284Z</updated>
     
     <content type="html"><![CDATA[<h2 id="利用docker实现mysql主从同步-读写分离"><a href="#利用docker实现mysql主从同步-读写分离" class="headerlink" title="利用docker实现mysql主从同步/读写分离"></a>利用docker实现mysql主从同步/读写分离</h2><p>为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。<br>有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。</p>
 <p>通过本文实际你会操作到。</p>
@@ -112,7 +114,7 @@ ps:如果下载太慢，请添加腾讯源,依次执行
 <h4 id="如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）："><a href="#如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）：" class="headerlink" title="如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）："></a>如果主服务器已经存在应用数据，则在进行主从复制时，需要单独复制处理（注意此操作，如果对从服务器单独录入的数据，会被覆盖掉。）：</h4><p>这里我们做一次完整的测试</p>
 <p>(1)在主服务器数据库插入新的数据，并进行锁表操作，不让数据再进行写入动作</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into sunhao values(2,'xiaoshuai');</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">mysql&gt; select * from sunhao;                   </div><div class="line">+------+-----------+</div><div class="line">| id   | name      |</div><div class="line">+------+-----------+</div><div class="line">|    1 | xiaoshuai |</div><div class="line">|    2 | xiaoshuai |</div><div class="line">+------+-----------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; FLUSH TABLES WITH READ LOCK;</div><div class="line"></div><div class="line"></div><div class="line">mysql&gt; show full processlist; </div><div class="line"></div><div class="line">`</div></pre></td></tr></table></figure>
-<p>(2)退出服务器，用mysqldump备份数据文件到/var/lib,然后顺便多余的用tar打包一下玩。哈哈。</p>
+<p>(2)退出mysql，用mysqldump备份数据文件到/var/lib,然后顺便多余的用tar打包一下玩。哈哈。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; exit</div><div class="line">Bye</div><div class="line"></div><div class="line">root@980e5ea48152:/var/lib/mysql# mysqldump -u root -p  sunhao &gt; /var/lib/sunhao.dump    </div><div class="line">Enter password: </div><div class="line"></div><div class="line"></div><div class="line">root@980e5ea48152:/var/lib# tar -zcvf ./sunhao.dump .tar  ./sunhao.dump</div></pre></td></tr></table></figure>
 <p>(3)打开宿主服务器，复制mysql主服务器文件sunhao.dump.tar。到宿主服务器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root]# docker ps </div><div class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES</div><div class="line">8d1e3b87d499        slave/mysql         &quot;docker-entrypoint.sh&quot;   4 hours ago         Up 4 hours          0.0.0.0:32769-&gt;3306/tcp   mysql-slave</div><div class="line">980e5ea48152        master/mysql        &quot;docker-entrypoint.sh&quot;   4 hours ago         Up 4 hours          0.0.0.0:32768-&gt;3306/tcp   mysql-master</div><div class="line"></div><div class="line"></div><div class="line">mkdir -p /var/mydata</div><div class="line">docker cp 980e:/var/lib/sunhao.dump.tar /var/mydata/</div><div class="line"></div><div class="line">cd /var/mydata</div><div class="line">[root@VM_128_230_centos mydata]# ls</div><div class="line">sunhao.dump.tar</div></pre></td></tr></table></figure>

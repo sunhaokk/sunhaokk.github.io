@@ -45,7 +45,7 @@
     <link href="http://sunhao.win/articles/mysql-replication.html"/>
     <id>http://sunhao.win/articles/mysql-replication.html</id>
     <published>2017-07-01T06:42:05.000Z</published>
-    <updated>2017-07-08T09:44:35.284Z</updated>
+    <updated>2017-07-11T06:19:37.223Z</updated>
     
     <content type="html"><![CDATA[<h2 id="利用docker实现mysql主从同步-读写分离"><a href="#利用docker实现mysql主从同步-读写分离" class="headerlink" title="利用docker实现mysql主从同步/读写分离"></a>利用docker实现mysql主从同步/读写分离</h2><p>为了保证数据的完整和安全，mysql设计了主从同步，一个挂掉还可以用另个。最近重构论坛，想来改成主从吧。担心失误，就先拿docker练练手。<br>有错误或者不理解的地方，可以联系本人邮箱sunhaokk@qq.com。</p>
 <p>通过本文实际你会操作到。</p>
@@ -181,7 +181,7 @@ ps:如果下载太慢，请添加腾讯源,依次执行
 <ol>
 <li><p>docker build -t sunhao/mycat:1.6  . 别忘了最后面的圆点</p>
 </li>
-<li><p>docker  run –name sunhaomycat  -d -p 8066:8066 -p 9066:9066 sunhao/mycat:1.6</p>
+<li><p>docker  run  –name sunhaomycat  -d -p 8066:8066 -p 9066:9066 sunhao/mycat:1.6</p>
 </li>
 </ol>
 <h3 id="就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端"><a href="#就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端" class="headerlink" title="就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端"></a>就那么简单。我们的mycat已经搭建成功了。测试下吧打开4个终端</h3><p>1个宿主，1个mysql主，1个mysql从，1个用来看mycat日志。</p>

@@ -318,16 +318,16 @@
 
     
     <entry>
-      <title><![CDATA[window命令mklink 创建符号链接 硬链接 目录联结]]></title>
-      <url>%2Farticles%2Fwindow-mklink.html</url>
-      <content type="text"><![CDATA[最近研究mklink 发现国内很多文档认识有错误 或者不充分，在此补充下。 符号链接 用的比较多 也就是我们的快捷方式 硬链接 用的很少 可以防止误删，省空间等、 目录联结 一般用于共享目录链接的本质是创建一个指向原文件的路径 我们的文件其实是存在磁盘空间中， 文件名指向磁盘空间，最后访问文件名 访问到它所指向的空间。 符号链接mklink /d 和快捷方式几乎。但与其不同的是快捷方式是.link后缀的文件。 删除原文件，这种链接就无效了 硬链接(hard link)mklink /h 指向到原文件空间中所在地址。只能用于文件，其实就是又新建了个文件名，指向共同的磁盘空间。所以删除其中一个文件名，不影响另一个。 与copy不同的是，copy实际是创建了两个不同的磁盘空间。 目录联接(junction)mklink /j所谓联结就是相当于一个中间件。充当中介 只能用于目录。而且它用的相对路径，所以复制到别的文件夹是无效的。 这个用来做目录共享。 比如说 我想让b电脑访问 a电脑的目录aa但是我就想让他访问一会。所以我可以创建个目录联结。然后共享这个目录。 等b访问完，直接就可以删掉这个目录。 总的来说链接的本质是为了管理方便，充分利用磁盘空间，避免冗余。]]></content>
+      <title><![CDATA[window命令 端口占用、查杀进制]]></title>
+      <url>%2Farticles%2Fwindow-tasklist-taskkill-netstat.html</url>
+      <content type="text"><![CDATA[cmd关闭php的一个示例 首先用php -S 开启一个服务 另开一个窗口，查询占用了8081端口的进程：netstat -ano|findstr 8081，找到pid为12552 tasklist|findstr 12552 。发现就是我们的php服务 taskkill /f /t /im php.exe/f 强制/t 关闭子进程/im 文件名taskkill /f /PID 12552/PID 删除指定pid]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[window命令 端口占用、查杀进制]]></title>
-      <url>%2Farticles%2Fwindow-tasklist-taskkill-netstat.html</url>
-      <content type="text"><![CDATA[cmd关闭php的一个示例 首先用php -S 开启一个服务 另开一个窗口，查询占用了8081端口的进程：netstat -ano|findstr 8081，找到pid为12552 tasklist|findstr 12552 。发现就是我们的php服务 taskkill /f /t /im php.exe/f 强制/t 关闭子进程/im 文件名taskkill /f /PID 12552/PID 删除指定pid]]></content>
+      <title><![CDATA[window命令mklink 创建符号链接 硬链接 目录联结]]></title>
+      <url>%2Farticles%2Fwindow-mklink.html</url>
+      <content type="text"><![CDATA[最近研究mklink 发现国内很多文档认识有错误 或者不充分，在此补充下。 符号链接 用的比较多 也就是我们的快捷方式 硬链接 用的很少 可以防止误删，省空间等、 目录联结 一般用于共享目录链接的本质是创建一个指向原文件的路径 我们的文件其实是存在磁盘空间中， 文件名指向磁盘空间，最后访问文件名 访问到它所指向的空间。 符号链接mklink /d 和快捷方式几乎。但与其不同的是快捷方式是.link后缀的文件。 删除原文件，这种链接就无效了 硬链接(hard link)mklink /h 指向到原文件空间中所在地址。只能用于文件，其实就是又新建了个文件名，指向共同的磁盘空间。所以删除其中一个文件名，不影响另一个。 与copy不同的是，copy实际是创建了两个不同的磁盘空间。 目录联接(junction)mklink /j所谓联结就是相当于一个中间件。充当中介 只能用于目录。而且它用的相对路径，所以复制到别的文件夹是无效的。 这个用来做目录共享。 比如说 我想让b电脑访问 a电脑的目录aa但是我就想让他访问一会。所以我可以创建个目录联结。然后共享这个目录。 等b访问完，直接就可以删掉这个目录。 总的来说链接的本质是为了管理方便，充分利用磁盘空间，避免冗余。]]></content>
     </entry>
 
     

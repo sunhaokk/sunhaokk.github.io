@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunhao.win/"/>
-  <updated>2017-07-08T09:36:50.502Z</updated>
+  <updated>2017-08-29T08:37:36.014Z</updated>
   <id>http://sunhao.win/</id>
   
   <author>
@@ -16,24 +16,526 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>子网掩码怎么理解？</title>
+    <link href="http://sunhao.win/articles/netwrok-ip-netmask.html"/>
+    <id>http://sunhao.win/articles/netwrok-ip-netmask.html</id>
+    <published>2017-08-29T08:08:14.000Z</published>
+    <updated>2017-08-29T08:37:36.014Z</updated>
+    
+    <content type="html"><![CDATA[<p>掩码的作用是划分区域</p>
+<p>子网掩码使用与IP相同的编址格式，子网掩码为1的部分对应于IP地址的网络与子网部分，子网掩码为0的部分对应于IP地址的主机部分。将子网掩码和IP地址作”与”操作后，IP地址的主机部分将被丢弃，剩余的是网络地址和子网地址。例如，一个IP分组的目的IP地址为：10.2.2.1，若子网掩码为：255.255.255.0，与之作”与”运算得：10.2.2.0，则网络设备认为该IP地址的网络号与子网号为：10.2.2.0。</p>
+<p>子网掩码使用与IP相同的编址格式，子网掩码为1的部分对应于IP地址的网络与子网部分，子网掩码为0的部分对应于IP地址的主机部分。将子网掩码和IP地址作”与”操作后，IP地址的主机部分将被丢弃，剩余的是网络地址和子网地址。例如，一个IP分组的目的IP地址为：10.2.2.1，若子网掩码为：255.255.255.0，与之作”与”运算得：10.2.2.0，则网络设备认为该IP地址的网络号与子网号为：10.2.2.0。</p>
+<p>内网中192.168.1.199的前三组是网络号，后一组是主机号，子网掩码就是255.255.255.0</p>
+<p>如果IP同样是192.168.1.199 那么子网掩码可以设成255.255.255.192吗，怎么理解</p>
+<p>如果在同一个局域网出现这两种掩码可以相互通讯吗<br><a id="more"></a><br>作者：车小胖<br>链接：<a href="https://www.zhihu.com/question/56895036/answer/150953183" target="_blank" rel="external">https://www.zhihu.com/question/56895036/answer/150953183</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>从前有一个地主，有256间房子，地主家的门牌号码是“192.168.1”，那么他家第一间房子的门牌号码是192.168.1.0，第二间是192.168.1.1，…第256间的编号是192.168.1.255。地主老了，需要把256间房子分给4个儿子，平均分配，每个儿子可以分64间。请来一位先生主持公道，先生这么来操作：192.168.1.0-192.168.1.63 分给大儿子192.168.1.64-192.168.1.127 分给二儿子192.168.1.128 -192.168.1.191 分给三儿子192.168.1.192-192.168.1.255 分给四儿子那如何来描述四个儿子的子网网段呢？192.168.1.0/26192.168.1.64/26192.168.1.128/26192.168.1.192/26/26是什么鬼？255.255.255.192的二进制是多少？ “11111111-11111111-11111111-11”大家数数一共多少个1？不用数了，是26个1，为了简化子网掩码的表示，用/26代替255.255.255.192。按位与运算我们来看大儿子的网段192.168.1.0/26是如何得到的？以大儿子的房间为例：192.168.1.0-192.168.1.63二进制表示：192.168.1.011000000.10101000.00000001.00000000192.168.1.6311000000.10101000.00000001.00111111首尾地址完全相同的是多少？11000000.10101000.00000001.00数数一共多少位？26位！那么用这个“192.168.1.0/26”就可以表示大儿子所有房间。对照房间的门牌号码“192.168.1.199”，很显然属于四儿子的。一个主机192.168.1.199/26 能否和直连主机192.168.1.200/24 通信？可以的，因为都是四儿子的房间。一个主机192.168.1.199/26 能否和直连主机192.168.1.1/24 通信？ 不可以，因为一个是大儿子的房间，一个是四儿子的房间，无法直连通信！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;掩码的作用是划分区域&lt;/p&gt;
+&lt;p&gt;子网掩码使用与IP相同的编址格式，子网掩码为1的部分对应于IP地址的网络与子网部分，子网掩码为0的部分对应于IP地址的主机部分。将子网掩码和IP地址作”与”操作后，IP地址的主机部分将被丢弃，剩余的是网络地址和子网地址。例如，一个IP分组的目的IP地址为：10.2.2.1，若子网掩码为：255.255.255.0，与之作”与”运算得：10.2.2.0，则网络设备认为该IP地址的网络号与子网号为：10.2.2.0。&lt;/p&gt;
+&lt;p&gt;子网掩码使用与IP相同的编址格式，子网掩码为1的部分对应于IP地址的网络与子网部分，子网掩码为0的部分对应于IP地址的主机部分。将子网掩码和IP地址作”与”操作后，IP地址的主机部分将被丢弃，剩余的是网络地址和子网地址。例如，一个IP分组的目的IP地址为：10.2.2.1，若子网掩码为：255.255.255.0，与之作”与”运算得：10.2.2.0，则网络设备认为该IP地址的网络号与子网号为：10.2.2.0。&lt;/p&gt;
+&lt;p&gt;内网中192.168.1.199的前三组是网络号，后一组是主机号，子网掩码就是255.255.255.0&lt;/p&gt;
+&lt;p&gt;如果IP同样是192.168.1.199 那么子网掩码可以设成255.255.255.192吗，怎么理解&lt;/p&gt;
+&lt;p&gt;如果在同一个局域网出现这两种掩码可以相互通讯吗&lt;br&gt;
+    
+    </summary>
+    
+      <category term="网络" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="ip" scheme="http://sunhao.win/tags/ip/"/>
+    
+      <category term="子网掩码" scheme="http://sunhao.win/tags/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>内网IP与外网的关系？</title>
+    <link href="http://sunhao.win/articles/netwrok-ip-kind.html"/>
+    <id>http://sunhao.win/articles/netwrok-ip-kind.html</id>
+    <published>2017-08-29T07:12:30.000Z</published>
+    <updated>2017-08-29T07:26:43.179Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p><a href="https://www.zhihu.com/question/43517806" target="_blank" rel="external">https://www.zhihu.com/question/43517806</a></p>
+</blockquote>
+<p>本人学习之中碰到余下疑惑，百度、必应都没找到很明确的答案，希望有懂得的人解答一二，谢谢。<br>1.看别人说内网IP可以随意分配，比如你的外网是个C类的，内网IP可以设A类的。   要是能这样一个C类公网的内网不就能容纳很多主机了，又有人说一个C类网络只能容纳254台主机。<br>2.现在划分子网时借的主机位能不能全0或全1。 好像现在不用在乎这，可老版的书又不让用，求解答。<br>3.申请的公网IP是一个具体的IP地址用在与公网连接的路由器上还是一个网段。</p>
+<p>我猜测申请的公网是一个具体的IP，用在与公网连接的路由器上，内网随意设置（个别IP除外），然后经过路由器时由路由器转换，不知道猜的对不对。</p>
+<p>诚心求解。</p>
+<p>谢谢各位的回答，可能是匿名的关系消息也没个提示，看了你们的解答对这几个问题目前没有疑惑了，十分感谢，祝你们万事如意。<br>还是得多看书，后来发现书上都有。。。<br><a id="more"></a><br>问题1:</p>
+<p>A类地址：</p>
+<p>1.0.0.0 /8 - 126.0.0.0/8</p>
+<p>127.0.0.0/8 保留给local host</p>
+<p>每个A类地址 256<em>256</em>256=16777216</p>
+<p>B类地址：</p>
+<p>128.0.0.0/16 - 191.255.0.0/16 </p>
+<p>每个B类地址 256*256= 65536</p>
+<p>C类地址：</p>
+<p>192.0.0.0/24 - 223.255.255.0/24 </p>
+<p>每个C类地址：256，以前考虑到需要一个保留做网段地址，一个做广播地址，所以一个C类能给主机使用的是254个地址</p>
+<p>但是每个类都保留一些地址做私有地址，即常说的内网地址：</p>
+<p>10.0.0.0/8</p>
+<p>172.16.0.0/16 - 172.31.0.0/16</p>
+<p>192.168.0.0/16</p>
+<p>私有地址随便使用，没有任何限制。</p>
+<p>A类、B类，C类除了以上的私有地址都为公网地址，即常说得外网地址。</p>
+<p>ABC类公网地址只要路由可达，即可以互相通信，不是说只有A类和A类通信，C类和C类通信。</p>
+<p>企业或者个人如果使用是私有地址，则需要在Internet 网关上作地址翻译NAT，将私有地址翻译成网关的公网地址。</p>
+<p>问题2:</p>
+<p>随着IPv4地址的的枯竭，设备商、运营商采用了/31位的子网掩码，以前使用的是/30位的子网掩码，比如100.1.1.0/30，只有100.1.1.1，100.1.1.2 可以使用，而100.1.1.0，100.1.1.3保留为网段地址、广播地址，白白浪费了；如果采用100.1.1.0/31，则100.1.1.0，100.1.1.1都可以使用，没有任何地址浪费！</p>
+<p>问题3:</p>
+<p>申请的IP地址既可以是一个，也可以是多个，即一个网段的多个地址，这要看自己的需求。</p>
+<p>编辑于 2016-05-29</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/43517806&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/43517806&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本人学习之中碰到余下疑惑，百度、必应都没找到很明确的答案，希望有懂得的人解答一二，谢谢。&lt;br&gt;1.看别人说内网IP可以随意分配，比如你的外网是个C类的，内网IP可以设A类的。   要是能这样一个C类公网的内网不就能容纳很多主机了，又有人说一个C类网络只能容纳254台主机。&lt;br&gt;2.现在划分子网时借的主机位能不能全0或全1。 好像现在不用在乎这，可老版的书又不让用，求解答。&lt;br&gt;3.申请的公网IP是一个具体的IP地址用在与公网连接的路由器上还是一个网段。&lt;/p&gt;
+&lt;p&gt;我猜测申请的公网是一个具体的IP，用在与公网连接的路由器上，内网随意设置（个别IP除外），然后经过路由器时由路由器转换，不知道猜的对不对。&lt;/p&gt;
+&lt;p&gt;诚心求解。&lt;/p&gt;
+&lt;p&gt;谢谢各位的回答，可能是匿名的关系消息也没个提示，看了你们的解答对这几个问题目前没有疑惑了，十分感谢，祝你们万事如意。&lt;br&gt;还是得多看书，后来发现书上都有。。。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="网络" scheme="http://sunhao.win/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="ip" scheme="http://sunhao.win/tags/ip/"/>
+    
+      <category term="内网" scheme="http://sunhao.win/tags/%E5%86%85%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css-oocss-samcss-sem</title>
+    <link href="http://sunhao.win/articles/css-oocss-samcss-sem.html"/>
+    <id>http://sunhao.win/articles/css-oocss-samcss-sem.html</id>
+    <published>2017-08-21T01:21:52.000Z</published>
+    <updated>2017-08-23T02:58:21.518Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="OOCSS"><a href="#OOCSS" class="headerlink" title="OOCSS"></a>OOCSS</h2><h3 id="OOCSS-翻译过来意思是-面向对象的css"><a href="#OOCSS-翻译过来意思是-面向对象的css" class="headerlink" title="OOCSS 翻译过来意思是 面向对象的css"></a>OOCSS 翻译过来意思是 面向对象的css</h3><p>很多没有接触过面向对象，或者没有理解的朋友可能觉得oocss这个是框架。</p>
+<p>其实面向对象分为  面向对象分析  面向对象编程  面向对象语言  面型对象思想 面向对象设计</p>
+<p>看着挺复杂，就我的教学经验。初学只需要从思想和代码上认识就可以。</p>
+<p>思想上，面向对象，是人认识客观事物的方式。是思想，就是思维方式。  和敲代码没有任何关系。</p>
+<p>首先我们要区分类和对象。</p>
+<p>我们把马这一种类叫  类。</p>
+<p>把小红正在骑的马(客观存在，不以人的意识为转移)   这个叫实例，也就是我们的对象。</p>
+<p>我们把大千世界真实存在的马，归为一类  给他们起了名字   叫马。 这是一种抽象概括的过程。</p>
+<p>我们从马中找出创建我们的真实存在的马。这叫实例化。</p>
+<p>简单点，我是真实存在的，但”人”这个名词是概念。所以我是对象，”人”是类。  我来源与类。</p>
+<p>而我们的面向对象，就是面向的一个一个客观存在的实物。你看到的想到的是真实存在的(包括思想).比如还是我，我都能在这打字，是不是真实存在的。包括思想，你在想媳妇，这个想的动作，也是真实存在的。也是对象。</p>
+<p>简单点，凡是能意思到，能感受到的都是对象。但人这个名词是我们抽象出来的，我们无从感受到它，它是一个类。</p>
+<p>好吧，估计好多小伙伴脑细胞死一半了。我们再简单点。从自身的角度看世界。冥想一下。</p>
+<p>我走在原始森林，看到了好多树，这些树都是真实存在的，这是你能感受到的。</p>
+<p>回去你给小伙伴说，我看到了好多树， 你们这时候沟通时候，对方是没法意识到你看到的树，对它而言，这个树就是一个概念。也就是我们的类。</p>
+<p>然后你继续给小伙伴说，其中在最中央有个撑天大树，很高很大。这个说的也是类。只是类的范围缩小了。</p>
+<p>当小伙伴去过去，亲眼看到的时候，它客观存在，这个时候在他意识中就成了对象。</p>
+<p>即必须是客观存在，能被意识到。如果意识不到，在人的角度，经过抽象就是一个类。</p>
+<p>凡是抽象的都是类。凡是意识到的都是对象。</p>
+<p>那梵高的话那么抽象它是类么？</p>
+<p>首先来说，梵高抽象的是自己的感情，这里的抽象是他自己真实的感情，抽象的过程是对象，但他画里面的感情是被抽象过的，是一种概括的类。</p>
+<p>好吧，现在脑细胞都死掉了吧。哈哈哈哈。其实我写的都是比喻，比较简单了。真的哦。不信你们可以看些教材。然后脑细胞会成负的。。。。</p>
+<p>所以在这我建议大家，有个认识就可以，不影响编程。在随后漫长的人生中，细细体味。思想无法传递和跨越，不需要苛求对错。</p>
+<p>下面我们说说编程吧</p>
+<p>传统的道家学说吸收了阴阳五行。</p>
+<p>阴阳化万物，天为阳，地为阴。一动，一静。衍生万物。</p>
+<p>这和我们编程有啥关系呢。。</p>
+<p>其实面相对象只是阴阳学说的一种表象。我们从头说起吧。</p>
+<p>在编程之初，代码是比较简单和可以控制的。就是按顺序一两个人写出来。</p>
+<p>但是随着硬件性能的成倍提高，用户对程序的要求也不断提高，对时间，性能，稳定也更苛刻。</p>
+<p>传统面向过程(这个是目前大部分小白的写法，就是想到啥写啥，按顺序把需求完成)</p>
+<p>无法预估项目，不适合多人开发，时间无法把控。而且维护困难，因为你是一个人从头到尾写的。</p>
+<p>上面错了，下面业务可能全乱了。牵一发而动全身。哈哈哈哈哈</p>
+<p>想让别人帮忙吧。但你业务都是从上到下写的。只好和小伙伴协商，分开写，导致代码臃肿，突然你写到一半。发现少约定个参数，然后你小伙伴也写了一半。然后就扯淡了。</p>
+<p>所以我们要用面向对象编程来解决。</p>
+<p>面向对象把业务拆分开。面对的不再是过程，而是对象。</p>
+<p>而对象又包含，静态的属性和 动态的方法。</p>
+<p>通过  动  和静  演化万众功能。</p>
+<p>通过拆分动静，  静的重复利用，动的相同部分也可以利用，</p>
+<p>oocss  准确的说  是一种编辑css的思想。又因为没有语法限制，所以片面点讲就是一种书写规范。</p>
+<p>很高兴 你能闯过刀山火海来看到这里<br>我们继续</p>
+<p>其实oocss是一种思想，所以每个人理解都是由一种偏差，所以为了学习，我们还是要有个规范<br>引用wiki的话</p>
+<p>OOCSS的重点是将页面元素作为对象，给所有对象设置类名，将类作为样式表中的单个实体处理，并从它中获取。</p>
+<p>在这篇文章中，我将通过介绍面向对象的css的概念以及如何帮助提高web页面的性能和可维护性来处理这一经常被忽略的领域。</p>
+<p>与任何基于对象的编码方法一样，OOCSS的目的是鼓励代码重用，最终更快捷、更高效的样式表更容易添加和维护。<br>Object-oriented CSS (OOCSS) 是 CSS的扩展和升级  </p>
+<p>引用OOCSS之父Nicole Sullivan话来说， 面向对象的CSS有两个原则：</p>
+<p>独立的结构和样式</p>
+<p>视觉性的特征具有可重复性，比如红色方块连衣裙，那么红色方块这种装饰性的东西，是不是也可以用到红色方块墙体和衣服呢？</p>
+<p>而结构往往具有独立和不可重复性。</p>
+<p>独立的容器和内容</p>
+<p>所谓容器 就是 最外层的盒子    容器本身不包含任何样式   他的样式由内容显示</p>
+<p>这样内容的样式具有可以</p>
+<p>OOCSS的两大原则 </p>
+<p>分离结构与皮肤 </p>
+<p>这意味着将重复的视觉功能(如背景和边框样式)定义为单独的“皮肤”，您可以与不同的对象进行混合和匹配，以实现大量的视觉多样性，但没有太多代码。请参阅模块对象及其皮肤。 分离结构和皮肤也意味着使用类来命名对象及其组件，而不是仅仅依赖于html的语义。例如，媒体对象被命名为类=“媒体”，其组件以类=“img”(用于图像/视频组件)和类=“bd”(为body/text组件)命名。 通过引用样式表中的这些类(表示，而不是直接样式化元素)，您的html可以灵活。例如，如果在未来几年中，一个新的媒体元素将会被起飞(例如&lt;；svg&gt;；)，它可以集成到html中，而不必触摸css。 分离容器和内容 从本质上讲，这意味着“很少使用位置依赖样式”。无论你把物体放在哪里，物体都应该是一样的。因此，不要使用特定的<br>进行样式化。myObject{.}，创建并应用一个类，该类描述了有关<br>的问题，如<br>。 这给了您保证：(1)所有的unclassed<br>s都会看起来相同；(2)所有具有类别类(称为mixin)的元素都会看起来相同； 3)当实际需要时，不需要为该例创建一个重写样式。myObject看起来像正常的</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#button</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</div><div class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</div><div class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#box</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</div><div class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#widget</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</div><div class="line">  <span class="attribute">min-height</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">overflow</span>: auto;</div><div class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</div><div class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的三个元素都有各自独有的样式，并且它们被应用于非可重用的ID选择器中，以定义样式。但他们也有很多风格的共同点。常见的样式可能存在于品牌目的或设计的一致性上。</p>
+<p>有了一点规划和思考，我们就可以抽象出常见的样式，这样css就会变成这样：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.button</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.box</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.widget</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</div><div class="line">  <span class="attribute">min-height</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">overflow</span>: auto;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.skin</span> &#123;</div><div class="line">  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#ccc</span>;</div><div class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(#ccc, #222);</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .5) <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在所有的元素都是使用类，通常的样式被组合成一个可重用的“皮肤”，而没有必要重复。我们只需要将“皮肤”类应用到所有元素中，结果将与第一个示例所生成的结果相同，除了代码少和用于进一步重用的possiblity之外。<br>SEPARATION OF CONTAINERS AND CONTENT LINK<br>在OOCSS GitHub页面上描述的第二个原则是将容器与其内容分离。为了说明为什么这是重要的，请采取以下css：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#sidebar</span> <span class="selector-tag">h3</span> &#123;</div><div class="line">  <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</div><div class="line">  <span class="attribute">font-size</span>: .<span class="number">8em</span>;</div><div class="line">  <span class="attribute">line-height</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="number">#777</span>;</div><div class="line">  <span class="attribute">text-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .3) <span class="number">3px</span> <span class="number">3px</span> <span class="number">6px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这些样式将应用于任何#sidebar h3标题。但是，如果我们想将完全相同的样式应用到在footer h3标题，除了不同字体大小和修改后的文本阴影之外，还会怎样呢？<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#sidebar</span> <span class="selector-tag">h3</span>, <span class="selector-id">#footer</span> <span class="selector-tag">h3</span> &#123;</div><div class="line">  <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">2em</span>;</div><div class="line">  <span class="attribute">line-height</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="number">#777</span>;</div><div class="line">  <span class="attribute">text-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .3) <span class="number">3px</span> <span class="number">3px</span> <span class="number">6px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#footer</span> <span class="selector-tag">h3</span> &#123;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">1.5em</span>;</div><div class="line">  <span class="attribute">text-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .3) <span class="number">2px</span> <span class="number">2px</span> <span class="number">4px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>或者我们可能会有更糟的事情：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#sidebar</span> <span class="selector-tag">h3</span> &#123;</div><div class="line">  <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">2em</span>;</div><div class="line">  <span class="attribute">line-height</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="number">#777</span>;</div><div class="line">  <span class="attribute">text-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .3) <span class="number">3px</span> <span class="number">3px</span> <span class="number">6px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* other styles here.... */</span></div><div class="line"></div><div class="line"><span class="selector-id">#footer</span> <span class="selector-tag">h3</span> &#123;</div><div class="line">  <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">1.5em</span>;</div><div class="line">  <span class="attribute">line-height</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="number">#777</span>;</div><div class="line">  <span class="attribute">text-shadow</span>: <span class="built_in">rgba</span>(0, 0, 0, .3) <span class="number">2px</span> <span class="number">2px</span> <span class="number">4px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在，我们不必要地复制样式，可能不会意识到它(或者根本不关心)。</p>
+<p>通过OOCSS，我们被鼓励对不同元素中常见的内容进行更多的思考，然后将这些常见特性分离到模块或对象中，这些模块或对象可以在任何地方重用。 </p>
+<p>在上述示例中使用子代选择器声明的样式是不可重用的，因为它们依赖于特定的容器(在本例中是#sidebar或#footer)。 当我们使用OOCSS的基于类的模块构建时，我们确保我们的样式不依赖于任何包含元素。这意味着，无论结构上下文如何，它们都可以重用在文档的任何地方。</p>
+<p>一个真实世界的例子</p>
+<p>为了进一步说明如何使用OOCSS，我将使用类似于我在网站最近的重新设计中所做的事情。在对站点上的内部标头元素进行编码后，我意识到页眉内的基本结构样式可以在页面上的其他元素上重用。 因此，这里有一些我开始设计标题时所拥有的线条：</p>
+<p>因此，这里有一些我开始设计标题时所拥有的线条：</p>
+<p>.header-inside {<br>  width: 980px;<br>  height: 260px;<br>  padding: 20px;<br>  margin: 0 auto;<br>  position: relative;<br>  overflow: hidden;<br>}</p>
+<p>这里列出的几种样式是唯一的。.header-inside元素。但其余部分可以形成一个可以重用的模块。因此，我可以将结构样式抽象成自己的可重用类。这是结</p>
+<p>.globalwidth {<br>  width: 980px;<br>  margin: 0 auto;<br>  position: relative;<br>  padding-left: 20px;<br>  padding-right: 20px;<br>  overflow: hidden;<br>}</p>
+<p>.header-inside {<br>  padding-top: 20px;<br>  padding-bottom: 20px;<br>  height: 260px;<br>}</p>
+<p>A fixed width<br>Centering using margin: auto<br>Relative positioning to create a positioning context for child elements<br>Left and right padding of 20px<br>Overflow set to “hidden” for clearfixing</p>
+<p>固定宽度 用边缘定位：自动 相对定位为子元素创建定位上下文 左的左、右填充 溢出设置为“隐藏”为clearfixing。<br>现在，我们可以在任何需要相同特性的元素上使用这些样式，只需将该类添加到所需的元素中-而无需编写单独的CSS行。 对于我的站点，我在主内容元素和内页脚元素上重用了这些结构样式。根据设计，这些样式也可以适用于可能出现在页眉和内容之间的水平导航元素，也可以适用于任何具有固定宽度的其他元素，并且需要居中在页面上。 将“globalwidth”样式添加到这些元素后，标记将看起来类似如下：</p>
+<header><br>  <div class="header-inside globalwidth"><br>  </div><br></header>
+
+<div class="main globalwidth"><br></div>
+
+<footer><br>  <div class="footer-inside globalwidth"><br>  </div><br></footer>
+
+<p>有些人可能会觉得这种样式抽象会使html变得更加复杂，并且违背了将标记与呈现分离的原则。 但是，抛开任何关于如何影响标记的辩论，没有人可以质疑，这种抽象现在使跟踪和修改用于构造这三个元素的常用样式变得更加容易</p>
+<p>媒体对象<br>OOCSS运动的先驱之一是nicole sullivan。她创建了一个名为媒体对象的可重用模块，正如她所解释的那样，它可以保存数百行代码。</p>
+<p>媒体对象是OOCSS强大的一个很好的例子，因为它可以包含任何大小的媒体元素，它的右边有内容。虽然许多适用于其内部内容的样式-甚至媒体元素本身的大小-都可能会发生变化，但是媒体对象本身也有共同的基础样式，以避免不必要的重复</p>
+<ul>
+<li>Separate structure and skin（分离结构和主题）减少对 HTML 结构的依赖 </li>
+<li>Separate Container and content（分离容器和内容）增加样式的复用性<br>OOCSS好处 </li>
+</ul>
+<p>我已经提到了OOCSS的一些好处。<br>在这里，我将扩大这些。 </p>
+<p>更快的网站链接</p>
+<p> OOCSS的性能效益应该是相当清楚的</p>
+<p> 。如果您在css中重复的样式较少，那么这将导致文件大小更小，从而更快地下载这些资源。</p>
+<p>  的确，标记将更加混乱，从而创建更大的html文件。</p>
+<p>  但是在许多情况下，标记性能的损失量将大大超过样式表性能中的增益量。</p>
+<p>   另一个记住的概念是，OOCSS wiki指的是性能赠品。这指的是，每当您在css中重用某些东西时，基本上都会创建一个新的样式元素，这些元素都是CSS代码的零行。对于大型的高流量项目，这些“免费”可能是一个关键的业绩增益。 </p>
+<p>   可维护的STYLESHEETS链接 使用OOCSS，而不是一个不断增长的样式表，充满了特定的战争，您将有一套易于维护的模块，在这些模块中，自然级联扮演了重要角色。 当对现有站点进行添加时，您不会在样式表的底部添加新样式，而不必考虑以前所出现的内容。相反，您将重用现有样式，并根据现有规则集扩展样式。 使用这种forethought，在编写很少的css时创建整个页面是可能的。任何现有的css模块都可以作为所有新页面的基础，并且任何新的css都是最小的。在某些情况下，您甚至可以创建一个新的完全样式的页面，而不编码一个单行的css。 这些可维护性的好处也扩展到样式表的健壮性。</p>
+<p>   由于样式是模块化的，在新开发人员开始使用样式表时，基于OOCSS构建的页面可能会更少崩溃。 值得注意的要点 OOCSS在社区里引起了大量的讨论，引起了一些争议。在这里，我会试着消除几个常见的误解。 您仍然可以使用ids链接。 如果您决定以一种OOCSS方式工作，那么您的样式将主要基于css类，而您不会使用id选择器来设计元素。 因此，许多人错误地声称，OOCSS鼓励完全放弃使用IDs。但这并不是真的。 避免IDs的规则更具体地说，在选择器中不使用IDs。因此，使用OOCSS原则(从而避免使用id选择器的样式)是完全可以接受的，同时使用IDs中的使用用于javascript钩子和片段标识符。 当然，您可能有一个状态，您已经将一个id应用到一个元素，您知道该元素是页面中唯一的。因此，您可以通过避免向该元素添加类来保存几个字节，并使用选择器选择器来创建它。但即使在这种情况下，依赖于类也更安全，以确保您在将来不会遇到特定的问题。 处理小项目链接 对于较小的站点和应用程序，您可以肯定的是，OOCSS将是多余的。所以，不要把这篇文章作为OOCSS的宣传，在任何情况下都会有所不同，这取决于项目的情况。 尽管如此，我认为这是一个好主意，至少在你的项目中开始考虑OOCSS。一旦你得到了它的窍门，我相信你会发现在更大的项目上工作变得更容易，而这些项目的好处会更显著和更相关。 执行链接的一些指导方针 开始和OOCSS一起工作可能需要时间。我还在研究它，所以我不声称在这方面有所有的答案和经验。 但是这里有一些你可能想要开始做的事情，以帮助你进入一种长期的思维方式： 避免派生选择器(即不使用)。侧栏h3 避免IDs作为样式挂钩 避免将类附加到样式表中的元素(即不做div.header或h1.title)。 除了在一些罕见的情况下，避免使用！重要 使用林特来检查你的css(并知道它有选择和方法去处理它的疯狂) 使用css网格 显然有些时候，这些规则会被打破，但总的来说，这些规则是开发的好习惯，</p>
+<p>   并且会导致样式表变得更小，更易于维护。 跟随nicole sullivan的工作链接 如果你想继续学习OOCSS，这个行业中最重要的人是妮可沙利文。 除了在她的博客上定期发布张贴文章外，妮可还与随行的幻灯片做了一系列的介绍。下面是一些您可能想要检查的内容： 面向对象的css(Slideshow) 高性能网站：nicole sullivan(视频) 我们最好的做法是杀了我们(Slideshow) css膨胀(Slideshow) 结论链路 许多人害怕OOCSS的意识形态，因为它似乎违背了我们所学到的许多所谓的“最佳实践”。但是一旦了解使用OOCSS的长期好处，我相信很多开发人员都会成为转换者。 总的来说，我认为OOCSS在css开发方面有着光明的未来，这是一个概念，所有开发人员都应该开始融入他们的项目-至少在某种程度上-帮助创建更快的网页，更有效，更容易维护。<br><a id="more"></a></p>
+<p>一个css对象由四个部分组成： </p>
+<p>html，它可以是一个或多个Dom节点，<br>关于这些节点的样式的css声明，所有这些节点都以包装器节点的类名开始。<br>组件，如用于显示所需的背景图像和精灵，<br>以及 与对象关联的javascript行为、侦听器或方法。 </p>
+<p>这可能会令人困惑，因为每个css类都不一定是一个对象，但它可以是包装类的属性。</p>
+<div class="mod"><br>        <div class="inner"><br>                <div class="hd">Block Head</div><br>                <div class="bd">Block Body</div><br>                <div class="ft">Block Foot</div><br>        </div><br></div>
+
+<p>该对象是一个模块，由类mod表示。它包含四个属性节点(不能独立于模块独立运行，包括两个需要的区域，内部和正文，两个可选区域，头部和脚)。</p>
+<p>OOCSS的性能效益有两方面： 对css代码进行重重用，因此需要使用更少的css代码，这意味着： 较小的文件，因此更快的传输 在网站的大多数页面中需要的css代码的百分比更大，可能会被重用，并且可能被浏览器缓存。 </p>
+<p>在较小的程度上，浏览器部分的repaints和布局计算较少。 在一个页面上，更多的css规则被重用，渲染引擎花费的时间越少计算“计算值”</p>
+<p>基本上，一个css“对象”是一个重复的视觉模式，可以抽象成一个独立的html、css和可能的javascript   的片段。然后，该对象可以在整个站点上重用。 例如，在OOCSS框架中，媒体对象描述包含固定大小媒体元素(如图像或视频)以及其他可变大小内容(例如文本)的内容块。另一个示例是模块对象，该对象描述一个具有必需的主体区域和可选页眉和页脚区域的通用内容块。</p>
+<p>作为架构师，您应该编写结构对象；设置圆角框的创建方式，将所有的显示参数设置为角点或其他特性，并处理浏览器差异。新手为这些模块编写皮肤(边框、颜色、背景图片等)。 我使用面向对象方法构建了大型站点(页面的1000s，数百万访问者)。它的规模很好，当正确做好时，它意味着一个新手正在工作的各个组件都是相对可预测的。代码审查很容易，因为对于可接受的扩展对象的方法，有明确的规则。这种反馈使新开发人员能够快速地生产。 我在FullSIX(法国的一个网络营销机构)管理了一支前端开发人员团队，他们是我曾经共事过的最有才华的人之一。在某种程度上，我们的成功意味着，我们的工作比我们所能处理的多得多。</p>
+<p>聘请前端专家是非常困难的(没有学校的这些东西！)<br>因此，我开始了一个内部实习项目，那些对探索代码感兴趣的设计师(但几乎没有以前的经验)可以成为我们团队的初级成员一个月的工作。</p>
+<p> 第一周：他们学到了语义，并从现有的css中构建了html。学习构建新页面，无需编写更多的css、html语法、多个类、验证、语义、介绍代码审查等。<br> 第二周：他们在一周内建立简单的内容对象(标题、列表等)。学习css语法，如何扩展对象、颜色、%大小的文本等等。<br> 第三周：他们正在建造块皮。边界，颜色，背景图像，基本定位，精灵。他们与一位令人惊叹的高级开发人员合作，回答了一大堆问题，并帮助他们扩大学习曲线。他也碰巧是一个非常有天赋的代码审查员。<br> 第四周：他们是我团队中富有生产力的成员，他们的皮肤是生产准备的。 他们的代码是在客户端网站上运行的。它和高级开发人员写的一样好，也许更好，因为他们没有必要去学习坏习惯。*)</p>
+<p>开始：我如何处理这些文件？ 三个文件，libraries.css(重置和字体从Yui)，grids.css和template.css已经准备好，其他的仍然非常不稳定。 通过下载按钮下载整个项目 打开template.html并将其保存为一个新文件。 通过扩展这些对象来调整列的数量和宽度。即使您有不同的列的页面，您只需要一个模板，因为这些列都是对象，类似于其他任何东西。您可以将它们视为可选区域，您可能有0-n左列。有关更多信息，请参见模板文档。 使用网格将任何内容区域拆分为小块。请参阅网格文档获取更多信息。 添加内容。提示：这也应该是oo。 复制和粘贴模块和聊天泡泡，在那里添加内容 基于“mod_skins.css”构建新的模块样式 如何将此部署在一个现场站点上？ 请记住，css仍然在发展，我可能会根据我收到的反馈来改变事情。 我已经将css文件拆分成网格和模板等模块。在实际站点上，您应该删除不必要的评论和减少http请求，或者站点将是超级慢。这意味着您需要将css文件合并到一个更大的文件中。我使用嵌套注释，以保持css的组织。最后，运行一个css minifier作为push/部署过程的一部分，以删除杂散注释。</p>
+<p>OOCSS的主要原则<br>分离结构和皮肤<br>这意味着将重复的视觉特性（如背景和边框样式）定义为单独的“皮肤”，您可以与各种对象混合和匹配，以获得大量的视觉变化，而无需太多代码。看到模块对象和它的皮。<br>分离结构和皮肤也可以使用类的命名你的对象和组件，而不是仅仅依靠HTML语义。例如，媒体对象命名为class=“media”，其成分为class=“img”（对image/video组件）和class=“BD”（body/text组件）。<br>在你的样式表引用这些类（说的，而不是直接造型<img>元素），HTML可以灵活。例如，如果一个新的媒体元素要在未来几年内（如&lt;&lt; SVG &gt;），它可以被集成到HTML而不必接触CSS。</p>
+<p>Separating structure and skin can also mean using classes to name your objects and their components, rather than relying solely on the semantics of HTML. For example, the media object is named with class=”media”, and its components are named with class=”img” (for the image/video component) and class=”bd” (for the body/text component).</p>
+<p>By referencing these classes in your stylesheets (say, rather than directly styling the <img> element), your HTML can be flexible. For instance, if a new media element were to take off in the next few years (e.g. <svg>), it could be integrated into the HTML without having to touch the CSS.</svg></p>
+<p>独立的容器和内容<br>从本质上讲，这意味着“很少使用位置相关的风格”。一个对象应该看起来一样，不管你把它放在哪里了。所以造型特定</p><h2>，MyObject H2 {…}，创建和应用类的描述问题的<h2>，像＜H2 class=“类别”&gt;。<br>这给你的保证：（1）所有未归类的<h2>的看起来都是相同的；（2）与类的所有元素（称为一个mixin）看起来都是相同的；3）你不需要的情况下创建一个重写的风格时，你真的想要的MyObject H2。像正常<h2>。<p></p>
+<p>Essentially, this means “rarely use location-dependent styles”. An object should look the same no matter where you put it. So instead of styling a specific </p><h2> with .myObject h2 {…}, create and apply a class that describes the <h2> in question, like <h2 class="category">.<p></p>
+<p>This gives you the assurance that: (1) all unclassed </p><h2>s will look the same; (2) all elements with the category class (called a mixin) will look the same; and 3) you won’t need to create an override style for the case when you actually do want .myObject h2 to look like the normal <h2>.<p></p>
+</h2></h2></h2></h2></h2></h2></h2></h2></h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;OOCSS&quot;&gt;&lt;a href=&quot;#OOCSS&quot; class=&quot;headerlink&quot; title=&quot;OOCSS&quot;&gt;&lt;/a&gt;OOCSS&lt;/h2&gt;&lt;h3 id=&quot;OOCSS-翻译过来意思是-面向对象的css&quot;&gt;&lt;a href=&quot;#OOCSS-翻译过来意思是-面向对象的css&quot; class=&quot;headerlink&quot; title=&quot;OOCSS 翻译过来意思是 面向对象的css&quot;&gt;&lt;/a&gt;OOCSS 翻译过来意思是 面向对象的css&lt;/h3&gt;&lt;p&gt;很多没有接触过面向对象，或者没有理解的朋友可能觉得oocss这个是框架。&lt;/p&gt;
+&lt;p&gt;其实面向对象分为  面向对象分析  面向对象编程  面向对象语言  面型对象思想 面向对象设计&lt;/p&gt;
+&lt;p&gt;看着挺复杂，就我的教学经验。初学只需要从思想和代码上认识就可以。&lt;/p&gt;
+&lt;p&gt;思想上，面向对象，是人认识客观事物的方式。是思想，就是思维方式。  和敲代码没有任何关系。&lt;/p&gt;
+&lt;p&gt;首先我们要区分类和对象。&lt;/p&gt;
+&lt;p&gt;我们把马这一种类叫  类。&lt;/p&gt;
+&lt;p&gt;把小红正在骑的马(客观存在，不以人的意识为转移)   这个叫实例，也就是我们的对象。&lt;/p&gt;
+&lt;p&gt;我们把大千世界真实存在的马，归为一类  给他们起了名字   叫马。 这是一种抽象概括的过程。&lt;/p&gt;
+&lt;p&gt;我们从马中找出创建我们的真实存在的马。这叫实例化。&lt;/p&gt;
+&lt;p&gt;简单点，我是真实存在的，但”人”这个名词是概念。所以我是对象，”人”是类。  我来源与类。&lt;/p&gt;
+&lt;p&gt;而我们的面向对象，就是面向的一个一个客观存在的实物。你看到的想到的是真实存在的(包括思想).比如还是我，我都能在这打字，是不是真实存在的。包括思想，你在想媳妇，这个想的动作，也是真实存在的。也是对象。&lt;/p&gt;
+&lt;p&gt;简单点，凡是能意思到，能感受到的都是对象。但人这个名词是我们抽象出来的，我们无从感受到它，它是一个类。&lt;/p&gt;
+&lt;p&gt;好吧，估计好多小伙伴脑细胞死一半了。我们再简单点。从自身的角度看世界。冥想一下。&lt;/p&gt;
+&lt;p&gt;我走在原始森林，看到了好多树，这些树都是真实存在的，这是你能感受到的。&lt;/p&gt;
+&lt;p&gt;回去你给小伙伴说，我看到了好多树， 你们这时候沟通时候，对方是没法意识到你看到的树，对它而言，这个树就是一个概念。也就是我们的类。&lt;/p&gt;
+&lt;p&gt;然后你继续给小伙伴说，其中在最中央有个撑天大树，很高很大。这个说的也是类。只是类的范围缩小了。&lt;/p&gt;
+&lt;p&gt;当小伙伴去过去，亲眼看到的时候，它客观存在，这个时候在他意识中就成了对象。&lt;/p&gt;
+&lt;p&gt;即必须是客观存在，能被意识到。如果意识不到，在人的角度，经过抽象就是一个类。&lt;/p&gt;
+&lt;p&gt;凡是抽象的都是类。凡是意识到的都是对象。&lt;/p&gt;
+&lt;p&gt;那梵高的话那么抽象它是类么？&lt;/p&gt;
+&lt;p&gt;首先来说，梵高抽象的是自己的感情，这里的抽象是他自己真实的感情，抽象的过程是对象，但他画里面的感情是被抽象过的，是一种概括的类。&lt;/p&gt;
+&lt;p&gt;好吧，现在脑细胞都死掉了吧。哈哈哈哈。其实我写的都是比喻，比较简单了。真的哦。不信你们可以看些教材。然后脑细胞会成负的。。。。&lt;/p&gt;
+&lt;p&gt;所以在这我建议大家，有个认识就可以，不影响编程。在随后漫长的人生中，细细体味。思想无法传递和跨越，不需要苛求对错。&lt;/p&gt;
+&lt;p&gt;下面我们说说编程吧&lt;/p&gt;
+&lt;p&gt;传统的道家学说吸收了阴阳五行。&lt;/p&gt;
+&lt;p&gt;阴阳化万物，天为阳，地为阴。一动，一静。衍生万物。&lt;/p&gt;
+&lt;p&gt;这和我们编程有啥关系呢。。&lt;/p&gt;
+&lt;p&gt;其实面相对象只是阴阳学说的一种表象。我们从头说起吧。&lt;/p&gt;
+&lt;p&gt;在编程之初，代码是比较简单和可以控制的。就是按顺序一两个人写出来。&lt;/p&gt;
+&lt;p&gt;但是随着硬件性能的成倍提高，用户对程序的要求也不断提高，对时间，性能，稳定也更苛刻。&lt;/p&gt;
+&lt;p&gt;传统面向过程(这个是目前大部分小白的写法，就是想到啥写啥，按顺序把需求完成)&lt;/p&gt;
+&lt;p&gt;无法预估项目，不适合多人开发，时间无法把控。而且维护困难，因为你是一个人从头到尾写的。&lt;/p&gt;
+&lt;p&gt;上面错了，下面业务可能全乱了。牵一发而动全身。哈哈哈哈哈&lt;/p&gt;
+&lt;p&gt;想让别人帮忙吧。但你业务都是从上到下写的。只好和小伙伴协商，分开写，导致代码臃肿，突然你写到一半。发现少约定个参数，然后你小伙伴也写了一半。然后就扯淡了。&lt;/p&gt;
+&lt;p&gt;所以我们要用面向对象编程来解决。&lt;/p&gt;
+&lt;p&gt;面向对象把业务拆分开。面对的不再是过程，而是对象。&lt;/p&gt;
+&lt;p&gt;而对象又包含，静态的属性和 动态的方法。&lt;/p&gt;
+&lt;p&gt;通过  动  和静  演化万众功能。&lt;/p&gt;
+&lt;p&gt;通过拆分动静，  静的重复利用，动的相同部分也可以利用，&lt;/p&gt;
+&lt;p&gt;oocss  准确的说  是一种编辑css的思想。又因为没有语法限制，所以片面点讲就是一种书写规范。&lt;/p&gt;
+&lt;p&gt;很高兴 你能闯过刀山火海来看到这里&lt;br&gt;我们继续&lt;/p&gt;
+&lt;p&gt;其实oocss是一种思想，所以每个人理解都是由一种偏差，所以为了学习，我们还是要有个规范&lt;br&gt;引用wiki的话&lt;/p&gt;
+&lt;p&gt;OOCSS的重点是将页面元素作为对象，给所有对象设置类名，将类作为样式表中的单个实体处理，并从它中获取。&lt;/p&gt;
+&lt;p&gt;在这篇文章中，我将通过介绍面向对象的css的概念以及如何帮助提高web页面的性能和可维护性来处理这一经常被忽略的领域。&lt;/p&gt;
+&lt;p&gt;与任何基于对象的编码方法一样，OOCSS的目的是鼓励代码重用，最终更快捷、更高效的样式表更容易添加和维护。&lt;br&gt;Object-oriented CSS (OOCSS) 是 CSS的扩展和升级  &lt;/p&gt;
+&lt;p&gt;引用OOCSS之父Nicole Sullivan话来说， 面向对象的CSS有两个原则：&lt;/p&gt;
+&lt;p&gt;独立的结构和样式&lt;/p&gt;
+&lt;p&gt;视觉性的特征具有可重复性，比如红色方块连衣裙，那么红色方块这种装饰性的东西，是不是也可以用到红色方块墙体和衣服呢？&lt;/p&gt;
+&lt;p&gt;而结构往往具有独立和不可重复性。&lt;/p&gt;
+&lt;p&gt;独立的容器和内容&lt;/p&gt;
+&lt;p&gt;所谓容器 就是 最外层的盒子    容器本身不包含任何样式   他的样式由内容显示&lt;/p&gt;
+&lt;p&gt;这样内容的样式具有可以&lt;/p&gt;
+&lt;p&gt;OOCSS的两大原则 &lt;/p&gt;
+&lt;p&gt;分离结构与皮肤 &lt;/p&gt;
+&lt;p&gt;这意味着将重复的视觉功能(如背景和边框样式)定义为单独的“皮肤”，您可以与不同的对象进行混合和匹配，以实现大量的视觉多样性，但没有太多代码。请参阅模块对象及其皮肤。 分离结构和皮肤也意味着使用类来命名对象及其组件，而不是仅仅依赖于html的语义。例如，媒体对象被命名为类=“媒体”，其组件以类=“img”(用于图像/视频组件)和类=“bd”(为body/text组件)命名。 通过引用样式表中的这些类(表示，而不是直接样式化元素)，您的html可以灵活。例如，如果在未来几年中，一个新的媒体元素将会被起飞(例如&amp;lt;；svg&amp;gt;；)，它可以集成到html中，而不必触摸css。 分离容器和内容 从本质上讲，这意味着“很少使用位置依赖样式”。无论你把物体放在哪里，物体都应该是一样的。因此，不要使用特定的&lt;br&gt;进行样式化。myObject{.}，创建并应用一个类，该类描述了有关&lt;br&gt;的问题，如&lt;br&gt;。 这给了您保证：(1)所有的unclassed&lt;br&gt;s都会看起来相同；(2)所有具有类别类(称为mixin)的元素都会看起来相同； 3)当实际需要时，不需要为该例创建一个重写样式。myObject看起来像正常的&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#button&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;200px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;50px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;padding&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;10px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;border&lt;/span&gt;: solid &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;#ccc&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;linear-gradient&lt;/span&gt;(#ccc, #222);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;box-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .5) &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#box&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;400px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;overflow&lt;/span&gt;: hidden;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;border&lt;/span&gt;: solid &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;#ccc&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;linear-gradient&lt;/span&gt;(#ccc, #222);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;box-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .5) &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#widget&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;500px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;min-height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;200px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;overflow&lt;/span&gt;: auto;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;border&lt;/span&gt;: solid &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;#ccc&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;linear-gradient&lt;/span&gt;(#ccc, #222);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;box-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .5) &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上面的三个元素都有各自独有的样式，并且它们被应用于非可重用的ID选择器中，以定义样式。但他们也有很多风格的共同点。常见的样式可能存在于品牌目的或设计的一致性上。&lt;/p&gt;
+&lt;p&gt;有了一点规划和思考，我们就可以抽象出常见的样式，这样css就会变成这样：&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-class&quot;&gt;.button&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;200px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;50px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-class&quot;&gt;.box&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;400px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;overflow&lt;/span&gt;: hidden;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-class&quot;&gt;.widget&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;500px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;min-height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;200px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;overflow&lt;/span&gt;: auto;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-class&quot;&gt;.skin&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;border&lt;/span&gt;: solid &lt;span class=&quot;number&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;#ccc&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;linear-gradient&lt;/span&gt;(#ccc, #222);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;box-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .5) &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;现在所有的元素都是使用类，通常的样式被组合成一个可重用的“皮肤”，而没有必要重复。我们只需要将“皮肤”类应用到所有元素中，结果将与第一个示例所生成的结果相同，除了代码少和用于进一步重用的possiblity之外。&lt;br&gt;SEPARATION OF CONTAINERS AND CONTENT LINK&lt;br&gt;在OOCSS GitHub页面上描述的第二个原则是将容器与其内容分离。为了说明为什么这是重要的，请采取以下css：&lt;br&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#sidebar&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;h3&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-family&lt;/span&gt;: Arial, Helvetica, sans-serif;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;: .&lt;span class=&quot;number&quot;&gt;8em&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;line-height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;color&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;#777&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;text-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .3) &lt;span class=&quot;number&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;6px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这些样式将应用于任何#sidebar h3标题。但是，如果我们想将完全相同的样式应用到在footer h3标题，除了不同字体大小和修改后的文本阴影之外，还会怎样呢？&lt;br&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#sidebar&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;h3&lt;/span&gt;, &lt;span class=&quot;selector-id&quot;&gt;#footer&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;h3&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-family&lt;/span&gt;: Arial, Helvetica, sans-serif;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;2em&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;line-height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;color&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;#777&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;text-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .3) &lt;span class=&quot;number&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;6px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#footer&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;h3&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1.5em&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;text-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .3) &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;或者我们可能会有更糟的事情：&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#sidebar&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;h3&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-family&lt;/span&gt;: Arial, Helvetica, sans-serif;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;2em&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;line-height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;color&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;#777&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;text-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .3) &lt;span class=&quot;number&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;6px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* other styles here.... */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-id&quot;&gt;#footer&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;h3&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-family&lt;/span&gt;: Arial, Helvetica, sans-serif;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1.5em&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;line-height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;color&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;#777&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;text-shadow&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;rgba&lt;/span&gt;(0, 0, 0, .3) &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4px&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;现在，我们不必要地复制样式，可能不会意识到它(或者根本不关心)。&lt;/p&gt;
+&lt;p&gt;通过OOCSS，我们被鼓励对不同元素中常见的内容进行更多的思考，然后将这些常见特性分离到模块或对象中，这些模块或对象可以在任何地方重用。 &lt;/p&gt;
+&lt;p&gt;在上述示例中使用子代选择器声明的样式是不可重用的，因为它们依赖于特定的容器(在本例中是#sidebar或#footer)。 当我们使用OOCSS的基于类的模块构建时，我们确保我们的样式不依赖于任何包含元素。这意味着，无论结构上下文如何，它们都可以重用在文档的任何地方。&lt;/p&gt;
+&lt;p&gt;一个真实世界的例子&lt;/p&gt;
+&lt;p&gt;为了进一步说明如何使用OOCSS，我将使用类似于我在网站最近的重新设计中所做的事情。在对站点上的内部标头元素进行编码后，我意识到页眉内的基本结构样式可以在页面上的其他元素上重用。 因此，这里有一些我开始设计标题时所拥有的线条：&lt;/p&gt;
+&lt;p&gt;因此，这里有一些我开始设计标题时所拥有的线条：&lt;/p&gt;
+&lt;p&gt;.header-inside {&lt;br&gt;  width: 980px;&lt;br&gt;  height: 260px;&lt;br&gt;  padding: 20px;&lt;br&gt;  margin: 0 auto;&lt;br&gt;  position: relative;&lt;br&gt;  overflow: hidden;&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;这里列出的几种样式是唯一的。.header-inside元素。但其余部分可以形成一个可以重用的模块。因此，我可以将结构样式抽象成自己的可重用类。这是结&lt;/p&gt;
+&lt;p&gt;.globalwidth {&lt;br&gt;  width: 980px;&lt;br&gt;  margin: 0 auto;&lt;br&gt;  position: relative;&lt;br&gt;  padding-left: 20px;&lt;br&gt;  padding-right: 20px;&lt;br&gt;  overflow: hidden;&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;.header-inside {&lt;br&gt;  padding-top: 20px;&lt;br&gt;  padding-bottom: 20px;&lt;br&gt;  height: 260px;&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;A fixed width&lt;br&gt;Centering using margin: auto&lt;br&gt;Relative positioning to create a positioning context for child elements&lt;br&gt;Left and right padding of 20px&lt;br&gt;Overflow set to “hidden” for clearfixing&lt;/p&gt;
+&lt;p&gt;固定宽度 用边缘定位：自动 相对定位为子元素创建定位上下文 左的左、右填充 溢出设置为“隐藏”为clearfixing。&lt;br&gt;现在，我们可以在任何需要相同特性的元素上使用这些样式，只需将该类添加到所需的元素中-而无需编写单独的CSS行。 对于我的站点，我在主内容元素和内页脚元素上重用了这些结构样式。根据设计，这些样式也可以适用于可能出现在页眉和内容之间的水平导航元素，也可以适用于任何具有固定宽度的其他元素，并且需要居中在页面上。 将“globalwidth”样式添加到这些元素后，标记将看起来类似如下：&lt;/p&gt;
+&lt;header&gt;&lt;br&gt;  &lt;div class=&quot;header-inside globalwidth&quot;&gt;&lt;br&gt;  &lt;/div&gt;&lt;br&gt;&lt;/header&gt;
+
+&lt;div class=&quot;main globalwidth&quot;&gt;&lt;br&gt;&lt;/div&gt;
+
+&lt;footer&gt;&lt;br&gt;  &lt;div class=&quot;footer-inside globalwidth&quot;&gt;&lt;br&gt;  &lt;/div&gt;&lt;br&gt;&lt;/footer&gt;
+
+&lt;p&gt;有些人可能会觉得这种样式抽象会使html变得更加复杂，并且违背了将标记与呈现分离的原则。 但是，抛开任何关于如何影响标记的辩论，没有人可以质疑，这种抽象现在使跟踪和修改用于构造这三个元素的常用样式变得更加容易&lt;/p&gt;
+&lt;p&gt;媒体对象&lt;br&gt;OOCSS运动的先驱之一是nicole sullivan。她创建了一个名为媒体对象的可重用模块，正如她所解释的那样，它可以保存数百行代码。&lt;/p&gt;
+&lt;p&gt;媒体对象是OOCSS强大的一个很好的例子，因为它可以包含任何大小的媒体元素，它的右边有内容。虽然许多适用于其内部内容的样式-甚至媒体元素本身的大小-都可能会发生变化，但是媒体对象本身也有共同的基础样式，以避免不必要的重复&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Separate structure and skin（分离结构和主题）减少对 HTML 结构的依赖 &lt;/li&gt;
+&lt;li&gt;Separate Container and content（分离容器和内容）增加样式的复用性&lt;br&gt;OOCSS好处 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我已经提到了OOCSS的一些好处。&lt;br&gt;在这里，我将扩大这些。 &lt;/p&gt;
+&lt;p&gt;更快的网站链接&lt;/p&gt;
+&lt;p&gt; OOCSS的性能效益应该是相当清楚的&lt;/p&gt;
+&lt;p&gt; 。如果您在css中重复的样式较少，那么这将导致文件大小更小，从而更快地下载这些资源。&lt;/p&gt;
+&lt;p&gt;  的确，标记将更加混乱，从而创建更大的html文件。&lt;/p&gt;
+&lt;p&gt;  但是在许多情况下，标记性能的损失量将大大超过样式表性能中的增益量。&lt;/p&gt;
+&lt;p&gt;   另一个记住的概念是，OOCSS wiki指的是性能赠品。这指的是，每当您在css中重用某些东西时，基本上都会创建一个新的样式元素，这些元素都是CSS代码的零行。对于大型的高流量项目，这些“免费”可能是一个关键的业绩增益。 &lt;/p&gt;
+&lt;p&gt;   可维护的STYLESHEETS链接 使用OOCSS，而不是一个不断增长的样式表，充满了特定的战争，您将有一套易于维护的模块，在这些模块中，自然级联扮演了重要角色。 当对现有站点进行添加时，您不会在样式表的底部添加新样式，而不必考虑以前所出现的内容。相反，您将重用现有样式，并根据现有规则集扩展样式。 使用这种forethought，在编写很少的css时创建整个页面是可能的。任何现有的css模块都可以作为所有新页面的基础，并且任何新的css都是最小的。在某些情况下，您甚至可以创建一个新的完全样式的页面，而不编码一个单行的css。 这些可维护性的好处也扩展到样式表的健壮性。&lt;/p&gt;
+&lt;p&gt;   由于样式是模块化的，在新开发人员开始使用样式表时，基于OOCSS构建的页面可能会更少崩溃。 值得注意的要点 OOCSS在社区里引起了大量的讨论，引起了一些争议。在这里，我会试着消除几个常见的误解。 您仍然可以使用ids链接。 如果您决定以一种OOCSS方式工作，那么您的样式将主要基于css类，而您不会使用id选择器来设计元素。 因此，许多人错误地声称，OOCSS鼓励完全放弃使用IDs。但这并不是真的。 避免IDs的规则更具体地说，在选择器中不使用IDs。因此，使用OOCSS原则(从而避免使用id选择器的样式)是完全可以接受的，同时使用IDs中的使用用于javascript钩子和片段标识符。 当然，您可能有一个状态，您已经将一个id应用到一个元素，您知道该元素是页面中唯一的。因此，您可以通过避免向该元素添加类来保存几个字节，并使用选择器选择器来创建它。但即使在这种情况下，依赖于类也更安全，以确保您在将来不会遇到特定的问题。 处理小项目链接 对于较小的站点和应用程序，您可以肯定的是，OOCSS将是多余的。所以，不要把这篇文章作为OOCSS的宣传，在任何情况下都会有所不同，这取决于项目的情况。 尽管如此，我认为这是一个好主意，至少在你的项目中开始考虑OOCSS。一旦你得到了它的窍门，我相信你会发现在更大的项目上工作变得更容易，而这些项目的好处会更显著和更相关。 执行链接的一些指导方针 开始和OOCSS一起工作可能需要时间。我还在研究它，所以我不声称在这方面有所有的答案和经验。 但是这里有一些你可能想要开始做的事情，以帮助你进入一种长期的思维方式： 避免派生选择器(即不使用)。侧栏h3 避免IDs作为样式挂钩 避免将类附加到样式表中的元素(即不做div.header或h1.title)。 除了在一些罕见的情况下，避免使用！重要 使用林特来检查你的css(并知道它有选择和方法去处理它的疯狂) 使用css网格 显然有些时候，这些规则会被打破，但总的来说，这些规则是开发的好习惯，&lt;/p&gt;
+&lt;p&gt;   并且会导致样式表变得更小，更易于维护。 跟随nicole sullivan的工作链接 如果你想继续学习OOCSS，这个行业中最重要的人是妮可沙利文。 除了在她的博客上定期发布张贴文章外，妮可还与随行的幻灯片做了一系列的介绍。下面是一些您可能想要检查的内容： 面向对象的css(Slideshow) 高性能网站：nicole sullivan(视频) 我们最好的做法是杀了我们(Slideshow) css膨胀(Slideshow) 结论链路 许多人害怕OOCSS的意识形态，因为它似乎违背了我们所学到的许多所谓的“最佳实践”。但是一旦了解使用OOCSS的长期好处，我相信很多开发人员都会成为转换者。 总的来说，我认为OOCSS在css开发方面有着光明的未来，这是一个概念，所有开发人员都应该开始融入他们的项目-至少在某种程度上-帮助创建更快的网页，更有效，更容易维护。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="http://sunhao.win/categories/css/"/>
+    
+    
+      <category term="oocss" scheme="http://sunhao.win/tags/oocss/"/>
+    
+      <category term="samcss" scheme="http://sunhao.win/tags/samcss/"/>
+    
+      <category term="sem" scheme="http://sunhao.win/tags/sem/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js-mobile-isroll移动端滚动插件iScroll</title>
+    <link href="http://sunhao.win/articles/js-mobile-isroll.html"/>
+    <id>http://sunhao.win/articles/js-mobile-isroll.html</id>
+    <published>2017-08-17T07:21:05.000Z</published>
+    <updated>2017-08-17T07:24:53.278Z</updated>
+    
+    <content type="html"><![CDATA[<p>移动端滚动插件iScroll</p>
+<p>目录：</p>
+<p>1iScroll的产生2iScroll的使用方法3iScroll应该如何实例化4iScroll中的参数5iScroll中的方法<br>概述：</p>
+<p>大家在日常工作中最常用的插件是什么，jQurey？Lazyload？但是这些都是在PC端，但是在移动端最常用的插件莫过于iScroll了，iScroll到底是什么东西，应该怎么用？iScroll是个很强大的插件，我也只是略懂皮毛，这里我们简单的介绍一下。<br>iScroll的产生：</p>
+<p>iScroll的产生完全是因为移动版webkit浏览器，例如在iPhone，Android 的移动设备上。<br>iScroll的使用方法：</p>
+<p>iScroll的原理是外层有一个溢出隐藏（overflow:hidden;）的DOM，然后这个区域内的第一个DOM结构会被实例化，其包裹的内容可以纵向或者横向的滚动，所以在使用iScroll的时候，滚动元素要尽量的简单，减少DOM个数，减少嵌套，因为DOM结构越是复杂iScroll运行起来就越是吃力，有可能会造成某些节点显示不正常的情况。 所以，推荐使用的DOM结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;wrapper&quot;&gt;//overflow:hidden;</div><div class="line">    &lt;ul&gt;</div><div class="line">    //只有第一个DOM结构（ul）被实例化，这个DOM可以纵向或者横向的滚动，</div><div class="line">    //多出的内容会被wrapper的样式hidden。</div><div class="line">        &lt;li&gt;1&lt;/li&gt;</div><div class="line">        &lt;li&gt;2&lt;/li&gt;</div><div class="line">        &lt;li&gt;3&lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>注意：再次重申，只有wrapper里的第一个子元素（ul）才可以被实例化滚动，并且要结合外层的DOM（wrapper）才能实现滚动。<br>如果 wrapper中有多个ul怎么办？很简单，记住那句话，只有wrapper里的第一个子元素（ul）才可以被实例化滚动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;wrapper&quot;&gt;//overflow:hidden;</div><div class="line">    &lt;div id=&quot;first&quot;&gt;</div><div class="line">        //只有第一个DOM结构(ul)被实例化，这个DOM可以纵向或者横向的滚动，</div><div class="line">        //多出的内容会被wrapper的样式hidden</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li&gt;1&lt;/li&gt;</div><div class="line">            &lt;li&gt;2&lt;/li&gt;</div><div class="line">            &lt;li&gt;3&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li&gt;4&lt;/li&gt;</div><div class="line">            &lt;li&gt;5&lt;/li&gt;</div><div class="line">            &lt;li&gt;6&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>看到了吧，只有first会被实例化。 注意：这里第一个DOM结构的ID（first）可以不写，我只是为了方便大家识别才写了个ID，但是最外层的ID（wrapper）一定要写，因为在JS实例化的时候需要填写这个ID：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myScroll = new iScroll(&quot;wrapper&quot;);</div></pre></td></tr></table></figure></p>
+<p>iScroll应该如何实例化：</p>
+<p>既然说道了实例化，我们应该在什么时候实例化？据说实例化的方法有很多，但是我没用过，我只说一种：</p>
+<p>（1）在HTML（uw3c.html）页面底部（body之后html之前）加载iscroll.js与当前页面的uw3c.js,这样能确保HTML的DOM结构能加载出来。</p>
+<p>（2）在JS插入页面DOM结构和数据之前实例化iScroll，也就是在JS的最开始实例化，因为之后可能会使用JS来插入DOM或者数据，这样以来能确保在插入数据之前iScroll已经实例化了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">HTML://HTML结构</div><div class="line">&lt;html &gt;</div><div class="line">    &lt;body&gt;</div><div class="line">     ...code...</div><div class="line">    &lt;/body&gt;</div><div class="line">     //插入iscroll.js文件</div><div class="line">   &lt;script type=&quot;text/javascript&quot; src=&quot;js/iscroll.js&quot; &gt; &lt;/script &gt;</div><div class="line">    //插入本页面JS文件</div><div class="line">  &lt;script type=&quot;text/javascript&quot; src=&quot;js/uw3c.js&quot; &gt; &lt;/script &gt;</div><div class="line">&lt;/html&gt;</div><div class="line"> JS://JS文件内容</div><div class="line"> var myscroll;</div><div class="line"> function iscroll(data)&#123;</div><div class="line">      //实例化iScroll</div><div class="line">     myscroll=new iScroll(&quot;wrapper&quot;);</div><div class="line">     pageData(data);</div><div class="line"> &#125;</div><div class="line"> function pageData(obj)&#123;</div><div class="line">     $(&quot;body&quot;).html(obj);</div><div class="line">     myscroll.refresh();//当DOM结构发生变化的时候，需要刷新iScroll</div><div class="line"> &#125;</div><div class="line"> iscroll(&quot;&lt;div&gt;pagedata&lt;/div&gt;&quot;);</div></pre></td></tr></table></figure>
+<p>iScroll中的参数：</p>
+<p>在实例化iScroll的时候，可以传入两个参数，第一个参数是实例化的外层的DOM的ID，第二个参数是iScroll执行方法的对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var myscroll=new iScroll(&quot;wrapper&quot;,&#123;hScrollbar:false&#125;);</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var opts = &#123;</div><div class="line">                vScroll:false,//禁止垂直滚动</div><div class="line">                snap:true,//执行传送带效果</div><div class="line">                hScrollbar:false//隐藏水平方向上的滚动条</div><div class="line">            &#125;;</div><div class="line">var myscroll = new iScroll(&quot;wrapper&quot;,opts);</div></pre></td></tr></table></figure></p>
+<p>第二个参数内容如下，这个参数会控制iScroll的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">hScroll        false 禁止横向滚动 true横向滚动 默认为true</div><div class="line">vScroll        false 禁止垂直滚动 true垂直滚动 默认为true</div><div class="line">hScrollbar     false隐藏水平方向上的滚动条</div><div class="line">vScrollbar     false 隐藏垂直方向上的滚动条</div><div class="line">fadeScrollbar  false 指定在无渐隐效果时隐藏滚动条</div><div class="line">hideScrollbar  在没有用户交互时隐藏滚动条 默认为true</div><div class="line">bounce         启用或禁用边界的反弹，默认为true</div><div class="line">momentum       启用或禁用惯性，默认为true，</div><div class="line">               此参数在你想要保存资源的时候非常有用</div><div class="line">lockDirection  false取消拖动方向的锁定，</div><div class="line">               true拖动只能在一个方向上（up/down 或者left/right）</div><div class="line">iScroll中的方法：</div></pre></td></tr></table></figure></p>
+<p>当然在第二个参数中，也有一些方法可以执行：</p>
+<p>(1)scrollTo(x, y, time, relative)方法：传入4个参数：X轴滚动距离，Y轴滚动距离，效果时间，是否相对当前位置。所以例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在200毫秒的时间内，Y轴向上滚动100像素；</div><div class="line">uw3c.scrollTo(0, -100, 200)</div><div class="line">//在200毫秒的时间内，相对于当前位置，X轴向左滚动100像素；</div><div class="line">uw3c.scrollTo(-100, 0, 200, true)</div></pre></td></tr></table></figure></p>
+<p>(2)refresh()方法：在DOM结构发生改变之后，需要刷新iScroll，否则滚动插件会实例化的不准确：</p>
+<p>uw3c.refresh();//刷新iScroll</p>
+<p>(3)onPosChange,有没有一个方法能返回位置的变化？你可以查询一下自己所用的iScroll中有没有onPosChange方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">onPosChange:function(x,y)&#123;</div><div class="line">    if(y &lt; -200)&#123;</div><div class="line">     //如果Y周向上滚动200像素，$(&quot;#uw3c&quot;)就显示，否则就隐藏。</div><div class="line">        $(&quot;#uw3c&quot;).show();</div><div class="line">    &#125;else&#123;</div><div class="line">        $(&quot;#uw3c&quot;).hide();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（4）onScrollEnd：滚动结束时执行的事件，如果想在滚动结束时出发摸个事件，这个方法就拍上用处了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//滚动结束后，执行的方法，滚动后会出现提示框alert(&quot;uw3c.com&quot;)</div><div class="line">onScrollEnd:function()&#123;</div><div class="line">    alert(&quot;uw3c.com&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（5）onRefresh：在DOM结构发生改变之后，需要刷新iScroll，否则滚动插件会实例化的不准确，onRefresh是刷新完iScroll会执行的方法。<br>（6）onBeforeScrollStart：开始滚动前的时间回调，默认是阻止浏览器默认行为 。<br>（7）onScrollStart：开始滚动的回调。<br>（8）onBeforeScrollMove：在内容移动前的回调。<br>（9）onScrollMove：内容移动的回调。<br>（10）onBeforeScrollEnd：在滚动结束前的回调。<br>（11）onTouchEnd：手离开屏幕后的回调。<br>（12）onDestroy：销毁实例的回调。<br><a id="more"></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;移动端滚动插件iScroll&lt;/p&gt;
+&lt;p&gt;目录：&lt;/p&gt;
+&lt;p&gt;1iScroll的产生2iScroll的使用方法3iScroll应该如何实例化4iScroll中的参数5iScroll中的方法&lt;br&gt;概述：&lt;/p&gt;
+&lt;p&gt;大家在日常工作中最常用的插件是什么，jQurey？Lazyload？但是这些都是在PC端，但是在移动端最常用的插件莫过于iScroll了，iScroll到底是什么东西，应该怎么用？iScroll是个很强大的插件，我也只是略懂皮毛，这里我们简单的介绍一下。&lt;br&gt;iScroll的产生：&lt;/p&gt;
+&lt;p&gt;iScroll的产生完全是因为移动版webkit浏览器，例如在iPhone，Android 的移动设备上。&lt;br&gt;iScroll的使用方法：&lt;/p&gt;
+&lt;p&gt;iScroll的原理是外层有一个溢出隐藏（overflow:hidden;）的DOM，然后这个区域内的第一个DOM结构会被实例化，其包裹的内容可以纵向或者横向的滚动，所以在使用iScroll的时候，滚动元素要尽量的简单，减少DOM个数，减少嵌套，因为DOM结构越是复杂iScroll运行起来就越是吃力，有可能会造成某些节点显示不正常的情况。 所以，推荐使用的DOM结构如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;div id=&amp;quot;wrapper&amp;quot;&amp;gt;//overflow:hidden;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;ul&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    //只有第一个DOM结构（ul）被实例化，这个DOM可以纵向或者横向的滚动，&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    //多出的内容会被wrapper的样式hidden。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;li&amp;gt;1&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;li&amp;gt;3&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;/ul&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/div&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;注意：再次重申，只有wrapper里的第一个子元素（ul）才可以被实例化滚动，并且要结合外层的DOM（wrapper）才能实现滚动。&lt;br&gt;如果 wrapper中有多个ul怎么办？很简单，记住那句话，只有wrapper里的第一个子元素（ul）才可以被实例化滚动：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;div id=&amp;quot;wrapper&amp;quot;&amp;gt;//overflow:hidden;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;div id=&amp;quot;first&amp;quot;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        //只有第一个DOM结构(ul)被实例化，这个DOM可以纵向或者横向的滚动，&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        //多出的内容会被wrapper的样式hidden&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;ul&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;li&amp;gt;1&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;li&amp;gt;3&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;/ul&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;ul&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;li&amp;gt;4&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;li&amp;gt;5&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;li&amp;gt;6&amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;/ul&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;/div&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/div&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;看到了吧，只有first会被实例化。 注意：这里第一个DOM结构的ID（first）可以不写，我只是为了方便大家识别才写了个ID，但是最外层的ID（wrapper）一定要写，因为在JS实例化的时候需要填写这个ID：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var myScroll = new iScroll(&amp;quot;wrapper&amp;quot;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;iScroll应该如何实例化：&lt;/p&gt;
+&lt;p&gt;既然说道了实例化，我们应该在什么时候实例化？据说实例化的方法有很多，但是我没用过，我只说一种：&lt;/p&gt;
+&lt;p&gt;（1）在HTML（uw3c.html）页面底部（body之后html之前）加载iscroll.js与当前页面的uw3c.js,这样能确保HTML的DOM结构能加载出来。&lt;/p&gt;
+&lt;p&gt;（2）在JS插入页面DOM结构和数据之前实例化iScroll，也就是在JS的最开始实例化，因为之后可能会使用JS来插入DOM或者数据，这样以来能确保在插入数据之前iScroll已经实例化了。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;HTML://HTML结构&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;html &amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;body&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     ...code...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;/body&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     //插入iscroll.js文件&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;js/iscroll.js&amp;quot; &amp;gt; &amp;lt;/script &amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    //插入本页面JS文件&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;js/uw3c.js&amp;quot; &amp;gt; &amp;lt;/script &amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/html&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; JS://JS文件内容&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; var myscroll;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; function iscroll(data)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      //实例化iScroll&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     myscroll=new iScroll(&amp;quot;wrapper&amp;quot;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     pageData(data);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; function pageData(obj)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     $(&amp;quot;body&amp;quot;).html(obj);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     myscroll.refresh();//当DOM结构发生变化的时候，需要刷新iScroll&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; iscroll(&amp;quot;&amp;lt;div&amp;gt;pagedata&amp;lt;/div&amp;gt;&amp;quot;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;iScroll中的参数：&lt;/p&gt;
+&lt;p&gt;在实例化iScroll的时候，可以传入两个参数，第一个参数是实例化的外层的DOM的ID，第二个参数是iScroll执行方法的对象：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var myscroll=new iScroll(&amp;quot;wrapper&amp;quot;,&amp;#123;hScrollbar:false&amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;或者&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var opts = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                vScroll:false,//禁止垂直滚动&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                snap:true,//执行传送带效果&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                hScrollbar:false//隐藏水平方向上的滚动条&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var myscroll = new iScroll(&amp;quot;wrapper&amp;quot;,opts);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;第二个参数内容如下，这个参数会控制iScroll的效果：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hScroll        false 禁止横向滚动 true横向滚动 默认为true&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;vScroll        false 禁止垂直滚动 true垂直滚动 默认为true&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hScrollbar     false隐藏水平方向上的滚动条&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;vScrollbar     false 隐藏垂直方向上的滚动条&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fadeScrollbar  false 指定在无渐隐效果时隐藏滚动条&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hideScrollbar  在没有用户交互时隐藏滚动条 默认为true&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;bounce         启用或禁用边界的反弹，默认为true&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;momentum       启用或禁用惯性，默认为true，&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;               此参数在你想要保存资源的时候非常有用&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;lockDirection  false取消拖动方向的锁定，&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;               true拖动只能在一个方向上（up/down 或者left/right）&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;iScroll中的方法：&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;当然在第二个参数中，也有一些方法可以执行：&lt;/p&gt;
+&lt;p&gt;(1)scrollTo(x, y, time, relative)方法：传入4个参数：X轴滚动距离，Y轴滚动距离，效果时间，是否相对当前位置。所以例如：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;//在200毫秒的时间内，Y轴向上滚动100像素；&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;uw3c.scrollTo(0, -100, 200)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//在200毫秒的时间内，相对于当前位置，X轴向左滚动100像素；&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;uw3c.scrollTo(-100, 0, 200, true)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;(2)refresh()方法：在DOM结构发生改变之后，需要刷新iScroll，否则滚动插件会实例化的不准确：&lt;/p&gt;
+&lt;p&gt;uw3c.refresh();//刷新iScroll&lt;/p&gt;
+&lt;p&gt;(3)onPosChange,有没有一个方法能返回位置的变化？你可以查询一下自己所用的iScroll中有没有onPosChange方法：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;onPosChange:function(x,y)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if(y &amp;lt; -200)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     //如果Y周向上滚动200像素，$(&amp;quot;#uw3c&amp;quot;)就显示，否则就隐藏。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        $(&amp;quot;#uw3c&amp;quot;).show();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;else&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        $(&amp;quot;#uw3c&amp;quot;).hide();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;（4）onScrollEnd：滚动结束时执行的事件，如果想在滚动结束时出发摸个事件，这个方法就拍上用处了：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;//滚动结束后，执行的方法，滚动后会出现提示框alert(&amp;quot;uw3c.com&amp;quot;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;onScrollEnd:function()&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    alert(&amp;quot;uw3c.com&amp;quot;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;（5）onRefresh：在DOM结构发生改变之后，需要刷新iScroll，否则滚动插件会实例化的不准确，onRefresh是刷新完iScroll会执行的方法。&lt;br&gt;（6）onBeforeScrollStart：开始滚动前的时间回调，默认是阻止浏览器默认行为 。&lt;br&gt;（7）onScrollStart：开始滚动的回调。&lt;br&gt;（8）onBeforeScrollMove：在内容移动前的回调。&lt;br&gt;（9）onScrollMove：内容移动的回调。&lt;br&gt;（10）onBeforeScrollEnd：在滚动结束前的回调。&lt;br&gt;（11）onTouchEnd：手离开屏幕后的回调。&lt;br&gt;（12）onDestroy：销毁实例的回调。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://sunhao.win/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://sunhao.win/tags/js/"/>
+    
+      <category term="mobile" scheme="http://sunhao.win/tags/mobile/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js-animate-canvas满屏小球动画</title>
+    <link href="http://sunhao.win/articles/js-animate-canvas.html"/>
+    <id>http://sunhao.win/articles/js-animate-canvas.html</id>
+    <published>2017-08-17T06:43:43.000Z</published>
+    <updated>2017-08-17T06:45:51.846Z</updated>
+    
+    <content type="html"><![CDATA[<p>逻辑简单  效果不错<br><a href="https://codepen.io/whqet/pen/bNWGaj" target="_blank" rel="external">https://codepen.io/whqet/pen/bNWGaj</a></p>
+<canvas id="motion">Canvas is not supported in your browser.</canvas>
+
+<p>body {<br>  overflow:hidden;<br>}</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// requestAnimationFrame polyfill by Erik Möller.</span></div><div class="line"><span class="keyword">if</span> (!<span class="built_in">Date</span>.now)</div><div class="line">    <span class="built_in">Date</span>.now = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); &#125;;</div><div class="line"></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">    'use strict'</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> vendors = [<span class="string">'webkit'</span>, <span class="string">'moz'</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; vendors.length &amp;&amp; !<span class="built_in">window</span>.requestAnimationFrame; ++i) &#123;</div><div class="line">        <span class="keyword">var</span> vp = vendors[i];</div><div class="line">        <span class="built_in">window</span>.requestAnimationFrame = <span class="built_in">window</span>[vp+<span class="string">'RequestAnimationFrame'</span>];</div><div class="line">        <span class="built_in">window</span>.cancelAnimationFrame = (<span class="built_in">window</span>[vp+<span class="string">'CancelAnimationFrame'</span>]</div><div class="line">                                   || <span class="built_in">window</span>[vp+<span class="string">'CancelRequestAnimationFrame'</span>]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (<span class="regexp">/iP(ad|hone|od).*OS 6/</span>.test(<span class="built_in">window</span>.navigator.userAgent) <span class="comment">// iOS6 is buggy</span></div><div class="line">        || !<span class="built_in">window</span>.requestAnimationFrame || !<span class="built_in">window</span>.cancelAnimationFrame) &#123;</div><div class="line">        <span class="keyword">var</span> lastTime = <span class="number">0</span>;</div><div class="line">        <span class="built_in">window</span>.requestAnimationFrame = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> now = <span class="built_in">Date</span>.now();</div><div class="line">            <span class="keyword">var</span> nextTime = <span class="built_in">Math</span>.max(lastTime + <span class="number">16</span>, now);</div><div class="line">            <span class="keyword">return</span> setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback(lastTime = nextTime); &#125;,</div><div class="line">                              nextTime - now);</div><div class="line">        &#125;;</div><div class="line">        <span class="built_in">window</span>.cancelAnimationFrame = clearTimeout;</div><div class="line">    &#125;</div><div class="line">&#125;());</div><div class="line"></div><div class="line"><span class="keyword">var</span> getRandomColor = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">'#'</span>+(<span class="built_in">Math</span>.random()*<span class="number">0xffffff</span>&lt;&lt;<span class="number">0</span>).toString(<span class="number">16</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"motion"</span>), </div><div class="line">    c = canvas.getContext(<span class="string">"2d"</span>),</div><div class="line">    particles = &#123;&#125;,</div><div class="line">    particleIndex = <span class="number">0</span>,</div><div class="line">    particleNum = <span class="number">0.2</span>;</div><div class="line"></div><div class="line">canvas.width = <span class="built_in">window</span>.innerWidth;</div><div class="line">canvas.height = <span class="built_in">window</span>.innerHeight;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Particle</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.x = canvas.width/<span class="number">2</span>;</div><div class="line">  <span class="keyword">this</span>.y = canvas.height/<span class="number">2</span>;</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.vx = <span class="built_in">Math</span>.random() * <span class="number">6</span> - <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.vy = <span class="built_in">Math</span>.random() * <span class="number">4</span> - <span class="number">2</span>;</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.growth = ( <span class="built_in">Math</span>.abs(<span class="keyword">this</span>.vx) + <span class="built_in">Math</span>.abs(<span class="keyword">this</span>.vy) ) * <span class="number">0.007</span>;</div><div class="line"></div><div class="line">  particleIndex++;</div><div class="line">  particles[particleIndex] = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">this</span>.id = particleIndex;</div><div class="line">  <span class="keyword">this</span>.size = <span class="built_in">Math</span>.random() * <span class="number">1</span>;</div><div class="line">  <span class="keyword">this</span>.color = getRandomColor();</div><div class="line">&#125;</div><div class="line"></div><div class="line">Particle.prototype.draw = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.x += <span class="keyword">this</span>.vx;</div><div class="line">  <span class="keyword">this</span>.y += <span class="keyword">this</span>.vy;</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.size += <span class="keyword">this</span>.growth;</div><div class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.x &gt; canvas.width || <span class="keyword">this</span>.y &gt; canvas.height)&#123;</div><div class="line">    <span class="keyword">delete</span> particles[<span class="keyword">this</span>.id];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  c.fillStyle = <span class="keyword">this</span>.color;</div><div class="line">  c.beginPath();</div><div class="line">  c.arc(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y, <span class="keyword">this</span>.size,<span class="number">0</span>*<span class="built_in">Math</span>.PI,<span class="number">2</span>*<span class="built_in">Math</span>.PI);</div><div class="line">  c.fill();</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  requestAnimationFrame( animate );</div><div class="line">  </div><div class="line">  c.fillStyle = <span class="string">"#000"</span>;</div><div class="line">  c.fillRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);</div><div class="line">  <span class="keyword">if</span>(<span class="built_in">Math</span>.random() &gt; particleNum)&#123;</div><div class="line">    <span class="keyword">new</span> Particle();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> particles)&#123;</div><div class="line">    particles[i].draw();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">requestAnimationFrame( animate );</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;逻辑简单  效果不错&lt;br&gt;&lt;a href=&quot;https://codepen.io/whqet/pen/bNWGaj&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://codepen.io/whqet/pen/bNWGaj&lt;/a&gt;&lt;/p&gt;
+&lt;canvas id=&quot;motion&quot;&gt;Canvas is not supported in your browser.&lt;/canvas&gt;
+
+&lt;p&gt;body {&lt;br&gt;  overflow:hidden;&lt;br&gt;}&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://sunhao.win/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://sunhao.win/tags/js/"/>
+    
+      <category term="animate" scheme="http://sunhao.win/tags/animate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>element-vue-study</title>
+    <link href="http://sunhao.win/articles/element-vue-study.html"/>
+    <id>http://sunhao.win/articles/element-vue-study.html</id>
+    <published>2017-07-18T07:29:55.000Z</published>
+    <updated>2017-07-20T07:49:10.609Z</updated>
+    
+    <content type="html"><![CDATA[<p>一致<br>Consistency</p>
+<p>反馈<br>Feedback</p>
+<p>效率<br>Efficiency</p>
+<p>可控<br>Controllability</p>
+<p>关于导航的设计</p>
+<p>如果导航较多  可以左侧分类<br>如果导航较少  可以顶部导航</p>
+<p>主色  辅助色 中性色<br>主场景         主要表现<br>副场景        表现用途<br>边框 文字   表现层次</p>
+<p> var arr = [2, 3, 4];<br>        var checkNum = 2;<br>        arr.filter((function(checkNum) {</p>
+<pre><code>    return function(num) {
+
+        return num &gt; checkNum;
+    }
+})(checkNum))
+</code></pre><p>isright = !false;<br>var cb = isright? (isright++) : 10;<br>console.log(cb)<br>console.log(isright)</p>
+<p>  methods: {<br>            queryData(queryString, cb) {<br>                let citys = this.citys<br>                var result = queryString ? citys.filter(((queryString) =&gt; {<br>                    return (city) =&gt; {<br>                        return city.value.indexOf(queryString.toLowerCase()) == 0<br>                    }<br>                })(queryString)) : citys<br>                cb(result)<br>            },<br>            selectCity(item) {<br>                console.log(item)<br>            }</p>
+<pre><code>}
+</code></pre><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一致&lt;br&gt;Consistency&lt;/p&gt;
+&lt;p&gt;反馈&lt;br&gt;Feedback&lt;/p&gt;
+&lt;p&gt;效率&lt;br&gt;Efficiency&lt;/p&gt;
+&lt;p&gt;可控&lt;br&gt;Controllability&lt;/p&gt;
+&lt;p&gt;关于导航的设计&lt;/p&gt;
+&lt;p&gt;如果导航较多  可以左侧分类&lt;br&gt;如果导航较少  可以顶部导航&lt;/p&gt;
+&lt;p&gt;主色  辅助色 中性色&lt;br&gt;主场景         主要表现&lt;br&gt;副场景        表现用途&lt;br&gt;边框 文字   表现层次&lt;/p&gt;
+&lt;p&gt; var arr = [2, 3, 4];&lt;br&gt;        var checkNum = 2;&lt;br&gt;        arr.filter((function(checkNum) {&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    return function(num) {
+
+        return num &amp;gt; checkNum;
+    }
+})(checkNum))
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;isright = !false;&lt;br&gt;var cb = isright? (isright++) : 10;&lt;br&gt;console.log(cb)&lt;br&gt;console.log(isright)&lt;/p&gt;
+&lt;p&gt;  methods: {&lt;br&gt;            queryData(queryString, cb) {&lt;br&gt;                let citys = this.citys&lt;br&gt;                var result = queryString ? citys.filter(((queryString) =&amp;gt; {&lt;br&gt;                    return (city) =&amp;gt; {&lt;br&gt;                        return city.value.indexOf(queryString.toLowerCase()) == 0&lt;br&gt;                    }&lt;br&gt;                })(queryString)) : citys&lt;br&gt;                cb(result)&lt;br&gt;            },&lt;br&gt;            selectCity(item) {&lt;br&gt;                console.log(item)&lt;br&gt;            }&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;}
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>node-js-module-study</title>
     <link href="http://sunhao.win/articles/node-js-module-study.html"/>
     <id>http://sunhao.win/articles/node-js-module-study.html</id>
     <published>2017-07-08T06:08:53.000Z</published>
-    <updated>2017-07-08T09:36:50.502Z</updated>
+    <updated>2017-07-15T02:13:29.838Z</updated>
     
     <content type="html"><![CDATA[<p>browserify<br>cross-env</p>
 <p><a href="http://www.cnblogs.com/libin-1/p/6254390.html插件开发" target="_blank" rel="external">http://www.cnblogs.com/libin-1/p/6254390.html插件开发</a></p>
 <p>promise</p>
-<p><a href="https://www.kancloud.cn/yunye/axios/234846" target="_blank" rel="external">https://www.kancloud.cn/yunye/axios/234846</a><br><a id="more"></a></p>
-]]></content>
+<p><a href="https://www.kancloud.cn/yunye/axios/234846" target="_blank" rel="external">https://www.kancloud.cn/yunye/axios/234846</a></p>
+<p>webpack-merge</p>
+<p>url-loader</p>
+<p>vuex<br>vue把事件驱动    和  行为变化  分离开 </p>
+<p>因为页面多，行为变化具有公共调控性。  所以 行为从事件分离开。   虽然麻烦  但是对于多页面挺有用</p>
+<p>actions</p>
+<p>mutations</p>
+<a id="more"></a>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;browserify&lt;br&gt;cross-env&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/libin-1/p/6254390.html插件开发&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/libin-1/p/6254390.html插件开发&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;promise&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.kancloud.cn/yunye/axios/234846&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.kancloud.cn/yunye/axios/234846&lt;/a&gt;&lt;br&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.kancloud.cn/yunye/axios/234846&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.kancloud.cn/yunye/axios/234846&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;webpack-merge&lt;/p&gt;
+&lt;p&gt;url-loader&lt;/p&gt;
+&lt;p&gt;vuex&lt;br&gt;vue把事件驱动    和  行为变化  分离开 &lt;/p&gt;
+&lt;p&gt;因为页面多，行为变化具有公共调控性。  所以 行为从事件分离开。   虽然麻烦  但是对于多页面挺有用&lt;/p&gt;
+&lt;p&gt;actions&lt;/p&gt;
+&lt;p&gt;mutations&lt;/p&gt;
     
     </summary>
     
@@ -825,329 +1327,6 @@ no_subtree_check ：即使输出目录是一个子目录，nfs服务器也不检
       <category term="面试题" scheme="http://sunhao.win/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     
       <category term="模块化" scheme="http://sunhao.win/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux如何查杀指定用户进程</title>
-    <link href="http://sunhao.win/articles/linux-kill9-psef.html"/>
-    <id>http://sunhao.win/articles/linux-kill9-psef.html</id>
-    <published>2017-05-23T03:02:20.000Z</published>
-    <updated>2017-05-23T03:23:50.476Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="首先w查看登录用户"><a href="#首先w查看登录用户" class="headerlink" title="首先w查看登录用户"></a>首先w查看登录用户</h3><p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170523/110721680.png" alt="mark"></p>
-<h3 id="通过ps-ef-grep-pts-0-查看pts-0上的用户"><a href="#通过ps-ef-grep-pts-0-查看pts-0上的用户" class="headerlink" title="通过ps -ef | grep pts/0 查看pts/0上的用户"></a>通过ps -ef | grep pts/0 查看pts/0上的用户</h3><p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170523/110943135.png" alt="mark"></p>
-<p>我们可以看到pid是17866  其余的ppid都是最终指向的都是这个。</p>
-<p>-e 显示所有进程。<br>-f 全格式。<br>ps e 列出程序时，显示每个程序所使用的环境变量。<br>ps f 用ASCII字符显示树状结构，表达程序间的相互关系</p>
-<a id="more"></a>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170523/111504923.png" alt="mark"></p>
-<p>我们通过kill -9 强制关闭进程。一般情况下 请不要这样，因为是强制关闭。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;首先w查看登录用户&quot;&gt;&lt;a href=&quot;#首先w查看登录用户&quot; class=&quot;headerlink&quot; title=&quot;首先w查看登录用户&quot;&gt;&lt;/a&gt;首先w查看登录用户&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170523/110721680.png&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;通过ps-ef-grep-pts-0-查看pts-0上的用户&quot;&gt;&lt;a href=&quot;#通过ps-ef-grep-pts-0-查看pts-0上的用户&quot; class=&quot;headerlink&quot; title=&quot;通过ps -ef | grep pts/0 查看pts/0上的用户&quot;&gt;&lt;/a&gt;通过ps -ef | grep pts/0 查看pts/0上的用户&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170523/110943135.png&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我们可以看到pid是17866  其余的ppid都是最终指向的都是这个。&lt;/p&gt;
-&lt;p&gt;-e 显示所有进程。&lt;br&gt;-f 全格式。&lt;br&gt;ps e 列出程序时，显示每个程序所使用的环境变量。&lt;br&gt;ps f 用ASCII字符显示树状结构，表达程序间的相互关系&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
-    
-    
-      <category term="kill" scheme="http://sunhao.win/tags/kill/"/>
-    
-      <category term="ps" scheme="http://sunhao.win/tags/ps/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nginx重启，重载，测试，配置</title>
-    <link href="http://sunhao.win/articles/nginx-config.html"/>
-    <id>http://sunhao.win/articles/nginx-config.html</id>
-    <published>2017-05-09T06:13:42.000Z</published>
-    <updated>2017-05-09T06:15:16.959Z</updated>
-    
-    <content type="html"><![CDATA[<p>nginx -s reload  ：修改配置后重新加载生效<br>nginx -s reopen  ：重新打开日志文件<br>nginx -t -c /path/to/nginx.conf 测试nginx配置文件是否正确</p>
-<p>关闭nginx：<br>nginx -s stop  :快速停止nginx<br>         quit  ：完整有序的停止nginx</p>
-<p>其他的停止nginx 方式：</p>
-<p>ps -ef | grep nginx</p>
-<p>kill -QUIT 主进程号     ：从容停止Nginx<br>kill -TERM 主进程号     ：快速停止Nginx<br>pkill -9 nginx          ：强制停止Nginx</p>
-<p>启动nginx:<br>nginx -c /path/to/nginx.conf</p>
-<p>平滑重启nginx：<br>kill -HUP 主进程号</p>
-<a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;nginx -s reload  ：修改配置后重新加载生效&lt;br&gt;nginx -s reopen  ：重新打开日志文件&lt;br&gt;nginx -t -c /path/to/nginx.conf 测试nginx配置文件是否正确&lt;/p&gt;
-&lt;p&gt;关闭nginx：&lt;br&gt;nginx -s stop  :快速停止nginx&lt;br&gt;         quit  ：完整有序的停止nginx&lt;/p&gt;
-&lt;p&gt;其他的停止nginx 方式：&lt;/p&gt;
-&lt;p&gt;ps -ef | grep nginx&lt;/p&gt;
-&lt;p&gt;kill -QUIT 主进程号     ：从容停止Nginx&lt;br&gt;kill -TERM 主进程号     ：快速停止Nginx&lt;br&gt;pkill -9 nginx          ：强制停止Nginx&lt;/p&gt;
-&lt;p&gt;启动nginx:&lt;br&gt;nginx -c /path/to/nginx.conf&lt;/p&gt;
-&lt;p&gt;平滑重启nginx：&lt;br&gt;kill -HUP 主进程号&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="nginx" scheme="http://sunhao.win/categories/nginx/"/>
-    
-    
-      <category term="nginx配置" scheme="http://sunhao.win/tags/nginx%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql2013错误</title>
-    <link href="http://sunhao.win/articles/mysql-2013error.html"/>
-    <id>http://sunhao.win/articles/mysql-2013error.html</id>
-    <published>2017-05-09T02:42:21.000Z</published>
-    <updated>2017-07-01T06:43:58.796Z</updated>
-    
-    <content type="html"><![CDATA[<p>mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0<br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png" alt="mark"><br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170509/104641667.png" alt="mark"><br>默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。<br>然后重启下服务器<br>/etc/init.d/mysql restart</p>
-<p>MySQL Error (2013): Lost connection to MySQL server at waiting for initial communication packet</p>
-<p>打开my.ini，找到[mysqld]项，在其后加入一句：skip-name-resolve，保存，重启mysql服务即可~</p>
-<a id="more"></a>
-<p>如果忘记密码<br>可以添加<br>skip-grant-tables<br>忽略权限验证</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;mysql错误Lost connection to MySQL server at ‘reading initial communication packet’, system error: 0&lt;br&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170509/104541613.png&quot; alt=&quot;mark&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ojlt0g866.bkt.clouddn.com/blog/20170509/104641667.png&quot; alt=&quot;mark&quot;&gt;&lt;br&gt;默认绑定的是本地,所以把bind-address = 127.0.0.1注释掉就好了。&lt;br&gt;然后重启下服务器&lt;br&gt;/etc/init.d/mysql restart&lt;/p&gt;
-&lt;p&gt;MySQL Error (2013): Lost connection to MySQL server at waiting for initial communication packet&lt;/p&gt;
-&lt;p&gt;打开my.ini，找到[mysqld]项，在其后加入一句：skip-name-resolve，保存，重启mysql服务即可~&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="mysql" scheme="http://sunhao.win/categories/mysql/"/>
-    
-    
-      <category term="2013错误" scheme="http://sunhao.win/tags/2013%E9%94%99%E8%AF%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>写给前端工程师的DNS基础知识</title>
-    <link href="http://sunhao.win/articles/netwrok-dns.html"/>
-    <id>http://sunhao.win/articles/netwrok-dns.html</id>
-    <published>2017-05-05T06:47:39.000Z</published>
-    <updated>2017-05-15T00:11:47.229Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>在工作中，经常切换本地和服务器，添加各种解析。遇到DNS引起的一些问题。发现网上资料很混乱，用心整理写了下，希望对大家有帮助。</p>
-<p>DNS（Domain Name System，域名系统），最初，由于ip长且难记，通过ip访问网站不方便。。所以后来通过发明了DNS服务器，这个时候我们访问网站输入网站域名，DNS服务器就解析我们的域名为ip。这样我们实际访问的就是对应的ip地址啦。</p>
-<p>抽象点DNS就是   一个记录ip地址的超级分布式数据库。</p>
-<a id="more"></a>
-<h3 id="根域和根域服务器"><a href="#根域和根域服务器" class="headerlink" title="根域和根域服务器"></a>根域和根域服务器</h3><p>首先我们要明白如何区分域，至于如何解析我们后面慢慢讲。</p>
-<p>当我们输入www.sunhao.win访问网站。实际上是访问了不同的域。<br>其中”.”是DNS 命称空间，用来分割不同域,</p>
-<p>www,sunhao,win分别代表不同的域。其实还有个域，跟在win后面，只是因为是域名系统默认的,所以这里不用写，这个就是根域。</p>
-<p>意义上域名应该是这样。</p>
-<pre><code>www.sunhao.win.根域
-</code></pre><p>根域记录了所有win域(这一个位置的叫顶级域),它和sunhao(二级域),共同构成顶级域名sunhao.win</p>
-<p>www(三级域)和sunhao.win叫二级域名www.sunhao.win</p>
-<p>这里大家要明白sunhao.win和www.sunhao.win是两个不同的网址。</p>
-<p>因为我们上网使用的UDP/TCP，UDP数据往往没有保障,但速度快,通常用于查询和响应，TCP由于多次验证，传输有保证，但速度慢，多用于主服务器和从服务器之间的传送。</p>
-<p>因此我们DNS主要通过UDP。</p>
-<p>当我们访问www.sunhao.win的时候,如果本地dns服务器没有记录，那么它就会向根服务器去请求地址。</p>
-<p>也就是它会向根服务器请求win域的地址。然后通过win域继续向下请求。根域名服务器并不直接把待查询的域名直接解析出IP地址，而是告诉本地域名服务器下一步应当找哪一个顶级域名服务器进行查询。</p>
-<p>所以根域名服务器很重要。假定所有的根域名服务器都瘫痪了，那么整个DNS系统就无法工作。</p>
-<h3 id="顶级域和顶级域服务器"><a href="#顶级域和顶级域服务器" class="headerlink" title="顶级域和顶级域服务器"></a>顶级域和顶级域服务器</h3><p>例如www.sunhao.win</p>
-<p>win所在的位置就是顶级域</p>
-<p>域名只是逻辑概念，并不代表计算机所在的物理地点。据2006年12月统计，现在顶级域名TLD(Top Level Domain)已有265个，分为三大类：</p>
-<p>(1)国家顶级域名nTLD：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)。</p>
-<p>(2)通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。<br>(3)基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。</p>
-<p>顶级域名服务器主要负责管理在该顶级域名服务器注册的二级域名。</p>
-<h3 id="权威DNS和权威域名服务器"><a href="#权威DNS和权威域名服务器" class="headerlink" title="权威DNS和权威域名服务器"></a>权威DNS和权威域名服务器</h3><p>权威DNS服务器是经过上一级授权，对域名进行解析的服务器，同时它可以把解析授权转授给其他人。</p>
-<p>例如，<br>在互联网上,谁售出的域名,就把域名授权给谁，比如sunhao.win是阿里售出的，所以权威服务器是阿里的dns解析服务器。(为了保障安全和保障一般权威DNS服务器都是俩)</p>
-<p>dns9.hichina.com<br>dns10.hichina.com</p>
-<p>但是由于业务我从后台调整解析到yunjiasu。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;; AUTHORITY SECTION:</div><div class="line">sunhao.win.		2992	IN	NS	n563.ns.yunjiasu.com.</div><div class="line">sunhao.win.		2992	IN	NS	n3101.ns.yunjiasu.com.</div></pre></td></tr></table></figure>
-<p>其中n563.ns.yunjiasu.com和n3101.ns.yunjiasu.com是sunhao.win的权威服务器。<br>由顶级域名win授权ns.yunjiasu.com.进行管理的。</p>
-<p>当访问sunhao.win通过顶级域名解析后，顶级域名win就给用户说,你要访问sunhao.win是吧，你得去n563.ns.yunjiasu.com看看,它那记录了ip地址,不行就去n3101.ns.yunjiasu.com.再不行，你就自己报错把。^_^.</p>
-<p>通俗点说,就是爸爸给孩子十块钱(这里指域名)，这十块钱,孩子可以自己花，也可以转给别人。拥有了控制十块钱的所有权限。简单点说,就是一旦把域名授权给我，授权给我的那部分，我做主。</p>
-<h3 id="运营商DNS服务器和本地DNS服务器"><a href="#运营商DNS服务器和本地DNS服务器" class="headerlink" title="运营商DNS服务器和本地DNS服务器"></a>运营商DNS服务器和本地DNS服务器</h3><p>在实际上网中，我们不是直接连接根服务器，而是通过本地DNS服务器上网。</p>
-<p>如果DNS设置不好，或者不对，会导致如我们qq能登陆，而页面无法浏览网页的症状、</p>
-<p>在这，本地DNS主要指是指各地电信运营商提供的域名解析服务器。也就是我们在上网网卡里面你设置的DNS地址。当然也可以自己建设一个服务器。</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170512/134034145.png" alt="mark"></p>
-<p>当一个主机发出DNS查询请求时，这个查询请求报文就发送给本地域名服务器，本地服务器替我们进行DNS解析,我们得到的ip地址是由本地服务器返回的。</p>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>我们了解了个个服务器,理一下常规DNS系统如何运作的吧</p>
-<p>1，用户—&gt;本地递归服务器— &gt; 根权威服务器— &gt; COM权威服务器— &gt; X(X代表任意地址).COM权威服务器— &gt; 本地递归服务器— &gt;用户</p>
-<p>2，用户—&gt;本地递归服务器— &gt; 缓存 — &gt;用户</p>
-<p>在这我们要明白两点。</p>
-<p>一、递归查询:主机向本地域名服务器的查询一般都是采用递归查询。所谓递归查询就是：如果主机所询问的本地域名服务器不知道被查询的域名的IP地址，那么本地域名服务器就以DNS客户的身份，向其它根域名服务器继续发出查询请求报文(即替主机继续查询)，而不是让主机自己进行下一步查询。因此，递归查询返回的查询结果或者是所要查询的IP地址，或者是报错，表示无法查询到所需的IP地址。</p>
-<p>简单说 就是说我们请求的地址  必须返回一个准确的ip地址，没有就向别的地址查询，然后返回给我们一个准确的ip地址。我们的本地服务器就是递归服务器。</p>
-<p>二、迭代查询:本地域名服务器向根域名服务器的查询的迭代查询。迭代查询的特点：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的IP地址，要么告诉本地服务器：“你下一步应当向哪一个域名服务器进行查询”。然后让本地服务器进行后续的查询。根域名服务器通常是把自己知道的顶级域名服务器的IP地址告诉本地域名服务器，让本地域名服务器再向顶级域名服务器查询。顶级域名服务器在收到本地域名服务器的查询请求后，要么给出所要查询的IP地址，要么告诉本地服务器下一步应当向哪一个权限域名服务器进行查询。最后，知道了所要解析的IP地址或报错，然后把这个结果返回给发起查询的主机。</p>
-<p>这里由各级服务器进行的就是迭代查询，自身不返回ip，而是返回给下一级的DNS服务器地址。</p>
-<p>实际一般本地DNS访问量巨大，会有一个前置的F5服务器，用于分发给后缀的服务器实现负载均衡。同时服务器会根据设置会缓存一段时间地址。所以有时候我们在服务器改完DNS，有时候会等一段时间，才能访问到新的地址。</p>
-<h3 id="解析记录"><a href="#解析记录" class="headerlink" title="解析记录"></a>解析记录</h3><p>域名解析记录A、CNAME、MX、NS、TXT、AAAA、SRV、显性URL、隐形URL含义</p>
-<ol>
-<li><p>A记录：解析域名到指定ip</p>
-</li>
-<li><p>CNAME记录（Canonical Name 别名指向）：解析域名到域名</p>
-</li>
-<li><p>MX记录：指向一个邮件服务器，用于电子邮件系统发邮件时根据收信人的地址后缀来定位邮件服务器。</p>
-</li>
-<li><p>NS记录：解析服务器记录。用来表明由哪台服务器对该域名进行解析，这里的NS记录只对子域名生效。<br>优先级：NS记录优先于A记录。即，如果一个主机地址同时存在NS记录和A记录，则A记录不生效。这里的NS记录只对子域名生效。</p>
-</li>
-<li><p>TXT记录：为某个主机名或域名设置联系信息，如：<br>admin IN TXT “管理员, 电话： 1000000000”</p>
-</li>
-<li><p>AAAA记录(AAAA record)：是用来将域名解析到IPv6地址的DNS记录。用户可以将一个域名解析到IPv6地址上，也可以将子域名解析到IPv6地址上。</p>
-</li>
-<li><p>SRV记录：一般是为Microsoft的活动目录设置时的应用。</p>
-</li>
-<li><p>显性URL记录：访问域名时，会自动跳转到所指的另一个网络地址（URL），此时在浏览器地址栏中显示的是跳转的地址。</p>
-</li>
-<li><p>隐形URL记录：访问域名时，会自动跳转到所指的另一个网络地址（URL），此时在浏览器地址栏中显示的是原域名地址。</p>
-</li>
-</ol>
-<h3 id="应答"><a href="#应答" class="headerlink" title="应答"></a>应答</h3><p>权威应答</p>
-<p>由权威服务器区域直接返回的应答地址</p>
-<p>非权威应答</p>
-<p>由缓存或者其他服务器返回的地址</p>
-<!--### 智能dns与cdn加速-->
-<h3 id="TTL值和缓存"><a href="#TTL值和缓存" class="headerlink" title="TTL值和缓存"></a>TTL值和缓存</h3><p>假如我们每次都发送一次DNS请求,那么服务器的压力会相当大，但是服务器的ip地址一般会经常变，所以实际我们都设置TTL把DNS缓存到本地。</p>
-<p>什么是域名的TTL值？<br>TTL(Time- To-Live)，简单的说它就是返回的记录在DNS服务器上保留的时间，就是TTL值。<br><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170505/155336775.png" alt="mark"></p>
-<p>DNS会将最终域名解析的结果缓存至本地。分为两种浏览器缓存和操作系统(OS)缓存。</p>
-<p>在浏览器中访问的时候，会优先访问浏览器缓存，如果访问指定域名,没有命中返回,则访问OS缓存。最后再次访问dns服务器。</p>
-<p>所以我们在调试的时候，更换了本地hosts仍然访问的是旧地址,那么就等一会吧。</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170505/153318984.png" alt="mark"></p>
-<p>我们可以看到chrome会自动缓存70s dns。</p>
-<p>那么我们如果想在70s内清除缓存怎么办呢?</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170515/080436851.png" alt="mark"></p>
-<p>我们在chrome地址栏里面输入chrome，会自动索引出有关的基本地址。选择chrome-urls</p>
-<p>往下拉选择chrome://net-internals</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170515/080832503.png" alt="mark"></p>
-<p>其中最右面</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170515/080915811.png" alt="mark"></p>
-<p>可以清除页面缓存</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170515/080944745.png" alt="mark"></p>
-<p>点Clear host cache，可以用于清除DNS缓存。</p>
-<p>其实这个页面最好收藏下来，便于以后调试时及时刷新。</p>
-<h3 id="hosts"><a href="#hosts" class="headerlink" title="hosts"></a>hosts</h3><p>在DNS系统之前，对应ip都是保存在hosts文件之中，现在系统仍然保留它。</p>
-<p>实际通过浏览器访问，会先查询浏览器dns缓存，再查询hosts里面是否有记录</p>
-<p><img src="http://ojlt0g866.bkt.clouddn.com/blog/20170512/144511980.png" alt="mark"></p>
-<p>一般win系统Hosts文件就在C:\WINDOWS\system32\drivers\etc中</p>
-<p>通过hosts我们可以把域名改成本地的地址，进行调试开发。</p>
-<p>对于经常访问的网站，也可以直接设置到hosts里，加快访问速度。</p>
-<!--### 域名迁移  换DNS服务商-->
-<h3 id="sunhao-win解析过程分析"><a href="#sunhao-win解析过程分析" class="headerlink" title="sunhao.win解析过程分析"></a>sunhao.win解析过程分析</h3><p>最后我们看下用dig +trace 跟踪的全部解析过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">[root@sunhao ~]# dig +trace www.sunhao.win</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.37.rc1.el6 &lt;&lt;&gt;&gt; +trace www.sunhao.win</div><div class="line">;; global options: +cmd</div><div class="line">.			12674	IN	NS	e.root-servers.net.</div><div class="line">.			12674	IN	NS	i.root-servers.net.</div><div class="line">.			12674	IN	NS	h.root-servers.net.</div><div class="line">.			12674	IN	NS	k.root-servers.net.</div><div class="line">.			12674	IN	NS	d.root-servers.net.</div><div class="line">.			12674	IN	NS	l.root-servers.net.</div><div class="line">.			12674	IN	NS	a.root-servers.net.</div><div class="line">.			12674	IN	NS	c.root-servers.net.</div><div class="line">.			12674	IN	NS	m.root-servers.net.</div><div class="line">.			12674	IN	NS	g.root-servers.net.</div><div class="line">.			12674	IN	NS	b.root-servers.net.</div><div class="line">.			12674	IN	NS	f.root-servers.net.</div><div class="line">.			12674	IN	NS	j.root-servers.net.</div><div class="line">;; Received 492 bytes from 211.161.46.85#53(211.161.46.85) in 42 ms</div><div class="line"></div><div class="line">win.			172800	IN	NS	ns1.dns.nic.win.</div><div class="line">win.			172800	IN	NS	ns6.dns.nic.win.</div><div class="line">win.			172800	IN	NS	ns3.dns.nic.win.</div><div class="line">win.			172800	IN	NS	ns2.dns.nic.win.</div><div class="line">win.			172800	IN	NS	ns5.dns.nic.win.</div><div class="line">win.			172800	IN	NS	ns4.dns.nic.win.</div><div class="line">;; Received 412 bytes from 192.36.148.17#53(192.36.148.17) in 191 ms</div><div class="line"></div><div class="line">sunhao.win.		3600	IN	NS	n563.ns.yunjiasu.com.</div><div class="line">sunhao.win.		3600	IN	NS	n3101.ns.yunjiasu.com.</div><div class="line">;; Received 86 bytes from 156.154.145.182#53(156.154.145.182) in 2415 ms</div><div class="line"></div><div class="line">www.sunhao.win.		300	IN	A	162.159.211.33</div><div class="line">www.sunhao.win.		300	IN	A	162.159.210.33</div><div class="line">;; Received 92 bytes from 220.181.111.112#53(220.181.111.112) in 6 ms</div></pre></td></tr></table></figure>
-<p>.就是一开始说的根域。NS就是指定该域名由哪个DNS服务器来进行解析。</p>
-<p>我们可以清晰的看到第一步先从13台dns服务器，然是顶级域win,最后权威域sunhao.win。<br>查到地址在162.159.211.33和162.159.210.33上。最后的是A记录。不再是NS了哦。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;DNS&quot;&gt;&lt;a href=&quot;#DNS&quot; class=&quot;headerlink&quot; title=&quot;DNS&quot;&gt;&lt;/a&gt;DNS&lt;/h3&gt;&lt;p&gt;在工作中，经常切换本地和服务器，添加各种解析。遇到DNS引起的一些问题。发现网上资料很混乱，用心整理写了下，希望对大家有帮助。&lt;/p&gt;
-&lt;p&gt;DNS（Domain Name System，域名系统），最初，由于ip长且难记，通过ip访问网站不方便。。所以后来通过发明了DNS服务器，这个时候我们访问网站输入网站域名，DNS服务器就解析我们的域名为ip。这样我们实际访问的就是对应的ip地址啦。&lt;/p&gt;
-&lt;p&gt;抽象点DNS就是   一个记录ip地址的超级分布式数据库。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="netwrok" scheme="http://sunhao.win/categories/netwrok/"/>
-    
-    
-      <category term="dns" scheme="http://sunhao.win/tags/dns/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>fg、bg、jobs、nohup、ctrl+z、ctrl+c、screen命令</title>
-    <link href="http://sunhao.win/articles/linux-bg-fg-jobs-screen.html"/>
-    <id>http://sunhao.win/articles/linux-bg-fg-jobs-screen.html</id>
-    <published>2017-05-04T02:10:17.000Z</published>
-    <updated>2017-05-16T05:57:57.165Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、&amp;</p>
-<p>加在一个命令的最后，可以把这个命令放到后台执行，如</p>
-<p>watch  -n 10 sh  test.sh  &amp;  #每10s在后台执行一次test.sh脚本</p>
-<p>二、ctrl + z</p>
-<p>可以将一个正在前台执行的命令放到后台，并且处于暂停状态。</p>
-<p>三、jobs</p>
-<p>查看当前有多少在后台运行的命令</p>
-<p>jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell从当前的shell环境已知的列表中删除任务的进程标识。</p>
-<a id="more"></a>
-<p>四、fg</p>
-<p>将后台中的命令调至前台继续运行。如果后台中有多个命令，可以用fg %jobnumber（是命令编号，不是进程号）将选中的命令调出。</p>
-<p>五、bg</p>
-<p>将一个在后台暂停的命令，变成在后台继续执行。如果后台中有多个命令，可以用bg %jobnumber将选中的命令调出。</p>
-<p>六、kill</p>
-<p>法子1：通过jobs命令查看job号（假设为num），然后执行kill %num</p>
-<p>法子2：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid</p>
-<p>前台进程的终止：Ctrl+c</p>
-<p>七、nohup</p>
-<p>如果让程序始终在后台执行，即使关闭当前的终端也执行（之前的&amp;做不到），这时候需要nohup。该命令可以在你退出帐户/</p>
-<p>关闭终端之后继续运行相应的进程。关闭中断后，在另一个终端jobs已经无法看到后台跑得程序了，此时利用ps（进程查看命令）</p>
-<p>ps -aux | grep “test.sh”  #a:显示所有程序 u:以用户为主的格式来显示 x:显示所有程序，不以终端机来区分</p>
-<p>进程的终止： </p>
-<p>后台进程的终止：</p>
-<p>一、使用Screen创建一个Session</p>
-<p>　　screen -S sessionName 注：sessionName是要删除的session名字</p>
-<p>二、结束一个Screen创建的session</p>
-<p>1、首先使用screen -ls命令查看全部session列表</p>
-<p>2、使用screen -S sessionName -X quit, 注：sessionName是要删除的session名字</p>
-<p>三、恢复一个Screen的session</p>
-<p>1、Screen -r sessionName</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、&amp;amp;&lt;/p&gt;
-&lt;p&gt;加在一个命令的最后，可以把这个命令放到后台执行，如&lt;/p&gt;
-&lt;p&gt;watch  -n 10 sh  test.sh  &amp;amp;  #每10s在后台执行一次test.sh脚本&lt;/p&gt;
-&lt;p&gt;二、ctrl + z&lt;/p&gt;
-&lt;p&gt;可以将一个正在前台执行的命令放到后台，并且处于暂停状态。&lt;/p&gt;
-&lt;p&gt;三、jobs&lt;/p&gt;
-&lt;p&gt;查看当前有多少在后台运行的命令&lt;/p&gt;
-&lt;p&gt;jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell从当前的shell环境已知的列表中删除任务的进程标识。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="http://sunhao.win/categories/linux/"/>
-    
-    
-      <category term="fg" scheme="http://sunhao.win/tags/fg/"/>
-    
-      <category term="bg" scheme="http://sunhao.win/tags/bg/"/>
-    
-      <category term="jobs" scheme="http://sunhao.win/tags/jobs/"/>
-    
-      <category term="screen" scheme="http://sunhao.win/tags/screen/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>respberry树莓派 无线网络配置</title>
-    <link href="http://sunhao.win/articles/respberry-wpanetwork.html"/>
-    <id>http://sunhao.win/articles/respberry-wpanetwork.html</id>
-    <published>2017-05-02T07:56:14.000Z</published>
-    <updated>2017-05-02T07:59:46.240Z</updated>
-    
-    <content type="html"><![CDATA[<p>执行命令: sudo iwlist wlan0 scan , 看看能否手动扫描周围的ESSID.</p>
-<h3 id="无线配置"><a href="#无线配置" class="headerlink" title="无线配置"></a>无线配置</h3><p>修改配置文件: sudo vim /etc/network/interfaces, 如果需要自动IP, 增加如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># wifi (dhcp config) :</div><div class="line">auto wlan0</div><div class="line">allow-hotplug wlan0</div><div class="line">iface wlan0 inet dhcp</div><div class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</div></pre></td></tr></table></figure>
-<p>如果需要固定IP, 增加的内容如下:</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">auto wlan0</div><div class="line">iface wlan0 inet static</div><div class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</div><div class="line">address 192.168.1.12</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.1.1</div></pre></td></tr></table></figure>
-<p>编辑/etc/wpa_supplicant/wpa_supplicant.conf, 增加如下几行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">network=&#123;</div><div class="line">    ssid=&quot;ssid1&quot;</div><div class="line">    psk=&quot;密码&quot;</div><div class="line">&#125;</div><div class="line">network=&#123;</div><div class="line">    ssid=&quot;ssid2&quot;</div><div class="line">    psk=&quot;密码&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里存的是明文密码, 如果需要存储加密后的密码, 执行命令wpa_passphrase ssid password, 替换上面的psk密码.<br>wpa_supplicant.conf里面更多参数详情, 请参考man手册链接, 上面的配置能应付大多数路由器了.</p>
-<p>重启wlan0</p>
-<p>重启无线网卡: sudo ifdown wlan0 and then  sudo ifup wlan0<br>然后运行ifconfig wlan0 查看无线网卡是否获能够取到了IP.<br>如果固定ip  最好重启 reboot  输入密码</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;执行命令: sudo iwlist wlan0 scan , 看看能否手动扫描周围的ESSID.&lt;/p&gt;
-&lt;h3 id=&quot;无线配置&quot;&gt;&lt;a href=&quot;#无线配置&quot; class=&quot;headerlink&quot; title=&quot;无线配置&quot;&gt;&lt;/a&gt;无线配置&lt;/h3&gt;&lt;p&gt;修改配置文件: sudo vim /etc/network/interfaces, 如果需要自动IP, 增加如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# wifi (dhcp config) :&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;auto wlan0&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;allow-hotplug wlan0&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;iface wlan0 inet dhcp&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果需要固定IP, 增加的内容如下:&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="respberry" scheme="http://sunhao.win/categories/respberry/"/>
-    
-    
-      <category term="无线网络配置" scheme="http://sunhao.win/tags/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
